@@ -1,0 +1,146 @@
+{
+  "_comment": "SEO Dashboard — example data. Swap these values for your own site's real data.",
+  "_instructions": "Update all fields below. Dates use YYYY-MM-DD. Numbers are raw integers.",
+
+  "site": {
+    "name": "Acme Creative Studio",
+    "domain": "acme-creative.example.com",
+    "url": "https://acme-creative.example.com",
+    "description": "Portfolio and blog for a freelance design studio",
+    "dataAsOf": "2026-05-23",
+    "dashboardUpdated": "2026-05-23"
+  },
+
+  "ga4": {
+    "propertyId": "123456789",
+    "measurementId": "G-XXXXXXXXXX",
+    "streamId": "0000000000",
+    "last30Days": {
+      "activeUsers": 1240,
+      "sessions": 1680,
+      "pageViews": 4320,
+      "bounceRate": 0.481,
+      "avgSessionDuration": 187,
+      "newUsersPct": 0.882
+    },
+    "previousPeriod": {
+      "activeUsers": 1080,
+      "sessions": 1490,
+      "pageViews": 3900
+    }
+  },
+
+  "searchConsole": {
+    "property": "https://acme-creative.example.com/",
+    "last90Days": {
+      "totalClicks": 920,
+      "totalImpressions": 18400,
+      "avgCtr": 0.05,
+      "avgPosition": 14.2
+    },
+    "indexedPages": 18,
+    "notIndexed": 47,
+    "topQuery": "acme creative studio",
+    "topQueryPosition": 2.4
+  },
+
+  "pagespeed": {
+    "mobile": {
+      "performance": 61,
+      "accessibility": 96,
+      "bestPractices": 92,
+      "seo": 100,
+      "lcp": "4.2s",
+      "tbt": "180ms",
+      "cls": "0.01",
+      "fcp": "3.1s"
+    },
+    "desktop": {
+      "performance": 88,
+      "accessibility": 96,
+      "bestPractices": 92,
+      "seo": 100,
+      "lcp": "1.3s",
+      "tbt": "0ms",
+      "cls": "0",
+      "fcp": "0.7s"
+    }
+  },
+
+  "topPages": [
+    { "path": "/",            "views": 1840, "avgDuration": 142, "label": "Homepage" },
+    { "path": "/portfolio",   "views": 780,  "avgDuration": 218, "label": "Portfolio" },
+    { "path": "/blog",        "views": 540,  "avgDuration": 194, "label": "Blog" },
+    { "path": "/services",    "views": 390,  "avgDuration": 87,  "label": "Services" },
+    { "path": "/contact",     "views": 290,  "avgDuration": 63,  "label": "Contact" },
+    { "path": "/about",       "views": 240,  "avgDuration": 156, "label": "About" },
+    { "path": "/blog/case-study-brandx", "views": 180, "avgDuration": 412, "label": "Case Study: BrandX" },
+    { "path": "/pricing",     "views": 160,  "avgDuration": 74,  "label": "Pricing" }
+  ],
+
+  "trafficSources": [
+    { "source": "google",   "medium": "organic",  "sessions": 620, "color": "#4285F4" },
+    { "source": "(direct)", "medium": "(none)",   "sessions": 490, "color": "#6C8EFF" },
+    { "source": "instagram","medium": "social",   "sessions": 210, "color": "#E1306C" },
+    { "source": "linkedin", "medium": "social",   "sessions": 140, "color": "#0A66C2" },
+    { "source": "twitter",  "medium": "social",   "sessions": 95,  "color": "#1DA1F2" },
+    { "source": "other",    "medium": "referral", "sessions": 125, "color": "rgba(108,142,255,0.35)" }
+  ],
+
+  "impressionsTrend": {
+    "_comment": "Monthly GSC impressions — oldest to newest. Add null for missing months.",
+    "labels": ["Nov 24","Dec 24","Jan 25","Feb 25","Mar 25","Apr 25","May 25","Jun 25","Jul 25","Aug 25","Sep 25","Oct 25","Nov 25","Dec 25","Jan 26","Feb 26","Mar 26","Apr 26","May 26"],
+    "data":   [320,     280,     340,     390,     410,     520,     680,     720,     840,     910,     1080,    1240,    1380,    1510,    1620,    1840,    2200,    2640,    3100],
+    "milestones": {
+      "6": "Blog launch",
+      "12": "Site redesign",
+      "16": "Schema markup added"
+    }
+  },
+
+  "seoFeatures": [
+    { "name": "GTM / Analytics",         "status": "pass", "detail": "GA4 live" },
+    { "name": "Canonical URLs",          "status": "pass", "detail": "All pages" },
+    { "name": "Open Graph meta",         "status": "pass", "detail": "All pages" },
+    { "name": "Twitter Cards",           "status": "pass", "detail": "All pages" },
+    { "name": "JSON-LD Structured Data", "status": "pass", "detail": "Homepage, blog posts" },
+    { "name": "XML Sitemap",             "status": "pass", "detail": "18 URLs — submitted" },
+    { "name": "robots.txt",              "status": "pass", "detail": "Clean" },
+    { "name": "Image alt text",          "status": "warn", "detail": "8 images missing alt" },
+    { "name": "Mobile-friendly",         "status": "pass", "detail": "Responsive" },
+    { "name": "HTTPS",                   "status": "pass", "detail": "SSL active (Cloudflare)" },
+    { "name": "Page speed (mobile)",     "status": "warn", "detail": "Perf 61 — LCP 4.2s" },
+    { "name": "Core Web Vitals (field)", "status": "pass", "detail": "All Good (CrUX)" }
+  ],
+
+  "actionItems": [
+    { "priority": "critical", "item": "Add alt text to 8 portfolio images", "impact": "accessibility + image search" },
+    { "priority": "critical", "item": "Improve mobile LCP: add hero image preload hint", "impact": "PageSpeed +15pts" },
+    { "priority": "high",     "item": "Submit sitemap to Bing Webmaster Tools", "impact": "+search engine coverage" },
+    { "priority": "high",     "item": "Add JSON-LD to portfolio pages (CreativeWork schema)", "impact": "rich results" },
+    { "priority": "high",     "item": "Fix 5 redirect chains (www → http → https)", "impact": "crawl budget" },
+    { "priority": "medium",   "item": "Create Google Business Profile", "impact": "local visibility" },
+    { "priority": "medium",   "item": "Add FAQ schema to Services page", "impact": "rich results" },
+    { "priority": "medium",   "item": "Write 2 long-form case studies (1,500+ words)", "impact": "organic ranking" },
+    { "priority": "done",     "item": "Canonical URLs implemented site-wide", "impact": "" },
+    { "priority": "done",     "item": "GA4 + GTM installed and verified", "impact": "" },
+    { "priority": "done",     "item": "Open Graph / Twitter Cards on all pages", "impact": "" }
+  ],
+
+  "milestones": [
+    { "date": "Nov 2024", "title": "Site Launch", "body": "Initial deploy — GA4 + GSC connected, sitemap submitted" },
+    { "date": "Apr 2025", "title": "Blog Launched", "body": "First 6 posts published — organic impressions doubled in 60 days" },
+    { "date": "Nov 2025", "title": "Site Redesign", "body": "New portfolio layout — bounce rate dropped 12pp, avg session +40s" },
+    { "date": "Feb 2026", "title": "Schema Markup", "body": "JSON-LD added to all pages — rich results appearing in 3 weeks" },
+    { "date": "May 2026", "title": "Current Results", "body": "#2 Google rank for brand term · 18 pages indexed · 3,100+ impressions/mo" }
+  ],
+
+  "cloudflare": {
+    "ssl": "Full (Strict)",
+    "cacheLevel": "Standard",
+    "minify": true,
+    "rocketLoader": false,
+    "crawlerHintsEnabled": true,
+    "dnsQueriesPerDay": 12400
+  }
+}

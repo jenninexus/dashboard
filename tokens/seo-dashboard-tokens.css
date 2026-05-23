@@ -1,0 +1,156 @@
+/**
+ * seo-dashboard-tokens.css — v1.0.0
+ * ============================================================================
+ * Design token contract for the SEO Dashboard template.
+ *
+ * Built on the www-theme-kit Tier 1 / Tier 2 pattern:
+ *   Tier 1 — SEO service brand colors (canonical — never override)
+ *   Tier 2 — Dashboard structural tokens (override in your brand file)
+ *
+ * Usage: inline these into your <style> block or @import this file.
+ * To brand for your project, copy brand-overrides-template.css and override
+ * the Tier 2 tokens listed there.
+ *
+ * SSOT reference: C:\Github\www-theme-kit\tokens\www-design-tokens.css
+ * ============================================================================
+ */
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TIER 1 — SEO SERVICE BRAND COLORS
+   Confirmed canonical values. Never override.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+
+  /* Google Analytics / GA4 ── */
+  --brand-ga4:                #E37400;
+  --brand-ga4-rgb:            227, 116, 0;
+
+  /* Google Search Console ── */
+  --brand-gsc:                #4285F4;
+  --brand-gsc-rgb:            66, 133, 244;
+
+  /* Google Tag Manager ── */
+  --brand-gtm:                #246FDB;
+  --brand-gtm-rgb:            36, 111, 219;
+
+  /* Google Ads ── */
+  --brand-google-ads:         #4285F4;
+  --brand-google-ads-rgb:     66, 133, 244;
+
+  /* PageSpeed / Lighthouse ── */
+  --brand-pagespeed:          #0D904F;
+  --brand-pagespeed-rgb:      13, 144, 79;
+
+  /* Cloudflare ── */
+  --brand-cloudflare:         #F38020;
+  --brand-cloudflare-rgb:     243, 128, 32;
+
+  /* Bing Webmaster ── */
+  --brand-bing:               #008373;
+  --brand-bing-rgb:           0, 131, 115;
+
+  /* Semrush ── */
+  --brand-semrush:            #FF642D;
+  --brand-semrush-rgb:        255, 100, 45;
+
+  /* Ahrefs ── */
+  --brand-ahrefs:             #0094FF;
+  --brand-ahrefs-rgb:         0, 148, 255;
+
+  /* Moz ── */
+  --brand-moz:                #2B6CB0;
+  --brand-moz-rgb:            43, 108, 176;
+
+  /* Performance signal colors (Lighthouse scale) ── */
+  --perf-good:                #0CCE6B;
+  --perf-good-rgb:            12, 206, 107;
+  --perf-needs-improvement:   #FFA400;
+  --perf-needs-improvement-rgb: 255, 164, 0;
+  --perf-poor:                #FF4E42;
+  --perf-poor-rgb:            255, 78, 66;
+
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TIER 2 — STRUCTURAL DASHBOARD TOKENS
+   Dark-mode baseline defaults. Override in your brand file.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+
+  /* ── Backgrounds ─────────────────────────────────────────────────────────── */
+  --dash-bg:                  #0b0e14;
+  --dash-surface:             rgba(255, 255, 255, 0.035);
+  --dash-surface-2:           rgba(255, 255, 255, 0.055);
+  --dash-border:              rgba(255, 255, 255, 0.07);
+  --dash-border-2:            rgba(255, 255, 255, 0.12);
+
+  /* ── Text ───────────────────────────────────────────────────────────────── */
+  --dash-text:                #dde4f0;
+  --dash-text-dim:            #7a8499;
+  --dash-text-bright:         #ffffff;
+
+  /* ── Brand accent (override per project) ──────────────────────────────── */
+  --dash-primary:             #6C8EFF;       /* neutral blue-violet default */
+  --dash-primary-rgb:         108, 142, 255;
+  --dash-secondary:           #42f4c8;
+  --dash-secondary-rgb:       66, 244, 200;
+  --dash-accent:              #ffd700;
+  --dash-accent-rgb:          255, 215, 0;
+
+  /* ── Card chrome ─────────────────────────────────────────────────────────── */
+  --dash-card-bg:             var(--dash-surface);
+  --dash-card-border:         rgba(var(--dash-primary-rgb), 0.15);
+  --dash-card-hover:          rgba(var(--dash-primary-rgb), 0.30);
+  --dash-card-radius:         16px;
+  --dash-card-blur:           20px;
+
+  /* ── Status colors (semantic — do not override) ───────────────────────── */
+  --dash-ok:                  var(--perf-good);
+  --dash-warn:                var(--perf-needs-improvement);
+  --dash-bad:                 var(--perf-poor);
+  --dash-info:                var(--brand-gsc);
+  --dash-cyan:                #42f4c8;
+
+  /* ── Typography ──────────────────────────────────────────────────────────── */
+  --dash-font-body:           'Segoe UI', system-ui, -apple-system, sans-serif;
+  --dash-font-mono:           'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+
+  /* ── Motion ──────────────────────────────────────────────────────────────── */
+  --dash-transition:          0.18s ease;
+  --dash-transition-slow:     0.32s ease;
+
+  /* ── Spacing scale ───────────────────────────────────────────────────────── */
+  --dash-gap-sm:              12px;
+  --dash-gap-md:              20px;
+  --dash-gap-lg:              32px;
+
+  /* ── Grid ────────────────────────────────────────────────────────────────── */
+  --dash-cols:                12;
+  --dash-max-width:           1400px;
+
+  /* ── Gauge colors (circular progress) ───────────────────────────────────── */
+  --dash-gauge-track:         rgba(255, 255, 255, 0.06);
+
+  /* ── Breakpoints (reference — use in @media, not in calc()) ─────────────── */
+  /* lg:  991.98px  (Bootstrap lg — tablet collapse)                           */
+  /* md:  767.98px  (Bootstrap md — mobile collapse)                           */
+  /* xxs: 389.98px  (sub-iPhone guard)                                         */
+
+}
+
+
+/* ── Light mode overrides ─────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --dash-bg:                  #f4f6fb;
+  --dash-surface:             rgba(255, 255, 255, 0.85);
+  --dash-surface-2:           rgba(255, 255, 255, 0.95);
+  --dash-border:              rgba(0, 0, 0, 0.08);
+  --dash-border-2:            rgba(0, 0, 0, 0.15);
+  --dash-text:                #1a2035;
+  --dash-text-dim:            #6b7491;
+  --dash-text-bright:         #000000;
+  --dash-card-bg:             rgba(255, 255, 255, 0.90);
+  --dash-gauge-track:         rgba(0, 0, 0, 0.08);
+}

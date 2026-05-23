@@ -1,0 +1,11 @@
+{
+  "name": "seo-dashboard",
+  "version": "1.0.0",
+  "description": "A self-contained SEO & analytics dashboard template for any website or portfolio",
+  "main": "dashboard.html",
+  "scripts": {
+    "open": "start dashboard.html"
+  },
+  "keywords": ["seo", "analytics", "dashboard", "ga4", "search-console", "template"],
+  "license": "MIT"
+}
