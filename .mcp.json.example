@@ -1,0 +1,16 @@
+{
+  "_comment": "Optional. Copy to .mcp.json to give an AI agent (Claude Code etc.) helper tools. The dashboard itself is static and needs NO server — this only adds conveniences like emailing a report, backing up to Drive, or logging metrics to a sheet via a sys-admin MCP server.",
+  "mcpServers": {
+    "sys-admin": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${env:SYSADMIN_ROOT}/index.js"],
+      "cwd": "${env:SYSADMIN_ROOT}",
+      "env": {
+        "NODE_ENV": "production",
+        "MCP_ROOT": "${env:MCP_ROOT}",
+        "SYSADMIN_ROOT": "${env:SYSADMIN_ROOT}"
+      }
+    }
+  }
+}

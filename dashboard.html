@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEO Dashboard — Acme Creative Studio</title>
+<title>Dashboard — SEO Profile (Acme Creative Studio)</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,44 +22,48 @@
   --perf-warn:          #FFA400;
   --perf-poor:          #FF4E42;
 
-  /* Tier 2 — structural (dark baseline) */
-  --bg:           #0b0e14;
-  --bg2:          #0e1219;
-  --surface:      rgba(255,255,255,0.035);
-  --surface2:     rgba(255,255,255,0.055);
-  --border:       rgba(255,255,255,0.07);
-  --border2:      rgba(255,255,255,0.13);
-  --text:         #cdd5e8;
-  --dim:          #6a7390;
-  --dim2:         #3e475e;
-  --bright:       #eef1f8;
+  /* Tier 2 — structural (dark baseline) · default theme: Plasma Green
+     (matches the JenniNexus dashboard family — fin.html / agentgarbo.html).
+     Swap the whole Tier-2 block via themes/*.css to reskin. */
+  --bg:           #040704;
+  --bg2:          #080e08;
+  --surface:      rgba(0,232,121,0.04);
+  --surface2:     rgba(0,232,121,0.07);
+  --border:       rgba(0,232,121,0.10);
+  --border2:      rgba(0,232,121,0.22);
+  --text:         #d7faef;
+  --dim:          #5a9980;
+  --dim2:         #2e5545;
+  --bright:       #eeffee;
 
-  /* Brand accent (override per project) */
-  --primary:      #6C8EFF;
-  --primary-rgb:  108,142,255;
-  --secondary:    #42f4c8;
-  --accent:       #ffd700;
-  --red:          #FF4E42;
-  --yellow:       #FFA400;
-  --green:        #0CCE6B;
+  /* Brand accent (override per project/profile via themes/*.css) */
+  --primary:      #00e879;
+  --primary-rgb:  0,232,121;
+  --secondary:    #00e5ff;
+  --accent:       #42f4c8;
+  --red:          #e5195f;
+  --yellow:       #fbbf24;
+  --green:        #00e879;
+  --glow:         rgba(0,232,121,0.13);
 
   --card-radius:  14px;
-  --blur:         18px;
+  --blur:         20px;
   --mono:         'DM Mono','Cascadia Code','Fira Code',monospace;
   --sans:         'Syne','Segoe UI',system-ui,sans-serif;
 }
 
 [data-theme="light"] {
-  --bg:       #f0f3fb;
-  --bg2:      #e8ecf5;
+  --bg:       #f2f7f3;
+  --bg2:      #e7efe9;
   --surface:  rgba(255,255,255,0.85);
   --surface2: rgba(255,255,255,0.96);
-  --border:   rgba(0,0,0,0.08);
-  --border2:  rgba(0,0,0,0.14);
-  --text:     #1c2440;
-  --dim:      #6b7490;
-  --dim2:     #a8b0c8;
-  --bright:   #0b0e14;
+  --border:   rgba(0,80,40,0.10);
+  --border2:  rgba(0,80,40,0.18);
+  --text:     #0d2419;
+  --dim:      #4a6b5a;
+  --dim2:     #9bb3a5;
+  --bright:   #04140a;
+  --glow:     rgba(0,180,90,0.10);
 }
 
 /* ── Reset ── */
@@ -74,6 +78,15 @@ body{
   min-height:100vh;
   overflow-x:hidden;
 }
+/* Atmospheric depth — radial glow wash (matches fin.html / agentgarbo.html) */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 0%,   var(--glow), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 100%, var(--glow), transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 50%,  rgba(0,229,255,.03), transparent 70%);
+}
+.masthead,.wrap,main,.container{position:relative;z-index:1}
 a{color:var(--primary);text-decoration:none}
 code{font-family:var(--mono);font-size:.88em;color:var(--secondary)}
 
@@ -1091,7 +1104,7 @@ tr:hover td{background:rgba(var(--primary-rgb),.03)}
   <div class="banner warn">
     <strong>No data loaded</strong> &mdash; This is a placeholder tab showing multi-site support.
     Duplicate the Site 1 panel and update the data for your second property.
-    See <code>data/example-site.json</code> for the data schema.
+    See <code>profiles/seo/example-data.json</code> for the data schema.
   </div>
 </div>
 <div class="dash">
@@ -1165,7 +1178,7 @@ function switchSite(id) {
       c.save();
       Object.entries(milestones).forEach(([iStr, label]) => {
         const i = parseInt(iStr);
-        const xPx = x.getPixelForIndex(i);
+        const xPx = x.getPixelForValue(i);
         const yPx = y.getPixelForValue(data[i]);
         c.setLineDash([3,3]);
         c.strokeStyle = 'rgba(255,215,0,0.45)';

@@ -1,0 +1,19 @@
+{
+  "id": "finances",
+  "name": "Personal Finances",
+  "status": "planned",
+  "description": "Cash-on-hand vs obligations, bills, loans/repayments, income sources, and progress bars — the fin.html toolkit, generalized.",
+  "theme": "plasma-green",
+  "render": "dashboard.html",
+  "exampleData": "example-data.json",
+  "plannedSections": [
+    { "id": "holdings",  "title": "Current Holdings",   "data": "accounts[] + compare[] → cash vs obligation bars (urgent flag)" },
+    { "id": "bills",     "title": "Bills & Amounts Due","data": "bills[] → due/overdue/paid status" },
+    { "id": "loans",     "title": "Loans & Repayments", "data": "loans[] → per-person collapsible foldouts + still-owed total" },
+    { "id": "income",    "title": "Income Sources",     "data": "income[] → YTD rollup" },
+    { "id": "progress",  "title": "Repayment / Goals",  "data": "progress bars (shimmer + % badges)" }
+  ],
+  "drawFrom": "D:/Documents/Finances/fin.html (holdings bars, loan foldouts, progress bars) + Clients/AgentGarbo/agentgarbo.html (rev-split meter, commitment chips). Port the reusable bar/chip/foldout components here.",
+  "blogPost": "A private finances dashboard you fully control (local, no SaaS)",
+  "_note": "STUB — not built yet. Roadmapped. The fin.html/agentgarbo.html components are the design reference; generalize them (strip personal data) into this profile."
+}

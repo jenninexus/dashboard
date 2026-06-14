@@ -1,0 +1,46 @@
+/* ============================================================
+   Midnight Blue — cool indigo/blue dashboard theme
+   The original seed look, kept as a ready alternate.
+   Apply per themes/README.md (inline the blocks, or <link> over HTTP).
+   ============================================================ */
+
+:root {
+  --bg:        #0b0e14;
+  --bg2:       #0e1219;
+  --surface:   rgba(255,255,255,0.035);
+  --surface2:  rgba(255,255,255,0.055);
+  --border:    rgba(255,255,255,0.07);
+  --border2:   rgba(255,255,255,0.13);
+  --text:      #cdd5e8;
+  --dim:       #6a7390;
+  --dim2:      #3e475e;
+  --bright:    #eef1f8;
+
+  --primary:     #6C8EFF;
+  --primary-rgb: 108,142,255;
+  --secondary:   #42f4c8;
+  --accent:      #ffd700;
+  --red:         #FF4E42;
+  --yellow:      #FFA400;
+  --green:       #0CCE6B;
+  --glow:        rgba(108,142,255,0.10);
+
+  --card-radius: 14px;
+  --blur:        18px;
+  --mono:        'DM Mono','Cascadia Code','Fira Code',monospace;
+  --sans:        'Syne','Segoe UI',system-ui,sans-serif;
+}
+
+[data-theme="light"] {
+  --bg:       #f0f3fb;
+  --bg2:      #e8ecf5;
+  --surface:  rgba(255,255,255,0.85);
+  --surface2: rgba(255,255,255,0.96);
+  --border:   rgba(0,0,0,0.08);
+  --border2:  rgba(0,0,0,0.14);
+  --text:     #1c2440;
+  --dim:      #6b7490;
+  --dim2:     #a8b0c8;
+  --bright:   #0b0e14;
+  --glow:     rgba(108,142,255,0.08);
+}

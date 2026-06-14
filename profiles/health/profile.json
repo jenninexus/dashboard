@@ -1,0 +1,19 @@
+{
+  "id": "health",
+  "name": "Health & Wellness",
+  "status": "planned",
+  "description": "Track whatever you choose — weight, sleep, steps, labs, meds, appointments, habit streaks. Fully customizable metrics.",
+  "theme": "plasma-green",
+  "render": "dashboard.html",
+  "exampleData": "example-data.json",
+  "plannedSections": [
+    { "id": "vitals",      "title": "Key Metrics",       "data": "metrics[] → current vs target gauges" },
+    { "id": "trend",       "title": "Trends",            "data": "trends[] → line charts (weight, sleep, etc.)" },
+    { "id": "habits",      "title": "Habit Streaks",     "data": "habits[] → streak bars" },
+    { "id": "labs",        "title": "Lab Results",       "data": "labs[] → in/out-of-range table" },
+    { "id": "appointments","title": "Appointments",      "data": "appointments[] → upcoming timeline" }
+  ],
+  "drawFrom": "Reuse the progress-bar, gauge, and timeline components from the SEO + finances profiles. Health metrics are user-defined — ship a flexible metrics[] schema.",
+  "blogPost": "Build a personal health dashboard you actually own",
+  "_note": "STUB — not built yet. Roadmapped. Emphasize user-customizable metrics: people track very different things."
+}
