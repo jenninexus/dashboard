@@ -1,0 +1,36 @@
+/* ============================================================
+   Aurora Borealis — dashboard theme (AUTO-GENERATED)
+   Source: www-theme-kit/tokens/dashboard-palettes.json → "aurora-borealis"
+   Regenerate: node scripts/sync-themes.mjs aurora-borealis
+   Do NOT hand-edit colors here — edit the source palette in www-theme-kit.
+   ============================================================ */
+:root {
+  --bg:        #08060e;
+  --bg2:       #17151c;
+  --surface:   rgba(168,85,247,0.05);
+  --surface2:  rgba(168,85,247,0.08);
+  --border:    rgba(168,85,247,0.14);
+  --border2:   rgba(168,85,247,0.30);
+  --text:      #f0e8ff;
+  --dim:       #b3a3d4;
+  --dim2:      #6f6090;
+  --bright:    #ffffff;
+
+  --primary:     #a855f7;
+  --primary-rgb: 168,85,247;
+  --secondary:   #00d4aa;
+  --accent:      #f472b6;
+  --blue:        #38bdf8;
+  --teal:        #2dd4bf;
+  --indigo:      #7c3aed;
+  --red:         #f472b6;
+  --yellow:      #fcd34d;
+  --green:       #2dd4bf;
+  --glow:        rgba(168,85,247,0.16);
+
+  --card-radius: 14px;
+  --blur:        20px;
+  --mono:        'JetBrains Mono','Cascadia Code',monospace;
+  --sans:        'Outfit','Segoe UI',system-ui,sans-serif;
+  --heading:     'Orbitron','Outfit',system-ui,sans-serif;
+}

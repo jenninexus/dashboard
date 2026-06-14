@@ -1,0 +1,41 @@
+/* ============================================================
+   Aurora Borealis — OPTIONAL holographic effects (hand-authored, NOT auto-generated)
+   Companion to aurora-borealis.css (which holds the synced :root tokens).
+   sync-themes.mjs never touches this file. Include it after the token block when
+   you want the shimmer + rainbow-border look (e.g. Kat's loan dashboard).
+   ============================================================ */
+
+/* Iridescent gradient used by the effects below (derived from the aurora palette) */
+:root {
+  --aurora:       linear-gradient(135deg,#ff6bd6,#c46bff,#6ba5ff,#6bffd6,#fff06b,#ff6bd6);
+  --aurora-angle: 135deg;
+}
+
+@keyframes auroraShimmer { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+@keyframes auroraBorder  { 0%{background-position:0% 50%} 100%{background-position:300% 50%} }
+
+/* Shimmering iridescent text (headings) */
+.holo-text {
+  background: var(--aurora);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: auroraShimmer 12s linear infinite;
+}
+
+/* Animated rainbow border around a card (masked so only the 1px ring shows) */
+.holo-border {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid transparent;
+}
+.holo-border::after {
+  content:''; position:absolute; inset:0; border-radius:inherit; padding:1px;
+  background: var(--aurora); background-size:300% 100%;
+  animation: auroraBorder 10s linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events:none;
+}
+
+@media print { .holo-text, .holo-border::after { animation: none; } }
