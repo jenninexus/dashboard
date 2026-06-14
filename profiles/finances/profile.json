@@ -1,19 +1,19 @@
 {
   "id": "finances",
   "name": "Personal Finances",
-  "status": "planned",
-  "description": "Cash-on-hand vs obligations, bills, loans/repayments, income sources, and progress bars — the fin.html toolkit, generalized.",
+  "status": "ready",
+  "description": "Cash-on-hand vs obligations, bills, loans/repayments, and income — local-only, no SaaS. Generalized from the fin.html toolkit.",
   "theme": "plasma-green",
-  "render": "dashboard.html",
+  "render": "profiles/finances/dashboard.html",
   "exampleData": "example-data.json",
-  "plannedSections": [
-    { "id": "holdings",  "title": "Current Holdings",   "data": "accounts[] + compare[] → cash vs obligation bars (urgent flag)" },
-    { "id": "bills",     "title": "Bills & Amounts Due","data": "bills[] → due/overdue/paid status" },
-    { "id": "loans",     "title": "Loans & Repayments", "data": "loans[] → per-person collapsible foldouts + still-owed total" },
-    { "id": "income",    "title": "Income Sources",     "data": "income[] → YTD rollup" },
-    { "id": "progress",  "title": "Repayment / Goals",  "data": "progress bars (shimmer + % badges)" }
+  "dataInjection": { "scriptId": "fin-data" },
+  "sections": [
+    { "id": "holdings", "title": "Current Holdings",     "data": "holdings.accounts[] + compare[] → cash vs obligation bars (urgent flag = red)" },
+    { "id": "bills",    "title": "Bills & Amounts Due",  "data": "bills[] → status table (Overdue/Due/Paid/OK)" },
+    { "id": "loans",    "title": "Loans & Repayments",   "data": "loans[] → per-person collapsible foldouts + still-owed total (excludeFromTotal flag)" },
+    { "id": "income",   "title": "Income Sources",       "data": "income[] → YTD rollup" }
   ],
-  "drawFrom": "D:/Documents/Finances/fin.html (holdings bars, loan foldouts, progress bars) + Clients/AgentGarbo/agentgarbo.html (rev-split meter, commitment chips). Port the reusable bar/chip/foldout components here.",
+  "dataSources": ["manual JSON (data.json)"],
   "blogPost": "A private finances dashboard you fully control (local, no SaaS)",
-  "_note": "STUB — not built yet. Roadmapped. The fin.html/agentgarbo.html components are the design reference; generalize them (strip personal data) into this profile."
+  "_note": "Render is data-driven: it reads the inline <script id=\"fin-data\"> JSON. The scaffold swaps that block with your data.json. Components (coverage bars, loan foldouts, status table) are generalized from D:/Documents/Finances/fin.html — no personal data."
 }

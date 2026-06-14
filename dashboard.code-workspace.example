@@ -1,0 +1,86 @@
+{
+  // ─────────────────────────────────────────────────────────────
+  //  Dashboard seed kit — VS Code workspace (Plasma Green chrome 🟢)
+  //  Copy this file → dashboard.code-workspace and open it.
+  //  (The real .code-workspace is gitignored so your tweaks stay local.)
+  // ─────────────────────────────────────────────────────────────
+  "folders": [
+    { "name": "📊 dashboard", "path": "." }
+  ],
+  "settings": {
+    "files.exclude": { "**/node_modules": true, "**/.git": true },
+    "search.exclude": { "**/my-dashboard": true, "**/_scratch": true },
+    "window.title": "📊 dashboard — ${activeEditorShort}",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+
+    // Plasma Green theme — matches the dashboard's own palette
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#040704",
+      "activityBar.foreground": "#00e879",
+      "activityBar.inactiveForeground": "#2e5545",
+      "activityBarBadge.background": "#00e879",
+      "activityBarBadge.foreground": "#040704",
+      "titleBar.activeBackground": "#080e08",
+      "titleBar.activeForeground": "#00e879",
+      "titleBar.inactiveBackground": "#040704",
+      "statusBar.background": "#040704",
+      "statusBar.foreground": "#00e879",
+      "statusBarItem.hoverBackground": "#0d1610",
+      "sideBar.background": "#040704",
+      "sideBar.foreground": "#d7faef",
+      "sideBarSectionHeader.background": "#080e08",
+      "sideBarSectionHeader.foreground": "#00e879",
+      "panel.background": "#040704",
+      "panelTitle.activeForeground": "#00e879",
+      "panelTitle.activeBorder": "#00e879",
+      "terminal.background": "#040704",
+      "terminal.foreground": "#d7faef",
+      "terminal.ansiGreen": "#00e879",
+      "terminal.ansiBrightGreen": "#39ff8c",
+      "terminal.ansiCyan": "#00e5ff",
+      "terminal.ansiBrightCyan": "#42f4c8",
+      "terminal.ansiRed": "#e5195f",
+      "terminal.ansiYellow": "#fbbf24",
+      "tab.activeBackground": "#0d1610",
+      "tab.activeForeground": "#00e879",
+      "tab.activeBorderTop": "#00e879",
+      "editorGroupHeader.tabsBackground": "#040704"
+    }
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "📋 List profiles",
+        "type": "shell",
+        "command": "node scripts/build-dashboard.mjs --list",
+        "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+        "problemMatcher": []
+      },
+      {
+        "label": "✨ Build dashboard (SEO)",
+        "type": "shell",
+        "command": "node scripts/build-dashboard.mjs --profile seo --name \"My Brand\" --force",
+        "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+        "problemMatcher": []
+      },
+      {
+        "label": "💰 Build dashboard (Finances)",
+        "type": "shell",
+        "command": "node scripts/build-dashboard.mjs --profile finances --name \"My Finances\" --force",
+        "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+        "problemMatcher": []
+      },
+      {
+        "label": "🌐 Open my dashboard",
+        "type": "shell",
+        "command": "Start-Process my-dashboard/dashboard.html",
+        "presentation": { "reveal": "silent", "panel": "shared" },
+        "problemMatcher": []
+      }
+    ]
+  },
+  "extensions": {
+    "recommendations": ["esbenp.prettier-vscode"]
+  }
+}

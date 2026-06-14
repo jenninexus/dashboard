@@ -67,17 +67,26 @@ const outDir = join(ROOT, args.out || 'my-dashboard');
 if (existsSync(outDir) && !args.force) die(`Output dir already exists: ${outDir}  (use --force to overwrite)`);
 mkdirSync(outDir, { recursive: true });
 
-// 1. data.json — copy example data, stamp identity
+// 1. data.json — copy example data, stamp identity (shape-agnostic: site{} or profile{})
 const exPath = join(profDir, profile.exampleData || 'example-data.json');
+const today = new Date().toISOString().slice(0, 10);
 let data = existsSync(exPath) ? JSON.parse(stripJsonComments(readFileSync(exPath, 'utf8'))) : {};
-data.site = data.site || {};
-if (args.name)   data.site.name = args.name;
-if (args.domain) { data.site.domain = args.domain; data.site.url = data.site.url || `https://${args.domain}`; }
-data.site.dataAsOf = new Date().toISOString().slice(0, 10);
+const ident = data.site ? 'site' : (data.profile ? 'profile' : 'site');
+data[ident] = data[ident] || {};
+if (args.name)   data[ident].name = args.name;
+if (args.domain) { data[ident].domain = args.domain; data[ident].url = data[ident].url || `https://${args.domain}`; }
+data[ident].dataAsOf = today; data[ident].asOf = today;
 writeFileSync(join(outDir, 'data.json'), JSON.stringify(data, null, 2));
 
 // 2. self-contained copy of the render + themes
-cpSync(join(ROOT, profile.render || 'dashboard.html'), join(outDir, 'dashboard.html'));
+let renderHtml = readFileSync(join(ROOT, profile.render || 'dashboard.html'), 'utf8');
+// Data-driven renders embed an inline <script id="..."> JSON block — swap it with the user's data.
+const sid = profile.dataInjection && profile.dataInjection.scriptId;
+if (sid) {
+  const re = new RegExp(`(<script id="${sid}"[^>]*>)([\\s\\S]*?)(</script>)`);
+  if (re.test(renderHtml)) renderHtml = renderHtml.replace(re, `$1\n${JSON.stringify(data, null, 2)}\n$3`);
+}
+writeFileSync(join(outDir, 'dashboard.html'), renderHtml);
 cpSync(join(ROOT, 'themes'), join(outDir, 'themes'), { recursive: true });
 
 // 3. done

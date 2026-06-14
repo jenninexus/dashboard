@@ -1,0 +1,57 @@
+{
+  "profile": {
+    "name": "My Finances",
+    "asOf": "2026-06-14",
+    "_comment": "Personal finances profile — sample data. Replace with your own. All amounts are numbers (no $ or commas)."
+  },
+  "holdings": {
+    "_comment": "accounts[] = cash on hand per account. compare[] = obligations to measure cash against; set urgent:true for the eviction-risk / must-pay-now one (renders red).",
+    "accounts": [
+      { "name": "Checking", "amount": 1850 },
+      { "name": "Savings", "amount": 600 },
+      { "name": "Cash app", "amount": 120 },
+      { "name": "Wallet", "amount": 80 }
+    ],
+    "compare": [
+      { "label": "Rent — this month", "amount": 1600, "urgent": true },
+      { "label": "Rent + utilities total", "amount": 2950 }
+    ],
+    "note": "🔴 The urgent bar (red) is what protects the essentials — pay that first. Set <code>urgent:true</code> on it in data.json."
+  },
+  "bills": [
+    { "name": "Rent", "amount": 1600, "due": "1st", "status": "Due" },
+    { "name": "Electric", "amount": 95, "due": "12th", "status": "OK" },
+    { "name": "Internet", "amount": 70, "due": "15th", "status": "OK" },
+    { "name": "Phone", "amount": 45, "due": "20th", "status": "Paid" },
+    { "name": "Car insurance", "amount": 150, "due": "19th", "status": "Due" }
+  ],
+  "loans": [
+    {
+      "name": "Friend — Alex",
+      "kind": "personal",
+      "stillOwed": 300,
+      "target": "~Jun 27",
+      "note": "Helped with a vet bill. Flexible — pay back when able."
+    },
+    {
+      "name": "Sibling — Sam",
+      "kind": "personal",
+      "stillOwed": 500,
+      "target": "~Jul 7",
+      "note": "Short-term, no interest."
+    },
+    {
+      "name": "Angel investor",
+      "kind": "investment",
+      "stillOwed": 6000,
+      "target": "2027-05-12",
+      "excludeFromTotal": true,
+      "note": "Loan structured as an investment — part of payback is a revenue %. Counted separately from near-term personal debt so the 'still owed' total isn't inflated."
+    }
+  ],
+  "income": [
+    { "source": "Day job", "ytd": 18500, "status": "active" },
+    { "source": "Freelance", "ytd": 3200, "status": "active" },
+    { "source": "Creator / Patreon", "ytd": 180, "status": "active" }
+  ]
+}

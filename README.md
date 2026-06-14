@@ -46,7 +46,7 @@ Prefer an AI assistant? Just say **"set up the SEO dashboard for mysite.com"** �
 | Profile | Status | Tracks |
 |---------|--------|--------|
 | **[seo](profiles/seo/)** | ✅ ready | GA4, Search Console, PageSpeed, Cloudflare — client-ready SEO reports |
-| [finances](profiles/finances/) | 🚧 planned | cash vs obligations, bills, loans/repayments, income |
+| **[finances](profiles/finances/)** | ✅ ready | cash vs obligations, bills, loans/repayments, income — local-only, no SaaS |
 | [health](profiles/health/) | 🚧 planned | custom metrics — weight, sleep, labs, habits, appointments |
 
 Each profile is a folder with a `profile.json` manifest + a fully-commented `example-data.json`.
@@ -88,6 +88,20 @@ AGENTS.md                   # AI-assistant guide (agent-agnostic)
 
 ---
 
+## Dev setup (optional)
+
+Copy the example configs (the real ones are gitignored so your secrets/tweaks stay local):
+
+```bash
+cp dashboard.code-workspace.example dashboard.code-workspace   # cute Plasma-Green VS Code workspace + tasks
+cp .env.example .env                                           # only if you wire optional MCP/live data
+cp .mcp.json.example .mcp.json                                 # only if you use an AI agent's MCP tools
+```
+
+Open `dashboard.code-workspace` for themed chrome + one-click tasks (list profiles, build, open).
+
+---
+
 ## Dependencies
 
 Loaded via CDN — no `npm install` needed to *run* it.
@@ -106,7 +120,7 @@ The scaffold script uses only Node's standard library (Node 18+).
 
 - [x] Generic seed + profile system + Plasma Green theme + agent layer
 - [x] **SEO** profile (ready)
-- [ ] **Finances** profile — port the holdings / loan / progress components from the fin.html toolkit
+- [x] **Finances** profile (ready) — data-driven `data.json`: holdings coverage bars, loan foldouts, bills, income
 - [ ] **Health** profile — user-defined metrics, trends, habit streaks
 - [ ] Live-data adapters (optional) per profile
 - [ ] Per-profile blog posts + screenshots
