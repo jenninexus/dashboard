@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Finances Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── Theme tokens (Plasma Green default — see themes/) ───────────── */
+:root{
+  --bg:#040704; --bg2:#080e08;
+  --surface:rgba(0,232,121,0.04); --surface2:rgba(0,232,121,0.07);
+  --border:rgba(0,232,121,0.10); --border2:rgba(0,232,121,0.22);
+  --text:#d7faef; --dim:#5a9980; --dim2:#2e5545; --bright:#eeffee;
+  --primary:#00e879; --primary-rgb:0,232,121; --secondary:#00e5ff;
+  --accent:#42f4c8; --red:#e5195f; --yellow:#fbbf24; --green:#00e879;
+  --glow:rgba(0,232,121,0.13);
+  --radius:14px; --mono:'DM Mono','Cascadia Code',monospace; --sans:'Syne','Segoe UI',system-ui,sans-serif;
+}
+[data-theme="light"]{
+  --bg:#f2f7f3; --bg2:#e7efe9; --surface:rgba(255,255,255,.85); --surface2:rgba(255,255,255,.96);
+  --border:rgba(0,80,40,.10); --border2:rgba(0,80,40,.18); --text:#0d2419; --dim:#4a6b5a; --dim2:#9bb3a5; --bright:#04140a; --glow:rgba(0,180,90,.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.55;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:
+  radial-gradient(ellipse 80% 60% at 10% 0%,var(--glow),transparent 60%),
+  radial-gradient(ellipse 60% 50% at 90% 100%,var(--glow),transparent 60%),
+  radial-gradient(ellipse 40% 40% at 50% 50%,rgba(0,229,255,.03),transparent 70%)}
+.wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:2rem 1.6rem 4rem}
+a{color:var(--secondary);text-decoration:none}
+code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
+
+/* Header */
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.4rem}
+.head h1{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--primary),#39ff8c,var(--secondary));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.01em}
+.head .meta{font-size:.72rem;color:var(--dim);margin-top:.2rem}
+.theme-btn{background:transparent;border:1px solid var(--border2);color:var(--dim);border-radius:6px;padding:.3rem .7rem;font-size:.62rem;font-family:var(--mono);cursor:pointer;text-transform:uppercase;letter-spacing:.05em;transition:color .15s,border-color .15s}
+.theme-btn:hover{color:var(--primary);border-color:var(--primary)}
+.controls{display:flex;justify-content:flex-end;gap:.4rem;margin-bottom:1rem}
+.ctrl-btn{padding:4px 12px;font-size:.6rem;font-family:var(--mono);font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--dim);background:transparent;border:1px solid var(--border);border-radius:5px;cursor:pointer;transition:.15s}
+.ctrl-btn:hover{color:var(--primary);border-color:var(--border2)}
+
+/* Card */
+.card{background:var(--surface);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1.1rem;overflow:hidden;position:relative}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--card-accent,var(--primary)),transparent);opacity:.7}
+.card-head{display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent;transition:background .15s}
+.card.open .card-head{border-bottom-color:var(--border)}
+.card-head:hover{background:var(--surface2)}
+.card-head h2{flex:1;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--bright);display:flex;align-items:center;gap:.5rem}
+.card-head h2::before{content:'';width:3px;height:14px;border-radius:2px;background:linear-gradient(180deg,var(--card-accent,var(--primary)),var(--secondary))}
+.card-toggle{font-size:.6rem;color:var(--dim2);transition:transform .2s}
+.card.open .card-toggle{transform:rotate(90deg)}
+.card-body{padding:1rem;display:none}
+.card.open .card-body{display:block}
+.badge{font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.12rem .45rem;border-radius:5px;background:rgba(var(--primary-rgb),.12);color:var(--primary);border:1px solid var(--border2)}
+
+/* Summary tiles */
+.tiles{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:1rem}
+.tile{flex:1;min-width:130px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:.7rem .8rem;text-align:center}
+.tile .n{font-size:1.25rem;font-weight:800;color:var(--primary);font-variant-numeric:tabular-nums}
+.tile .l{font-size:.58rem;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-top:.15rem}
+
+/* Account chips */
+.accts{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:.9rem}
+.acct{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:.35rem .6rem;font-size:.66rem;color:var(--dim)}
+.acct b{color:var(--text);font-size:.76rem;margin-left:.3rem}
+
+/* Progress / coverage bars */
+.bar-row{margin-bottom:.95rem}
+.bar-label{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;font-size:.76rem;margin-bottom:.35rem}
+.bar-label .lbl{color:var(--text);font-weight:600}
+.bar-label .v{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.track{position:relative;height:20px;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(255,255,255,.03));border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.5)}
+.fill{position:absolute;inset:0 auto 0 0;min-width:10px;border-radius:10px;background:linear-gradient(90deg,#00c95a,var(--primary),#39ff8c);box-shadow:0 0 14px var(--glow),inset 0 1px 0 rgba(255,255,255,.25);transition:width .6s cubic-bezier(.22,1,.36,1);overflow:hidden}
+.fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);transform:translateX(-100%);animation:sh 2.6s ease-in-out infinite}
+@keyframes sh{0%{transform:translateX(-100%)}60%,100%{transform:translateX(320%)}}
+.fill.warn{background:linear-gradient(90deg,rgba(251,191,36,.5),var(--yellow),#ffd968)}
+.fill.danger{background:linear-gradient(90deg,rgba(229,25,95,.6),var(--red))}
+.pct{position:absolute;top:50%;right:.5rem;transform:translateY(-50%);font-size:.6rem;font-weight:700;color:var(--bright);text-shadow:0 1px 3px rgba(0,0,0,.8);z-index:2}
+.bar-note{font-size:.66rem;color:var(--dim2);margin-top:.3rem;line-height:1.5}
+.bar-note .short{color:var(--red);font-weight:700}
+.bar-note .ok{color:var(--primary);font-weight:700}
+
+/* Loan foldouts */
+.fold{border:1px solid var(--border);border-radius:8px;margin-bottom:.4rem;background:rgba(var(--primary-rgb),.02);overflow:hidden}
+.fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.5rem;padding:.5rem .65rem}
+.fold>summary::-webkit-details-marker{display:none}
+.fold>summary:hover{background:var(--surface2)}
+.fold .caret{font-size:.5rem;color:var(--dim);transition:transform .18s}
+.fold[open] .caret{transform:rotate(90deg)}
+.fold .name{flex:1;font-size:.74rem;font-weight:600;color:var(--text)}
+.fold .owed{font-size:.74rem;font-weight:700;font-variant-numeric:tabular-nums}
+.fold-body{padding:.1rem .65rem .6rem 1.6rem;font-size:.66rem;color:var(--dim);border-top:1px solid var(--border)}
+.loan-ctrls{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.6rem}
+
+/* Bills table */
+table{width:100%;border-collapse:collapse;font-size:.74rem}
+th{text-align:left;padding:.5rem .6rem;color:var(--dim);font-size:.6rem;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--border)}
+td{padding:.5rem .6rem;border-bottom:1px solid rgba(var(--primary-rgb),.06);vertical-align:top}
+.st{font-weight:700;font-size:.66rem}
+.st.overdue{color:var(--red)} .st.due{color:var(--yellow)} .st.paid{color:var(--primary)} .st.ok{color:var(--dim)}
+
+.foot{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.66rem;color:var(--dim2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
+@media print{.controls,.theme-btn{display:none}.card-body{display:block!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <div>
+      <h1 id="title">My Finances</h1>
+      <div class="meta">Data as of <span id="asof">—</span> · self-contained · your data in <code>data.json</code></div>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()"><span id="themeIcon">☾</span> <span id="themeLabel">Dark</span></button>
+  </div>
+
+  <div class="controls">
+    <button class="ctrl-btn" onclick="allCards(true)">expand all</button>
+    <button class="ctrl-btn" onclick="allCards(false)">collapse all</button>
+  </div>
+
+  <!-- Current Holdings -->
+  <div class="card open" style="--card-accent:var(--primary)">
+    <div class="card-head" onclick="tog(this)"><h2>Current Holdings</h2><span class="badge">live</span><span class="card-toggle">▸</span></div>
+    <div class="card-body">
+      <div class="tiles" id="hold-tiles"></div>
+      <div class="accts" id="hold-accts"></div>
+      <div id="hold-bars"></div>
+      <div id="hold-note" style="font-size:.62rem;color:var(--dim2);margin-top:.6rem;line-height:1.5"></div>
+    </div>
+  </div>
+
+  <!-- Bills -->
+  <div class="card open" style="--card-accent:var(--secondary)">
+    <div class="card-head" onclick="tog(this)"><h2>Bills &amp; Amounts Due</h2><span class="card-toggle">▸</span></div>
+    <div class="card-body"><table><thead><tr><th>Bill</th><th>Amount</th><th>Due</th><th>Status</th></tr></thead><tbody id="bills-body"></tbody></table></div>
+  </div>
+
+  <!-- Loans -->
+  <div class="card open" style="--card-accent:var(--yellow)">
+    <div class="card-head" onclick="tog(this)"><h2>Loans &amp; Repayments</h2><span class="card-toggle">▸</span></div>
+    <div class="card-body">
+      <div class="tiles" style="margin-bottom:.7rem"><div class="tile"><div class="n" id="loan-total" style="color:var(--yellow)">—</div><div class="l">Still owed</div></div></div>
+      <div class="loan-ctrls">
+        <button class="ctrl-btn" onclick="loansAll(true)">expand</button>
+        <button class="ctrl-btn" onclick="loansAll(false)">collapse</button>
+      </div>
+      <div id="loan-folds"></div>
+    </div>
+  </div>
+
+  <!-- Income -->
+  <div class="card open" style="--card-accent:var(--accent)">
+    <div class="card-head" onclick="tog(this)"><h2>Income Sources</h2><span class="card-toggle">▸</span></div>
+    <div class="card-body"><table><thead><tr><th>Source</th><th>YTD</th><th>Status</th></tr></thead><tbody id="income-body"></tbody></table>
+      <div class="tiles" style="margin-top:.8rem"><div class="tile"><div class="n" id="income-total">—</div><div class="l">Total YTD</div></div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Finances profile · dashboard seed kit</span>
+    <span>Local-only by design · no data leaves your machine</span>
+  </div>
+</div>
+
+<!-- Your data. Replace data.json with your own (same shape). Inlined here so it works over file://. -->
+<script id="fin-data" type="application/json">
+{
+  "profile": {
+    "name": "My Finances",
+    "asOf": "2026-06-14",
+    "_comment": "Personal finances profile — sample data. Replace with your own. All amounts are numbers (no $ or commas)."
+  },
+  "holdings": {
+    "_comment": "accounts[] = cash on hand per account. compare[] = obligations to measure cash against; set urgent:true for the eviction-risk / must-pay-now one (renders red).",
+    "accounts": [
+      { "name": "Checking", "amount": 1850 },
+      { "name": "Savings", "amount": 600 },
+      { "name": "Cash app", "amount": 120 },
+      { "name": "Wallet", "amount": 80 }
+    ],
+    "compare": [
+      { "label": "Rent — this month", "amount": 1600, "urgent": true },
+      { "label": "Rent + utilities total", "amount": 2950 }
+    ],
+    "note": "🔴 The urgent bar (red) is what protects the essentials — pay that first. Set <code>urgent:true</code> on it in data.json."
+  },
+  "bills": [
+    { "name": "Rent", "amount": 1600, "due": "1st", "status": "Due" },
+    { "name": "Electric", "amount": 95, "due": "12th", "status": "OK" },
+    { "name": "Internet", "amount": 70, "due": "15th", "status": "OK" },
+    { "name": "Phone", "amount": 45, "due": "20th", "status": "Paid" },
+    { "name": "Car insurance", "amount": 150, "due": "19th", "status": "Due" }
+  ],
+  "loans": [
+    {
+      "name": "Friend — Alex",
+      "kind": "personal",
+      "stillOwed": 300,
+      "target": "~Jun 27",
+      "note": "Helped with a vet bill. Flexible — pay back when able."
+    },
+    {
+      "name": "Sibling — Sam",
+      "kind": "personal",
+      "stillOwed": 500,
+      "target": "~Jul 7",
+      "note": "Short-term, no interest."
+    },
+    {
+      "name": "Angel investor",
+      "kind": "investment",
+      "stillOwed": 6000,
+      "target": "2027-05-12",
+      "excludeFromTotal": true,
+      "note": "Loan structured as an investment — part of payback is a revenue %. Counted separately from near-term personal debt so the 'still owed' total isn't inflated."
+    }
+  ],
+  "income": [
+    { "source": "Day job", "ytd": 18500, "status": "active" },
+    { "source": "Freelance", "ytd": 3200, "status": "active" },
+    { "source": "Creator / Patreon", "ytd": 180, "status": "active" }
+  ]
+}
+</script>
+<script>
+const D = JSON.parse(document.getElementById('fin-data').textContent);
+const money = n => (n<0?'-$':'$') + Math.abs(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2});
+const pctCover = (cash,amt) => Math.max(2,Math.min(100, amt? cash/amt*100 : 100));
+
+// Header
+document.getElementById('title').textContent = D.profile?.name || 'My Finances';
+document.getElementById('asof').textContent = D.profile?.asOf || '—';
+
+// Holdings
+(function(){
+  const h = D.holdings||{}; const accts=h.accounts||[];
+  const cash = accts.reduce((s,a)=>s+(+a.amount||0),0);
+  document.getElementById('hold-tiles').innerHTML =
+    `<div class="tile"><div class="n">${money(cash)}</div><div class="l">Cash on hand</div></div>` +
+    (h.compare||[]).slice(0,2).map(c=>`<div class="tile"><div class="n" style="color:${c.urgent?'var(--red)':'var(--yellow)'}">${money(c.amount)}</div><div class="l">${c.label.split('—').pop().trim().slice(0,18)}</div></div>`).join('');
+  document.getElementById('hold-accts').innerHTML = accts.map(a=>`<div class="acct">${a.name}<b>${money(a.amount)}</b></div>`).join('');
+  const bars = [`<div class="bar-row"><div class="bar-label"><span class="lbl">Cash on hand</span><span class="v" style="color:var(--primary)">${money(cash)}</span></div><div class="track"><div class="fill" style="width:100%"></div><span class="pct">ready</span></div></div>`];
+  (h.compare||[]).forEach(c=>{
+    const cov=pctCover(cash,c.amount), diff=cash-c.amount;
+    const cls=c.urgent?'danger':'warn', col=c.urgent?'var(--red)':'var(--yellow)';
+    const note = diff>=0?`<span class="ok">covered — ${money(diff)} to spare</span>`:`<span class="short">short ${money(-diff)}</span> · ${Math.round(cov)}% covered`;
+    bars.push(`<div class="bar-row"><div class="bar-label"><span class="lbl">${c.urgent?'🔴 ':''}${c.label}</span><span class="v" style="color:${col}">${money(c.amount)}</span></div><div class="track"><div class="fill ${cls}" style="width:${cov}%"></div><span class="pct">${Math.round(cov)}%</span></div><div class="bar-note">${note}</div></div>`);
+  });
+  document.getElementById('hold-bars').innerHTML = bars.join('');
+  if(h.note) document.getElementById('hold-note').innerHTML = h.note;
+})();
+
+// Bills
+document.getElementById('bills-body').innerHTML = (D.bills||[]).map(b=>{
+  const st=(b.status||'ok').toLowerCase();
+  return `<tr><td><strong>${b.name}</strong></td><td>${b.amount!=null?money(b.amount):'—'}</td><td>${b.due||'—'}</td><td class="st ${st}">${b.status||''}</td></tr>`;
+}).join('') || '<tr><td colspan="4" style="color:var(--dim)">No bills in data.json</td></tr>';
+
+// Loans
+(function(){
+  const loans=D.loans||[];
+  const total=loans.filter(l=>!l.excludeFromTotal).reduce((s,l)=>s+(+l.stillOwed||0),0);
+  document.getElementById('loan-total').textContent=money(total);
+  document.getElementById('loan-folds').innerHTML = loans.map((l,i)=>{
+    const owed=+l.stillOwed||0; const id='ln'+i; const open=l.kind==='investment'?'':' open';
+    const owedHtml = owed<=0?`<span style="color:var(--primary);font-weight:700">repaid</span>`:`<span class="owed" style="color:var(--yellow)">${money(owed)}</span>`;
+    return `<details class="fold" id="${id}"${open}><summary><span class="caret">▶</span><span class="name">${l.name}${l.kind==='investment'?' <span style="font-size:.56rem;color:var(--dim)">(investment)</span>':''}</span>${owedHtml}</summary><div class="fold-body">${l.note||''}${l.target?` · target ${l.target}`:''}</div></details>`;
+  }).join('') || '<div style="color:var(--dim);font-size:.7rem">No loans in data.json</div>';
+})();
+
+// Income
+(function(){
+  const inc=D.income||[]; const total=inc.reduce((s,x)=>s+(+x.ytd||0),0);
+  document.getElementById('income-body').innerHTML = inc.map(x=>`<tr><td><strong>${x.source}</strong></td><td>${money(x.ytd)}</td><td class="st ok">${x.status||''}</td></tr>`).join('') || '<tr><td colspan="3" style="color:var(--dim)">No income in data.json</td></tr>';
+  document.getElementById('income-total').textContent=money(total);
+})();
+
+// Interactions
+function tog(h){h.closest('.card').classList.toggle('open');}
+function allCards(open){document.querySelectorAll('.card').forEach(c=>c.classList.toggle('open',open));}
+function loansAll(open){document.querySelectorAll('.fold').forEach(f=>open?f.setAttribute('open',''):f.removeAttribute('open'));}
+function toggleTheme(){const h=document.documentElement;const d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');document.getElementById('themeIcon').textContent=d?'☀':'☾';document.getElementById('themeLabel').textContent=d?'Light':'Dark';localStorage.setItem('fin-theme',d?'light':'dark');}
+if(localStorage.getItem('fin-theme')==='light')toggleTheme();
+</script>
+</body>
+</html>
