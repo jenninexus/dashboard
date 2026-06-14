@@ -1,0 +1,24 @@
+{
+  "id": "seo",
+  "name": "SEO & Analytics",
+  "status": "ready",
+  "description": "Track GA4, Search Console, PageSpeed, and Cloudflare for any site. Client-ready monthly reports.",
+  "theme": "plasma-green",
+  "render": "dashboard.html",
+  "exampleData": "example-data.json",
+  "tier1Tokens": "../../themes/seo-tokens.css",
+  "sections": [
+    { "id": "progress",  "title": "6-Month Progress",  "data": "impressionsTrend + KPI deltas" },
+    { "id": "ga4",       "title": "GA4 Summary",        "data": "ga4.last30Days vs previousPeriod" },
+    { "id": "traffic",   "title": "Traffic Sources",    "data": "trafficSources → doughnut" },
+    { "id": "pages",     "title": "Top Pages",          "data": "topPages → table" },
+    { "id": "gsc",       "title": "GSC Coverage",       "data": "searchConsole" },
+    { "id": "pagespeed", "title": "PageSpeed",          "data": "pagespeed.mobile/desktop → gauges" },
+    { "id": "onpage",    "title": "On-Page SEO",        "data": "seoFeatures → pass/warn/fail" },
+    { "id": "actions",   "title": "Action Plan",        "data": "actionItems → priority buckets" },
+    { "id": "milestones","title": "Site Milestones",    "data": "milestones → timeline" }
+  ],
+  "dataSources": ["GA4", "Google Search Console", "PageSpeed Insights", "Cloudflare"],
+  "blogPost": "Build a client-ready SEO report dashboard (no backend)",
+  "_note": "This profile's live reference render IS dashboard.html (SEO content inline). example-data.json documents the full data schema field-by-field."
+}

@@ -1,203 +1,118 @@
-# SEO Dashboard
+# Dashboard
 
-A self-contained, single-file SEO & analytics dashboard template. Drop in your own data and ship a polished client-ready report — no build step, no framework, no backend.
+A self-contained, themeable **dashboard seed kit**. Pick a **profile** — SEO, finances, health,
+or your own — drop in a JSON file, and ship a polished single-file dashboard. No build step, no
+framework, no backend. Open `dashboard.html` and it just works.
 
-![Dark mode dashboard preview](docs/preview-dark.png)
+![Dashboard preview](docs/preview-dark.png)
 
 ---
 
-## What it is
+## Why
 
-A static HTML dashboard that renders GA4, Google Search Console, PageSpeed, and Cloudflare data into charts, gauges, and scorecards. Everything runs in the browser. Your data lives in one JSON file.
+Most dashboards are either a heavyweight SaaS you don't control or a spreadsheet you copy
+numbers into. This is the middle path: **one HTML file, your data in JSON, your colors, fully
+yours.** Built to be forked.
 
-**Built for:**
-- Freelancers presenting monthly SEO reports to clients
-- Agencies documenting site health over time
-- Developers tracking their own portfolio or product site
-- Anyone who wants a beautiful alternative to copying numbers into a spreadsheet
+- **Profiles** decide *what* you track. SEO ships ready; finances & health are on the roadmap.
+- **Themes** decide *how it looks*. Default is a polished neon "Plasma Green"; swap one token block to reskin.
+- **An agent layer** (`AGENTS.md` + a scaffold script + a `/build-dashboard` skill) lets any AI assistant — or a plain `npm` command — set one up for you.
 
 ---
 
 ## Quick start
 
 ```bash
-git clone https://github.com/your-username/seo-dashboard.git
-cd seo-dashboard
+git clone https://github.com/jenninexus/dashboard.git
+cd dashboard
+
+# See available profiles
+npm run profiles
+
+# Scaffold your own (creates ./my-dashboard/)
+npm run build-dashboard -- --profile seo --name "Your Brand" --domain yoursite.com
 ```
 
-Open `data/example-site.json` and replace the example values with your real data.
+Then edit `my-dashboard/data.json` (every field is commented) and open
+`my-dashboard/dashboard.html` in a browser. Done.
 
-Then open `dashboard.html` in your browser — no server required.
-
-```bash
-# macOS / Linux
-open dashboard.html
-
-# Windows
-start dashboard.html
-```
+Prefer an AI assistant? Just say **"set up the SEO dashboard for mysite.com"** — see
+[`AGENTS.md`](AGENTS.md).
 
 ---
 
-## How to use your own data
+## Profiles
 
-All dashboard content is driven by `data/example-site.json`. The file is thoroughly commented — every field explains what it expects.
+| Profile | Status | Tracks |
+|---------|--------|--------|
+| **[seo](profiles/seo/)** | ✅ ready | GA4, Search Console, PageSpeed, Cloudflare — client-ready SEO reports |
+| [finances](profiles/finances/) | 🚧 planned | cash vs obligations, bills, loans/repayments, income |
+| [health](profiles/health/) | 🚧 planned | custom metrics — weight, sleep, labs, habits, appointments |
 
-### Minimal setup (swap these first)
-
-```jsonc
-"site": {
-  "name":        "Your Site Name",
-  "domain":      "yourdomain.com",
-  "url":         "https://yourdomain.com",
-  "dataAsOf":    "2026-05-23"
-},
-"ga4": {
-  "last30Days": { "activeUsers": 0, "sessions": 0, ... }
-},
-"searchConsole": {
-  "last90Days": { "totalClicks": 0, "totalImpressions": 0, ... }
-}
-```
-
-### Impressions trend chart
-
-The `impressionsTrend` block drives the 6-month growth chart. Add one number per month, oldest first. Use `null` for months with no data (shows as a gap in the line):
-
-```jsonc
-"impressionsTrend": {
-  "labels": ["Jan 25", "Feb 25", "Mar 25", "Apr 25", "May 25", "Jun 25"],
-  "data":   [120, 180, null, 340, 520, 810],
-  "milestones": {
-    "1": "Blog launch",
-    "5": "Schema markup added"
-  }
-}
-```
-
-Milestone keys are zero-based indices into the `labels` array. They render as gold annotation lines on the chart.
-
-### Action items
-
-Four priority levels: `"critical"`, `"high"`, `"medium"`, `"done"`. Done items move to a collapsed "Completed" bucket automatically.
-
-```jsonc
-{ "priority": "critical", "item": "Fix mobile LCP", "impact": "PageSpeed +15pts" },
-{ "priority": "done",     "item": "Add canonical URLs", "impact": "" }
-```
+Each profile is a folder with a `profile.json` manifest + a fully-commented `example-data.json`.
+Add your own in minutes — see [`profiles/README.md`](profiles/README.md).
 
 ---
 
-## Branding / theming
+## Theming
 
-The token system follows the same Tier 1 / Tier 2 pattern used by `www-theme-kit`:
-
-| Tier | File | What to do |
-|------|------|------------|
-| **Tier 1** — SEO service colors | `tokens/seo-dashboard-tokens.css` | Never override — these are canonical Google/Cloudflare/etc brand values |
-| **Tier 2** — Dashboard structure | `tokens/seo-dashboard-tokens.css` | Override in your own brand file using the template below |
-
-### Brand override template
-
-Create `tokens/my-brand.css` and paste only the tokens you want to change:
+Ships dark with the **Plasma Green** palette (matches the JenniNexus dashboard family). Toggle
+light/dark with the header button. To reskin, copy a `themes/*.css` token block into
+`dashboard.html` — or link it over HTTP. Full contract + alternate palettes:
+[`themes/README.md`](themes/README.md).
 
 ```css
-:root {
-  --dash-primary:       #your-color;
-  --dash-primary-rgb:   r, g, b;          /* required for rgba() usage */
-  --dash-secondary:     #your-accent;
-  --dash-accent:        #your-highlight;
-  --dash-font-body:     'Your Font', sans-serif;
+:root{
+  --primary:#00e879; --primary-rgb:0,232,121;
+  --secondary:#00e5ff; --accent:#42f4c8; --glow:rgba(0,232,121,.13);
 }
 ```
 
-Then add `<link rel="stylesheet" href="tokens/my-brand.css">` after the base token import in `dashboard.html`.
-
-### Light / dark mode
-
-The dashboard ships dark by default. Toggle with the sun/moon button in the header — preference is saved to `localStorage`.
-
-Theme switching is done via `data-theme` on `<html>` (not `<body>`), which avoids the CSS cascade trap where body-level overrides can bleed into child elements before the attribute propagates.
-
 ---
 
-## Multi-site tabs
-
-The dashboard supports multiple sites in a single file. Each tab is a `<section class="tab-pane" data-tab="...">` block. The tab switcher is generated automatically from `data-tab-label` attributes.
-
-To add a second site: duplicate the tab pane block, give it a new `data-tab` ID, and update the data. Useful for agencies managing several clients in one shareable document.
-
----
-
-## File structure
+## What's in the box
 
 ```
-seo-dashboard/
-├── dashboard.html          # The entire dashboard — open this
-├── data/
-│   └── example-site.json  # Your data goes here
-├── tokens/
-│   └── seo-dashboard-tokens.css  # Design token contract (Tier 1 + Tier 2)
-├── docs/                   # Screenshots, guides
-├── resources/
-│   └── svgs/              # Optional custom icons
-├── package.json
-└── .gitignore
+dashboard.html              # the render shell (self-contained, themed, file://-safe)
+profiles/
+  seo/        profile.json + example-data.json   ← ready
+  finances/   profile.json (stub)                ← planned
+  health/     profile.json (stub)                ← planned
+themes/       plasma-green.css · midnight-blue.css · seo-tokens.css (Tier-1) + README
+scripts/build-dashboard.mjs # zero-dep scaffolder
+.claude/commands/build-dashboard.md  # the /build-dashboard skill
+AGENTS.md                   # AI-assistant guide (agent-agnostic)
+.mcp.json.example           # optional MCP wiring (email/Drive/sheet helpers)
+.env.example                # optional env (all optional — static app needs none)
 ```
-
-Everything runs from `dashboard.html`. The token file and data file are the only external dependencies.
-
----
-
-## What the dashboard shows
-
-| Section | Data source |
-|---------|-------------|
-| **6-Month Progress** | `impressionsTrend` + KPI deltas computed from `ga4` / `searchConsole` |
-| **GA4 Summary** | `ga4.last30Days` vs `ga4.previousPeriod` |
-| **Traffic Sources** | `trafficSources` array → doughnut chart |
-| **Top Pages** | `topPages` array → sortable table |
-| **GSC Coverage** | `searchConsole` indexed/not-indexed counts + top query |
-| **PageSpeed** | `pagespeed.mobile` + `pagespeed.desktop` → circular gauges |
-| **On-Page SEO** | `seoFeatures` array → pass/warn/fail table |
-| **Action Plan** | `actionItems` → bucketed by priority |
-| **Site Milestones** | `milestones` array → horizontal timeline |
 
 ---
 
 ## Dependencies
 
-All loaded via CDN — no npm install needed.
+Loaded via CDN — no `npm install` needed to *run* it.
 
-| Library | Version | Why |
-|---------|---------|-----|
-| [Chart.js](https://www.chartjs.org/) | 4.4.4 | Line, bar, doughnut charts + custom milestone annotations |
-| [DM Mono](https://fonts.google.com/specimen/DM+Mono) | — | Mono font for labels, metrics, code |
-| [Syne](https://fonts.google.com/specimen/Syne) | — | Display font for headings |
+| Library | Why |
+|---------|-----|
+| [Chart.js](https://www.chartjs.org/) 4.4.4 | line / bar / doughnut charts + custom annotations |
+| [Syne](https://fonts.google.com/specimen/Syne) | display headings |
+| [DM Mono](https://fonts.google.com/specimen/DM+Mono) | metrics & labels |
 
-No React, no build step, no `node_modules`.
+The scaffold script uses only Node's standard library (Node 18+).
 
 ---
 
-## Extending the dashboard
+## Roadmap
 
-### Adding a new chart
-
-1. Add a `<canvas id="myChart">` inside a `.chart-container` div
-2. In the script block at the bottom of `dashboard.html`, initialize with `new Chart(document.getElementById('myChart'), {...})`
-3. Pull data from the JSON constants already parsed at the top of the script block
-
-### Adding a new data field
-
-1. Add the field to `data/example-site.json` with a `_comment` explaining what it means
-2. Reference it in `dashboard.html` via the `D` constant: `D.yourField`
-
-### Custom milestone annotations
-
-The `milestonePlugin` is a Chart.js plugin registered inline. It reads `impressionsTrend.milestones` from the JSON and draws vertical dashed gold lines with label boxes at the correct data indices. To customize: find `const milestonePlugin` in `dashboard.html` and adjust `lineColor`, `labelBg`, and font size.
+- [x] Generic seed + profile system + Plasma Green theme + agent layer
+- [x] **SEO** profile (ready)
+- [ ] **Finances** profile — port the holdings / loan / progress components from the fin.html toolkit
+- [ ] **Health** profile — user-defined metrics, trends, habit streaks
+- [ ] Live-data adapters (optional) per profile
+- [ ] Per-profile blog posts + screenshots
 
 ---
 
 ## License
 
-MIT — use it, fork it, sell it, ship it. No attribution required (but appreciated).
+MIT — use it, fork it, sell it, ship it. Attribution appreciated, not required.

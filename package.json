@@ -1,11 +1,14 @@
 {
-  "name": "seo-dashboard",
-  "version": "1.0.0",
-  "description": "A self-contained SEO & analytics dashboard template for any website or portfolio",
+  "name": "dashboard",
+  "version": "2.0.0",
+  "description": "A self-contained, themeable dashboard seed kit. Pick a profile (SEO, finances, health, or your own), drop in JSON, ship a polished single-file dashboard — no build step, no backend.",
+  "type": "module",
   "main": "dashboard.html",
   "scripts": {
-    "open": "start dashboard.html"
+    "open": "start dashboard.html",
+    "build-dashboard": "node scripts/build-dashboard.mjs",
+    "profiles": "node scripts/build-dashboard.mjs --list"
   },
-  "keywords": ["seo", "analytics", "dashboard", "ga4", "search-console", "template"],
+  "keywords": ["dashboard", "analytics", "template", "seo", "finances", "health", "charts", "self-contained", "starter-kit"],
   "license": "MIT"
 }
