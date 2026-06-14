@@ -57,9 +57,14 @@ Add your own in minutes — see [`profiles/README.md`](profiles/README.md).
 ## Theming
 
 Ships dark with the **Plasma Green** palette (matches the JenniNexus dashboard family). Toggle
-light/dark with the header button. To reskin, copy a `themes/*.css` token block into
-`dashboard.html` — or link it over HTTP. Full contract + alternate palettes:
-[`themes/README.md`](themes/README.md).
+light/dark with the header button. Presets: `plasma-green`, `aurora-borealis` (holographic),
+`midnight-blue`. To reskin, copy a `themes/*.css` token block into `dashboard.html` — or link it
+over HTTP. Full contract + alternate palettes: [`themes/README.md`](themes/README.md).
+
+**Theme tokens are kit-derived** (don't hand-edit colors) — they sync from the shared theme kits:
+**www-theme-kit** owns dashboard/PHP tokens (this seed's source), **syna-theme-kit** owns
+React/Dockview/Synagen-customizer palettes. Mapping + regen: [`themes/SOURCES.md`](themes/SOURCES.md)
+→ `node scripts/sync-themes.mjs`.
 
 ```css
 :root{
