@@ -1,14 +1,22 @@
 #!/usr/bin/env node
 /**
- * sync-themes.mjs — regenerate dashboard theme CSS from the shared theme kit.
+ * sync-themes.mjs — (OPTIONAL maintainer tool) regenerate dashboard theme CSS
+ * from the shared theme kit's palette registry.
  *
- * Source of truth: www-theme-kit/tokens/dashboard-palettes.json (the standalone-HTML
- * dashboard-token palettes; see themes/SOURCES.md). Maps each palette's colors → this
- * seed's Tier-2 token contract (themes/README.md) and writes themes/<key>.css.
+ * ⚠️ YOU DO NOT NEED THIS TO USE THE SEED. The themes in themes/*.css are already
+ * committed, so the dashboard is fully self-contained. This script only matters if
+ * you maintain the upstream palette source and want to re-derive the theme CSS.
+ *
+ * Source of truth: the theme kit's dashboard-palettes.json (a private dev kit;
+ * see themes/SOURCES.md). Maps each palette's colors → this seed's Tier-2 token
+ * contract (themes/README.md) and writes themes/<key>.css.
  *
  *   node scripts/sync-themes.mjs                  # regenerate all mapped themes
  *   node scripts/sync-themes.mjs aurora-borealis  # just one
  *   node scripts/sync-themes.mjs --list           # list available source palettes
+ *
+ * Point it at your kit with the THEME_KIT_PALETTES env var if it isn't a sibling repo:
+ *   THEME_KIT_PALETTES=/path/to/dashboard-palettes.json node scripts/sync-themes.mjs
  *
  * Skips non-kit themes (midnight-blue.css) and Tier-1 vendor tokens (seo-tokens.css).
  * Zero deps. After syncing, inline the block into a dashboard or <link> it (see README).
@@ -21,14 +29,24 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SEED = path.join(__dirname, '..');
 const THEMES = path.join(SEED, 'themes');
 
-// www-theme-kit is a sibling repo under C:\Github\
+// The palette source lives in the (private) theme kit. Resolution order:
+//   1. THEME_KIT_PALETTES env var (explicit path)
+//   2. a sibling ../www-theme-kit checkout (maintainer's local layout)
 const KIT_CANDIDATES = [
+  process.env.THEME_KIT_PALETTES,
   path.join(SEED, '..', 'www-theme-kit', 'tokens', 'dashboard-palettes.json'),
-  'C:/Github/www-theme-kit/tokens/dashboard-palettes.json',
-];
+].filter(Boolean);
 const kitPath = KIT_CANDIDATES.find(p => fs.existsSync(p));
 if (!kitPath) {
-  console.error('Cannot find www-theme-kit/tokens/dashboard-palettes.json. Is the kit cloned at C:\\Github\\www-theme-kit ?');
+  console.error([
+    'Theme-kit palette source not found — nothing to sync.',
+    '',
+    'This is a MAINTAINER tool and is OPTIONAL: the dashboard works without it',
+    'because themes/*.css are already committed.',
+    '',
+    'If you do maintain the kit, point this at its dashboard-palettes.json:',
+    '  THEME_KIT_PALETTES=/path/to/dashboard-palettes.json node scripts/sync-themes.mjs',
+  ].join('\n'));
   process.exit(1);
 }
 const kit = JSON.parse(fs.readFileSync(kitPath, 'utf8'));

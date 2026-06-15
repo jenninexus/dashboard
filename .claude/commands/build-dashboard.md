@@ -17,7 +17,7 @@ e.g. `/build-dashboard seo "Acme Studio" acme.com`
    ```bash
    node scripts/build-dashboard.mjs --list
    ```
-   `seo` is ready; `finances`/`health` are planned stubs (offer to build out if asked).
+   `seo` + `finances` are ready (full dashboard.html); `health` is a planned stub (offer to build out if asked).
 
 2. **Scaffold** (never hand-build the files — run the script):
    ```bash
@@ -41,6 +41,14 @@ e.g. `/build-dashboard seo "Acme Studio" acme.com`
    - Add/edit a palette in the kit, then `node scripts/sync-themes.mjs <key>` to regenerate the theme CSS.
    - `node scripts/sync-themes.mjs --list` shows all available source palettes.
 
+   **Spacing & type tokens (don't hand-author cramped px).** Colors are palettes; spacing/type
+   live in the upstream theme kit (`www-theme-kit/tokens/dashboard-tokens.css` — private dev kit;
+   see `themes/SOURCES.md`). The canonical names: `--dash-space-1..10` (4px scale),
+   `--dash-fs-2xs..stat` + `--dash-leading-*` (type), radii, and reusable
+   `.dash-card`/`.dash-stat`/`.dash-holdings`/`.dash-ticker` classes — all already inlined into the
+   seed's `:root`. Build with these tokens so the dashboard never looks squished, and use the
+   canonical font stack (Outfit / Orbitron / JetBrains Mono).
+
 5. **Open it:** `start my-dashboard/dashboard.html` (Windows) / `open` (mac) / `xdg-open` (linux).
 
 6. **Verify** it renders (charts populate, no console errors). If you can screenshot, do so.
@@ -52,11 +60,12 @@ e.g. `/build-dashboard seo "Acme Studio" acme.com`
 - **Add a section** → copy a card block, new id, wire its data.
 - **New domain** → copy `profiles/seo` → `profiles/<new>`, edit `profile.json` + `example-data.json`.
 
-## Building out a planned profile (finances / health)
+## Building out a planned profile (e.g. health)
 
-The stubs in `profiles/finances/` and `profiles/health/` list the sections + which reusable
-components to port (progress bars, gauges, foldouts, chips). Generalize them — never copy
-personal data. Then flip `profile.json` → `"status": "ready"` and add a row to `profiles/README.md`.
+The `health` stub in `profiles/health/` lists the sections + which reusable components to port
+(progress bars, gauges, foldouts, chips) — `seo` + `finances` are already full examples to model
+on. Generalize them — never copy personal data. Then flip `profile.json` → `"status": "ready"` and
+add a row to `profiles/README.md`.
 
 ## Rules
 
