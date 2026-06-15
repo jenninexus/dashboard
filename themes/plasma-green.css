@@ -32,5 +32,5 @@
   --blur:        20px;
   --mono:        'JetBrains Mono','Cascadia Code',monospace;
   --sans:        'Outfit','Segoe UI',system-ui,sans-serif;
-  --heading:     'Orbitron','Outfit',system-ui,sans-serif;
+  --heading:     'Outfit','Segoe UI',system-ui,-apple-system,sans-serif;
 }
