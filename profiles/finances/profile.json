@@ -2,7 +2,7 @@
   "id": "finances",
   "name": "Personal Finances",
   "status": "ready",
-  "description": "Cash-on-hand vs obligations, bills, loans/repayments, and income — local-only, no SaaS. Generalized from the fin.html toolkit.",
+  "description": "Cash-on-hand vs obligations, bills, loans/repayments, and income — local-only, no SaaS.",
   "theme": "plasma-green",
   "render": "profiles/finances/dashboard.html",
   "exampleData": "example-data.json",
@@ -15,5 +15,5 @@
   ],
   "dataSources": ["manual JSON (data.json)"],
   "blogPost": "A private finances dashboard you fully control (local, no SaaS)",
-  "_note": "Render is data-driven: it reads the inline <script id=\"fin-data\"> JSON. The scaffold swaps that block with your data.json. Components (coverage bars, loan foldouts, status table) are generalized from D:/Documents/Finances/fin.html — no personal data."
+  "_note": "Render is data-driven: it reads the inline <script id=\"fin-data\"> JSON. The scaffold swaps that block with your data.json. Components (coverage bars, loan foldouts, status table) ship as a reusable, data-only template — no personal data."
 }

@@ -4,7 +4,8 @@ A self-contained, themeable **dashboard seed kit**. Pick a **profile** — SEO, 
 or your own — drop in a JSON file, and ship a polished single-file dashboard. No build step, no
 framework, no backend. Open `dashboard.html` and it just works.
 
-![Dashboard preview](docs/preview-dark.png)
+> **Preview:** open [`dashboard.html`](dashboard.html) (or any `profiles/*/dashboard.html`) directly
+> in a browser — it's a single self-contained file. A screenshot lives in `docs/` once added.
 
 ---
 
@@ -14,7 +15,7 @@ Most dashboards are either a heavyweight SaaS you don't control or a spreadsheet
 numbers into. This is the middle path: **one HTML file, your data in JSON, your colors, fully
 yours.** Built to be forked.
 
-- **Profiles** decide *what* you track. SEO ships ready; finances & health are on the roadmap.
+- **Profiles** decide *what* you track. SEO + finances ship ready; health is on the roadmap.
 - **Themes** decide *how it looks*. Default is a polished neon "Plasma Green"; swap one token block to reskin.
 - **An agent layer** (`AGENTS.md` + a scaffold script + a `/build-dashboard` skill) lets any AI assistant — or a plain `npm` command — set one up for you.
 
@@ -56,7 +57,7 @@ Add your own in minutes — see [`profiles/README.md`](profiles/README.md).
 
 ## Theming
 
-Ships dark with the **Plasma Green** palette (matches the JenniNexus dashboard family). Toggle
+Ships dark with the **Plasma Green** palette. Toggle
 light/dark with the header button. Presets: `plasma-green`, `aurora-borealis` (holographic),
 `midnight-blue`. To reskin, copy a `themes/*.css` token block into `dashboard.html` — or link it
 over HTTP. Full contract + alternate palettes: [`themes/README.md`](themes/README.md).
@@ -80,10 +81,10 @@ React/Dockview/Synagen-customizer palettes. Mapping + regen: [`themes/SOURCES.md
 ```
 dashboard.html              # the render shell (self-contained, themed, file://-safe)
 profiles/
-  seo/        profile.json + example-data.json   ← ready
-  finances/   profile.json (stub)                ← planned
-  health/     profile.json (stub)                ← planned
-themes/       plasma-green.css · midnight-blue.css · seo-tokens.css (Tier-1) + README
+  seo/        profile.json + example-data.json + dashboard.html   ← ready
+  finances/   profile.json + example-data.json + dashboard.html   ← ready
+  health/     profile.json (stub)                                 ← planned
+themes/       plasma-green.css · midnight-blue.css · aurora-borealis.css · seo-tokens.css (Tier-1) + README
 scripts/build-dashboard.mjs # zero-dep scaffolder
 .claude/commands/build-dashboard.md  # the /build-dashboard skill
 AGENTS.md                   # AI-assistant guide (agent-agnostic)
@@ -114,8 +115,11 @@ Loaded via CDN — no `npm install` needed to *run* it.
 | Library | Why |
 |---------|-----|
 | [Chart.js](https://www.chartjs.org/) 4.4.4 | line / bar / doughnut charts + custom annotations |
-| [Syne](https://fonts.google.com/specimen/Syne) | display headings |
-| [DM Mono](https://fonts.google.com/specimen/DM+Mono) | metrics & labels |
+| [Outfit](https://fonts.google.com/specimen/Outfit) | body text (canonical dashboard sans) |
+| [Orbitron](https://fonts.google.com/specimen/Orbitron) | display headings (`--heading`) |
+| [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) | metrics & code (`--mono`) |
+
+> Fonts are the canonical dashboard stack defined in the upstream theme kit (`tokens/dashboard-tokens.css` → `--dash-body`/`--dash-heading`/`--dash-mono`; see `themes/SOURCES.md`). Already inlined into the seed — don't reintroduce per-dashboard fonts.
 
 The scaffold script uses only Node's standard library (Node 18+).
 

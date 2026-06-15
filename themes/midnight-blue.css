@@ -27,8 +27,10 @@
 
   --card-radius: 14px;
   --blur:        18px;
-  --mono:        'DM Mono','Cascadia Code','Fira Code',monospace;
-  --sans:        'Syne','Segoe UI',system-ui,sans-serif;
+  /* Canonical dashboard fonts (from the shared theme kit — see SOURCES.md) */
+  --mono:        'JetBrains Mono','Cascadia Code',monospace;
+  --sans:        'Outfit','Segoe UI',system-ui,sans-serif;
+  --heading:     'Orbitron','Outfit',system-ui,sans-serif;
 }
 
 [data-theme="light"] {

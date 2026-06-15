@@ -34,12 +34,11 @@ into the `<style>` at the top of `dashboard.html`, replacing the existing Tier-2
 
 ## Included themes
 
-- **plasma-green.css** — default. Neon charcoal-green; matches the JenniNexus dashboard family.
+- **plasma-green.css** — default. Neon charcoal-green dark-glass.
 - **midnight-blue.css** — the original cool indigo/blue starter look.
 - **aurora-borealis.css** — iridescent turquoise/purple/pink on holographic-glass dark.
-  Bold + beautiful; ships optional `.holo-text` / `.holo-border` shimmer effects. Used by
-  the personal-loan **Kat** dashboard (`Finances/Loans/Kat/kat.html`). Sourced from
-  syna-theme-kit "Aurora Borealis" + "Holographic Glass".
+  Bold + beautiful; ships optional `.holo-text` / `.holo-border` shimmer effects. Sourced from
+  the theme kit's "Aurora Borealis" + "Holographic Glass" palettes.
 
 ## More palettes
 

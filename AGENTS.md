@@ -8,8 +8,8 @@
 ## What this repo is
 
 - `dashboard.html` — the render shell. Self-contained: inline CSS (themed), inline Chart.js (CDN), works over `file://`.
-- `profiles/` — what to track. `seo` is ready; `finances` + `health` are planned stubs. Each has a `profile.json` manifest + `example-data.json` schema.
-- `themes/` — swap the whole look via one token block. Default **Plasma Green** (matches the JenniNexus dashboard family). Alternates included; more in `www-theme-kit`.
+- `profiles/` — what to track. `seo` + `finances` are ready (full `dashboard.html` + `example-data.json`); `health` is a planned stub (`profile.json` only). Each has a `profile.json` manifest.
+- `themes/` — swap the whole look via one token block. Default **Plasma Green**. Alternates included (`aurora-borealis`, `midnight-blue`); palette source is the upstream theme kit (see `themes/SOURCES.md`).
 - `scripts/build-dashboard.mjs` — zero-dep scaffolder. Copies a profile + theme into `my-dashboard/` and stamps the user's name/site.
 
 ## The one thing to do for a user
@@ -31,12 +31,12 @@ Then:
 | Profile | Status | Tracks | Data schema |
 |---------|--------|--------|-------------|
 | **seo** | ✅ ready | GA4 · Search Console · PageSpeed · Cloudflare | `profiles/seo/example-data.json` |
-| finances | 🚧 planned | cash vs obligations · bills · loans · income | `profiles/finances/` (stub) |
+| **finances** | ✅ ready | cash vs obligations · bills · loans · income | `profiles/finances/example-data.json` |
 | health | 🚧 planned | custom metrics · trends · habits · labs | `profiles/health/` (stub) |
 
 Manifest fields (`profile.json`): `id, name, status, theme, render, exampleData, sections[]`.
-To build out a planned profile, see `profiles/README.md` → "Add your own profile". The
-finances/health stubs name the components to port from the reference dashboards.
+`seo` + `finances` ship a full `dashboard.html` + `example-data.json`; `health` is a stub
+(profile.json only). To build out a planned profile, see `profiles/README.md` → "Add your own profile".
 
 ## Theming
 

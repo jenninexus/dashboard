@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard — Finances Profile</title>
+<!-- Canonical dashboard fonts — www-theme-kit v1.8.0 (Outfit + Orbitron + JetBrains Mono) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Orbitron:wght@700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ── Theme tokens (Plasma Green default — see themes/) ───────────── */
 :root{
@@ -17,7 +18,11 @@
   --primary:#00e879; --primary-rgb:0,232,121; --secondary:#00e5ff;
   --accent:#42f4c8; --red:#e5195f; --yellow:#fbbf24; --green:#00e879;
   --glow:rgba(0,232,121,0.13);
-  --radius:14px; --mono:'DM Mono','Cascadia Code',monospace; --sans:'Syne','Segoe UI',system-ui,sans-serif;
+  --radius:14px;
+  /* Canonical dashboard fonts (from the shared theme kit — see themes/SOURCES.md) */
+  --mono:'JetBrains Mono','Cascadia Code',monospace;
+  --sans:'Outfit','Segoe UI',system-ui,sans-serif;
+  --heading:'Orbitron','Outfit',system-ui,sans-serif;
 }
 [data-theme="light"]{
   --bg:#f2f7f3; --bg2:#e7efe9; --surface:rgba(255,255,255,.85); --surface2:rgba(255,255,255,.96);
@@ -36,7 +41,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 
 /* Header */
 .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.4rem}
-.head h1{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--primary),#39ff8c,var(--secondary));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.01em}
+.head h1{font-family:var(--heading);font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--primary),#39ff8c,var(--secondary));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.01em}
 .head .meta{font-size:.72rem;color:var(--dim);margin-top:.2rem}
 .theme-btn{background:transparent;border:1px solid var(--border2);color:var(--dim);border-radius:6px;padding:.3rem .7rem;font-size:.62rem;font-family:var(--mono);cursor:pointer;text-transform:uppercase;letter-spacing:.05em;transition:color .15s,border-color .15s}
 .theme-btn:hover{color:var(--primary);border-color:var(--primary)}
@@ -50,7 +55,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 .card-head{display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent;transition:background .15s}
 .card.open .card-head{border-bottom-color:var(--border)}
 .card-head:hover{background:var(--surface2)}
-.card-head h2{flex:1;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--bright);display:flex;align-items:center;gap:.5rem}
+.card-head h2{font-family:var(--heading);flex:1;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--bright);display:flex;align-items:center;gap:.5rem}
 .card-head h2::before{content:'';width:3px;height:14px;border-radius:2px;background:linear-gradient(180deg,var(--card-accent,var(--primary)),var(--secondary))}
 .card-toggle{font-size:.6rem;color:var(--dim2);transition:transform .2s}
 .card.open .card-toggle{transform:rotate(90deg)}

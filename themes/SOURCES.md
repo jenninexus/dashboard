@@ -19,9 +19,9 @@ palette in the kit, then re-run the sync.
 
 | Theme file | Source kit | Palette key | Notes |
 |------------|-----------|-------------|-------|
-| `plasma-green.css` | www-theme-kit | `plasma-green` | Default. JenniNexus dashboard family (fin.html, ruben.html). |
+| `plasma-green.css` | www-theme-kit | `plasma-green` | Default. Neon charcoal-green dark-glass. |
 | `aurora-borealis.css` | www-theme-kit | `aurora-borealis` | Turquoise/purple/pink. Synced **tokens only**. |
-| `aurora-borealis.effects.css` | (hand-authored) | — | Optional shimmer + rainbow-border effects companion. **Never synced.** Include after the token block for the full holographic look (Kat's dashboard). |
+| `aurora-borealis.effects.css` | (hand-authored) | — | Optional shimmer + rainbow-border effects companion. **Never synced.** Include after the token block for the full holographic look (Kat's dashboard). Its `--aurora` gradient is the canonical value from `dashboard-palettes.json → aurora-borealis.auroraGradient` — keep them identical. |
 | `midnight-blue.css` | (local starter) | — | Original cool indigo/blue; not kit-derived. |
 | `seo-tokens.css` | **Tier-1 (vendor)** | — | GA4/GSC/Cloudflare brand colors — **do not regenerate**. |
 
@@ -52,3 +52,21 @@ This reads `www-theme-kit/tokens/dashboard-palettes.json` and rewrites each mapp
 2. Add a row to the manifest table above.
 3. `node scripts/sync-themes.mjs synthwave` → generates `themes/synthwave.css`.
 4. Inline it into a dashboard or `<link>` it (see `themes/README.md`).
+
+## Spacing & type tokens (NOT palettes — structural, not synced)
+
+Colors come from `dashboard-palettes.json` (above). **Spacing, type, and radii** come from a
+different file in the same kit and are **not** touched by `sync-themes.mjs`:
+
+- `C:\Github\www-theme-kit\tokens\dashboard-tokens.css` — the canonical `:root` block with:
+  - `--dash-space-1..10` (4px-based spacing scale)
+  - `--dash-fs-2xs..stat` + `--dash-leading-*` (type scale + line-heights)
+  - `--dash-radius-sm/md/lg`, `--dash-glass-blur`, `--dash-body`/`--dash-mono` fonts
+  - reusable component classes: `.dash-card`, `.dash-stat`, `.dash-controls`, `.dash-holdings`, `.dash-ticker`
+
+**Why this matters for `/dashboard` + `/build-dashboard`:** new dashboards should copy this `:root`
+block (or mirror the token names locally) so padding/type stay consistent — don't hand-author cramped
+px values. Added in www-theme-kit **v1.7.0** (spacing/type scale) and **v1.8.0** (canonical font
+stack: Outfit / Orbitron / JetBrains Mono) specifically to fix "squished" dashboards that had no
+shared spacing or font scale. These tokens are already inlined into this seed's `dashboard.html`
+and each profile, so the seed is self-contained even without the (private) upstream kit.

@@ -7,7 +7,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<!-- Canonical dashboard fonts — www-theme-kit v1.8.0 (Outfit + Orbitron + JetBrains Mono) -->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Orbitron:wght@700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ── Design tokens (inlined from tokens/seo-dashboard-tokens.css) ── */
 :root {
@@ -22,8 +23,7 @@
   --perf-warn:          #FFA400;
   --perf-poor:          #FF4E42;
 
-  /* Tier 2 — structural (dark baseline) · default theme: Plasma Green
-     (matches the JenniNexus dashboard family — fin.html / agentgarbo.html).
+  /* Tier 2 — structural (dark baseline) · default theme: Plasma Green.
      Swap the whole Tier-2 block via themes/*.css to reskin. */
   --bg:           #040704;
   --bg2:          #080e08;
@@ -48,8 +48,10 @@
 
   --card-radius:  14px;
   --blur:         20px;
-  --mono:         'DM Mono','Cascadia Code','Fira Code',monospace;
-  --sans:         'Syne','Segoe UI',system-ui,sans-serif;
+  /* Canonical dashboard fonts (from the shared theme kit — see themes/SOURCES.md) */
+  --mono:         'JetBrains Mono','Cascadia Code','Fira Code',monospace;
+  --sans:         'Outfit','Segoe UI',system-ui,sans-serif;
+  --heading:      'Orbitron','Outfit',system-ui,sans-serif;
 }
 
 [data-theme="light"] {
@@ -78,7 +80,7 @@ body{
   min-height:100vh;
   overflow-x:hidden;
 }
-/* Atmospheric depth — radial glow wash (matches fin.html / agentgarbo.html) */
+/* Atmospheric depth — radial glow wash */
 body::before{
   content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background:
@@ -127,7 +129,7 @@ code{font-family:var(--mono);font-size:.88em;color:var(--secondary)}
   margin-bottom:14px;
 }
 .masthead-title{
-  font-family:var(--sans);
+  font-family:var(--heading);
   font-size:clamp(1.7rem,3.5vw,2.6rem);
   font-weight:800;
   letter-spacing:-0.02em;
@@ -1136,7 +1138,7 @@ tr:hover td{background:rgba(var(--primary-rgb),.03)}
 // ── Chart.js defaults ──
 Chart.defaults.color = '#6a7390';
 Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
-Chart.defaults.font.family = "'DM Mono','Segoe UI',system-ui,sans-serif";
+Chart.defaults.font.family = "'JetBrains Mono','Cascadia Code',monospace";
 
 // ── Theme toggle ──
 function toggleTheme() {
@@ -1195,7 +1197,7 @@ function switchSite(id) {
         if(c.roundRect){ c.beginPath(); c.roundRect(bx,by,mw,bh,3); c.fill(); }
         else { c.fillRect(bx,by,mw,bh); }
         c.fillStyle = '#ffd700';
-        c.font = 'bold 8px "DM Mono",monospace';
+        c.font = 'bold 8px "JetBrains Mono",monospace';
         c.textAlign = 'center';
         lines.forEach((l,li) => c.fillText(l, xPx, by + pad + lh*(li+1) - 1));
       });

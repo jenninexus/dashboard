@@ -6,7 +6,7 @@ adds the sections, data schema, and example data for a domain.
 | Profile | Status | What it tracks |
 |---------|--------|----------------|
 | [**seo**](seo/) | ✅ ready | GA4, Search Console, PageSpeed, Cloudflare — client SEO reports |
-| [finances](finances/) | 🚧 planned | Cash vs obligations, bills, loans, income (the fin.html toolkit) |
+| [**finances**](finances/) | ✅ ready | Cash vs obligations, bills, loans, income — local-only, no SaaS |
 | [health](health/) | 🚧 planned | Custom metrics — weight, sleep, labs, habits, appointments |
 
 Each profile folder has:
