@@ -24,6 +24,12 @@ Use the profile you want first, then iterate.
 
 Then open `my-dashboard/dashboard.html` and refresh after edits.
 
+## What to open first
+
+Open the root `dashboard.html` first if you want to see the most polished visual example. It is the SEO showcase and should keep the current graph-heavy look.
+
+Open `profiles/finances/dashboard.html` if you want to inspect the finance-specific layout before scaffolding. It has its own render because money data is shaped differently than SEO data.
+
 ## Commands
 
 | Command | What it does |

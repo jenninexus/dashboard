@@ -17,6 +17,16 @@ Inside `profiles/<id>/`:
 3. Dashboard and `themes/` are copied into output.
 4. The output dashboard reads your JSON and renders instantly.
 
+## Root dashboard vs profile dashboards
+
+The root `dashboard.html` is intentionally kept as the main SEO demo. It shows the strongest graph-heavy dashboard style and gives visitors something useful to open immediately.
+
+Not every profile needs its own HTML file:
+
+- Use the root `dashboard.html` when a profile can share the default SEO-style render.
+- Add `profiles/<id>/dashboard.html` when the profile needs a different schema, layout, or interactions.
+- Keep planned profiles manifest-only until their data and layout are ready.
+
 ## Build your own profile (recommended path)
 
 1. Pick the profile closest to your goal.

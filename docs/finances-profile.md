@@ -18,6 +18,12 @@ If you are adapting for your own money system, begin by replacing values in `dat
 3. Keep `example-data.json` as your reference map.
 4. Add your own labels only after dashboard renders correctly.
 
+## Why finances has its own HTML
+
+Finance data is not just SEO data with different labels. It needs cash coverage bars, bill status rows, loan foldouts, and income totals.
+
+That is why this profile owns `profiles/finances/dashboard.html` instead of sharing the root SEO render.
+
 ## Example extension direction
 
 - Add checklist-like action rows.
