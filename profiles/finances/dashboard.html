@@ -23,6 +23,9 @@
   --mono:'JetBrains Mono','Cascadia Code',monospace;
   --sans:'Outfit','Segoe UI',system-ui,sans-serif;
   --heading:'Outfit','Segoe UI',system-ui,-apple-system,sans-serif;
+  --dash-body:var(--sans); --dash-heading:var(--heading); --dash-mono:var(--mono);
+  --dash-card:var(--surface); --dash-card-border:var(--border); --dash-text-dim:var(--dim);
+  --dash-text-bright:var(--bright); --dash-space-4:16px; --dash-space-6:24px; --dash-space-8:32px;
 }
 [data-theme="light"]{
   --bg:#f2f7f3; --bg2:#e7efe9; --surface:rgba(255,255,255,.85); --surface2:rgba(255,255,255,.96);
@@ -109,7 +112,10 @@ td{padding:.5rem .6rem;border-bottom:1px solid rgba(var(--primary-rgb),.06);vert
 .st{font-weight:700;font-size:.66rem}
 .st.overdue{color:var(--red)} .st.due{color:var(--yellow)} .st.paid{color:var(--primary)} .st.ok{color:var(--dim)}
 
-.foot{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.66rem;color:var(--dim2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
+.foot{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);font-family:var(--dash-mono);font-size:.66rem;color:var(--dim2);display:grid;gap:.45rem;text-align:center}
+.foot strong{font-family:var(--dash-heading);color:var(--dash-text-bright);font-size:.78rem}
+.foot a{color:var(--primary);opacity:.78}
+.foot a:hover{opacity:1}
 @media print{.controls,.theme-btn{display:none}.card-body{display:block!important}}
 </style>
 </head>
@@ -168,8 +174,9 @@ td{padding:.5rem .6rem;border-bottom:1px solid rgba(var(--primary-rgb),.06);vert
   </div>
 
   <div class="foot">
-    <span>Finances profile · dashboard seed kit</span>
-    <span>Local-only by design · no data leaves your machine</span>
+    <strong>Published by <a href="https://github.com/jenninexus" target="_blank" rel="noopener">Jenni Nexus</a> at <a href="https://github.com/monofinitystudio" target="_blank" rel="noopener">Monofinity Studio</a>.</strong>
+    <span>Finances profile · local-only dashboard seed · no data leaves your machine</span>
+    <span><a href="https://github.com/jenninexus/dashboard" target="_blank" rel="noopener">Star the repo</a> · <a href="https://x.com/jenninexus" target="_blank" rel="noopener">Follow on X</a> · <a href="https://www.patreon.com/c/JenniNexus" target="_blank" rel="noopener">Patreon</a> · <a href="https://paypal.me/jenninexus" target="_blank" rel="noopener">PayPal</a></span>
   </div>
 </div>
 
