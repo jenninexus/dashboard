@@ -1,141 +1,111 @@
 # Dashboard
 
-A self-contained, themeable **dashboard seed kit**. Pick a **profile** — SEO, finances, health,
-or your own — drop in a JSON file, and ship a polished single-file dashboard. No build step, no
-framework, no backend. Open `dashboard.html` and it just works.
+![MIT](https://img.shields.io/badge/license-MIT-00e879?style=flat-square) ![Runtime](https://img.shields.io/badge/runtime-static%20HTML-42f4c8?style=flat-square) ![Dependencies](https://img.shields.io/badge/dependencies-zero--deps-39ff8c?style=flat-square) ![Mode](https://img.shields.io/badge/mode-local--first-00e5ff?style=flat-square)
 
-> **Preview:** open [`dashboard.html`](dashboard.html) (or any `profiles/*/dashboard.html`) directly
-> in a browser — it's a single self-contained file. A screenshot lives in `docs/` once added.
+## Make one dashboard.
+## For everyone.
 
----
+`dashboard` is a profile-based, local-first seed for quick, private, custom dashboards.
+Pick a domain (`SEO`, `finances`, etc.), replace one JSON file, and get a polished single-file dashboard in seconds.
 
-## Why
-
-Most dashboards are either a heavyweight SaaS you don't control or a spreadsheet you copy
-numbers into. This is the middle path: **one HTML file, your data in JSON, your colors, fully
-yours.** Built to be forked.
-
-- **Profiles** decide *what* you track. SEO + finances ship ready; health is on the roadmap.
-- **Themes** decide *how it looks*. Default is a polished neon "Plasma Green"; swap one token block to reskin.
-- **An agent layer** (`AGENTS.md` + a scaffold script + a `/build-dashboard` skill) lets any AI assistant — or a plain `npm` command — set one up for you.
+- ✨ No server needed — open from `file://` or deploy static.
+- 🧩 Profiles drive what you track.
+- 🎨 Themes drive how it looks.
+- 🤝 Assistant-friendly scaffold flow.
 
 ---
 
-## Quick start
+## Who is this for?
+
+- Makers who want a clean starting point instead of building from zero.
+- People who want to track one area deeply, then share it with others.
+- Solo builders and small teams who like local-first, editable dashboards.
+
+### Pick your starting profile
+
+- **SEO**: Use it for sites, reports, and growth telemetry in one place.
+  - Start with: `profiles/seo/`
+- **Personal finance**: Use it for bills, obligations, cash, and income snapshots.
+  - Start with: `profiles/finances/`
+- **Hobby projects**: Use it for fitness, learning goals, content calendars, or experiments.
+  - Start with whichever profile already has the closest structure, then customize data keys.
+
+---
+
+## Quick start (2 minutes)
 
 ```bash
 git clone https://github.com/jenninexus/dashboard.git
 cd dashboard
-
-# See available profiles
 npm run profiles
-
-# Scaffold your own (creates ./my-dashboard/)
-npm run build-dashboard -- --profile seo --name "Your Brand" --domain yoursite.com
+npm run build-dashboard -- --profile finances --name "Your Name" --domain example.com
 ```
 
-Then edit `my-dashboard/data.json` (every field is commented) and open
-`my-dashboard/dashboard.html` in a browser. Done.
+Then:
 
-Prefer an AI assistant? Just say **"set up the SEO dashboard for mysite.com"** — see
-[`AGENTS.md`](AGENTS.md).
+1. Open `my-dashboard/dashboard.html`.
+2. Edit `my-dashboard/data.json`.
+3. Refresh.
+
+No build step is required to run. No runtime dependencies.
 
 ---
 
-## Profiles
+## Profiles at a glance
 
 | Profile | Status | Tracks |
-|---------|--------|--------|
-| **[seo](profiles/seo/)** | ✅ ready | GA4, Search Console, PageSpeed, Cloudflare — client-ready SEO reports |
-| **[finances](profiles/finances/)** | ✅ ready | cash vs obligations, bills, loans/repayments, income — local-only, no SaaS |
-| [health](profiles/health/) | 🚧 planned | custom metrics — weight, sleep, labs, habits, appointments |
-
-Each profile is a folder with a `profile.json` manifest + a fully-commented `example-data.json`.
-Add your own in minutes — see [`profiles/README.md`](profiles/README.md).
+|---|---|---|
+| [seo](profiles/seo/) | ✅ Ready | GA4, Search Console, PageSpeed, Cloudflare |
+| [finances](profiles/finances/) | ✅ Ready | cash vs obligations, bills, loans/repayments, income |
+| [health](profiles/health/) | 🚧 Planned | habits, labs, sleep, and appointments |
 
 ---
 
-## Theming
+## Screenshot gallery (placeholder cards)
 
-Ships dark with the **Plasma Green** palette. Toggle
-light/dark with the header button. Presets: `plasma-green`, `aurora-borealis` (holographic),
-`midnight-blue`. To reskin, copy a `themes/*.css` token block into `dashboard.html` — or link it
-over HTTP. Full contract + alternate palettes: [`themes/README.md`](themes/README.md).
+Use these paths when you add images:
 
-**Theme tokens are kit-derived** (don't hand-edit colors) — they sync from the shared theme kits:
-**www-theme-kit** owns dashboard/PHP tokens (this seed's source), **syna-theme-kit** owns
-React/Dockview/Synagen-customizer palettes. Mapping + regen: [`themes/SOURCES.md`](themes/SOURCES.md)
-→ `node scripts/sync-themes.mjs`.
+| Profile | Placeholder target |
+|---|---|
+| SEO | `docs/screenshots/seo-dashboard.png` |
+| Finances | `docs/screenshots/finances-dashboard.png` |
+| Health | `docs/screenshots/health-dashboard.png` |
 
-```css
-:root{
-  --primary:#00e879; --primary-rgb:0,232,121;
-  --secondary:#00e5ff; --accent:#42f4c8; --glow:rgba(0,232,121,.13);
-}
-```
+- Keep files under `docs/screenshots/`.
+- Use a consistent 16:9 ratio.
+- Update this table only, not the layout docs.
 
 ---
 
-## What's in the box
+## Docs you should read first
 
-```
-dashboard.html              # the render shell (self-contained, themed, file://-safe)
-profiles/
-  seo/        profile.json + example-data.json + dashboard.html   ← ready
-  finances/   profile.json + example-data.json + dashboard.html   ← ready
-  health/     profile.json (stub)                                 ← planned
-themes/       plasma-green.css · midnight-blue.css · aurora-borealis.css · seo-tokens.css (Tier-1) + README
-scripts/build-dashboard.mjs # zero-dep scaffolder
-.claude/commands/build-dashboard.md  # the /build-dashboard skill
-AGENTS.md                   # AI-assistant guide (agent-agnostic)
-.mcp.json.example           # optional MCP wiring (email/Drive/sheet helpers)
-.env.example                # optional env (all optional — static app needs none)
-```
+- [Getting started](docs/getting-started.md)
+- [Profile system](docs/profile-system.md)
+- [Finances profile playbook](docs/finances-profile.md)
+- [Profiles reference](profiles/README.md)
+- [Themes reference](themes/README.md)
 
 ---
 
-## Dev setup (optional)
+## Repo contents in 10 seconds
 
-Copy the example configs (the real ones are gitignored so your secrets/tweaks stay local):
-
-```bash
-cp dashboard.code-workspace.example dashboard.code-workspace   # cute Plasma-Green VS Code workspace + tasks
-cp .env.example .env                                           # only if you wire optional MCP/live data
-cp .mcp.json.example .mcp.json                                 # only if you use an AI agent's MCP tools
-```
-
-Open `dashboard.code-workspace` for themed chrome + one-click tasks (list profiles, build, open).
+- `dashboard.html` — baseline render shell, file:// safe
+- `scripts/build-dashboard.mjs` — profile scaffold CLI (Node 18+)
+- `profiles/` — profile manifests and example data
+- `themes/` — token presets and theme sources
+- `.claude/` and `AGENTS.md` — assistant handoff docs
 
 ---
 
-## Dependencies
+## Contributing
 
-Loaded via CDN — no `npm install` needed to *run* it.
+Prefer focused PRs:
 
-| Library | Why |
-|---------|-----|
-| [Chart.js](https://www.chartjs.org/) 4.4.4 | line / bar / doughnut charts + custom annotations |
-| [Outfit](https://fonts.google.com/specimen/Outfit) | body text (canonical dashboard sans) |
-| [Orbitron](https://fonts.google.com/specimen/Orbitron) | display headings (`--heading`) |
-| [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) | metrics & code (`--mono`) |
-
-> Fonts are the canonical dashboard stack defined in the upstream theme kit (`tokens/dashboard-tokens.css` → `--dash-body`/`--dash-heading`/`--dash-mono`; see `themes/SOURCES.md`). Already inlined into the seed — don't reintroduce per-dashboard fonts.
-
-The scaffold script uses only Node's standard library (Node 18+).
-
----
-
-## Roadmap
-
-- [x] Generic seed + profile system + Plasma Green theme + agent layer
-- [x] **SEO** profile (ready)
-- [x] **Finances** profile (ready) — data-driven `data.json`: holdings coverage bars, loan foldouts, bills, income
-- [ ] **Health** profile — user-defined metrics, trends, habit streaks
-- [ ] Live-data adapters (optional) per profile
-- [ ] Per-profile blog posts + screenshots
-
----
+- add one new profile at a time,
+- include a clear `example-data.json`,
+- keep output static and local-first,
+- add/update docs for any new behavior.
 
 ## License
 
-MIT — use it, fork it, sell it, ship it. Attribution appreciated, not required.
+MIT — use it, fork it, customize it.
