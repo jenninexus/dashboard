@@ -138,7 +138,7 @@ Prefer focused PRs:
 - keep output static and local-first,
 - add/update docs for any new behavior.
 
-MIT — use it, fork it, customize it.
+MIT — use, fork, customize
 
 ---
 
@@ -146,7 +146,7 @@ MIT — use it, fork it, customize it.
 
 If this dashboard seed helps you build something useful:
 
-[Star](https://github.com/jenninexus/dashboard) · [Follow](https://jenninexus.com/links) · [Patreon](https://www.patreon.com/c/JenniNexus) · [Paypal](https://paypal.me/jenninexus)
+[Star this repo](https://github.com/jenninexus/dashboard) · [Links](https://jenninexus.com/links) · [Patreon](https://www.patreon.com/c/JenniNexus) · [Paypal](https://paypal.me/jenninexus)
 
 Published by [Jenni](https://github.com/jenninexus) at [Monofinity Studio](https://github.com/monofinitystudio).
 
