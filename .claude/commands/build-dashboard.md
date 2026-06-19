@@ -32,22 +32,11 @@ e.g. `/build-dashboard seo "Acme Studio" acme.com`
 4. **Theme (optional).** Default is Plasma Green. Available presets: `plasma-green`,
    `aurora-borealis` (turquoise/purple/pink holographic), `midnight-blue`. To reskin, copy a
    `themes/*.css` `:root` block into the `<style>` at the top of `my-dashboard/dashboard.html`
-   (see `themes/README.md`). For holographic shimmer, also include `themes/aurora-borealis.effects.css`.
+   or link the theme file when served over HTTP. For holographic shimmer, also include
+   `themes/aurora-borealis.effects.css`.
 
-   **Theme tokens are kit-derived — don't hand-edit colors.** They sync from the shared theme
-   kits (see `themes/SOURCES.md`):
-   - **www-theme-kit** (`tokens/dashboard-palettes.json`) = standalone-HTML dashboards (this seed) + PHP/Bootstrap sites + `/seo`.
-   - **syna-theme-kit** (`palettes/syna-palettes.json`) = React / Dockview / Synagen theme-customizer.
-   - Add/edit a palette in the kit, then `node scripts/sync-themes.mjs <key>` to regenerate the theme CSS.
-   - `node scripts/sync-themes.mjs --list` shows all available source palettes.
-
-   **Spacing & type tokens (don't hand-author cramped px).** Colors are palettes; spacing/type
-   live in the upstream theme kit (`www-theme-kit/tokens/dashboard-tokens.css` — private dev kit;
-   see `themes/SOURCES.md`). The canonical names: `--dash-space-1..10` (4px scale),
-   `--dash-fs-2xs..stat` + `--dash-leading-*` (type), radii, and reusable
-   `.dash-card`/`.dash-stat`/`.dash-holdings`/`.dash-ticker` classes — all already inlined into the
-   seed's `:root`. Build with these tokens so the dashboard never looks squished, and use the
-   canonical font stack (Outfit / Orbitron / JetBrains Mono).
+   Use the committed theme CSS as the public contract. Keep spacing, radii, and type consistent
+   with the existing `--dash-*` aliases already inlined into the seed.
 
 5. **Open it:** `start my-dashboard/dashboard.html` (Windows) / `open` (mac) / `xdg-open` (linux).
 

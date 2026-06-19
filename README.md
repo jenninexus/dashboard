@@ -1,12 +1,19 @@
+<div align="center">
+
 # Dashboard
 
-![MIT](https://img.shields.io/badge/license-MIT-00e879?style=flat-square) ![Runtime](https://img.shields.io/badge/runtime-static%20HTML-42f4c8?style=flat-square) ![Dependencies](https://img.shields.io/badge/dependencies-zero--deps-39ff8c?style=flat-square) ![Mode](https://img.shields.io/badge/mode-local--first-00e5ff?style=flat-square)
+![MIT](https://img.shields.io/badge/license-MIT-00e879?style=flat-square)
+![Runtime](https://img.shields.io/badge/runtime-static%20HTML-42f4c8?style=flat-square)
+![Dependencies](https://img.shields.io/badge/dependencies-zero--deps-39ff8c?style=flat-square)
+![Mode](https://img.shields.io/badge/mode-local--first-00e5ff?style=flat-square)
 
 ## Make one dashboard.
 ## For everyone.
 
 `dashboard` is a profile-based, local-first seed for quick, private, custom dashboards.
 Pick a domain (`SEO`, `finances`, etc.), replace one JSON file, and get a polished single-file dashboard in seconds.
+
+</div>
 
 - ✨ No server needed — open from `file://` or deploy static.
 - 🧩 Profiles drive what you track.
@@ -72,6 +79,22 @@ Profile folders hold the reusable source material for each dashboard type:
 
 ---
 
+## Themes
+
+The default look is **Plasma Green**: neon glass, readable cards, and bright status accents.
+Additional palettes live in `themes/` and can be copied into a dashboard's `<style>` block or linked when served over HTTP.
+
+The palette direction is inspired by the workspace themes and VS Code extension in [jenninexus/syn-themes](https://github.com/jenninexus/syn-themes).
+
+Included palettes:
+
+- `plasma-green.css` — default dark neon dashboard palette
+- `aurora-borealis.css` — prismatic turquoise, purple, and pink
+- `midnight-blue.css` — cooler blue dashboard starter
+- `aurora-borealis.effects.css` — optional shimmer effects for the aurora palette
+
+---
+
 ## Screenshot gallery
 
 Screenshots live in `docs/screenshots/`. Add or replace these files as profiles mature:
@@ -93,7 +116,6 @@ Screenshots live in `docs/screenshots/`. Add or replace these files as profiles 
 - [Profile system](docs/profile-system.md)
 - [Finances profile playbook](docs/finances-profile.md)
 - [Profiles reference](profiles/README.md)
-- [Themes reference](themes/README.md)
 
 ---
 
@@ -120,10 +142,10 @@ Prefer focused PRs:
 
 <div align="center">
 
+MIT — use it, fork it, customize it.
+
 Published by [Jenni Nexus](https://github.com/jenninexus) at [Monofinity Studio](https://github.com/monofinitystudio).
 
 If this dashboard seed helps you build something useful: [Star the repo](https://github.com/jenninexus/dashboard) · [Follow on X](https://x.com/jenninexus) · [Patreon](https://www.patreon.com/c/JenniNexus) · [PayPal](https://paypal.me/jenninexus)
-
-MIT — use it, fork it, customize it.
 
 </div>

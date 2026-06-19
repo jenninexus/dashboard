@@ -7,7 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Canonical dashboard fonts — www-theme-kit v1.8.0 (Outfit + Orbitron + JetBrains Mono) -->
+<!-- Dashboard fonts: Outfit + JetBrains Mono, with system fallbacks. -->
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Orbitron:wght@700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ── Design tokens (inlined from tokens/seo-dashboard-tokens.css) ── */
@@ -48,12 +48,12 @@
 
   --card-radius:  14px;
   --blur:         20px;
-  /* Canonical dashboard fonts (from the shared theme kit — see themes/SOURCES.md) */
+  /* Dashboard fonts */
   --mono:         'JetBrains Mono','Cascadia Code','Fira Code',monospace;
   --sans:         'Outfit','Segoe UI',system-ui,sans-serif;
   --heading:      'Outfit','Segoe UI',system-ui,-apple-system,sans-serif;
 
-  /* www-theme-kit dashboard aliases: keep this file compatible with --dash-* docs. */
+  /* Dashboard token aliases for reusable --dash-* component styles. */
   --dash-bg: var(--bg);
   --dash-bg-2: var(--bg2);
   --dash-card: var(--surface);
@@ -1163,7 +1163,7 @@ tr:hover td{background:rgba(var(--primary-rgb),.03)}
     <div>
       SEO profile demo &mdash;
       data shape: <a href="profiles/seo/example-data.json">profiles/seo/example-data.json</a>
-      &mdash; tokens from <a href="themes/SOURCES.md">www-theme-kit</a>
+      &mdash; palette inspired by <a href="https://github.com/jenninexus/syn-themes" target="_blank" rel="noopener">syn-themes</a>
       &mdash; data as of <strong style="color:var(--primary)">May 23, 2026</strong>
     </div>
     <div class="footer-links">

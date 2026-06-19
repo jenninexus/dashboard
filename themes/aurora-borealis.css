@@ -1,8 +1,7 @@
 /* ============================================================
-   Aurora Borealis — dashboard theme (AUTO-GENERATED)
-   Source: www-theme-kit/tokens/dashboard-palettes.json → "aurora-borealis"
-   Regenerate: node scripts/sync-themes.mjs aurora-borealis
-   Do NOT hand-edit colors here — edit the source palette in www-theme-kit.
+   Aurora Borealis — prismatic dashboard theme.
+   Inspired by the Jenni Nexus syn-themes workspace aesthetic.
+   Copy this token block into dashboard.html, or link it over HTTP.
    ============================================================ */
 :root {
   --bg:        #08060e;

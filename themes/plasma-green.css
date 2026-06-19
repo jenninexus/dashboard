@@ -1,8 +1,7 @@
 /* ============================================================
-   Plasma Green (Default) — dashboard theme (AUTO-GENERATED)
-   Source: www-theme-kit/tokens/dashboard-palettes.json → "plasma-green"
-   Regenerate: node scripts/sync-themes.mjs plasma-green
-   Do NOT hand-edit colors here — edit the source palette in www-theme-kit.
+   Plasma Green (Default) — dashboard theme.
+   Inspired by the Jenni Nexus syn-themes workspace aesthetic.
+   Copy this token block into dashboard.html, or link it over HTTP.
    ============================================================ */
 :root {
   --bg:        #040704;
