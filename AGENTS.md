@@ -9,7 +9,7 @@
 
 - `dashboard.html` — the render shell. Self-contained: inline CSS (themed), inline Chart.js (CDN), works over `file://`.
 - `profiles/` — what to track. `seo` + `finances` are ready (full `dashboard.html` + `example-data.json`); `health` is a planned stub (`profile.json` only). Each has a `profile.json` manifest.
-- `themes/` — swap the whole look via one token block. Default **Plasma Green**. Alternates included (`aurora-borealis`, `midnight-blue`); palette source is the upstream theme kit (see `themes/SOURCES.md`).
+- `themes/` — swap the whole look via one token block. Default **Plasma Green**. Alternates included (`aurora-borealis`, `midnight-blue`).
 - `scripts/build-dashboard.mjs` — zero-dep scaffolder. Copies a profile + theme into `my-dashboard/` and stamps the user's name/site.
 
 ## The one thing to do for a user
@@ -41,9 +41,9 @@ Manifest fields (`profile.json`): `id, name, status, theme, render, exampleData,
 ## Theming
 
 Default is **Plasma Green** (inlined in `dashboard.html`). To reskin: copy a `themes/*.css`
-block into the `<style>` at the top of `dashboard.html`, or `<link>` it (over HTTP). Token
-contract + alternate palettes: `themes/README.md`. Tier-1 brand-service colors
-(`themes/seo-tokens.css`) are canonical vendor values — don't change those.
+block into the `<style>` at the top of `dashboard.html`, or `<link>` it when served over HTTP.
+The root README has the public theme overview. Tier-1 brand-service colors
+(`themes/seo-tokens.css`) are canonical vendor values; don't change those.
 
 ## How to customize what's tracked (the point of the kit)
 

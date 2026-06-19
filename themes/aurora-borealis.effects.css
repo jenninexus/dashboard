@@ -1,8 +1,7 @@
 /* ============================================================
-   Aurora Borealis — OPTIONAL holographic effects (hand-authored, NOT auto-generated)
-   Companion to aurora-borealis.css (which holds the synced :root tokens).
-   sync-themes.mjs never touches this file. Include it after the token block when
-   you want the shimmer + rainbow-border look (e.g. Kat's loan dashboard).
+   Aurora Borealis — optional holographic effects.
+   Companion to aurora-borealis.css. Include it after the token block when
+   you want the shimmer + rainbow-border look.
    ============================================================ */
 
 /* Iridescent gradient used by the effects below (derived from the aurora palette) */

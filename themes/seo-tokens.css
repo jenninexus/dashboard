@@ -3,15 +3,12 @@
  * ============================================================================
  * Design token contract for the SEO Dashboard template.
  *
- * Built on the www-theme-kit Tier 1 / Tier 2 pattern:
+ * Built on a Tier 1 / Tier 2 token pattern:
  *   Tier 1 — SEO service brand colors (canonical — never override)
  *   Tier 2 — Dashboard structural tokens (override in your brand file)
  *
  * Usage: inline these into your <style> block or @import this file.
- * To brand for your project, copy brand-overrides-template.css and override
- * the Tier 2 tokens listed there.
- *
- * SSOT reference: C:\Github\www-theme-kit\tokens\www-design-tokens.css
+ * To brand for your project, override the Tier 2 tokens in your dashboard file.
  * ============================================================================
  */
 
