@@ -1,0 +1,28 @@
+{
+  "name": "dashboard-profiles",
+  "description": "Full-page screenshot sweep for all dashboard profiles. Run via scripts/capture.ps1 or: npx tsx C:/Github/vid-scroll/src/cli.ts --breakpoints configs/breakpoints.json --local --output docs/screenshots",
+  "breakpoints": [
+    { "name": "390-mobile", "width": 390,  "height": 844,  "mobile": true,  "label": "Mobile (390px)" },
+    { "name": "768-tablet", "width": 768,  "height": 1024, "mobile": false, "label": "Tablet (768px)" },
+    { "name": "1280-desktop", "width": 1280, "height": 900, "mobile": false, "label": "Desktop (1280px)" }
+  ],
+  "pages": [
+    { "path": "profiles/seo/seo.html",           "slug": "seo" },
+    { "path": "profiles/finances/finances.html",  "slug": "finances" },
+    { "path": "profiles/health/health.html",      "slug": "health" }
+  ],
+  "defaults": {
+    "baseUrl":        "https://jenninexus.github.io/dashboard",
+    "localUrl":       "file:///C:/Github/dashboard/",
+    "outputFormat":   "webp",
+    "webpQuality":    85,
+    "collapseVariants": true,
+    "fullPage":       true
+  },
+  "notes": {
+    "local": "Use --local flag (or scripts/capture.ps1 -Local) to capture from file:// — no server needed.",
+    "output": "Files land in <output>/<width>/<slug>-<width>[-collapsed].webp",
+    "collapseVariants": "Produces both expanded and collapsed variants per page × breakpoint.",
+    "webp": "Requires ffmpeg on PATH. Install: winget install Gyan.FFmpeg"
+  }
+}
