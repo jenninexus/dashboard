@@ -20,7 +20,8 @@
   Use the published GitHub Pages baseUrl instead of local file://.
 
 .PARAMETER Output
-  Output directory. Defaults to docs/screenshots relative to this repo.
+  Output directory. Defaults to storage/screenshots relative to this repo (gitignored staging area).
+  Graduate approved shots to docs/screenshots/ manually.
 
 .PARAMETER Only
   Comma-separated breakpoint names to limit capture (e.g. "1280-desktop").
@@ -29,7 +30,7 @@
   Comma-separated page slugs to limit capture (e.g. "seo,health").
 
 .EXAMPLE
-  # Capture everything locally (default)
+  # Capture everything locally → storage/screenshots/ (default staging area)
   pwsh -File scripts/capture.ps1
 
 .EXAMPLE
@@ -39,6 +40,10 @@
 .EXAMPLE
   # Capture from live GitHub Pages
   pwsh -File scripts/capture.ps1 -Live
+
+.EXAMPLE
+  # Graduate approved shots to docs/screenshots/ (committed to repo)
+  pwsh -File scripts/capture.ps1 -Output docs\screenshots
 #>
 
 param(
@@ -56,7 +61,7 @@ $RepoRoot     = Split-Path -Parent $PSScriptRoot
 $VidScrollDir = $env:VID_SCROLL_DIR ?? "C:\Github\vid-scroll"
 $CliPath      = Join-Path $VidScrollDir "src\cli.ts"
 $ConfigPath   = Join-Path $RepoRoot "configs\breakpoints.json"
-$OutputDir    = if ($Output) { $Output } else { Join-Path $RepoRoot "docs\screenshots" }
+$OutputDir    = if ($Output) { $Output } else { Join-Path $RepoRoot "storage\screenshots" }
 
 # Validate prerequisites
 if (-not (Test-Path $CliPath)) {
