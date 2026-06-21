@@ -1,0 +1,52 @@
+/* ============================================================
+   Vitality Health — dashboard theme.
+   Calm, clinical-clean, premium wellness aesthetic.
+   Soft deep teal base, lavender-blue primary, mint teal
+   secondary, violet accent, coral for alerts.
+   Like a premium wellness app — dark but never harsh.
+   ============================================================ */
+
+:root {
+  --bg:        #060a0f;
+  --bg2:       #0a0f16;
+  --surface:   rgba(45,212,191,0.04);
+  --surface2:  rgba(45,212,191,0.08);
+  --border:    rgba(45,212,191,0.11);
+  --border2:   rgba(45,212,191,0.24);
+  --text:      #d4e4f0;
+  --dim:       #6a8fa8;
+  --dim2:      #2e4d62;
+  --bright:    #eef6fc;
+
+  --primary:     #7c9ef8;
+  --primary-rgb: 124,158,248;
+  --secondary:   #2dd4bf;
+  --accent:      #c084fc;
+  --blue:        #7c9ef8;
+  --teal:        #2dd4bf;
+  --indigo:      #818cf8;
+  --red:         #f87171;
+  --yellow:      #fbbf24;
+  --green:       #34d399;
+  --glow:        rgba(124,158,248,0.12);
+
+  --card-radius: 14px;
+  --blur:        20px;
+  --mono:        'JetBrains Mono','Cascadia Code',monospace;
+  --sans:        'Outfit','Segoe UI',system-ui,sans-serif;
+  --heading:     'Outfit','Segoe UI',system-ui,-apple-system,sans-serif;
+}
+
+[data-theme="light"] {
+  --bg:        #f3f7fb;
+  --bg2:       #e8eff7;
+  --surface:   rgba(255,255,255,0.87);
+  --surface2:  rgba(255,255,255,0.97);
+  --border:    rgba(30,80,130,0.09);
+  --border2:   rgba(30,80,130,0.17);
+  --text:      #132033;
+  --dim:       #4a6a88;
+  --dim2:      #9ab5cc;
+  --bright:    #080f18;
+  --glow:      rgba(124,158,248,0.09);
+}

@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Health Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ── Theme tokens: Vitality Health ──────────────────────────────── */
+:root {
+  --bg:#060a0f; --bg2:#0a0f16;
+  --surface:rgba(45,212,191,0.04); --surface2:rgba(45,212,191,0.08);
+  --border:rgba(45,212,191,0.11); --border2:rgba(45,212,191,0.24);
+  --text:#d4e4f0; --dim:#6a8fa8; --dim2:#2e4d62; --bright:#eef6fc;
+  --primary:#7c9ef8; --primary-rgb:124,158,248;
+  --secondary:#2dd4bf; --accent:#c084fc;
+  --blue:#7c9ef8; --teal:#2dd4bf; --indigo:#818cf8;
+  --red:#f87171; --yellow:#fbbf24; --green:#34d399;
+  --glow:rgba(124,158,248,0.12);
+  --card-radius:14px; --blur:20px;
+  --mono:'JetBrains Mono','Cascadia Code',monospace;
+  --sans:'Outfit','Segoe UI',system-ui,sans-serif;
+  --heading:'Outfit','Segoe UI',system-ui,-apple-system,sans-serif;
+}
+[data-theme="light"] {
+  --bg:#f3f7fb; --bg2:#e8eff7;
+  --surface:rgba(255,255,255,0.87); --surface2:rgba(255,255,255,0.97);
+  --border:rgba(30,80,130,0.09); --border2:rgba(30,80,130,0.17);
+  --text:#132033; --dim:#4a6a88; --dim2:#9ab5cc; --bright:#080f18;
+  --glow:rgba(124,158,248,0.09);
+}
+
+/* ── Reset & Base ────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--sans);font-size:15px;line-height:1.55;
+  min-height:100vh;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 70% 55% at 85% 5%, rgba(45,212,191,0.07), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 15% 92%, rgba(192,132,252,0.07), transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(124,158,248,0.03), transparent 70%);
+}
+.wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:2rem 1.6rem 4rem}
+a{color:var(--secondary);text-decoration:none}
+code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
+
+/* ── Animations ─────────────────────────────────────────────────── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes sh{
+  0%{transform:translateX(-100%)}
+  60%,100%{transform:translateX(320%)}
+}
+.anim{opacity:0;animation:fadeUp .45s ease forwards}
+.anim:nth-child(1){animation-delay:.04s}
+.anim:nth-child(2){animation-delay:.09s}
+.anim:nth-child(3){animation-delay:.14s}
+.anim:nth-child(4){animation-delay:.19s}
+.anim:nth-child(5){animation-delay:.24s}
+.anim:nth-child(6){animation-delay:.29s}
+.anim:nth-child(7){animation-delay:.34s}
+.anim:nth-child(8){animation-delay:.39s}
+.anim:nth-child(9){animation-delay:.44s}
+.anim:nth-child(10){animation-delay:.49s}
+
+/* ── Banner ──────────────────────────────────────────────────────── */
+.banner{
+  position:relative;width:100%;height:160px;border-radius:var(--card-radius);
+  overflow:hidden;margin-bottom:1.4rem;
+  border:1px solid var(--border);
+}
+.banner img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+.banner::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(to right, rgba(6,10,15,0.65) 0%, transparent 30%, transparent 70%, rgba(6,10,15,0.65) 100%),
+    linear-gradient(to bottom, rgba(6,10,15,0.2) 0%, rgba(6,10,15,0.55) 100%);
+}
+.banner-label{
+  position:absolute;bottom:1rem;left:1.2rem;z-index:2;
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(238,246,252,0.7);
+  text-shadow:0 1px 6px rgba(0,0,0,.7);
+}
+.banner-label strong{display:block;font-size:.85rem;letter-spacing:.06em;color:#eef6fc}
+
+/* ── Header ──────────────────────────────────────────────────────── */
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}
+.head-left{display:flex;align-items:center;gap:.85rem}
+.avatar{
+  width:42px;height:42px;border-radius:8px;object-fit:cover;
+  border:2px solid var(--secondary);
+  box-shadow:0 0 0 4px rgba(45,212,191,0.15), 0 0 16px rgba(45,212,191,0.2);
+  flex-shrink:0;
+}
+.head h1{
+  font-family:var(--heading);font-size:1.5rem;font-weight:800;
+  background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 50%,var(--green) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:.01em;line-height:1.1;
+}
+.head .meta{font-size:.72rem;color:var(--dim);margin-top:.2rem;font-family:var(--mono)}
+.theme-btn{
+  background:transparent;border:1px solid var(--border2);color:var(--dim);
+  border-radius:6px;padding:.3rem .7rem;font-size:.62rem;
+  font-family:var(--mono);cursor:pointer;text-transform:uppercase;
+  letter-spacing:.05em;transition:color .15s,border-color .15s;white-space:nowrap;
+}
+.theme-btn:hover{color:var(--primary);border-color:var(--primary)}
+
+/* ── Controls ────────────────────────────────────────────────────── */
+.controls{display:flex;justify-content:flex-end;gap:.4rem;margin-bottom:1rem}
+.ctrl-btn{
+  padding:4px 12px;font-size:.6rem;font-family:var(--mono);font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--dim);
+  background:transparent;border:1px solid var(--border);border-radius:5px;
+  cursor:pointer;transition:.15s;
+}
+.ctrl-btn:hover{color:var(--primary);border-color:var(--border2)}
+
+/* ── KPI Stats Bar ───────────────────────────────────────────────── */
+.stats{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:1.4rem}
+.kpi{
+  flex:1;min-width:130px;background:var(--surface2);border:1px solid var(--border);
+  border-radius:10px;padding:.7rem .8rem;text-align:center;
+  transition:border-color .2s;
+}
+.kpi:hover{border-color:var(--border2)}
+.kpi .n{font-size:1.15rem;font-weight:800;color:var(--primary);font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi .l{font-size:.57rem;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-top:.18rem}
+
+/* ── Cards ───────────────────────────────────────────────────────── */
+.card{
+  background:var(--surface);backdrop-filter:blur(var(--blur));
+  border:1px solid var(--border);border-radius:var(--card-radius);
+  margin-bottom:1.1rem;overflow:hidden;position:relative;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--card-accent,var(--primary)),transparent);
+  opacity:.7;
+}
+.card-head{
+  display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;
+  cursor:pointer;user-select:none;border-bottom:1px solid transparent;
+  transition:background .15s;
+}
+.card.open .card-head{border-bottom-color:var(--border)}
+.card-head:hover{background:var(--surface2)}
+.card-head h2{
+  font-family:var(--heading);flex:1;font-size:.74rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--bright);
+  display:flex;align-items:center;gap:.5rem;
+}
+.card-head h2::before{
+  content:'';width:3px;height:14px;border-radius:2px;flex-shrink:0;
+  background:linear-gradient(180deg,var(--card-accent,var(--primary)),var(--secondary));
+}
+.card-toggle{font-size:.6rem;color:var(--dim2);transition:transform .2s}
+.card.open .card-toggle{transform:rotate(90deg)}
+.card-body{padding:1rem;display:none}
+.card.open .card-body{display:block}
+
+/* ── Tables ──────────────────────────────────────────────────────── */
+.tbl{width:100%;border-collapse:collapse;font-size:.75rem}
+.tbl th{
+  font-family:var(--mono);font-size:.58rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.06em;color:var(--dim);
+  padding:.45rem .6rem;border-bottom:1px solid var(--border);text-align:left;
+}
+.tbl td{padding:.45rem .6rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--surface2)}
+.tbl .today td{background:rgba(var(--primary-rgb),.07);color:var(--bright)}
+.tbl .past td{color:var(--dim2);font-style:italic}
+
+/* ── Chips / badges ──────────────────────────────────────────────── */
+.chip{
+  display:inline-block;font-size:.56rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.04em;padding:.12rem .45rem;border-radius:5px;
+}
+.chip.ok{background:rgba(52,211,153,.14);color:var(--green);border:1px solid rgba(52,211,153,.3)}
+.chip.warn{background:rgba(251,191,36,.12);color:var(--yellow);border:1px solid rgba(251,191,36,.28)}
+.chip.over{background:rgba(248,113,113,.14);color:var(--red);border:1px solid rgba(248,113,113,.3)}
+.chip.pri{background:rgba(var(--primary-rgb),.12);color:var(--primary);border:1px solid var(--border2)}
+
+/* ── Progress bar ────────────────────────────────────────────────── */
+.bar-row{margin-bottom:.95rem}
+.bar-label{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;font-size:.76rem;margin-bottom:.35rem}
+.bar-label .lbl{color:var(--text);font-weight:600}
+.bar-label .v{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--dim)}
+.track{
+  position:relative;height:18px;
+  background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(255,255,255,.02));
+  border:1px solid var(--border);border-radius:9px;
+  overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.5);
+}
+.fill{
+  position:absolute;inset:0 auto 0 0;min-width:8px;border-radius:9px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  box-shadow:0 0 12px var(--glow),inset 0 1px 0 rgba(255,255,255,.2);
+  transition:width .65s cubic-bezier(.22,1,.36,1);overflow:hidden;
+}
+.fill::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
+  transform:translateX(-100%);animation:sh 2.8s ease-in-out infinite;
+}
+.fill.mint{background:linear-gradient(90deg,var(--secondary),var(--green))}
+.fill.violet{background:linear-gradient(90deg,var(--accent),var(--indigo))}
+.pct{
+  position:absolute;top:50%;right:.5rem;transform:translateY(-50%);
+  font-size:.58rem;font-weight:700;color:var(--bright);
+  text-shadow:0 1px 3px rgba(0,0,0,.8);z-index:2;
+}
+
+/* ── Checklist ───────────────────────────────────────────────────── */
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-bottom:.8rem}
+@media(max-width:620px){.check-grid{grid-template-columns:1fr}}
+.check-group h3{
+  font-size:.64rem;font-family:var(--mono);text-transform:uppercase;
+  letter-spacing:.08em;color:var(--dim);margin-bottom:.55rem;
+}
+.check-item{
+  display:flex;align-items:center;gap:.6rem;padding:.35rem 0;
+  border-bottom:1px solid var(--border);cursor:pointer;
+}
+.check-item:last-child{border-bottom:none}
+.check-item input[type=checkbox]{
+  width:15px;height:15px;accent-color:var(--secondary);cursor:pointer;flex-shrink:0;
+}
+.check-item label{font-size:.75rem;color:var(--text);cursor:pointer;line-height:1.35}
+.check-item.done label{color:var(--dim2);text-decoration:line-through}
+.progress-bar-wrap{margin-top:.6rem}
+.prog-label{font-size:.66rem;color:var(--dim);margin-bottom:.3rem;display:flex;justify-content:space-between}
+
+/* ── Fitness week strip ──────────────────────────────────────────── */
+.week-strip{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:.9rem}
+.day-pill{
+  flex:1;min-width:82px;background:var(--surface2);border:1px solid var(--border);
+  border-radius:9px;padding:.5rem .5rem;text-align:center;
+}
+.day-pill .day-name{font-size:.58rem;font-family:var(--mono);color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.day-pill .day-icon{font-size:1.1rem;margin:.2rem 0}
+.day-pill .day-dur{font-size:.62rem;color:var(--text);font-weight:600}
+.day-pill.cardio{border-color:rgba(var(--primary-rgb),.3)}
+.day-pill.strength{border-color:rgba(192,132,252,.3)}
+.day-pill.stretch{border-color:rgba(45,212,191,.3)}
+.day-pill.rest{border-color:rgba(106,143,168,.2)}
+
+/* ── Mood tracker ────────────────────────────────────────────────── */
+.mood-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem}
+.mood-day{
+  flex:1;min-width:90px;background:var(--surface2);border:1px solid var(--border);
+  border-radius:9px;padding:.5rem .5rem .4rem;text-align:center;
+}
+.mood-day .m-date{font-size:.54rem;color:var(--dim);font-family:var(--mono);letter-spacing:.04em}
+.mood-day .m-emoji{font-size:1.3rem;margin:.15rem 0}
+.mood-day .m-score{font-size:.7rem;font-weight:800;font-variant-numeric:tabular-nums}
+.mood-day .m-note{font-size:.56rem;color:var(--dim2);margin-top:.2rem;line-height:1.35;display:none}
+.mood-day.good{border-color:rgba(52,211,153,.3)}
+.mood-day.ok{border-color:rgba(251,191,36,.3)}
+.mood-day.low{border-color:rgba(248,113,113,.3)}
+.mood-avg{font-size:.76rem;color:var(--dim);margin-bottom:.5rem}
+.mood-avg strong{color:var(--primary)}
+
+/* ── Sleep quality dots ──────────────────────────────────────────── */
+.q-dots{display:inline-flex;gap:2px;vertical-align:middle}
+.q-dot{width:7px;height:7px;border-radius:50%;background:var(--dim2)}
+.q-dot.on{background:var(--secondary)}
+
+/* ── Goals ───────────────────────────────────────────────────────── */
+.goals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+@media(max-width:720px){.goals-grid{grid-template-columns:1fr}}
+.goal-group{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:.75rem}
+.goal-group h3{
+  font-size:.62rem;font-family:var(--mono);text-transform:uppercase;
+  letter-spacing:.08em;color:var(--dim);margin-bottom:.65rem;
+  padding-bottom:.4rem;border-bottom:1px solid var(--border);
+}
+.goal-item{margin-bottom:.7rem}
+.goal-item:last-child{margin-bottom:0}
+.goal-item .g-name{font-size:.72rem;font-weight:600;color:var(--text);margin-bottom:.25rem;line-height:1.35}
+.goal-mini-track{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:.2rem}
+.goal-mini-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--primary),var(--secondary));transition:width .6s ease}
+.goal-pct{font-size:.58rem;color:var(--dim);font-family:var(--mono)}
+
+/* ── Stressors note ──────────────────────────────────────────────── */
+.note-box{
+  background:rgba(192,132,252,.05);border:1px solid rgba(192,132,252,.18);
+  border-radius:8px;padding:.65rem .8rem;font-size:.74rem;color:var(--text);line-height:1.55;
+  margin-top:.6rem;
+}
+.note-box strong{color:var(--accent);font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:.3rem}
+
+/* ── Macro bars ──────────────────────────────────────────────────── */
+.macro-bars{margin-bottom:1rem}
+
+/* ── Section label ───────────────────────────────────────────────── */
+.sec-lbl{
+  font-size:.62rem;font-family:var(--mono);text-transform:uppercase;
+  letter-spacing:.08em;color:var(--dim);
+  margin:1rem 0 .5rem;padding-bottom:.3rem;border-bottom:1px solid var(--border);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media(max-width:720px){
+  .banner{height:110px}
+  .stats{gap:.4rem}
+  .kpi{min-width:100px}
+  .week-strip{gap:.3rem}
+  .day-pill{min-width:70px}
+}
+@media(max-width:480px){
+  .stats .kpi .n{font-size:.95rem}
+  .week-strip{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- Banner -->
+  <div class="banner anim">
+    <img src="../../docs/images/agency/bloggie-16x9.webp" alt="Health dashboard banner" onerror="this.style.display='none'">
+    <div class="banner-label">
+      <strong>JORDAN LEE</strong>
+      Health Dashboard
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div class="head anim">
+    <div class="head-left">
+      <img class="avatar" src="../../docs/images/agency/bloggie-1x1.webp" alt="Jordan Lee avatar" onerror="this.style.background='var(--surface2)'">
+      <div>
+        <h1>Health Dashboard</h1>
+        <div class="meta">jordan-lee &middot; example data &middot; June 2026</div>
+      </div>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">&#9790; Theme</button>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls anim">
+    <button class="ctrl-btn" onclick="expandAll()">Expand All</button>
+    <button class="ctrl-btn" onclick="collapseAll()">Collapse All</button>
+  </div>
+
+  <!-- KPI Stats Bar -->
+  <div class="stats anim" id="stats-bar">
+    <div class="kpi"><div class="n" id="kpi-appt">—</div><div class="l">Next Appt</div></div>
+    <div class="kpi"><div class="n" id="kpi-meds">—</div><div class="l">Meds Today</div></div>
+    <div class="kpi"><div class="n" id="kpi-steps">8,240</div><div class="l">Steps (avg)</div></div>
+    <div class="kpi"><div class="n" id="kpi-sleep">—</div><div class="l">Sleep (avg)</div></div>
+    <div class="kpi"><div class="n" id="kpi-water">6 / 8</div><div class="l">Water Today</div></div>
+    <div class="kpi"><div class="n" id="kpi-mood">—</div><div class="l">Mood Score</div></div>
+  </div>
+
+  <!-- ── 1. Daily Checklist ────────────────────────────────────────── -->
+  <div class="card anim" id="card-checklist" style="--card-accent:var(--secondary)">
+    <div class="card-head" onclick="toggleCard('card-checklist')">
+      <h2>Daily Checklist</h2>
+      <span class="chip pri" id="check-progress-chip">0 / 10</span>
+      <span class="card-toggle">&#9654;</span>
+    </div>
+    <div class="card-body">
+      <div class="progress-bar-wrap">
+        <div class="prog-label"><span>Today's completion</span><span id="check-pct-label">0%</span></div>
+        <div class="track"><div class="fill mint" id="check-fill" style="width:0%"></div></div>
+      </div>
+      <div class="check-grid" id="checklist-grid"></div>
+    </div>
+  </div>
+
+  <!-- ── 2. Vitals Tracking ────────────────────────────────────────── -->
+  <div class="card anim" id="card-vitals" style="--card-accent:var(--primary)">
+    <div class="card-head" onclick="toggleCard('card-vitals')">
+      <h2>Vitals Tracking</h2>
+      <span class="chip pri">Last 7 Days</span>
+      <span class="card-toggle">&#9654;</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl" id="vitals-table">
+        <thead><tr>
+          <th>Date</th><th>Blood Pressure</th><th>Heart Rate</th><th>Weight (lbs)</th><th>Notes</th>
+        </tr></thead>
+        <tbody id="vitals-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── 3. Medications & Supplements ─────────────────────────────── -->
+  <div class="card anim" id="card-meds" style="--card-accent:var(--accent)">
+    <div class="card-head" onclick="toggleCard('card-meds')">
+      <h2>Medications &amp; Supplements</h2>
+      <span class="chip warn" id="meds-warn-chip" style="display:none">Action Needed</span>
+      <span class="card-toggle">&#9654;</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl" id="meds-table">
+        <thead><tr>
+          <th>Name</th><th>Dose</th><th>Frequency</th><th>Time</th><th>Notes</th><th>Refill</th>
+        </tr></thead>
+        <tbody id="meds-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── 4. Fitness & Activity ─────────────────────────────────────── -->
+  <div class="card anim" id="card-fitness" style="--card-accent:var(--primary)">
+    <div class="card-head" onclick="toggleCard('card-fitness')">
+      <h2>Fitness &amp; Activity</h2>
+      <span class="chip pri" id="fitness-total-chip">0 min this week</span>
+      <span class="card-toggle">&#9654;</span>
+    </div>
+    <div class="card-body">
+      <div class="week-strip" id="week-strip"></div>
+      <div class="sec-lbl">Weekly Goal Progress</div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="lbl">Active Minutes</span>
+          <span class="v" id="fitness-bar-label">0 / 150 min</span>
+        </div>
+        <div class="track">
+          <div class="fill" id="fitness-fill" style="width:0%"></div>
+          <div class="pct" id="fitness-pct">0%</div>
+        </div>
+      </div>
+      <div class="sec-lbl" style="margin-top:.4rem">Activity Breakdown</div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.4rem" id="fitness-breakdown"></div>
+    </div>
+  </div>
+
+  <!-- ── 5. Nutrition ──────────────────────────────────────────────── -->
+  <div class="card anim" id="card-nutrition" style="--card-accent:var(--green)">
+    <div class="card-head" onclick="toggleCard('card-nutrition')">
+      <h2>Nutrition</h2>
+      <span class="chip pri">Today's Macros</span>
+      <span class="card-toggle">&#9654;</span>
+    </div>
+    <div class="card-body">
+      <div class="macro-bars" id="macro-bars"></div>
+      <div class="sec-lbl">3-Day Meal Log</div>
+      <table class="tbl" id="nutrition-table">
+        <thead><tr>
+          <th>Date</th><th>Breakfast</th><th>Lunch</th><th>Dinner</th><th>Snacks</th><th>Cal</th><th>Protein</th>
+        </tr></thead>
+        <tbody id="nutrition-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── 6. Sleep Tracking ─────────────────────────────────────────── -->
+  <div class="card anim" id="card-sleep" style="--card-accent:var(--indigo)">
+    <div class="card-head" onclick="toggleCard('card-sleep')">
+      <h2>Sleep Tracking</h2>
+      <span class="chip pri" id="sleep-avg-chip">— hrs avg</span>
+      <span class="card-toggle">&#9654;</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl" id="sleep-table">
+        <thead><tr>
+          <th>Date</th><th>Bedtime</th><th>Wake</th><th>Hours</th><th>Quality</th>
+        </tr></thead>
+        <tbody id="sleep-body"></tbody>
+      </table>
+      <div style="margin-top:.75rem;display:flex;gap:1.4rem;flex-wrap:wrap">
+        <div><span style="font-size:.68rem;color:var(--dim)">Weekly Average:</span> <strong id="sleep-avg-val" style="color:var(--primary)">—</strong></div>
+        <div><span style="font-size:.68rem;color:var(--dim)">Sleep Goal (7.5 hrs):</span> <strong id="sleep-goal-status" style="color:var(--green)">On Track</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 7. Mental Health & Mood ───────────────────────────────────── -->
+  <div class="card anim" id="card-mood" style="--card-accent:var(--accent)">
+    <div class="card-head" onclick="toggleCard('card-mood')">
+      <h2>Mental Health &amp; Mood</h2>
+      <span class="chip pri" id="mood-avg-chip">Avg —</span>
+      <span class="card-toggle">&#9654;</span>
+    </div>
+    <div class="card-body">
+      <div class="mood-row" id="mood-row"></div>
+      <div class="mood-avg">Weekly average: <strong id="mood-avg-val">—</strong> / 10</div>
+      <div class="note-box">
+        <strong>Current Stressors &amp; Notes</strong>
+        Work deadline pressure eased this week. Continuing sertraline consistently — noticeable improvement in baseline anxiety. Therapy session next month. Key focus: protecting sleep and maintaining exercise routine as primary mood regulators.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 8. Upcoming Appointments ─────────────────────────────────── -->
+  <div class="card anim" id="card-appts" style="--card-accent:var(--teal)">
+    <div class="card-head" onclick="toggleCard('card-appts')">
+      <h2>Upcoming Appointments</h2>
+      <span class="chip pri" id="appts-count-chip">— upcoming</span>
+      <span class="card-toggle">&#9654;</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl" id="appts-table">
+        <thead><tr>
+          <th>Date</th><th>Provider</th><th>Type</th><th>Location</th><th>Notes</th>
+        </tr></thead>
+        <tbody id="appts-body"></tbody>
+      </table>
+      <details style="margin-top:.7rem">
+        <summary style="cursor:pointer;font-size:.67rem;color:var(--dim);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;list-style:none;padding:.3rem 0">
+          &#9654; Past Appointments
+        </summary>
+        <table class="tbl" style="margin-top:.5rem">
+          <thead><tr><th>Date</th><th>Provider</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody id="past-appts-body"></tbody>
+        </table>
+      </details>
+    </div>
+  </div>
+
+  <!-- ── 9. Health Goals ───────────────────────────────────────────── -->
+  <div class="card anim" id="card-goals" style="--card-accent:var(--secondary)">
+    <div class="card-head" onclick="toggleCard('card-goals')">
+      <h2>Health Goals</h2>
+      <span class="chip pri">Progress Tracker</span>
+      <span class="card-toggle">&#9654;</span>
+    </div>
+    <div class="card-body">
+      <div class="goals-grid" id="goals-grid"></div>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<!-- Embedded data -->
+<script id="health-data" type="application/json">
+{
+  "profile": {
+    "name": "Jordan Lee",
+    "age": 32,
+    "dob": "1992-03-14",
+    "location": "Portland, OR",
+    "last_updated": "2026-06-20"
+  },
+  "vitals": [
+    { "date": "2026-06-14", "bp_systolic": 118, "bp_diastolic": 76, "heart_rate": 68, "weight_lbs": 162.4, "notes": "Felt rested" },
+    { "date": "2026-06-15", "bp_systolic": 122, "bp_diastolic": 78, "heart_rate": 72, "weight_lbs": 162.8, "notes": "After coffee" },
+    { "date": "2026-06-16", "bp_systolic": 116, "bp_diastolic": 74, "heart_rate": 65, "weight_lbs": 161.9, "notes": "Morning walk" },
+    { "date": "2026-06-17", "bp_systolic": 120, "bp_diastolic": 77, "heart_rate": 70, "weight_lbs": 162.1, "notes": "" },
+    { "date": "2026-06-18", "bp_systolic": 124, "bp_diastolic": 80, "heart_rate": 74, "weight_lbs": 163.0, "notes": "Stressful meeting" },
+    { "date": "2026-06-19", "bp_systolic": 117, "bp_diastolic": 75, "heart_rate": 66, "weight_lbs": 162.2, "notes": "Post yoga" },
+    { "date": "2026-06-20", "bp_systolic": 119, "bp_diastolic": 76, "heart_rate": 67, "weight_lbs": 161.8, "notes": "Today" }
+  ],
+  "medications": [
+    { "name": "Vitamin D3", "dose": "2000 IU", "frequency": "Daily", "time": "Morning", "pharmacy": "CVS Pharmacy", "refill_status": "ok", "notes": "With breakfast" },
+    { "name": "Omega-3 Fish Oil", "dose": "1000 mg", "frequency": "Daily", "time": "Morning", "pharmacy": "Amazon", "refill_status": "ok", "notes": "Cardiovascular support" },
+    { "name": "Magnesium Glycinate", "dose": "400 mg", "frequency": "Daily", "time": "Evening", "pharmacy": "Whole Foods", "refill_status": "refill_soon", "notes": "~12 days left" },
+    { "name": "Loratadine (Claritin)", "dose": "10 mg", "frequency": "Daily (seasonal)", "time": "Morning", "pharmacy": "Walgreens", "refill_status": "ok", "notes": "Seasonal allergies" },
+    { "name": "Sertraline", "dose": "50 mg", "frequency": "Daily", "time": "Morning", "pharmacy": "CVS Pharmacy", "refill_status": "ok", "notes": "Dr. Patel — anxiety mgmt" },
+    { "name": "Multivitamin", "dose": "1 tablet", "frequency": "Daily", "time": "Morning", "pharmacy": "Costco", "refill_status": "overdue", "notes": "Ran out 3 days ago" },
+    { "name": "Melatonin", "dose": "0.5 mg", "frequency": "As needed", "time": "Before bed", "pharmacy": "Amazon", "refill_status": "ok", "notes": "Travel/circadian reset" }
+  ],
+  "fitness": [
+    { "date": "2026-06-14", "day": "Sat", "activity": "Running", "duration_min": 35, "type": "cardio" },
+    { "date": "2026-06-15", "day": "Sun", "activity": "Rest", "duration_min": 0, "type": "rest" },
+    { "date": "2026-06-16", "day": "Mon", "activity": "Weights", "duration_min": 50, "type": "strength" },
+    { "date": "2026-06-17", "day": "Tue", "activity": "Yoga", "duration_min": 40, "type": "stretch" },
+    { "date": "2026-06-18", "day": "Wed", "activity": "Cycling", "duration_min": 45, "type": "cardio" },
+    { "date": "2026-06-19", "day": "Thu", "activity": "Weights", "duration_min": 55, "type": "strength" },
+    { "date": "2026-06-20", "day": "Fri", "activity": "Walk/Cardio", "duration_min": 30, "type": "cardio" }
+  ],
+  "nutrition": {
+    "goal_calories": 2000,
+    "goal_protein_g": 120,
+    "goal_water_cups": 8,
+    "today": { "calories": 1680, "protein": 94, "water": 6 },
+    "log": [
+      { "date": "2026-06-18", "breakfast": "Greek yogurt, berries, granola", "lunch": "Grilled chicken salad, quinoa", "dinner": "Salmon, sweet potato, broccoli", "snacks": "Apple, almonds", "calories": 1920, "protein": 112, "water": 7 },
+      { "date": "2026-06-19", "breakfast": "Avocado toast, 2 eggs", "lunch": "Turkey wrap, side salad", "dinner": "Lentil soup, whole grain bread", "snacks": "Banana, protein bar", "calories": 1840, "protein": 108, "water": 8 },
+      { "date": "2026-06-20", "breakfast": "Oatmeal, chia seeds, blueberries", "lunch": "Grain bowl, chickpeas, tahini", "dinner": "Planned: Stir-fry tofu + veggies", "snacks": "Orange, trail mix", "calories": 1680, "protein": 94, "water": 6 }
+    ]
+  },
+  "sleep": [
+    { "date": "2026-06-14", "bedtime": "22:45", "wake": "06:30", "hours": 7.75, "quality": 4 },
+    { "date": "2026-06-15", "bedtime": "23:30", "wake": "07:15", "hours": 7.75, "quality": 5 },
+    { "date": "2026-06-16", "bedtime": "22:00", "wake": "05:45", "hours": 7.75, "quality": 3 },
+    { "date": "2026-06-17", "bedtime": "23:00", "wake": "06:45", "hours": 7.75, "quality": 4 },
+    { "date": "2026-06-18", "bedtime": "00:15", "wake": "07:00", "hours": 6.75, "quality": 2 },
+    { "date": "2026-06-19", "bedtime": "22:30", "wake": "06:15", "hours": 7.75, "quality": 5 },
+    { "date": "2026-06-20", "bedtime": "23:00", "wake": "06:45", "hours": 7.75, "quality": 4 }
+  ],
+  "mood": [
+    { "date": "2026-06-14", "score": 7, "emoji": "😊", "note": "Good energy, productive day" },
+    { "date": "2026-06-15", "score": 8, "emoji": "😄", "note": "Relaxed Sunday, time outside" },
+    { "date": "2026-06-16", "score": 6, "emoji": "😐", "note": "Monday fatigue, picked up after lunch" },
+    { "date": "2026-06-17", "score": 7, "emoji": "😊", "note": "Yoga helped, steady day" },
+    { "date": "2026-06-18", "score": 4, "emoji": "😓", "note": "Stressful deadline, poor sleep" },
+    { "date": "2026-06-19", "score": 8, "emoji": "😄", "note": "Deadline done, huge relief" },
+    { "date": "2026-06-20", "score": 7, "emoji": "😊", "note": "Calm Friday, good week overall" }
+  ],
+  "appointments": [
+    { "date": "2026-06-25", "provider": "Dr. Sarah Patel, MD", "type": "Annual Check-up", "location": "Providence Medical Center", "notes": "Fasting bloodwork", "past": false },
+    { "date": "2026-07-08", "provider": "Dr. Marcus Webb, DDS", "type": "Dental Cleaning", "location": "Pearl District Dental", "notes": "6-month cleaning + X-ray", "past": false },
+    { "date": "2026-07-15", "provider": "Dr. Aisha Ramos, PsyD", "type": "Therapy Session", "location": "Telehealth (Zoom)", "notes": "Monthly — anxiety mgmt", "past": false },
+    { "date": "2026-08-02", "provider": "Dr. Tom Nguyen, DO", "type": "Sports Medicine", "location": "OHSU Sports Medicine", "notes": "Left knee follow-up", "past": false },
+    { "date": "2026-05-20", "provider": "Dr. Sarah Patel, MD", "type": "Medication Review", "location": "Providence Medical Center", "notes": "Sertraline confirmed 50mg", "past": true }
+  ],
+  "goals": {
+    "this_month": [
+      { "title": "Run 30+ min 3x per week", "progress": 70 },
+      { "title": "Average 7.5 hrs sleep", "progress": 80 },
+      { "title": "8 cups water daily", "progress": 60 },
+      { "title": "No alcohol for 30 days", "progress": 65 }
+    ],
+    "this_quarter": [
+      { "title": "Lose 5 lbs (target 158)", "progress": 45 },
+      { "title": "12-week strength program", "progress": 58 },
+      { "title": "Meditate 10 min daily", "progress": 40 },
+      { "title": "Cook at home 5 nights/wk", "progress": 72 }
+    ],
+    "long_term": [
+      { "title": "Consistent sleep schedule", "progress": 65 },
+      { "title": "5K under 25 minutes", "progress": 50 },
+      { "title": "Reduce anxiety (GAD-7 < 5)", "progress": 55 },
+      { "title": "Sustainable meal-prep habit", "progress": 35 }
+    ]
+  },
+  "checklist": {
+    "morning": [
+      "Take morning medications",
+      "Drink 2 glasses of water",
+      "5 min journal / intentions",
+      "Take vitamins & supplements",
+      "Light stretch or mobility work"
+    ],
+    "evening": [
+      "Take evening medications",
+      "Log today's mood score",
+      "Prep tomorrow's meals",
+      "Wind down screens by 10pm",
+      "Aim for 7+ hrs sleep tonight"
+    ]
+  }
+}
+</script>
+
+<script>
+(function(){
+  'use strict';
+
+  // ── Data ──────────────────────────────────────────────────────────
+  const D = JSON.parse(document.getElementById('health-data').textContent);
+
+  // ── Theme toggle ──────────────────────────────────────────────────
+  function toggleTheme(){
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('health-theme', next);
+  }
+  window.toggleTheme = toggleTheme;
+  const savedTheme = localStorage.getItem('health-theme');
+  if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+
+  // ── Card collapse ─────────────────────────────────────────────────
+  function toggleCard(id){
+    const card = document.getElementById(id);
+    const open = card.classList.toggle('open');
+    const state = JSON.parse(localStorage.getItem('health-cards') || '{}');
+    state[id] = open;
+    localStorage.setItem('health-cards', JSON.stringify(state));
+  }
+  window.toggleCard = toggleCard;
+
+  function expandAll(){
+    document.querySelectorAll('.card').forEach(c => c.classList.add('open'));
+    const ids = {};
+    document.querySelectorAll('.card[id]').forEach(c => { ids[c.id] = true; });
+    localStorage.setItem('health-cards', JSON.stringify(ids));
+  }
+  window.expandAll = expandAll;
+
+  function collapseAll(){
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('open'));
+    localStorage.setItem('health-cards', '{}');
+  }
+  window.collapseAll = collapseAll;
+
+  function restoreCards(){
+    const state = JSON.parse(localStorage.getItem('health-cards') || '{}');
+    // Default: open first 3 cards
+    const defaults = ['card-checklist','card-vitals','card-meds'];
+    document.querySelectorAll('.card[id]').forEach(c => {
+      const open = (c.id in state) ? state[c.id] : defaults.includes(c.id);
+      if(open) c.classList.add('open');
+    });
+  }
+
+  // ── Helpers ───────────────────────────────────────────────────────
+  function fmtDate(str){
+    const [y,m,d] = str.split('-');
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return months[parseInt(m)-1] + ' ' + parseInt(d);
+  }
+
+  function qualityDots(q){
+    let html = '<span class="q-dots">';
+    for(let i=1;i<=5;i++) html += `<span class="q-dot${i<=q?' on':''}"></span>`;
+    return html + '</span>';
+  }
+
+  // ── KPI bar ───────────────────────────────────────────────────────
+  function renderKPIs(){
+    // Next appointment
+    const upcoming = D.appointments.filter(a => !a.past).sort((a,b) => a.date.localeCompare(b.date));
+    if(upcoming.length){
+      const d = upcoming[0].date;
+      document.getElementById('kpi-appt').textContent = fmtDate(d);
+    }
+    // Meds today (non-as-needed)
+    const dailyMeds = D.medications.filter(m => m.frequency.toLowerCase().includes('daily'));
+    document.getElementById('kpi-meds').textContent = dailyMeds.length + ' items';
+    // Sleep avg
+    const sleepAvg = (D.sleep.reduce((s,n) => s + n.hours, 0) / D.sleep.length).toFixed(1);
+    document.getElementById('kpi-sleep').textContent = sleepAvg + ' hrs';
+    document.getElementById('sleep-avg-chip').textContent = sleepAvg + ' hrs avg';
+    document.getElementById('sleep-avg-val').textContent = sleepAvg + ' hrs';
+    if(parseFloat(sleepAvg) < 7){
+      document.getElementById('sleep-goal-status').textContent = 'Below Goal';
+      document.getElementById('sleep-goal-status').style.color = 'var(--red)';
+    }
+    // Mood avg
+    const moodAvg = (D.mood.reduce((s,n) => s + n.score, 0) / D.mood.length).toFixed(1);
+    document.getElementById('kpi-mood').textContent = moodAvg + ' / 10';
+    document.getElementById('mood-avg-chip').textContent = 'Avg ' + moodAvg;
+    document.getElementById('mood-avg-val').textContent = moodAvg;
+    // Upcoming count
+    document.getElementById('appts-count-chip').textContent = upcoming.length + ' upcoming';
+  }
+
+  // ── Checklist ─────────────────────────────────────────────────────
+  function renderChecklist(){
+    const today = new Date().toISOString().slice(0,10);
+    const storageKey = 'health-checklist-' + today;
+    const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    const grid = document.getElementById('checklist-grid');
+    const allItems = [];
+
+    function buildGroup(title, items, prefix){
+      const group = document.createElement('div');
+      group.className = 'check-group';
+      group.innerHTML = `<h3>${title}</h3>`;
+      items.forEach((label, i) => {
+        const key = prefix + '_' + i;
+        allItems.push(key);
+        const item = document.createElement('div');
+        item.className = 'check-item' + (saved[key] ? ' done' : '');
+        item.dataset.key = key;
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.id = key;
+        cb.checked = !!saved[key];
+        const lbl = document.createElement('label');
+        lbl.htmlFor = key;
+        lbl.textContent = label;
+        item.appendChild(cb);
+        item.appendChild(lbl);
+        item.addEventListener('click', function(e){
+          if(e.target.tagName !== 'INPUT'){
+            cb.checked = !cb.checked;
+          }
+          const s = JSON.parse(localStorage.getItem(storageKey) || '{}');
+          s[key] = cb.checked;
+          localStorage.setItem(storageKey, JSON.stringify(s));
+          item.classList.toggle('done', cb.checked);
+          updateCheckProgress(storageKey, allItems);
+        });
+        group.appendChild(item);
+      });
+      return group;
+    }
+
+    grid.appendChild(buildGroup('Morning Routine', D.checklist.morning, 'morning'));
+    grid.appendChild(buildGroup('Evening Routine', D.checklist.evening, 'evening'));
+    updateCheckProgress(storageKey, allItems);
+  }
+
+  function updateCheckProgress(storageKey, allItems){
+    const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    const done = allItems.filter(k => saved[k]).length;
+    const total = allItems.length;
+    const pct = Math.round((done/total)*100);
+    document.getElementById('check-progress-chip').textContent = done + ' / ' + total;
+    document.getElementById('check-pct-label').textContent = pct + '%';
+    document.getElementById('check-fill').style.width = pct + '%';
+  }
+
+  // ── Vitals ────────────────────────────────────────────────────────
+  function renderVitals(){
+    const tbody = document.getElementById('vitals-body');
+    D.vitals.forEach((v, i) => {
+      const isToday = i === D.vitals.length - 1;
+      const tr = document.createElement('tr');
+      if(isToday) tr.className = 'today';
+      tr.innerHTML = `
+        <td><strong>${fmtDate(v.date)}</strong>${isToday ? ' <span class="chip ok">Today</span>' : ''}</td>
+        <td>${v.bp_systolic}/${v.bp_diastolic} mmHg</td>
+        <td>${v.heart_rate} bpm</td>
+        <td>${v.weight_lbs}</td>
+        <td style="color:var(--dim)">${v.notes || '—'}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // ── Medications ───────────────────────────────────────────────────
+  function renderMeds(){
+    const tbody = document.getElementById('meds-body');
+    let hasWarn = false;
+    D.medications.forEach(m => {
+      const chipClass = m.refill_status === 'ok' ? 'ok' : m.refill_status === 'refill_soon' ? 'warn' : 'over';
+      const chipLabel = m.refill_status === 'ok' ? 'OK' : m.refill_status === 'refill_soon' ? 'Refill Soon' : 'Overdue';
+      if(m.refill_status !== 'ok') hasWarn = true;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><strong>${m.name}</strong></td>
+        <td><code>${m.dose}</code></td>
+        <td>${m.frequency}</td>
+        <td>${m.time}</td>
+        <td style="color:var(--dim)">${m.notes}</td>
+        <td><span class="chip ${chipClass}">${chipLabel}</span></td>
+      `;
+      tbody.appendChild(tr);
+    });
+    if(hasWarn){
+      const chip = document.getElementById('meds-warn-chip');
+      chip.style.display = '';
+    }
+  }
+
+  // ── Fitness ───────────────────────────────────────────────────────
+  function renderFitness(){
+    const strip = document.getElementById('week-strip');
+    const icons = { cardio:'🏃', strength:'🏋️', stretch:'🧘', rest:'😴' };
+    let totalMin = 0;
+    const breakdown = { cardio: 0, strength: 0, stretch: 0 };
+    D.fitness.forEach(f => {
+      totalMin += f.duration_min;
+      if(breakdown[f.type] !== undefined) breakdown[f.type] += f.duration_min;
+      const pill = document.createElement('div');
+      pill.className = `day-pill ${f.type}`;
+      pill.innerHTML = `
+        <div class="day-name">${f.day}</div>
+        <div class="day-icon">${icons[f.type] || '🏃'}</div>
+        <div class="day-dur">${f.duration_min > 0 ? f.duration_min + ' min' : 'Rest'}</div>
+      `;
+      strip.appendChild(pill);
+    });
+    document.getElementById('fitness-total-chip').textContent = totalMin + ' min this week';
+    const goal = 150;
+    const pct = Math.min(100, Math.round((totalMin/goal)*100));
+    document.getElementById('fitness-bar-label').textContent = totalMin + ' / ' + goal + ' min';
+    document.getElementById('fitness-fill').style.width = pct + '%';
+    document.getElementById('fitness-pct').textContent = pct + '%';
+
+    const bdEl = document.getElementById('fitness-breakdown');
+    const colors = { cardio:'var(--primary)', strength:'var(--accent)', stretch:'var(--secondary)' };
+    Object.entries(breakdown).forEach(([type, min]) => {
+      const pill = document.createElement('div');
+      pill.style.cssText = `background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:.3rem .6rem;font-size:.67rem`;
+      pill.innerHTML = `<span style="color:${colors[type]};font-weight:700">${type}</span> <span style="color:var(--dim)">${min} min</span>`;
+      bdEl.appendChild(pill);
+    });
+  }
+
+  // ── Nutrition ─────────────────────────────────────────────────────
+  function renderNutrition(){
+    const today = D.nutrition.today;
+    const goal = D.nutrition;
+    const macros = [
+      { label:'Calories', current: today.calories, max: goal.goal_calories, unit:'kcal', fillClass:'' },
+      { label:'Protein', current: today.protein, max: goal.goal_protein_g, unit:'g', fillClass:'violet' },
+      { label:'Water', current: today.water, max: goal.goal_water_cups, unit:'cups', fillClass:'mint' }
+    ];
+    const mbEl = document.getElementById('macro-bars');
+    macros.forEach(m => {
+      const pct = Math.min(100, Math.round((m.current/m.max)*100));
+      const div = document.createElement('div');
+      div.className = 'bar-row';
+      div.innerHTML = `
+        <div class="bar-label">
+          <span class="lbl">${m.label}</span>
+          <span class="v">${m.current} / ${m.max} ${m.unit}</span>
+        </div>
+        <div class="track">
+          <div class="fill ${m.fillClass}" style="width:${pct}%"></div>
+          <div class="pct">${pct}%</div>
+        </div>
+      `;
+      mbEl.appendChild(div);
+    });
+
+    const tbody = document.getElementById('nutrition-body');
+    D.nutrition.log.forEach((day, i) => {
+      const tr = document.createElement('tr');
+      if(i === D.nutrition.log.length - 1) tr.className = 'today';
+      tr.innerHTML = `
+        <td><strong>${fmtDate(day.date)}</strong></td>
+        <td>${day.breakfast}</td>
+        <td>${day.lunch}</td>
+        <td>${day.dinner}</td>
+        <td>${day.snacks}</td>
+        <td>${day.calories}</td>
+        <td>${day.protein}g</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // ── Sleep ─────────────────────────────────────────────────────────
+  function renderSleep(){
+    const tbody = document.getElementById('sleep-body');
+    const total = D.sleep.reduce((s,n) => s + n.hours, 0);
+    const avg = (total / D.sleep.length).toFixed(2);
+    D.sleep.forEach((s, i) => {
+      const isLatest = i === D.sleep.length - 1;
+      const tr = document.createElement('tr');
+      if(isLatest) tr.className = 'today';
+      tr.innerHTML = `
+        <td><strong>${fmtDate(s.date)}</strong>${isLatest ? ' <span class="chip ok">Latest</span>' : ''}</td>
+        <td>${s.bedtime}</td>
+        <td>${s.wake}</td>
+        <td>${s.hours} hrs</td>
+        <td>${qualityDots(s.quality)}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+    const avgVal = parseFloat(avg);
+    document.getElementById('sleep-avg-val').textContent = avgVal.toFixed(1) + ' hrs';
+    document.getElementById('sleep-avg-chip').textContent = avgVal.toFixed(1) + ' hrs avg';
+    if(avgVal < 7){
+      document.getElementById('sleep-goal-status').textContent = 'Below Goal';
+      document.getElementById('sleep-goal-status').style.color = 'var(--red)';
+    } else {
+      document.getElementById('sleep-goal-status').textContent = 'On Track';
+      document.getElementById('sleep-goal-status').style.color = 'var(--green)';
+    }
+  }
+
+  // ── Mood ──────────────────────────────────────────────────────────
+  function renderMood(){
+    const row = document.getElementById('mood-row');
+    let total = 0;
+    D.mood.forEach(m => {
+      total += m.score;
+      const cls = m.score >= 7 ? 'good' : m.score >= 4 ? 'ok' : 'low';
+      const scoreColor = m.score >= 7 ? 'var(--green)' : m.score >= 4 ? 'var(--yellow)' : 'var(--red)';
+      const d = document.createElement('div');
+      d.className = `mood-day ${cls}`;
+      d.title = m.note;
+      const shortDate = fmtDate(m.date);
+      d.innerHTML = `
+        <div class="m-date">${shortDate}</div>
+        <div class="m-emoji">${m.emoji}</div>
+        <div class="m-score" style="color:${scoreColor}">${m.score}/10</div>
+        <div class="m-note">${m.note}</div>
+      `;
+      row.appendChild(d);
+    });
+    const avg = (total / D.mood.length).toFixed(1);
+    document.getElementById('mood-avg-val').textContent = avg;
+    document.getElementById('mood-avg-chip').textContent = 'Avg ' + avg;
+  }
+
+  // ── Appointments ──────────────────────────────────────────────────
+  function renderAppointments(){
+    const upcoming = D.appointments.filter(a => !a.past).sort((a,b) => a.date.localeCompare(b.date));
+    const past = D.appointments.filter(a => a.past);
+    const tbody = document.getElementById('appts-body');
+    upcoming.forEach(a => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><strong>${fmtDate(a.date)}</strong></td>
+        <td>${a.provider}</td>
+        <td>${a.type}</td>
+        <td style="color:var(--dim)">${a.location}</td>
+        <td style="color:var(--dim)">${a.notes}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+    document.getElementById('appts-count-chip').textContent = upcoming.length + ' upcoming';
+    const pastTbody = document.getElementById('past-appts-body');
+    past.forEach(a => {
+      const tr = document.createElement('tr');
+      tr.className = 'past';
+      tr.innerHTML = `
+        <td>${fmtDate(a.date)}</td>
+        <td>${a.provider}</td>
+        <td>${a.type}</td>
+        <td>${a.notes}</td>
+      `;
+      pastTbody.appendChild(tr);
+    });
+    // KPI: next appointment
+    if(upcoming.length){
+      document.getElementById('kpi-appt').textContent = fmtDate(upcoming[0].date);
+    }
+  }
+
+  // ── Goals ─────────────────────────────────────────────────────────
+  function renderGoals(){
+    const grid = document.getElementById('goals-grid');
+    const buckets = [
+      { key: 'this_month', label: 'This Month', fillClass: 'mint' },
+      { key: 'this_quarter', label: 'This Quarter', fillClass: '' },
+      { key: 'long_term', label: 'Long Term', fillClass: 'violet' }
+    ];
+    buckets.forEach(b => {
+      const group = document.createElement('div');
+      group.className = 'goal-group';
+      group.innerHTML = `<h3>${b.label}</h3>`;
+      D.goals[b.key].forEach(g => {
+        const item = document.createElement('div');
+        item.className = 'goal-item';
+        item.innerHTML = `
+          <div class="g-name">${g.title}</div>
+          <div class="goal-mini-track">
+            <div class="goal-mini-fill ${b.fillClass}" style="width:${g.progress}%"></div>
+          </div>
+          <div class="goal-pct">${g.progress}%</div>
+        `;
+        group.appendChild(item);
+      });
+      grid.appendChild(group);
+    });
+  }
+
+  // ── Init ──────────────────────────────────────────────────────────
+  function init(){
+    renderKPIs();
+    renderChecklist();
+    renderVitals();
+    renderMeds();
+    renderFitness();
+    renderNutrition();
+    renderSleep();
+    renderMood();
+    renderAppointments();
+    renderGoals();
+    restoreCards();
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
