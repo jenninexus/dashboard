@@ -1,6 +1,6 @@
 {
   "name": "dashboard-profiles",
-  "description": "Full-page screenshot sweep for all dashboard profiles. Run via scripts/capture.ps1 or: npx tsx C:/Github/vid-scroll/src/cli.ts --breakpoints configs/breakpoints.json --local --output docs/screenshots",
+  "description": "Full-page screenshot sweep for all dashboard profiles. Run via scripts/capture.ps1 or: npx tsx C:/Github/vid-scroll/src/cli.ts --breakpoints configs/breakpoints.json --local --output storage/screenshots",
   "breakpoints": [
     { "name": "390-mobile", "width": 390,  "height": 844,  "mobile": true,  "label": "Mobile (390px)" },
     { "name": "768-tablet", "width": 768,  "height": 1024, "mobile": false, "label": "Tablet (768px)" },
