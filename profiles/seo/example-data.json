@@ -3,12 +3,12 @@
   "_instructions": "Update all fields below. Dates use YYYY-MM-DD. Numbers are raw integers.",
 
   "site": {
-    "name": "Acme Creative Studio",
-    "domain": "acme-creative.example.com",
-    "url": "https://acme-creative.example.com",
+    "name": "Stellar Digital",
+    "domain": "stellar-digital.co",
+    "url": "https://stellar-digital.co",
     "description": "Portfolio and blog for a freelance design studio",
-    "dataAsOf": "2026-05-23",
-    "dashboardUpdated": "2026-05-23"
+    "dataAsOf": "2026-06-20",
+    "dashboardUpdated": "2026-06-20"
   },
 
   "ga4": {
@@ -31,7 +31,7 @@
   },
 
   "searchConsole": {
-    "property": "https://acme-creative.example.com/",
+    "property": "https://stellar-digital.co/",
     "last90Days": {
       "totalClicks": 920,
       "totalImpressions": 18400,
@@ -40,7 +40,7 @@
     },
     "indexedPages": 18,
     "notIndexed": 47,
-    "topQuery": "acme creative studio",
+    "topQuery": "stellar digital studio",
     "topQueryPosition": 2.4
   },
 
@@ -132,7 +132,7 @@
     { "date": "Apr 2025", "title": "Blog Launched", "body": "First 6 posts published — organic impressions doubled in 60 days" },
     { "date": "Nov 2025", "title": "Site Redesign", "body": "New portfolio layout — bounce rate dropped 12pp, avg session +40s" },
     { "date": "Feb 2026", "title": "Schema Markup", "body": "JSON-LD added to all pages — rich results appearing in 3 weeks" },
-    { "date": "May 2026", "title": "Current Results", "body": "#2 Google rank for brand term · 18 pages indexed · 3,100+ impressions/mo" }
+    { "date": "Jun 2026", "title": "Current Results", "body": "#2 Google rank for brand term · 18 pages indexed · 3,100+ impressions/mo" }
   ],
 
   "cloudflare": {

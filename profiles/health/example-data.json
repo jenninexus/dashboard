@@ -1,0 +1,230 @@
+{
+  "profile": {
+    "name": "Jordan Lee",
+    "age": 32,
+    "dob": "1992-03-14",
+    "location": "Portland, OR",
+    "last_updated": "2026-06-20"
+  },
+  "vitals": [
+    { "date": "2026-06-14", "bp_systolic": 118, "bp_diastolic": 76, "heart_rate": 68, "weight_lbs": 162.4, "notes": "Felt rested" },
+    { "date": "2026-06-15", "bp_systolic": 122, "bp_diastolic": 78, "heart_rate": 72, "weight_lbs": 162.8, "notes": "After coffee" },
+    { "date": "2026-06-16", "bp_systolic": 116, "bp_diastolic": 74, "heart_rate": 65, "weight_lbs": 161.9, "notes": "Morning walk" },
+    { "date": "2026-06-17", "bp_systolic": 120, "bp_diastolic": 77, "heart_rate": 70, "weight_lbs": 162.1, "notes": "" },
+    { "date": "2026-06-18", "bp_systolic": 124, "bp_diastolic": 80, "heart_rate": 74, "weight_lbs": 163.0, "notes": "Stressful meeting" },
+    { "date": "2026-06-19", "bp_systolic": 117, "bp_diastolic": 75, "heart_rate": 66, "weight_lbs": 162.2, "notes": "Post yoga" },
+    { "date": "2026-06-20", "bp_systolic": 119, "bp_diastolic": 76, "heart_rate": 67, "weight_lbs": 161.8, "notes": "Today" }
+  ],
+  "medications": [
+    {
+      "name": "Vitamin D3",
+      "dose": "2000 IU",
+      "frequency": "Daily",
+      "time": "Morning",
+      "pharmacy": "CVS Pharmacy",
+      "refill_status": "ok",
+      "notes": "With breakfast"
+    },
+    {
+      "name": "Omega-3 Fish Oil",
+      "dose": "1000 mg",
+      "frequency": "Daily",
+      "time": "Morning",
+      "pharmacy": "Amazon",
+      "refill_status": "ok",
+      "notes": "Cardiovascular support"
+    },
+    {
+      "name": "Magnesium Glycinate",
+      "dose": "400 mg",
+      "frequency": "Daily",
+      "time": "Evening",
+      "pharmacy": "Whole Foods",
+      "refill_status": "refill_soon",
+      "notes": "Sleep support, ~12 days left"
+    },
+    {
+      "name": "Loratadine (Claritin)",
+      "dose": "10 mg",
+      "frequency": "Daily (seasonal)",
+      "time": "Morning",
+      "pharmacy": "Walgreens",
+      "refill_status": "ok",
+      "notes": "Seasonal allergies, May–Sep"
+    },
+    {
+      "name": "Sertraline",
+      "dose": "50 mg",
+      "frequency": "Daily",
+      "time": "Morning",
+      "pharmacy": "CVS Pharmacy",
+      "refill_status": "ok",
+      "notes": "Dr. Patel — anxiety management"
+    },
+    {
+      "name": "Multivitamin",
+      "dose": "1 tablet",
+      "frequency": "Daily",
+      "time": "Morning",
+      "pharmacy": "Costco",
+      "refill_status": "overdue",
+      "notes": "Need to reorder — ran out 3 days ago"
+    },
+    {
+      "name": "Melatonin",
+      "dose": "0.5 mg",
+      "frequency": "As needed",
+      "time": "30 min before bed",
+      "pharmacy": "Amazon",
+      "refill_status": "ok",
+      "notes": "Low-dose for circadian reset when traveling"
+    }
+  ],
+  "fitness": [
+    { "date": "2026-06-14", "day": "Sat", "activity": "Running", "duration_min": 35, "type": "cardio" },
+    { "date": "2026-06-15", "day": "Sun", "activity": "Rest", "duration_min": 0, "type": "rest" },
+    { "date": "2026-06-16", "day": "Mon", "activity": "Weight Training", "duration_min": 50, "type": "strength" },
+    { "date": "2026-06-17", "day": "Tue", "activity": "Yoga", "duration_min": 40, "type": "stretch" },
+    { "date": "2026-06-18", "day": "Wed", "activity": "Cycling", "duration_min": 45, "type": "cardio" },
+    { "date": "2026-06-19", "day": "Thu", "activity": "Weight Training", "duration_min": 55, "type": "strength" },
+    { "date": "2026-06-20", "day": "Fri", "activity": "Walk / Light Cardio", "duration_min": 30, "type": "cardio" }
+  ],
+  "nutrition": {
+    "goal_calories": 2000,
+    "goal_protein_g": 120,
+    "goal_water_cups": 8,
+    "today": {
+      "calories": 1680,
+      "protein": 94,
+      "water": 6
+    },
+    "log": [
+      {
+        "date": "2026-06-18",
+        "breakfast": "Greek yogurt, berries, granola",
+        "lunch": "Grilled chicken salad, quinoa",
+        "dinner": "Salmon, roasted sweet potato, broccoli",
+        "snacks": "Apple, handful of almonds",
+        "calories": 1920,
+        "protein": 112,
+        "water": 7
+      },
+      {
+        "date": "2026-06-19",
+        "breakfast": "Avocado toast, 2 eggs",
+        "lunch": "Turkey wrap, side salad",
+        "dinner": "Lentil soup, whole grain bread",
+        "snacks": "Banana, protein bar",
+        "calories": 1840,
+        "protein": 108,
+        "water": 8
+      },
+      {
+        "date": "2026-06-20",
+        "breakfast": "Oatmeal with chia seeds, blueberries",
+        "lunch": "Grain bowl with chickpeas, tahini",
+        "dinner": "Planned: Stir-fry tofu + veggies",
+        "snacks": "Orange, trail mix",
+        "calories": 1680,
+        "protein": 94,
+        "water": 6
+      }
+    ]
+  },
+  "sleep": [
+    { "date": "2026-06-14", "bedtime": "22:45", "wake": "06:30", "hours": 7.75, "quality": 4 },
+    { "date": "2026-06-15", "bedtime": "23:30", "wake": "07:15", "hours": 7.75, "quality": 5 },
+    { "date": "2026-06-16", "bedtime": "22:00", "wake": "05:45", "hours": 7.75, "quality": 3 },
+    { "date": "2026-06-17", "bedtime": "23:00", "wake": "06:45", "hours": 7.75, "quality": 4 },
+    { "date": "2026-06-18", "bedtime": "00:15", "wake": "07:00", "hours": 6.75, "quality": 2 },
+    { "date": "2026-06-19", "bedtime": "22:30", "wake": "06:15", "hours": 7.75, "quality": 5 },
+    { "date": "2026-06-20", "bedtime": "23:00", "wake": "06:45", "hours": 7.75, "quality": 4 }
+  ],
+  "mood": [
+    { "date": "2026-06-14", "score": 7, "emoji": "😊", "note": "Good energy, productive day" },
+    { "date": "2026-06-15", "score": 8, "emoji": "😄", "note": "Relaxed Sunday, spent time outside" },
+    { "date": "2026-06-16", "score": 6, "emoji": "😐", "note": "Monday fatigue, picked up after lunch" },
+    { "date": "2026-06-17", "score": 7, "emoji": "😊", "note": "Yoga helped, steady day" },
+    { "date": "2026-06-18", "score": 4, "emoji": "😓", "note": "Stressful work deadline, poor sleep" },
+    { "date": "2026-06-19", "score": 8, "emoji": "😄", "note": "Deadline done, huge relief" },
+    { "date": "2026-06-20", "score": 7, "emoji": "😊", "note": "Calm Friday, looking forward to weekend" }
+  ],
+  "appointments": [
+    {
+      "date": "2026-06-25",
+      "provider": "Dr. Sarah Patel, MD",
+      "type": "Primary Care — Annual Check-up",
+      "location": "Providence Medical Center, Portland",
+      "notes": "Bring updated med list, fasting bloodwork",
+      "past": false
+    },
+    {
+      "date": "2026-07-08",
+      "provider": "Dr. Marcus Webb, DDS",
+      "type": "Dental Cleaning",
+      "location": "Pearl District Dental",
+      "notes": "6-month cleaning and X-ray",
+      "past": false
+    },
+    {
+      "date": "2026-07-15",
+      "provider": "Dr. Aisha Ramos, PsyD",
+      "type": "Therapy Session",
+      "location": "Telehealth (Zoom)",
+      "notes": "Monthly check-in — anxiety + stress management",
+      "past": false
+    },
+    {
+      "date": "2026-08-02",
+      "provider": "Dr. Tom Nguyen, DO",
+      "type": "Sports Medicine Follow-up",
+      "location": "OHSU Sports Medicine Clinic",
+      "notes": "Left knee — cleared for running last visit",
+      "past": false
+    },
+    {
+      "date": "2026-05-20",
+      "provider": "Dr. Sarah Patel, MD",
+      "type": "Medication Review",
+      "location": "Providence Medical Center, Portland",
+      "notes": "Sertraline dosage confirmed at 50mg",
+      "past": true
+    }
+  ],
+  "goals": {
+    "this_month": [
+      { "title": "Run 30+ min 3x per week", "progress": 70, "unit": "%" },
+      { "title": "Average 7.5 hrs sleep per night", "progress": 80, "unit": "%" },
+      { "title": "Drink 8 cups water daily", "progress": 60, "unit": "%" },
+      { "title": "No alcohol for 30 days", "progress": 65, "unit": "%" }
+    ],
+    "this_quarter": [
+      { "title": "Lose 5 lbs (target: 158 lbs)", "progress": 45, "unit": "%" },
+      { "title": "Complete 12-week strength program", "progress": 58, "unit": "%" },
+      { "title": "Meditate 10 min daily", "progress": 40, "unit": "%" },
+      { "title": "Cook at home 5 nights/week", "progress": 72, "unit": "%" }
+    ],
+    "long_term": [
+      { "title": "Establish consistent sleep schedule", "progress": 65, "unit": "%" },
+      { "title": "Run a 5K under 25 minutes", "progress": 50, "unit": "%" },
+      { "title": "Reduce anxiety symptoms (GAD-7 < 5)", "progress": 55, "unit": "%" },
+      { "title": "Build sustainable meal-prep habit", "progress": 35, "unit": "%" }
+    ]
+  },
+  "checklist": {
+    "morning": [
+      "Take morning medications",
+      "Drink 2 glasses of water",
+      "5 min journal / intentions",
+      "Take vitamins & supplements",
+      "Light stretch or mobility work"
+    ],
+    "evening": [
+      "Take evening medications",
+      "Log today's mood score",
+      "Prep tomorrow's meals / check plan",
+      "Wind down screen time by 10pm",
+      "Aim for 7+ hrs sleep tonight"
+    ]
+  }
+}

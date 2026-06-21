@@ -1,0 +1,51 @@
+/* ============================================================
+   Emerald Finance — dashboard theme.
+   "Old money meets cyberpunk" — deep charcoal, rich emerald
+   primary, warm gold accent, luminous teal secondary.
+   Sophisticated and measured; not neon, not acid.
+   Copy this token block into any dashboard page, or link over HTTP.
+   ============================================================ */
+:root {
+  --bg:        #050908;
+  --bg2:       #0c110d;
+  --surface:   rgba(16,185,129,0.05);
+  --surface2:  rgba(16,185,129,0.09);
+  --border:    rgba(16,185,129,0.13);
+  --border2:   rgba(16,185,129,0.28);
+  --text:      #e8f4ef;
+  --dim:       #7aab94;
+  --dim2:      #3a6352;
+  --bright:    #f0fdf8;
+
+  --primary:     #10b981;
+  --primary-rgb: 16,185,129;
+  --secondary:   #f59e0b;
+  --accent:      #6366f1;
+  --blue:        #60a5fa;
+  --teal:        #2dd4bf;
+  --indigo:      #6366f1;
+  --red:         #f43f5e;
+  --yellow:      #f59e0b;
+  --green:       #10b981;
+  --glow:        rgba(16,185,129,0.14);
+
+  --card-radius: 14px;
+  --blur:        20px;
+  --mono:        'JetBrains Mono','Cascadia Code',monospace;
+  --sans:        'Outfit','Segoe UI',system-ui,sans-serif;
+  --heading:     'Outfit','Segoe UI',system-ui,-apple-system,sans-serif;
+}
+
+[data-theme="light"] {
+  --bg:        #f4f9f7;
+  --bg2:       #eaf2ee;
+  --surface:   rgba(255,255,255,0.88);
+  --surface2:  rgba(255,255,255,0.97);
+  --border:    rgba(0,80,50,0.10);
+  --border2:   rgba(0,80,50,0.18);
+  --text:      #0d2419;
+  --dim:       #3d7a60;
+  --dim2:      #92b8a5;
+  --bright:    #081812;
+  --glow:      rgba(16,185,129,0.09);
+}

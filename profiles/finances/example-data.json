@@ -1,57 +1,51 @@
 {
-  "profile": {
-    "name": "My Finances",
-    "asOf": "2026-06-14",
-    "_comment": "Personal finances profile — sample data. Replace with your own. All amounts are numbers (no $ or commas)."
-  },
-  "holdings": {
-    "_comment": "accounts[] = cash on hand per account. compare[] = obligations to measure cash against; set urgent:true for the eviction-risk / must-pay-now one (renders red).",
-    "accounts": [
-      { "name": "Checking", "amount": 1850 },
-      { "name": "Savings", "amount": 600 },
-      { "name": "Cash app", "amount": 120 },
-      { "name": "Wallet", "amount": 80 }
-    ],
-    "compare": [
-      { "label": "Rent — this month", "amount": 1600, "urgent": true },
-      { "label": "Rent + utilities total", "amount": 2950 }
-    ],
-    "note": "🔴 The urgent bar (red) is what protects the essentials — pay that first. Set <code>urgent:true</code> on it in data.json."
-  },
+  "profile": { "name": "Alex Rivera", "title": "Freelance Designer", "city": "Austin, TX", "last_updated": "2026-06-20" },
+  "stats": { "net_worth": 14685, "monthly_income": 6000, "monthly_expenses": 3850, "savings_rate": 0.36, "bills_this_month": 2890 },
+  "priority_alerts": [
+    { "label": "Rent", "amount": 1400, "due_date": "2026-06-25", "days_until": 5, "category": "bills", "priority": "warn" },
+    { "label": "Car Insurance Autopay", "amount": 127, "due_date": "2026-07-01", "days_until": 11, "category": "bills", "priority": "ok", "autopay": true, "autopay_card": "Visa ••4821" },
+    { "label": "Q2 Estimated Tax", "amount": 580, "due_date": "2026-06-15", "days_until": -5, "category": "taxes", "priority": "urgent" }
+  ],
+  "holdings": [
+    { "name": "Chase Checking", "amount": 2840, "type": "checking" },
+    { "name": "HYSA Savings", "amount": 8200, "type": "savings" },
+    { "name": "Emergency Fund", "amount": 3500, "type": "savings" },
+    { "name": "Cash App", "amount": 145, "type": "cash" }
+  ],
   "bills": [
-    { "name": "Rent", "amount": 1600, "due": "1st", "status": "Due" },
-    { "name": "Electric", "amount": 95, "due": "12th", "status": "OK" },
-    { "name": "Internet", "amount": 70, "due": "15th", "status": "OK" },
-    { "name": "Phone", "amount": 45, "due": "20th", "status": "Paid" },
-    { "name": "Car insurance", "amount": 150, "due": "19th", "status": "Due" }
+    { "name": "Rent", "amount": 1400, "due_day": 25, "status": "due", "category": "housing" },
+    { "name": "Electricity", "amount": 82, "due_day": 10, "status": "paid", "category": "utilities" },
+    { "name": "Internet", "amount": 65, "due_day": 15, "status": "paid", "category": "utilities" },
+    { "name": "Car Insurance", "amount": 127, "due_day": 1, "status": "autopay", "autopay_card": "Visa ••4821", "category": "auto" },
+    { "name": "Phone", "amount": 45, "due_day": 20, "status": "autopay", "autopay_card": "Visa ••4821", "category": "utilities" },
+    { "name": "Adobe Creative Cloud", "amount": 55, "due_day": 12, "status": "paid", "category": "software" },
+    { "name": "Netflix", "amount": 18, "due_day": 8, "status": "paid", "category": "subscriptions" },
+    { "name": "Gym", "amount": 35, "due_day": 1, "status": "autopay", "autopay_card": "Visa ••4821", "category": "health" }
   ],
   "loans": [
-    {
-      "name": "Friend — Alex",
-      "kind": "personal",
-      "stillOwed": 300,
-      "target": "~Jun 27",
-      "note": "Helped with a vet bill. Flexible — pay back when able."
-    },
-    {
-      "name": "Sibling — Sam",
-      "kind": "personal",
-      "stillOwed": 500,
-      "target": "~Jul 7",
-      "note": "Short-term, no interest."
-    },
-    {
-      "name": "Angel investor",
-      "kind": "investment",
-      "stillOwed": 6000,
-      "target": "2027-05-12",
-      "excludeFromTotal": true,
-      "note": "Loan structured as an investment — part of payback is a revenue %. Counted separately from near-term personal debt so the 'still owed' total isn't inflated."
-    }
+    { "name": "Student Loan (MOHELA)", "principal": 18500, "paid_to_date": 4200, "remaining": 14300, "monthly_payment": 198, "interest_rate": 4.5, "target_payoff": "2031-01", "notes": "IBR plan — income-based repayment" },
+    { "name": "Car Loan (Chase)", "principal": 12000, "paid_to_date": 5800, "remaining": 6200, "monthly_payment": 312, "interest_rate": 6.9, "target_payoff": "2027-09", "notes": "2022 Honda Civic" },
+    { "name": "Personal (Sam)", "principal": 800, "paid_to_date": 400, "remaining": 400, "monthly_payment": 100, "interest_rate": 0, "target_payoff": "2026-10", "notes": "Borrowed for laptop — $100/mo informal" }
   ],
   "income": [
-    { "source": "Day job", "ytd": 18500, "status": "active" },
-    { "source": "Freelance", "ytd": 3200, "status": "active" },
-    { "source": "Creator / Patreon", "ytd": 180, "status": "active" }
-  ]
+    { "source": "Design Studio (W2)", "type": "W2", "monthly_est": 4200, "ytd": 25200, "status": "active" },
+    { "source": "Freelance (1099)", "type": "1099", "monthly_est": 800, "ytd": 3200, "status": "active", "notes": "Variable — set aside 25% for taxes" },
+    { "source": "Patreon", "type": "passive", "monthly_est": 45, "ytd": 270, "status": "active" }
+  ],
+  "action_plan": {
+    "pay_this_week": [
+      { "text": "Pay rent — $1,400 due Jun 25", "done": false },
+      { "text": "Check Chase balance before car insurance autopay Jul 1", "done": false }
+    ],
+    "this_month": [
+      { "text": "File Q2 estimated tax payment — $580 OVERDUE", "done": false },
+      { "text": "Invoice client #3 for June work", "done": false },
+      { "text": "Transfer $500 to emergency fund", "done": false }
+    ],
+    "financial_goals": [
+      { "text": "Emergency fund → $5,000 target", "done": false },
+      { "text": "Pay off Sam loan by Oct 2026", "done": false },
+      { "text": "Start Roth IRA contributions (even $50/mo)", "done": false }
+    ]
+  }
 }
