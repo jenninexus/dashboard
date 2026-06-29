@@ -28,7 +28,13 @@ Then open `my-dashboard/dashboard.html` and refresh after edits.
 
 Open the root `dashboard.html` first if you want to see the most polished visual example. It is the SEO showcase and should keep the current graph-heavy look.
 
-Open `profiles/finances/dashboard.html` if you want to inspect the finance-specific layout before scaffolding. It has its own render because money data is shaped differently than SEO data.
+Open `profiles/finances/finances.html` if you want to inspect the finance-specific layout before scaffolding. Each profile directory contains a `{profile-id}.html` example dashboard (not `dashboard.html`):
+
+| Profile | Example HTML | Config |
+|---------|-------------|--------|
+| SEO | `profiles/seo/seo.html` | `profiles/seo/profile.json` |
+| Finances | `profiles/finances/finances.html` | `profiles/finances/profile.json` |
+| Health | `profiles/health/health.html` | `profiles/health/profile.json` |
 
 ## Commands
 
