@@ -1,0 +1,22 @@
+{
+  "name": "dashboard-hero-16x9",
+  "description": "16:9 desktop hero shots for the README — one per profile, full-page screenshots.",
+  "breakpoints": [
+    { "name": "hero-desktop", "width": 1920, "height": 1080, "mobile": false, "label": "Hero (1920x1080)" }
+  ],
+  "pages": [
+    { "path": "profiles/seo/seo.html",           "slug": "seo" },
+    { "path": "profiles/finances/finances.html",  "slug": "finances" },
+    { "path": "profiles/health/health.html",      "slug": "health" }
+  ],
+  "defaults": {
+    "localUrl":     "file:///C:/Github/dashboard/",
+    "outputFormat": "png",
+    "fullPage":     true,
+    "collapseVariants": false
+  },
+  "notes": {
+    "purpose": "Public README hero gallery. Run with --local from any machine with this repo cloned.",
+    "invocation": "npx tsx C:/Github/vid-scroll/src/cli.ts --breakpoints configs/hero-screenshots.json --local --output docs/screenshots/hero"
+  }
+}

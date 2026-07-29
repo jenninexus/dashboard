@@ -4,13 +4,16 @@ storage/
 # Secrets & local config — copy the .example files and fill in
 .env
 .env.local
-.mcp.json
 *.code-workspace
 !*.code-workspace.example
 
 # Per-user generated output (your dashboard lives here)
 my-dashboard/
 _scratch/
+
+# Local agent scratch (Codex / Claude Code state)
+.codex/
+.claude/
 
 *.log
 .DS_Store

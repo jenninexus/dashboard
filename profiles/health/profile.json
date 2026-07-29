@@ -1,7 +1,7 @@
 {
   "id": "health",
   "name": "Health & Wellness",
-  "status": "planned",
+  "status": "ready",
   "description": "Track whatever you choose — weight, sleep, steps, labs, meds, appointments, habit streaks. Fully customizable metrics.",
   "theme": "plasma-green",
   "render": "dashboard.html",
