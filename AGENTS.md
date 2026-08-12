@@ -65,9 +65,12 @@ of your own, do it in your fork; don't commit it back here.
 
 ## Private vs public
 
+⭐ Full map: [`docs/PUBLIC-LOCAL-SPLIT.md`](docs/PUBLIC-LOCAL-SPLIT.md)
+
 Designed for public release:
 - No secrets in tracked files — all in `.env` (gitignored). `.env.example` has placeholders for optional API keys (SEO profile is hand-fed JSON by default).
 - No hardcoded personal data in the seed — example profiles use fictional sample data (Stellar Digital, Alex Rivera, Jordan Lee).
 - Per-user output (`my-dashboard/`) is gitignored.
+- Brand tokens for production dashes may come from private **`www-theme-kit`** — copy into `themes/`; do not treat the kit as a public dependency of this seed.
 
 Clone → `npm run build-dashboard -- --profile seo --name "You"` → edit `data.json` → done.
