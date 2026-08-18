@@ -1,36 +1,36 @@
 /* ============================================================
    Dusk Companion — dashboard theme.
-   Warm charcoal evening palette for senior pet care.
-   Amber primary, soft teal secondary, rose for alerts only.
-   Cozy and legible — not clinical lavender or finance emerald.
+   Pink dusk palette for senior pet care.
+   Rose primary, sunset coral secondary, magenta glow.
+   Plum-black surfaces — not brown charcoal, not clinical lavender.
    ============================================================ */
 
 :root {
-  --bg:        #0c0908;
-  --bg2:       #14100e;
-  --surface:   rgba(245,185,66,0.04);
-  --surface2:  rgba(245,185,66,0.08);
-  --border:    rgba(245,185,66,0.11);
-  --border2:   rgba(245,185,66,0.24);
-  --text:      #e8ddd4;
-  --dim:       #9a8578;
-  --dim2:      #5c4f47;
-  --bright:    #faf5ef;
+  --bg:        #120814;
+  --bg2:       #1c101c;
+  --surface:   rgba(244,114,182,0.05);
+  --surface2:  rgba(244,114,182,0.10);
+  --border:    rgba(244,114,182,0.14);
+  --border2:   rgba(244,114,182,0.30);
+  --text:      #f5e6f0;
+  --dim:       #c4a0b4;
+  --dim2:      #7a5570;
+  --bright:    #fff7fb;
 
-  --primary:     #f5b942;
-  --primary-rgb: 245,185,66;
-  --secondary:   #2dd4bf;
-  --accent:      #2dd4bf;
-  --blue:        #f5b942;
-  --teal:        #2dd4bf;
-  --indigo:      #d4a574;
-  --red:         #f87171;
-  --yellow:      #f5b942;
+  --primary:     #f472b6;
+  --primary-rgb: 244,114,182;
+  --secondary:   #fb923c;
+  --accent:      #e879f9;
+  --blue:        #f472b6;
+  --teal:        #f9a8d4;
+  --indigo:      #c084fc;
+  --red:         #fb7185;
+  --yellow:      #fbbf24;
   --green:       #2dd4bf;
-  --glow:        rgba(245,185,66,0.12);
+  --glow:        rgba(244,114,182,0.16);
 
-  --dash-accent:   #f5b942;
-  --dash-accent-2: #2dd4bf;
+  --dash-accent:   #f472b6;
+  --dash-accent-2: #fb923c;
 
   --card-radius: 14px;
   --blur:        20px;
@@ -40,15 +40,15 @@
 }
 
 [data-theme="light"] {
-  --bg:        #f7f2ec;
-  --bg2:       #ede4da;
-  --surface:   rgba(255,255,255,0.87);
+  --bg:        #fdf2f8;
+  --bg2:       #fce7f3;
+  --surface:   rgba(255,255,255,0.88);
   --surface2:  rgba(255,255,255,0.97);
-  --border:    rgba(80,55,30,0.09);
-  --border2:   rgba(80,55,30,0.17);
-  --text:      #2a1f18;
-  --dim:       #7a6558;
-  --dim2:      #b8a89c;
-  --bright:    #1a120c;
-  --glow:      rgba(245,185,66,0.09);
+  --border:    rgba(190,24,93,0.10);
+  --border2:   rgba(190,24,93,0.20);
+  --text:      #4a1840;
+  --dim:       #9d5b88;
+  --dim2:      #d8a8c4;
+  --bright:    #2d0a24;
+  --glow:      rgba(244,114,182,0.10);
 }
