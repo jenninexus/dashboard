@@ -17,7 +17,7 @@ Each one is fully built. Open the example HTML or scaffold a copy.
 ## 3-step setup
 
 1. **Open the profile** — `profiles/{id}/{id}.html` directly in your browser.
-2. **Or scaffold your own** — `npm run build-dashboard -- --profile <id> --name "Your Name"`. This creates `my-dashboard/` with `dashboard.html`, `themes/`, and a stamped `data.json`.
+2. **Or scaffold your own** — `npm run build-dashboard -- --profile <id> --name "Your Name"`. This creates `my-dashboard/` with `dashboard.html`, `themes/`, a stamped `data.json`, and any in-repo banner images (pets: `docs/images/pets/`).
 3. **Replace example data** — open `my-dashboard/data.json` and fill in your real numbers.
 
 No server. No build step for viewing.

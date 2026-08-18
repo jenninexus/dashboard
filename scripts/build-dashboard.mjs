@@ -13,7 +13,10 @@
  *   3. Copies the profile's example-data.json → my-dashboard/data.json, stamping
  *      site name / domain / dataAsOf where present.
  *   4. Copies the profile HTML (profiles/{id}/{id}.html) + themes/ into my-dashboard/.
- *   5. Prints next steps.
+ *   5. If the HTML references ../../docs/images/<folder>/ and that folder exists
+ *      in the repo, copies it to my-dashboard/docs/images/<folder>/ and rewrites
+ *      those srcs to docs/images/ (dashboard.html sits one level deep, not two).
+ *   6. Prints next steps.
  *
  * It never overwrites an existing --out dir unless --force is given.
  */
@@ -85,6 +88,20 @@ const sid = profile.dataInjection && profile.dataInjection.scriptId;
 if (sid) {
   const re = new RegExp(`(<script id="${sid}"[^>]*>)([\\s\\S]*?)(</script>)`);
   if (re.test(renderHtml)) renderHtml = renderHtml.replace(re, `$1\n${JSON.stringify(data, null, 2)}\n$3`);
+}
+// Profile HTML lives at profiles/{id}/{id}.html → ../../docs/images/...
+// Scaffolded dashboard.html lives one level deep → docs/images/...
+const bannerPrefix = '../../docs/images/';
+if (renderHtml.includes(bannerPrefix)) {
+  const copied = [];
+  for (const dir of new Set([...renderHtml.matchAll(/\.\.\/\.\.\/docs\/images\/([^/"'\s]+)\//g)].map(m => m[1]))) {
+    const src = join(ROOT, 'docs', 'images', dir);
+    if (!existsSync(src)) continue;
+    cpSync(src, join(outDir, 'docs', 'images', dir), { recursive: true });
+    copied.push(dir);
+  }
+  renderHtml = renderHtml.replaceAll(bannerPrefix, 'docs/images/');
+  if (copied.length) console.log(`  copied banner assets: docs/images/${copied.join(', docs/images/')}`);
 }
 writeFileSync(join(outDir, 'dashboard.html'), renderHtml);
 cpSync(join(ROOT, 'themes'), join(outDir, 'themes'), { recursive: true });
