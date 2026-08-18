@@ -20,9 +20,9 @@ drop in JSON, get a polished single-file dashboard in seconds — no server, no 
 
 | SEO | Finances | Health | Pets |
 |---|---|---|---|
-| ![SEO Dashboard](docs/screenshots/hero/1920/seo-1920.png) | ![Finance Dashboard](docs/screenshots/hero/1920/finances-1920.png) | ![Health Dashboard](docs/screenshots/hero/1920/health-1920.png) | Open `pets.html` |
+| ![SEO Dashboard](docs/screenshots/hero/1920/seo-1920.png) | ![Finance Dashboard](docs/screenshots/hero/1920/finances-1920.png) | ![Health Dashboard](docs/screenshots/hero/1920/health-1920.png) | ![Pets Dashboard](docs/screenshots/hero/1920/pets-1920.png) |
 | `profiles/seo/seo.html` | `profiles/finances/finances.html` | `profiles/health/health.html` | `profiles/pets/pets.html` |
-| Aurora · midnight blue | Emerald · gold | Vitality · teal · lavender | Dusk · amber · teal |
+| Aurora · midnight blue | Emerald · gold | Vitality · teal · lavender | Dusk · rose · sunset |
 
 Open any of these directly in your browser. They're self-contained — only Chart.js + Google Fonts load from the network.
 
@@ -69,7 +69,7 @@ Each profile is a self-contained dashboard for one domain. Open the example HTML
 | **SEO** — `profiles/seo/seo.html` | GA4 · Search Console · PageSpeed · Cloudflare | Aurora SEO (midnight blue / aurora) |
 | **Finances** — `profiles/finances/finances.html` | Cash vs obligations · bills · loans · income | Emerald Finance (emerald / gold) |
 | **Health** — `profiles/health/health.html` | Vitals · meds · labs · habits · sleep | Vitality Health (teal / lavender) |
-| **Pets** — `profiles/pets/pets.html` | Weight · QoL · fluids · red flags | Dusk Companion (amber / teal) |
+| **Pets** — `profiles/pets/pets.html` | Weight · QoL · fluids · red flags | Dusk Companion (rose / sunset coral) |
 
 Replace the example numbers in `data.json` with your own. The example data is fictional on purpose — easy to swap without leaking anything real.
 
@@ -94,7 +94,9 @@ Bundled palettes:
 - `aurora-seo.css` — used by the SEO profile
 - `emerald-finance.css` — used by the Finances profile
 - `vitality-health.css` — used by the Health profile
-- `dusk-companion.css` — used by the Pets profile
+- `dusk-companion.css` — used by the Pets profile (pink dusk, not brown/amber)
+
+Public teaching starter for making *your* kit: [jenninexus/theme-designer](https://github.com/jenninexus/theme-designer) (copy-on-update; do not `@import` a kit path).
 
 `plasma-green` is dashboard neon green (`#00e879`). It is **not** Synagraphic Plasma Drift (pink `#e050a0`).
 

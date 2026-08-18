@@ -3,7 +3,7 @@
 > A self-contained, themeable **dashboard seed kit**. Pick a **profile** (SEO, finances,
 > health, pets, or your own), drop in JSON, get a polished single-file dashboard. No build, no backend.
 > Works with any AI agent (Claude, Copilot, Cursor, Gemini) or a plain `npm` command.
-> *Last updated: 2026-08-17*
+> *Last updated: 2026-08-18*
 
 ## What this repo is
 
@@ -44,7 +44,7 @@ Per-profile palettes stay distinct. Shared chrome is collapse, radii, and breakp
 - `aurora-seo.css` — SEO
 - `emerald-finance.css` — Finances
 - `vitality-health.css` — Health
-- `dusk-companion.css` — Pets
+- `dusk-companion.css` — Pets (pink dusk / rose `#f472b6`, not brown/amber)
 - Alternates: `plasma-green.css`, `aurora-borealis.css`, `midnight-blue.css`
 
 **Name collision:** `plasma-green` (`#00e879`) ≠ Synagraphic **Plasma Drift** (`#e050a0`).

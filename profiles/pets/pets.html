@@ -11,27 +11,27 @@
 <style>
 /* ── Theme tokens: Dusk Companion ───────────────────────────────── */
 :root {
-  --bg:#0c0908; --bg2:#14100e;
-  --surface:rgba(245,185,66,0.04); --surface2:rgba(245,185,66,0.08);
-  --border:rgba(245,185,66,0.11); --border2:rgba(245,185,66,0.24);
-  --text:#e8ddd4; --dim:#9a8578; --dim2:#5c4f47; --bright:#faf5ef;
-  --primary:#f5b942; --primary-rgb:245,185,66;
-  --secondary:#2dd4bf; --accent:#2dd4bf;
-  --blue:#f5b942; --teal:#2dd4bf; --indigo:#d4a574;
-  --red:#f87171; --yellow:#f5b942; --green:#2dd4bf;
-  --glow:rgba(245,185,66,0.12);
-  --dash-accent:#f5b942; --dash-accent-2:#2dd4bf;
+  --bg:#120814; --bg2:#1c101c;
+  --surface:rgba(244,114,182,0.05); --surface2:rgba(244,114,182,0.10);
+  --border:rgba(244,114,182,0.14); --border2:rgba(244,114,182,0.30);
+  --text:#f5e6f0; --dim:#c4a0b4; --dim2:#7a5570; --bright:#fff7fb;
+  --primary:#f472b6; --primary-rgb:244,114,182;
+  --secondary:#fb923c; --accent:#e879f9;
+  --blue:#f472b6; --teal:#f9a8d4; --indigo:#c084fc;
+  --red:#fb7185; --yellow:#fbbf24; --green:#2dd4bf;
+  --glow:rgba(244,114,182,0.16);
+  --dash-accent:#f472b6; --dash-accent-2:#fb923c;
   --card-radius:14px; --blur:20px;
   --mono:'JetBrains Mono','Cascadia Code',monospace;
   --sans:'Outfit','Segoe UI',system-ui,sans-serif;
   --heading:'Outfit','Segoe UI',system-ui,-apple-system,sans-serif;
 }
 [data-theme="light"] {
-  --bg:#f7f2ec; --bg2:#ede4da;
-  --surface:rgba(255,255,255,0.87); --surface2:rgba(255,255,255,0.97);
-  --border:rgba(80,55,30,0.09); --border2:rgba(80,55,30,0.17);
-  --text:#2a1f18; --dim:#7a6558; --dim2:#b8a89c; --bright:#1a120c;
-  --glow:rgba(245,185,66,0.09);
+  --bg:#fdf2f8; --bg2:#fce7f3;
+  --surface:rgba(255,255,255,0.88); --surface2:rgba(255,255,255,0.97);
+  --border:rgba(190,24,93,0.10); --border2:rgba(190,24,93,0.20);
+  --text:#4a1840; --dim:#9d5b88; --dim2:#d8a8c4; --bright:#2d0a24;
+  --glow:rgba(244,114,182,0.10);
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -44,9 +44,9 @@ body{
 body::before{
   content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background:
-    radial-gradient(ellipse 70% 55% at 85% 5%, rgba(245,185,66,0.06), transparent 60%),
-    radial-gradient(ellipse 60% 50% at 15% 92%, rgba(45,212,191,0.05), transparent 60%),
-    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(212,165,116,0.03), transparent 70%);
+    radial-gradient(ellipse 70% 55% at 85% 5%, rgba(244,114,182,0.10), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 15% 92%, rgba(251,146,60,0.07), transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(232,121,249,0.05), transparent 70%);
 }
 .wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:2rem 1.6rem 4rem}
 a{color:var(--secondary);text-decoration:none}
@@ -74,39 +74,34 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 .anim:nth-child(10){animation-delay:.49s}
 .anim:nth-child(11){animation-delay:.54s}
 
-/* ── Banner (CSS gradient only) ─────────────────────────────────── */
+/* ── Banner ─────────────────────────────────────────────────────── */
 .banner{
   position:relative;width:100%;height:160px;border-radius:var(--card-radius);
   overflow:hidden;margin-bottom:1.4rem;border:1px solid var(--border);
-  background:
-    linear-gradient(135deg, #1a120c 0%, #2a1f14 35%, #1e1610 70%, #0c0908 100%),
-    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(245,185,66,0.18), transparent 55%),
-    radial-gradient(ellipse 60% 50% at 80% 60%, rgba(45,212,191,0.12), transparent 50%);
+  background:#1c101c;
 }
-.banner::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to bottom, transparent 40%, rgba(12,9,8,0.75) 100%);
+.banner img{width:100%;height:100%;object-fit:cover;object-position:center 42%;display:block}
+.banner::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(to right, rgba(18,8,20,0.55) 0%, transparent 28%, transparent 72%, rgba(18,8,20,0.45) 100%),
+    linear-gradient(to bottom, rgba(18,8,20,0.12) 0%, rgba(18,8,20,0.72) 100%);
 }
 .banner-label{
   position:absolute;bottom:1rem;left:1.2rem;z-index:2;
   font-family:var(--mono);font-size:.65rem;letter-spacing:.12em;
-  text-transform:uppercase;color:rgba(250,245,239,0.75);
+  text-transform:uppercase;color:rgba(255,247,251,0.78);
+  text-shadow:0 1px 6px rgba(18,8,20,.75);
 }
-.banner-label strong{display:block;font-size:.85rem;letter-spacing:.06em;color:#faf5ef}
-.banner-paw{
-  position:absolute;top:50%;right:8%;transform:translateY(-50%);
-  font-size:3.5rem;opacity:.12;z-index:1;
-}
+.banner-label strong{display:block;font-size:.85rem;letter-spacing:.06em;color:#fff7fb}
 
 .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}
 .head-left{display:flex;align-items:center;gap:.85rem}
 .avatar{
-  width:42px;height:42px;border-radius:8px;
-  background:linear-gradient(135deg,rgba(245,185,66,0.25),rgba(45,212,191,0.2));
-  border:2px solid var(--secondary);
-  box-shadow:0 0 0 4px rgba(245,185,66,0.12), 0 0 16px rgba(245,185,66,0.15);
-  flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  font-size:1.25rem;
+  width:42px;height:42px;border-radius:8px;object-fit:cover;
+  border:2px solid var(--primary);
+  box-shadow:0 0 0 4px rgba(244,114,182,0.16), 0 0 16px rgba(244,114,182,0.22);
+  flex-shrink:0;
 }
 .head h1{
   font-family:var(--heading);font-size:1.5rem;font-weight:800;
@@ -195,7 +190,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
   letter-spacing:.04em;padding:.12rem .45rem;border-radius:5px;
 }
 .chip.ok{background:rgba(45,212,191,.14);color:var(--green);border:1px solid rgba(45,212,191,.3)}
-.chip.warn{background:rgba(245,185,66,.12);color:var(--yellow);border:1px solid rgba(245,185,66,.28)}
+.chip.warn{background:rgba(251,191,36,.12);color:var(--yellow);border:1px solid rgba(251,191,36,.28)}
 .chip.over{background:rgba(248,113,113,.14);color:var(--red);border:1px solid rgba(248,113,113,.3)}
 .chip.pri{background:rgba(var(--primary-rgb),.12);color:var(--primary);border:1px solid var(--border2)}
 .chip.alert{background:rgba(248,113,113,.18);color:var(--red);border:1px solid rgba(248,113,113,.4)}
@@ -258,7 +253,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 .conditions-list li{margin-left:1rem;margin-bottom:.25rem}
 
 .note-box{
-  background:rgba(245,185,66,0.05);border:1px solid rgba(245,185,66,0.18);
+  background:rgba(244,114,182,0.07);border:1px solid rgba(244,114,182,0.20);
   border-radius:8px;padding:.65rem .8rem;font-size:.74rem;color:var(--text);line-height:1.55;
   margin-top:.6rem;
 }
@@ -289,7 +284,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 <div class="wrap">
 
   <div class="banner anim">
-    <span class="banner-paw" aria-hidden="true">🐾</span>
+    <img src="../../docs/images/pets/pink-cats-16x9.webp" alt="Miso and companion at pink dusk" onerror="this.style.display='none'">
     <div class="banner-label">
       <strong>MISO</strong>
       Senior Pet Care Dashboard
@@ -298,7 +293,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 
   <div class="head anim">
     <div class="head-left">
-      <div class="avatar" aria-hidden="true">🐱</div>
+      <img class="avatar" src="../../docs/images/pets/pink-cats-1x1.webp" alt="Miso avatar" onerror="this.style.background='var(--surface2)'">
       <div>
         <h1>Senior Pet Care</h1>
         <div class="meta" id="head-meta">—</div>
@@ -757,11 +752,11 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     const readings = D.weight.readings;
     const labels = readings.map(r => fmtDate(r.date));
     const data = readings.map(r => r.lbs);
-    const primary = cssVar('--primary') || '#f5b942';
-    const secondary = cssVar('--secondary') || '#2dd4bf';
-    const dim = cssVar('--dim') || '#9a8578';
-    const border = cssVar('--border') || 'rgba(245,185,66,0.11)';
-    const text = cssVar('--text') || '#e8ddd4';
+    const primary = cssVar('--primary') || '#f472b6';
+    const secondary = cssVar('--secondary') || '#fb923c';
+    const dim = cssVar('--dim') || '#c4a0b4';
+    const border = cssVar('--border') || 'rgba(244,114,182,0.14)';
+    const text = cssVar('--text') || '#f5e6f0';
 
     if(weightChart) weightChart.destroy();
     weightChart = new Chart(canvas, {
@@ -772,7 +767,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
           label: 'Weight (' + D.weight.unit + ')',
           data,
           borderColor: primary,
-          backgroundColor: primary.replace(')', ', 0.12)').replace('rgb', 'rgba').replace('#f5b942', 'rgba(245,185,66,0.12)'),
+          backgroundColor: 'rgba(244,114,182,0.12)',
           pointBackgroundColor: secondary,
           pointBorderColor: primary,
           pointRadius: 4,
@@ -786,7 +781,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
         plugins: {
           legend: { display: false },
           tooltip: {
-            backgroundColor: 'rgba(20,16,14,0.95)',
+            backgroundColor: 'rgba(18,8,20,0.95)',
             titleColor: text,
             bodyColor: text,
             borderColor: border,

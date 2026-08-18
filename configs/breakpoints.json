@@ -9,7 +9,8 @@
   "pages": [
     { "path": "profiles/seo/seo.html",           "slug": "seo" },
     { "path": "profiles/finances/finances.html",  "slug": "finances" },
-    { "path": "profiles/health/health.html",      "slug": "health" }
+    { "path": "profiles/health/health.html",      "slug": "health" },
+    { "path": "profiles/pets/pets.html",          "slug": "pets" }
   ],
   "defaults": {
     "localUrl":        "file:///<repo-root>/",

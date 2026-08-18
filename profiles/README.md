@@ -7,7 +7,7 @@ Each folder is one domain package: `profile.json` (manifest), `{id}.html` (the d
 | `seo` | aurora-seo | GA4 · Search Console · PageSpeed · Cloudflare |
 | `finances` | emerald-finance | Cash vs obligations · bills · loans · income |
 | `health` | vitality-health | Human wellness — vitals, meds, labs, habits, sleep |
-| `pets` | dusk-companion | Senior pet care — weight, QoL, fluids, red flags |
+| `pets` | dusk-companion | Senior pet care — weight, QoL, fluids, red flags (pink dusk) |
 
 ## File convention
 
