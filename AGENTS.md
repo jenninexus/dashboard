@@ -66,6 +66,7 @@ Tier-1 vendor colors (`themes/seo-tokens.css`) are canonical — don't change th
 - `profile.render` must exist on disk (`profiles/<id>/<id>.html`). Old manifests pointed at a missing root `dashboard.html` and the scaffolder died with ENOENT.
 - Always set `dataInjection.scriptId` to the inline script the HTML parses (`seo-data`, `fin-data`, `health-data`, `pets-data`).
 - After changing the HTML inline JSON, copy it to `example-data.json` so scaffold injection matches the renderer.
+- Profile HTML banner paths are repo-relative (`../../docs/images/...`). Scaffolded `my-dashboard/` copies the HTML only — banners 404 unless you also copy the image folder (pets: `docs/images/pets/`). SEO/finances/health hide via `onerror`; pets ships in-repo webp so clone-and-open works, scaffold-and-open still needs the copy.
 
 ## Optional MCP
 
