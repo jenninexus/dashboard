@@ -57,7 +57,7 @@ Continue the 2026-08-17 cross-repo run. Pets HTML is approved; restyle dusk-comp
 
 - Live droplet deploy of JN (sanctioned `/deploy jenni` after git push).
 - Scaffolder still leaves `../../docs/images/pets/` relative paths in `my-dashboard/` (same class of bug as missing agency banners).
-- Generated `~/.codex/skills/theme/SKILL.md` is write-protected; source `~/.claude/commands/syn/theme.md` is corrected — rerun sync-command-skills.
+- `/theme` source (`~/.claude/commands/syn/theme.md`) is corrected; generated Codex skill may still lag if write-protected. Confirm before treating the skill mirror as SSOT.
 - www-theme-kit sibling dirty `profiles/discord-bot.json` on `codex/social-notifier-release` — not staged.
 - syn-themes `.gitignore` / `.code-workspace` dirty — not staged.
 - Optional later from theme-designer ROADMAP: HTML previewer, copy-to-project.mjs, generate/validate script.
