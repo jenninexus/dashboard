@@ -12,7 +12,7 @@
  *   2. Creates ./my-dashboard/ (or --out <dir>).
  *   3. Copies the profile's example-data.json → my-dashboard/data.json, stamping
  *      site name / domain / dataAsOf where present.
- *   4. Copies dashboard.html + themes/ into my-dashboard/ so it's self-contained.
+ *   4. Copies the profile HTML (profiles/{id}/{id}.html) + themes/ into my-dashboard/.
  *   5. Prints next steps.
  *
  * It never overwrites an existing --out dir unless --force is given.

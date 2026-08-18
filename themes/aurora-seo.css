@@ -29,6 +29,9 @@
   --green:       #39e8a0;
   --glow:        rgba(77,159,255,0.14);
 
+  --dash-accent:   #4d9fff;
+  --dash-accent-2: #00f5d4;
+
   /* shared */
   --card-radius: 14px;
   --blur:        22px;

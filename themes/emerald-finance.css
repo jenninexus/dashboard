@@ -29,6 +29,9 @@
   --green:       #10b981;
   --glow:        rgba(16,185,129,0.14);
 
+  --dash-accent:   #10b981;
+  --dash-accent-2: #f59e0b;
+
   --card-radius: 14px;
   --blur:        20px;
   --mono:        'JetBrains Mono','Cascadia Code',monospace;

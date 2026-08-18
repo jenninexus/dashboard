@@ -1,0 +1,223 @@
+{
+  "profile": {
+    "_comment": "Fictional demo data for the public dashboard seed — not a real pet, owner, or clinic.",
+    "name": "Miso",
+    "species": "cat",
+    "age": 14,
+    "coat": "tuxedo",
+    "conditions": [
+      "Chronic kidney disease (IRIS stage 2, fictional staging)",
+      "Hyperthyroidism (managed with medication)"
+    ],
+    "primary_vet": "Riverside Animal Clinic",
+    "last_updated": "2026-08-17"
+  },
+  "checklist": {
+    "daily": [
+      "Log appetite (meals + treats)",
+      "Scoop litter — note volume & consistency",
+      "Sub-Q fluids (100 mL if scheduled today)",
+      "Give morning & evening medications",
+      "Note energy level / play interest"
+    ]
+  },
+  "weight": {
+    "unit": "lbs",
+    "target_range": {
+      "min": 8.5,
+      "max": 9.2
+    },
+    "readings": [
+      {
+        "date": "2026-06-23",
+        "lbs": 9.1,
+        "notes": "Baseline at specialist recheck"
+      },
+      {
+        "date": "2026-06-30",
+        "lbs": 9,
+        "notes": "Stable"
+      },
+      {
+        "date": "2026-07-07",
+        "lbs": 9,
+        "notes": "Good appetite week"
+      },
+      {
+        "date": "2026-07-14",
+        "lbs": 8.9,
+        "notes": "Slight dip, watching"
+      },
+      {
+        "date": "2026-07-21",
+        "lbs": 8.9,
+        "notes": "Holding steady"
+      },
+      {
+        "date": "2026-07-28",
+        "lbs": 8.8,
+        "notes": "Within target range"
+      },
+      {
+        "date": "2026-08-04",
+        "lbs": 8.8,
+        "notes": "Stable on renal diet"
+      },
+      {
+        "date": "2026-08-11",
+        "lbs": 8.8,
+        "notes": "Today — stable-ish trend"
+      }
+    ]
+  },
+  "medications": [
+    {
+      "name": "Methimazole",
+      "dose": "2.5 mg",
+      "frequency": "Twice daily",
+      "time": "Morning & evening with food",
+      "purpose": "Hyperthyroidism",
+      "refill_status": "ok",
+      "notes": "Transdermal gel alternate if GI upset"
+    },
+    {
+      "name": "Phosphate binder",
+      "dose": "1/4 tablet",
+      "frequency": "With each meal",
+      "time": "Breakfast & dinner",
+      "purpose": "CKD — phosphorus control",
+      "refill_status": "ok",
+      "notes": "Crush into wet food"
+    },
+    {
+      "name": "Cyanocobalamin (B12)",
+      "dose": "250 mcg",
+      "frequency": "Weekly",
+      "time": "Sunday morning",
+      "purpose": "CKD support",
+      "refill_status": "refill_soon",
+      "notes": "Sub-Q injection at home — ~2 doses left"
+    }
+  ],
+  "vetVisits": [
+    {
+      "date": "2026-05-10",
+      "clinic": "Riverside Animal Clinic",
+      "reason": "Senior wellness & bloodwork",
+      "findings": "Creatinine mildly elevated; T4 high — started methimazole",
+      "follow_up": "Recheck labs in 6 weeks"
+    },
+    {
+      "date": "2026-06-21",
+      "clinic": "Riverside Animal Clinic",
+      "reason": "Renal diet transition follow-up",
+      "findings": "Weight stable; appetite good on prescription diet",
+      "follow_up": "Continue fluids 2× weekly"
+    },
+    {
+      "date": "2026-08-02",
+      "clinic": "Riverside Animal Clinic",
+      "reason": "Quarterly senior panel",
+      "findings": "IRIS stage 2 unchanged; thyroid controlled on current dose",
+      "follow_up": "Next labs in 3 months"
+    }
+  ],
+  "qol": {
+    "_scale": "HHHHHMM — each dimension scored 0–10 (higher = better)",
+    "last_assessed": "2026-08-15",
+    "scores": {
+      "hurt": {
+        "label": "Hurt",
+        "score": 8,
+        "note": "Mild stiffness after long naps; no vocalizing"
+      },
+      "hunger": {
+        "label": "Hunger",
+        "score": 7,
+        "note": "Eats most of renal wet food; occasional pickiness"
+      },
+      "hydration": {
+        "label": "Hydration",
+        "score": 6,
+        "note": "Sub-Q fluids help; still drinks less than ideal"
+      },
+      "hygiene": {
+        "label": "Hygiene",
+        "score": 9,
+        "note": "Self-grooms well; coat shiny"
+      },
+      "happiness": {
+        "label": "Happiness",
+        "score": 7,
+        "note": "Purr when petted; enjoys window perch"
+      },
+      "mobility": {
+        "label": "Mobility",
+        "score": 6,
+        "note": "Jumps to couch; slower on stairs"
+      },
+      "moreGoodDays": {
+        "label": "More Good Days",
+        "score": 7,
+        "note": "Mostly good days this month"
+      }
+    }
+  },
+  "redFlags": [
+    {
+      "symptom": "Not eating for 24 hours",
+      "action": "Call Riverside Animal Clinic same day; may need appetite stimulant or fluids"
+    },
+    {
+      "symptom": "Labored or open-mouth breathing",
+      "action": "Emergency — go to nearest ER vet immediately"
+    },
+    {
+      "symptom": "Hiding more than usual / withdrawn",
+      "action": "Monitor closely; call vet if persists beyond one day"
+    },
+    {
+      "symptom": "Collapse or unable to stand",
+      "action": "Emergency — transport to ER vet immediately"
+    }
+  ],
+  "appointments": [
+    {
+      "date": "2026-09-05",
+      "clinic": "Riverside Animal Clinic",
+      "type": "Bloodwork recheck",
+      "notes": "Fasting not required; bring med list",
+      "past": false
+    },
+    {
+      "date": "2026-10-12",
+      "clinic": "Riverside Animal Clinic",
+      "type": "Senior wellness exam",
+      "notes": "Discuss fluid schedule & weight trend",
+      "past": false
+    },
+    {
+      "date": "2026-11-08",
+      "clinic": "Riverside Animal Clinic",
+      "type": "Dental assessment",
+      "notes": "Non-anesthetic cleaning vs extraction decision",
+      "past": false
+    },
+    {
+      "date": "2026-04-18",
+      "clinic": "Riverside Animal Clinic",
+      "type": "Vaccination update",
+      "notes": "Rabies booster; declined non-core vaccines",
+      "past": true
+    }
+  ],
+  "eol": {
+    "title": "End-of-life planning (optional)",
+    "summary": "Quality-of-life journaling and gentle planning notes live in the printable templates. This dashboard tracks day-to-day care — not clinical decisions.",
+    "resources": [
+      "Discuss hospice vs palliative options with your vet when QoL scores trend down",
+      "Keep a comfort-care list: favorite bed, quiet room, pain plan",
+      "Printable decision worksheets: github.com/jenninexus/senior-pet-care"
+    ]
+  }
+}

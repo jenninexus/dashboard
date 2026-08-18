@@ -2,26 +2,25 @@
 
 ## Pick your profile first
 
-Start by choosing one profile and copy that pattern:
-
 - **SEO** — site analytics (GA4, Search Console, PageSpeed).
-- **Finances** — local money clarity (cash, bills, loans, income).
-- **Health** — habits, vitals, meds, labs, appointments.
+- **Finances** — local money snapshot (cash, bills, loans, income).
+- **Health** — human wellness (vitals, meds, labs, habits, sleep).
+- **Pets** — senior pet care (weight, QoL, fluids, red flags).
 
-Use the profile you want first, then iterate. Each one is fully built and ready.
+Each one is fully built. Open the example HTML or scaffold a copy.
 
 ## Prerequisites
 
 - A browser. That's it for viewing.
-- Optional: Node 18+ for `npm run build-dashboard` (only needed for the scaffolder).
+- Optional: Node 18+ for `npm run build-dashboard`.
 
 ## 3-step setup
 
-1. **Open the profile** — `profiles/{id}/{id}.html` directly in your browser. Each one is fully built with example data.
+1. **Open the profile** — `profiles/{id}/{id}.html` directly in your browser.
 2. **Or scaffold your own** — `npm run build-dashboard -- --profile <id> --name "Your Name"`. This creates `my-dashboard/` with `dashboard.html`, `themes/`, and a stamped `data.json`.
-3. **Replace example data** — open `my-dashboard/data.json` and fill in your real numbers. Every field has a `_comment` explaining what it is.
+3. **Replace example data** — open `my-dashboard/data.json` and fill in your real numbers.
 
-That's it. No server, no build step.
+No server. No build step for viewing.
 
 ## What to open first
 
@@ -30,35 +29,23 @@ That's it. No server, no build step.
 | SEO | `profiles/seo/seo.html` | `profiles/seo/profile.json` |
 | Finances | `profiles/finances/finances.html` | `profiles/finances/profile.json` |
 | Health | `profiles/health/health.html` | `profiles/health/profile.json` |
+| Pets | `profiles/pets/pets.html` | `profiles/pets/profile.json` |
 
-Open `profiles/seo/seo.html` directly in a browser — it loads from `file://` with no server.
-
-## Commands (if you use the scaffolder)
+## Commands
 
 | Command | What it does |
 |---|---|
-| `npm run profiles` | Lists available profiles and readiness |
-| `npm run build-dashboard -- --profile <id> --name <name> [--domain <domain>] [--out <folder>]` | Builds a runnable dashboard in `<folder>` |
+| `npm run profiles` | Lists available profiles |
+| `npm run build-dashboard -- --profile <id> --name <name> [--domain <domain>] [--out <folder>]` | Scaffolds `<folder>` |
 | `npm run open` | Opens `profiles/seo/seo.html` |
-
-## Design your own dashboard from a profile
-
-1. Choose the closest profile.
-2. Build it once.
-3. Change only `data.json` until structure is right.
-4. Edit `profile/{profile-id}.html` only when you need new sections.
-5. Move the result to your own distribution branch.
-
-This approach keeps the core template stable and user-visible behavior predictable.
 
 ## Customize safely
 
 - Keep `example-data.json` as the contract example.
 - Keep sensitive values in your personal `data.json` only.
-- If you publish publicly, document data ownership and any required setup in your fork README.
+- Want a daily finance *workspace* (autopay, archive, startup script)? That is [jenninexus/fin](https://github.com/jenninexus/fin), not this profile.
+- Want printable pet-care sheets? That is [jenninexus/senior-pet-care](https://github.com/jenninexus/senior-pet-care).
 
 ## Open in your editor
 
-If you cloned this with VS Code, Cursor, opencode, or another IDE, open the
-`dashboard.code-workspace.example` as a workspace (or copy it to
-`dashboard.code-workspace` to customize locally — that file is gitignored).
+Open `dashboard.code-workspace.example` as a workspace (or copy it to `dashboard.code-workspace` — gitignored).
