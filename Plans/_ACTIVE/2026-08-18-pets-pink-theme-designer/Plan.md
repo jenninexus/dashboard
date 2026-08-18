@@ -15,7 +15,7 @@ Continue the 2026-08-17 cross-repo run. Pets HTML is approved; restyle dusk-comp
 - [x] `C:\Github\product-design\docs\THEME-DESIGNER.md` explains interchangeable use as a dashboard brand-kit
 - [x] JN `senior-cat-care.php` links the pets dashboard; `/products` has a Dashboard card
 - [x] `/theme` command no longer calls syn-themes `all-palettes.json` the authoring SSOT
-- [ ] dashboard (and other owned repos) pushed; wrap handoff written
+- [x] dashboard (and other owned repos) pushed; wrap handoff written
 
 ## Task checklist
 
@@ -29,7 +29,7 @@ Continue the 2026-08-17 cross-repo run. Pets HTML is approved; restyle dusk-comp
 - [x] JN blog + products
 - [x] /theme skill SSOT fix
 - [x] Verify scaffolder still injects pets
-- [ ] Wrap + push owned repos
+- [x] Wrap + push owned repos
 
 ## Assumptions
 
