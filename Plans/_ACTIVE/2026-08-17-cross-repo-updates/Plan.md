@@ -14,7 +14,7 @@ Apply the plan in `Plans/_ACTIVE/cross-repo-updates-8-17.md` to `dashboard`, `fi
 - [x] scaffolder writes `dashboard.html` for seo/finances/health/pets (`_scratch/*`)
 - [x] health `profile.json` no longer says STUB
 - [x] dashboard README cross-links `fin` and `senior-pet-care`
-- [ ] wrap + reflect landed; next-agent handoff emitted
+- [x] wrap + reflect landed; next-agent handoff emitted
 
 ## Task checklist
 
@@ -24,7 +24,7 @@ Apply the plan in `Plans/_ACTIVE/cross-repo-updates-8-17.md` to `dashboard`, `fi
 - [x] reconcile example-data with inline HTML schemas
 - [x] pets profile (4th) with fictional data
 - [x] verify scaffolder for all ready profiles
-- [ ] reflect + wrap
+- [x] reflect + wrap
 
 ## Assumptions
 
