@@ -9,7 +9,7 @@
 
 **Make one dashboard. For everyone.** ✨
 
-`dashboard` is a profile-based, local-first seed kit. Pick a profile (`SEO`, `finances`, `health`),
+`dashboard` is a profile-based, local-first seed kit. Pick a profile (`SEO`, `finances`, `health`, `pets`),
 drop in JSON, get a polished single-file dashboard in seconds — no server, no build, no backend.
 
 </div>
@@ -18,11 +18,11 @@ drop in JSON, get a polished single-file dashboard in seconds — no server, no 
 
 ## See it first
 
-| SEO | Finances | Health |
-|---|---|---|
-| ![SEO Dashboard](docs/screenshots/hero/1920/seo-1920.png) | ![Finance Dashboard](docs/screenshots/hero/1920/finances-1920.png) | ![Health Dashboard](docs/screenshots/hero/1920/health-1920.png) |
-| `profiles/seo/seo.html` | `profiles/finances/finances.html` | `profiles/health/health.html` |
-| Aurora · midnight blue | Emerald · gold | Vitality · teal · lavender |
+| SEO | Finances | Health | Pets |
+|---|---|---|---|
+| ![SEO Dashboard](docs/screenshots/hero/1920/seo-1920.png) | ![Finance Dashboard](docs/screenshots/hero/1920/finances-1920.png) | ![Health Dashboard](docs/screenshots/hero/1920/health-1920.png) | Open `pets.html` |
+| `profiles/seo/seo.html` | `profiles/finances/finances.html` | `profiles/health/health.html` | `profiles/pets/pets.html` |
+| Aurora · midnight blue | Emerald · gold | Vitality · teal · lavender | Dusk · amber · teal |
 
 Open any of these directly in your browser. They're self-contained — only Chart.js + Google Fonts load from the network.
 
@@ -68,9 +68,15 @@ Each profile is a self-contained dashboard for one domain. Open the example HTML
 |---|---|---|
 | **SEO** — `profiles/seo/seo.html` | GA4 · Search Console · PageSpeed · Cloudflare | Aurora SEO (midnight blue / aurora) |
 | **Finances** — `profiles/finances/finances.html` | Cash vs obligations · bills · loans · income | Emerald Finance (emerald / gold) |
-| **Health** — `profiles/health/health.html` | Habits · vitals · meds · labs · appointments | Vitality Health (teal / lavender) |
+| **Health** — `profiles/health/health.html` | Vitals · meds · labs · habits · sleep | Vitality Health (teal / lavender) |
+| **Pets** — `profiles/pets/pets.html` | Weight · QoL · fluids · red flags | Dusk Companion (amber / teal) |
 
 Replace the example numbers in `data.json` with your own. The example data is fictional on purpose — easy to swap without leaking anything real.
+
+**Sister repos** (same family, different job):
+
+- [jenninexus/fin](https://github.com/jenninexus/fin) — operational finance *workspace* (autopay, archive, startup script). This kit’s finances profile is the snapshot demo.
+- [jenninexus/senior-pet-care](https://github.com/jenninexus/senior-pet-care) — printable Markdown pet-care tracker. This kit’s pets profile is the optional visual layer.
 
 ---
 
@@ -88,6 +94,9 @@ Bundled palettes:
 - `aurora-seo.css` — used by the SEO profile
 - `emerald-finance.css` — used by the Finances profile
 - `vitality-health.css` — used by the Health profile
+- `dusk-companion.css` — used by the Pets profile
+
+`plasma-green` is dashboard neon green (`#00e879`). It is **not** Synagraphic Plasma Drift (pink `#e050a0`).
 
 ---
 

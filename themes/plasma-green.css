@@ -1,7 +1,9 @@
 /* ============================================================
    Plasma Green (Default) — dashboard theme.
-   Inspired by the Jenni Nexus syn-themes workspace aesthetic.
-   Copy this token block into dashboard.html, or link it over HTTP.
+   Dashboard-only industrial neon green. NOT Synagraphic Plasma Drift
+   (that VS Code theme is pink #e050a0). Text tokens use the green family
+   to match fin.html / www-theme-kit plasma text.
+   Copy this token block into a dashboard <style>, or link it over HTTP.
    ============================================================ */
 :root {
   --bg:        #040704;
@@ -10,10 +12,10 @@
   --surface2:  rgba(0,232,121,0.08);
   --border:    rgba(0,232,121,0.14);
   --border2:   rgba(0,232,121,0.30);
-  --text:      #f0e8ff;
-  --dim:       #b3a3d4;
-  --dim2:      #6f6090;
-  --bright:    #ffffff;
+  --text:      #d7faef;
+  --dim:       #5a9980;
+  --dim2:      #2e5545;
+  --bright:    #eeffee;
 
   --primary:     #00e879;
   --primary-rgb: 0,232,121;
@@ -26,6 +28,9 @@
   --yellow:      #fcd34d;
   --green:       #42f4c8;
   --glow:        rgba(0,232,121,0.16);
+
+  --dash-accent:   #00e879;
+  --dash-accent-2: #00e5ff;
 
   --card-radius: 14px;
   --blur:        20px;

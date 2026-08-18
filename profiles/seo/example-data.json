@@ -1,146 +1,443 @@
 {
-  "_comment": "SEO Dashboard — example data. Swap these values for your own site's real data.",
-  "_instructions": "Update all fields below. Dates use YYYY-MM-DD. Numbers are raw integers.",
-
-  "site": {
+  "_comment": "Stellar Digital — fictional creative agency. All numbers are example/demo data only.",
+  "profile": {
     "name": "Stellar Digital",
-    "domain": "stellar-digital.co",
-    "url": "https://stellar-digital.co",
-    "description": "Portfolio and blog for a freelance design studio",
-    "dataAsOf": "2026-06-20",
-    "dashboardUpdated": "2026-06-20"
+    "site": "stellar-digital.co",
+    "asOf": "June 2026",
+    "period": "Jan 2026 – Jun 2026"
   },
-
-  "ga4": {
-    "propertyId": "123456789",
-    "measurementId": "G-XXXXXXXXXX",
-    "streamId": "0000000000",
-    "last30Days": {
-      "activeUsers": 1240,
-      "sessions": 1680,
-      "pageViews": 4320,
-      "bounceRate": 0.481,
-      "avgSessionDuration": 187,
-      "newUsersPct": 0.882
+  "kpis": [
+    {
+      "label": "Sessions",
+      "value": "4,210",
+      "key": "sessions"
     },
-    "previousPeriod": {
-      "activeUsers": 1080,
-      "sessions": 1490,
-      "pageViews": 3900
+    {
+      "label": "Clicks",
+      "value": "1,340",
+      "key": "clicks"
+    },
+    {
+      "label": "Impressions",
+      "value": "38,500",
+      "key": "impressions"
+    },
+    {
+      "label": "Avg Position",
+      "value": "14.2",
+      "key": "position"
+    },
+    {
+      "label": "Indexed Pages",
+      "value": "84",
+      "key": "indexed"
+    },
+    {
+      "label": "PageSpeed Score",
+      "value": "94",
+      "key": "psi"
     }
+  ],
+  "progress": {
+    "metrics": [
+      {
+        "metric": "Organic Sessions",
+        "before": 310,
+        "after": 1180,
+        "unit": "",
+        "lowerIsBetter": false
+      },
+      {
+        "metric": "Impressions / mo",
+        "before": 4200,
+        "after": 38500,
+        "unit": "",
+        "lowerIsBetter": false
+      },
+      {
+        "metric": "Clicks / mo",
+        "before": 82,
+        "after": 1340,
+        "unit": "",
+        "lowerIsBetter": false
+      },
+      {
+        "metric": "Avg Position",
+        "before": 48.3,
+        "after": 14.2,
+        "unit": "",
+        "lowerIsBetter": true
+      },
+      {
+        "metric": "Indexed Pages",
+        "before": 22,
+        "after": 84,
+        "unit": "",
+        "lowerIsBetter": false
+      },
+      {
+        "metric": "Domain Rating",
+        "before": 0,
+        "after": 14,
+        "unit": " DR",
+        "lowerIsBetter": false
+      }
+    ]
   },
-
-  "searchConsole": {
-    "property": "https://stellar-digital.co/",
-    "last90Days": {
-      "totalClicks": 920,
-      "totalImpressions": 18400,
-      "avgCtr": 0.05,
-      "avgPosition": 14.2
+  "ga4": [
+    {
+      "label": "Active Users",
+      "value": "1,842",
+      "trend": [
+        30,
+        38,
+        44,
+        51,
+        60,
+        72
+      ]
     },
-    "indexedPages": 18,
-    "notIndexed": 47,
-    "topQuery": "stellar digital studio",
-    "topQueryPosition": 2.4
+    {
+      "label": "Sessions",
+      "value": "4,210",
+      "trend": [
+        55,
+        64,
+        72,
+        84,
+        96,
+        108
+      ]
+    },
+    {
+      "label": "Pageviews",
+      "value": "12,540",
+      "trend": [
+        160,
+        192,
+        220,
+        258,
+        290,
+        340
+      ]
+    },
+    {
+      "label": "Bounce Rate",
+      "value": "38.2%",
+      "trend": [
+        60,
+        56,
+        52,
+        48,
+        44,
+        38
+      ],
+      "invert": true
+    },
+    {
+      "label": "Avg Session Dur",
+      "value": "2m 34s",
+      "trend": [
+        30,
+        42,
+        52,
+        65,
+        70,
+        78
+      ]
+    },
+    {
+      "label": "New Users",
+      "value": "61%",
+      "trend": [
+        40,
+        45,
+        50,
+        54,
+        57,
+        61
+      ]
+    }
+  ],
+  "traffic": [
+    {
+      "source": "Organic Search",
+      "pct": 48,
+      "color": "#4d9fff"
+    },
+    {
+      "source": "Direct",
+      "pct": 22,
+      "color": "#1de9c0"
+    },
+    {
+      "source": "Referral",
+      "pct": 15,
+      "color": "#9b72ff"
+    },
+    {
+      "source": "Social",
+      "pct": 9,
+      "color": "#60b4ff"
+    },
+    {
+      "source": "Paid Search",
+      "pct": 4,
+      "color": "#ffb347"
+    },
+    {
+      "source": "Email",
+      "pct": 2,
+      "color": "#39e8a0"
+    }
+  ],
+  "topPages": [
+    {
+      "page": "/",
+      "views": 3840,
+      "duration": "1m 52s",
+      "bounce": "41%",
+      "top": true
+    },
+    {
+      "page": "/services",
+      "views": 2210,
+      "duration": "2m 44s",
+      "bounce": "32%"
+    },
+    {
+      "page": "/portfolio",
+      "views": 1780,
+      "duration": "3m 10s",
+      "bounce": "28%"
+    },
+    {
+      "page": "/blog/seo-guide-2026",
+      "views": 1460,
+      "duration": "4m 02s",
+      "bounce": "22%"
+    },
+    {
+      "page": "/about",
+      "views": 920,
+      "duration": "1m 38s",
+      "bounce": "50%"
+    },
+    {
+      "page": "/contact",
+      "views": 640,
+      "duration": "0m 55s",
+      "bounce": "63%"
+    }
+  ],
+  "gsc": {
+    "coverage": [
+      {
+        "label": "Indexed",
+        "value": 84,
+        "status": "ok"
+      },
+      {
+        "label": "Not Indexed",
+        "value": 12,
+        "status": "warn"
+      },
+      {
+        "label": "Errors",
+        "value": 3,
+        "status": "fail"
+      }
+    ],
+    "issues": [
+      {
+        "type": "Crawl errors",
+        "count": 3,
+        "severity": "fail",
+        "note": "Broken internal links on /old-pricing"
+      },
+      {
+        "type": "Mobile usability",
+        "count": 2,
+        "severity": "warn",
+        "note": "Tap targets too small on contact form"
+      },
+      {
+        "type": "Core Web Vitals",
+        "count": 0,
+        "severity": "ok",
+        "note": "All URLs pass desktop; 2 mobile pending"
+      },
+      {
+        "type": "Soft 404s",
+        "count": 5,
+        "severity": "warn",
+        "note": "Redirect legacy /old-blog/* paths"
+      },
+      {
+        "type": "Duplicate meta desc",
+        "count": 8,
+        "severity": "warn",
+        "note": "Service sub-pages share identical descriptions"
+      }
+    ]
   },
-
   "pagespeed": {
     "mobile": {
-      "performance": 61,
-      "accessibility": 96,
-      "bestPractices": 92,
-      "seo": 100,
-      "lcp": "4.2s",
-      "tbt": "180ms",
-      "cls": "0.01",
-      "fcp": "3.1s"
+      "score": 76,
+      "grade": "warn"
     },
     "desktop": {
-      "performance": 88,
-      "accessibility": 96,
-      "bestPractices": 92,
-      "seo": 100,
-      "lcp": "1.3s",
-      "tbt": "0ms",
-      "cls": "0",
-      "fcp": "0.7s"
-    }
+      "score": 94,
+      "grade": "pass"
+    },
+    "cwv": [
+      {
+        "label": "LCP",
+        "value": "2.4s",
+        "status": "pass",
+        "target": "< 2.5s"
+      },
+      {
+        "label": "INP",
+        "value": "88ms",
+        "status": "pass",
+        "target": "< 200ms"
+      },
+      {
+        "label": "CLS",
+        "value": "0.08",
+        "status": "pass",
+        "target": "< 0.1"
+      },
+      {
+        "label": "FCP",
+        "value": "1.6s",
+        "status": "pass",
+        "target": "< 1.8s"
+      },
+      {
+        "label": "TTFB",
+        "value": "340ms",
+        "status": "warn",
+        "target": "< 200ms"
+      }
+    ]
   },
-
-  "topPages": [
-    { "path": "/",            "views": 1840, "avgDuration": 142, "label": "Homepage" },
-    { "path": "/portfolio",   "views": 780,  "avgDuration": 218, "label": "Portfolio" },
-    { "path": "/blog",        "views": 540,  "avgDuration": 194, "label": "Blog" },
-    { "path": "/services",    "views": 390,  "avgDuration": 87,  "label": "Services" },
-    { "path": "/contact",     "views": 290,  "avgDuration": 63,  "label": "Contact" },
-    { "path": "/about",       "views": 240,  "avgDuration": 156, "label": "About" },
-    { "path": "/blog/case-study-brandx", "views": 180, "avgDuration": 412, "label": "Case Study: BrandX" },
-    { "path": "/pricing",     "views": 160,  "avgDuration": 74,  "label": "Pricing" }
-  ],
-
-  "trafficSources": [
-    { "source": "google",   "medium": "organic",  "sessions": 620, "color": "#4285F4" },
-    { "source": "(direct)", "medium": "(none)",   "sessions": 490, "color": "#6C8EFF" },
-    { "source": "instagram","medium": "social",   "sessions": 210, "color": "#E1306C" },
-    { "source": "linkedin", "medium": "social",   "sessions": 140, "color": "#0A66C2" },
-    { "source": "twitter",  "medium": "social",   "sessions": 95,  "color": "#1DA1F2" },
-    { "source": "other",    "medium": "referral", "sessions": 125, "color": "rgba(108,142,255,0.35)" }
-  ],
-
-  "impressionsTrend": {
-    "_comment": "Monthly GSC impressions — oldest to newest. Add null for missing months.",
-    "labels": ["Nov 24","Dec 24","Jan 25","Feb 25","Mar 25","Apr 25","May 25","Jun 25","Jul 25","Aug 25","Sep 25","Oct 25","Nov 25","Dec 25","Jan 26","Feb 26","Mar 26","Apr 26","May 26"],
-    "data":   [320,     280,     340,     390,     410,     520,     680,     720,     840,     910,     1080,    1240,    1380,    1510,    1620,    1840,    2200,    2640,    3100],
-    "milestones": {
-      "6": "Blog launch",
-      "12": "Site redesign",
-      "16": "Schema markup added"
+  "checklist": [
+    {
+      "item": "Title tags (unique, <60 chars)",
+      "status": "pass"
+    },
+    {
+      "item": "Meta descriptions",
+      "status": "warn"
+    },
+    {
+      "item": "H1 tags (one per page)",
+      "status": "pass"
+    },
+    {
+      "item": "Image alt text",
+      "status": "warn"
+    },
+    {
+      "item": "Schema markup (org + article)",
+      "status": "pass"
+    },
+    {
+      "item": "XML Sitemap submitted",
+      "status": "pass"
+    },
+    {
+      "item": "Robots.txt configured",
+      "status": "pass"
+    },
+    {
+      "item": "SSL / HTTPS",
+      "status": "pass"
+    },
+    {
+      "item": "Mobile-friendly",
+      "status": "pass"
+    },
+    {
+      "item": "Page speed (desktop)",
+      "status": "pass"
+    },
+    {
+      "item": "Internal linking",
+      "status": "warn"
+    },
+    {
+      "item": "Canonical tags",
+      "status": "fail"
     }
+  ],
+  "actions": {
+    "critical": [
+      "Fix 3 crawl errors — update broken /old-pricing links",
+      "Add canonical tags to all service sub-pages",
+      "Resolve 3 GSC coverage errors blocking indexation"
+    ],
+    "high": [
+      "Write unique meta descriptions for 8 duplicate pages",
+      "Add alt text to 34 portfolio images missing descriptions",
+      "Improve mobile TTFB: enable edge caching / CDN",
+      "Fix 2 mobile tap-target issues on contact form"
+    ],
+    "medium": [
+      "Build 3 more internal links to /blog/seo-guide-2026",
+      "Add FAQ schema to /services page",
+      "Redirect 5 soft-404 legacy /old-blog/* URLs",
+      "Compress hero images for mobile LCP improvement"
+    ],
+    "done": [
+      "XML sitemap submitted to GSC",
+      "SSL certificate renewed and HSTS enabled",
+      "GA4 property fully configured with events",
+      "Google Business Profile claimed and verified"
+    ]
   },
-
-  "seoFeatures": [
-    { "name": "GTM / Analytics",         "status": "pass", "detail": "GA4 live" },
-    { "name": "Canonical URLs",          "status": "pass", "detail": "All pages" },
-    { "name": "Open Graph meta",         "status": "pass", "detail": "All pages" },
-    { "name": "Twitter Cards",           "status": "pass", "detail": "All pages" },
-    { "name": "JSON-LD Structured Data", "status": "pass", "detail": "Homepage, blog posts" },
-    { "name": "XML Sitemap",             "status": "pass", "detail": "18 URLs — submitted" },
-    { "name": "robots.txt",              "status": "pass", "detail": "Clean" },
-    { "name": "Image alt text",          "status": "warn", "detail": "8 images missing alt" },
-    { "name": "Mobile-friendly",         "status": "pass", "detail": "Responsive" },
-    { "name": "HTTPS",                   "status": "pass", "detail": "SSL active (Cloudflare)" },
-    { "name": "Page speed (mobile)",     "status": "warn", "detail": "Perf 61 — LCP 4.2s" },
-    { "name": "Core Web Vitals (field)", "status": "pass", "detail": "All Good (CrUX)" }
-  ],
-
-  "actionItems": [
-    { "priority": "critical", "item": "Add alt text to 8 portfolio images", "impact": "accessibility + image search" },
-    { "priority": "critical", "item": "Improve mobile LCP: add hero image preload hint", "impact": "PageSpeed +15pts" },
-    { "priority": "high",     "item": "Submit sitemap to Bing Webmaster Tools", "impact": "+search engine coverage" },
-    { "priority": "high",     "item": "Add JSON-LD to portfolio pages (CreativeWork schema)", "impact": "rich results" },
-    { "priority": "high",     "item": "Fix 5 redirect chains (www → http → https)", "impact": "crawl budget" },
-    { "priority": "medium",   "item": "Create Google Business Profile", "impact": "local visibility" },
-    { "priority": "medium",   "item": "Add FAQ schema to Services page", "impact": "rich results" },
-    { "priority": "medium",   "item": "Write 2 long-form case studies (1,500+ words)", "impact": "organic ranking" },
-    { "priority": "done",     "item": "Canonical URLs implemented site-wide", "impact": "" },
-    { "priority": "done",     "item": "GA4 + GTM installed and verified", "impact": "" },
-    { "priority": "done",     "item": "Open Graph / Twitter Cards on all pages", "impact": "" }
-  ],
-
   "milestones": [
-    { "date": "Nov 2024", "title": "Site Launch", "body": "Initial deploy — GA4 + GSC connected, sitemap submitted" },
-    { "date": "Apr 2025", "title": "Blog Launched", "body": "First 6 posts published — organic impressions doubled in 60 days" },
-    { "date": "Nov 2025", "title": "Site Redesign", "body": "New portfolio layout — bounce rate dropped 12pp, avg session +40s" },
-    { "date": "Feb 2026", "title": "Schema Markup", "body": "JSON-LD added to all pages — rich results appearing in 3 weeks" },
-    { "date": "Jun 2026", "title": "Current Results", "body": "#2 Google rank for brand term · 18 pages indexed · 3,100+ impressions/mo" }
-  ],
-
-  "cloudflare": {
-    "ssl": "Full (Strict)",
-    "cacheLevel": "Standard",
-    "minify": true,
-    "rocketLoader": false,
-    "crawlerHintsEnabled": true,
-    "dnsQueriesPerDay": 12400
-  }
+    {
+      "label": "Site launch",
+      "date": "Jan 2026",
+      "done": true
+    },
+    {
+      "label": "GSC verified",
+      "date": "Jan 2026",
+      "done": true
+    },
+    {
+      "label": "First 100 clicks",
+      "date": "Feb 2026",
+      "done": true
+    },
+    {
+      "label": "DA 14 achieved",
+      "date": "Mar 2026",
+      "done": true
+    },
+    {
+      "label": "Mobile score 76",
+      "date": "Apr 2026",
+      "done": true
+    },
+    {
+      "label": "1k monthly sessions",
+      "date": "May 2026",
+      "done": true
+    },
+    {
+      "label": "DA 25 target",
+      "date": "Sep 2026",
+      "done": false
+    },
+    {
+      "label": "5k sessions / mo",
+      "date": "Dec 2026",
+      "done": false
+    }
+  ]
 }

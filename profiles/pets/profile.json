@@ -1,0 +1,22 @@
+{
+  "id": "pets",
+  "name": "Senior Pet Care",
+  "status": "ready",
+  "description": "Track daily care, weight, medications, vet visits, and HHHHHMM quality-of-life scores for a senior pet. Fictional demo data — pair with printable templates at senior-pet-care.",
+  "theme": "dusk-companion",
+  "render": "profiles/pets/pets.html",
+  "exampleData": "example-data.json",
+  "dataInjection": { "scriptId": "pets-data" },
+  "sections": [
+    { "id": "today",       "title": "Today",              "data": "checklist.daily[] → interactive daily care checklist" },
+    { "id": "weight",      "title": "Weight Trend",       "data": "weight.readings[] → line chart + target range" },
+    { "id": "medications", "title": "Medications",        "data": "medications[] → dose / frequency table" },
+    { "id": "vet-visits",  "title": "Vet Visits",         "data": "vetVisits[] → visit log with findings" },
+    { "id": "qol",         "title": "Quality of Life",    "data": "qol.scores → HHHHHMM bars (0–10)" },
+    { "id": "red-flags",   "title": "Red Flags",          "data": "redFlags[] → always-visible emergency cues" },
+    { "id": "appointments","title": "Upcoming Care",      "data": "appointments[] → upcoming timeline" }
+  ],
+  "dataSources": ["manual JSON (data.json)"],
+  "blogPost": "A visual senior pet care dashboard you fully control (local, no SaaS)",
+  "_note": "Render is data-driven: reads inline <script id=\"pets-data\"> JSON. Printable Markdown templates live at github.com/jenninexus/senior-pet-care — this profile is the optional visual layer."
+}

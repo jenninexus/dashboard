@@ -1,7 +1,8 @@
 /* ============================================================
    Midnight Blue — cool indigo/blue dashboard theme
-   The original seed look, kept as a ready alternate.
-   Copy this token block into dashboard.html, or link it over HTTP.
+   Original seed look (intentional). Kit midnight-depths glow is #818cf8;
+   this file keeps --primary: #6C8EFF as the first public seed appearance.
+   Copy this token block into a dashboard <style>, or link it over HTTP.
    ============================================================ */
 
 :root {
@@ -24,6 +25,9 @@
   --yellow:      #FFA400;
   --green:       #0CCE6B;
   --glow:        rgba(108,142,255,0.10);
+
+  --dash-accent:   #6C8EFF;
+  --dash-accent-2: #42f4c8;
 
   --card-radius: 14px;
   --blur:        18px;

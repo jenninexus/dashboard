@@ -2,18 +2,18 @@
   "id": "finances",
   "name": "Personal Finances",
   "status": "ready",
-  "description": "Cash-on-hand vs obligations, bills, loans/repayments, and income — local-only, no SaaS.",
-  "theme": "plasma-green",
-  "render": "profiles/finances/dashboard.html",
+  "description": "Cash-on-hand vs obligations, bills, loans/repayments, and income — local-only snapshot, no SaaS.",
+  "theme": "emerald-finance",
+  "render": "profiles/finances/finances.html",
   "exampleData": "example-data.json",
   "dataInjection": { "scriptId": "fin-data" },
   "sections": [
-    { "id": "holdings", "title": "Current Holdings",     "data": "holdings.accounts[] + compare[] → cash vs obligation bars (urgent flag = red)" },
-    { "id": "bills",    "title": "Bills & Amounts Due",  "data": "bills[] → status table (Overdue/Due/Paid/OK)" },
-    { "id": "loans",    "title": "Loans & Repayments",   "data": "loans[] → per-person collapsible foldouts + still-owed total (excludeFromTotal flag)" },
+    { "id": "holdings", "title": "Current Holdings",     "data": "holdings.accounts[] + compare[] → cash vs obligation bars" },
+    { "id": "bills",    "title": "Bills & Amounts Due",  "data": "bills[] → status table (Overdue/Due/Paid/Autopay)" },
+    { "id": "loans",    "title": "Loans & Repayments",   "data": "loans[] → collapsible foldouts + stillOwed" },
     { "id": "income",   "title": "Income Sources",       "data": "income[] → YTD rollup" }
   ],
   "dataSources": ["manual JSON (data.json)"],
   "blogPost": "A private finances dashboard you fully control (local, no SaaS)",
-  "_note": "Render is data-driven: it reads the inline <script id=\"fin-data\"> JSON. The scaffold swaps that block with your data.json. Components (coverage bars, loan foldouts, status table) ship as a reusable, data-only template — no personal data."
+  "_note": "Public snapshot demo (Alex Rivera, fictional). For an operational workspace (autopay, archive, startup pipeline) see github.com/jenninexus/fin. Never copy a household dashboard here."
 }

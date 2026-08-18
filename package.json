@@ -1,14 +1,14 @@
 {
   "name": "dashboard",
   "version": "2.0.0",
-  "description": "A self-contained, themeable dashboard seed kit. Pick a profile (SEO, finances, health, or your own), drop in JSON, ship a polished single-file dashboard — no build step, no backend.",
+  "description": "A self-contained, themeable dashboard seed kit. Pick a profile (SEO, finances, health, pets, or your own), drop in JSON, ship a polished single-file dashboard — no build step, no backend.",
   "type": "module",
-  "main": "dashboard.html",
+  "main": "profiles/seo/seo.html",
   "scripts": {
-    "open": "start dashboard.html",
+    "open": "start profiles/seo/seo.html",
     "build-dashboard": "node scripts/build-dashboard.mjs",
     "profiles": "node scripts/build-dashboard.mjs --list"
   },
-  "keywords": ["dashboard", "analytics", "template", "seo", "finances", "health", "charts", "self-contained", "starter-kit"],
+  "keywords": ["dashboard", "analytics", "template", "seo", "finances", "health", "pets", "charts", "self-contained", "starter-kit"],
   "license": "MIT"
 }

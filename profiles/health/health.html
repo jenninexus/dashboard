@@ -190,6 +190,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 }
 .chip.ok{background:rgba(52,211,153,.14);color:var(--green);border:1px solid rgba(52,211,153,.3)}
 .chip.warn{background:rgba(251,191,36,.12);color:var(--yellow);border:1px solid rgba(251,191,36,.28)}
+.chip.fail{background:rgba(248,113,113,.12);color:var(--red);border:1px solid rgba(248,113,113,.28)}
 .chip.over{background:rgba(248,113,113,.14);color:var(--red);border:1px solid rgba(248,113,113,.3)}
 .chip.pri{background:rgba(var(--primary-rgb),.12);color:var(--primary);border:1px solid var(--border2)}
 
@@ -400,6 +401,33 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     </div>
   </div>
 
+  <!-- ── 2b. Lab Results ──────────────────────────────────────────── -->
+  <div class="card anim" id="card-labs" style="--card-accent:var(--yellow)">
+    <div class="card-head" onclick="toggleCard('card-labs')">
+      <h2>Lab Results</h2>
+      <span class="chip pri" id="labs-chip">Latest panel</span>
+      <span class="card-toggle">&#9654;</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl" id="labs-table">
+        <thead><tr>
+          <th>Test</th><th>Value</th><th>Range</th><th>Status</th><th>Notes</th>
+        </tr></thead>
+        <tbody id="labs-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── 2c. Habit Streaks ────────────────────────────────────────── -->
+  <div class="card anim" id="card-habits" style="--card-accent:var(--green)">
+    <div class="card-head" onclick="toggleCard('card-habits')">
+      <h2>Habit Streaks</h2>
+      <span class="chip pri" id="habits-chip">—</span>
+      <span class="card-toggle">&#9654;</span>
+    </div>
+    <div class="card-body" id="habits-body"></div>
+  </div>
+
   <!-- ── 3. Medications & Supplements ─────────────────────────────── -->
   <div class="card anim" id="card-meds" style="--card-accent:var(--accent)">
     <div class="card-head" onclick="toggleCard('card-meds')">
@@ -604,6 +632,19 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     { "date": "2026-06-18", "score": 4, "emoji": "😓", "note": "Stressful deadline, poor sleep" },
     { "date": "2026-06-19", "score": 8, "emoji": "😄", "note": "Deadline done, huge relief" },
     { "date": "2026-06-20", "score": 7, "emoji": "😊", "note": "Calm Friday, good week overall" }
+  ],
+  "labs": [
+    { "name": "LDL Cholesterol", "value": "98", "unit": "mg/dL", "range": "<100", "status": "ok", "notes": "May 2026 panel" },
+    { "name": "HDL Cholesterol", "value": "62", "unit": "mg/dL", "range": ">50", "status": "ok", "notes": "" },
+    { "name": "HbA1c", "value": "5.4", "unit": "%", "range": "<5.7", "status": "ok", "notes": "Prediabetes cutoff 5.7" },
+    { "name": "Vitamin D", "value": "28", "unit": "ng/mL", "range": "30–80", "status": "warn", "notes": "Supplementing D3 2000 IU" },
+    { "name": "TSH", "value": "2.1", "unit": "mIU/L", "range": "0.4–4.0", "status": "ok", "notes": "" }
+  ],
+  "habits": [
+    { "name": "Morning walk", "streak": 12, "targetDays": 7, "unit": "days" },
+    { "name": "Meds taken", "streak": 20, "targetDays": 7, "unit": "days" },
+    { "name": "No alcohol", "streak": 19, "targetDays": 30, "unit": "days" },
+    { "name": "Journal 5 min", "streak": 4, "targetDays": 7, "unit": "days" }
   ],
   "appointments": [
     { "date": "2026-06-25", "provider": "Dr. Sarah Patel, MD", "type": "Annual Check-up", "location": "Providence Medical Center", "notes": "Fasting bloodwork", "past": false },
@@ -1014,6 +1055,39 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     }
   }
 
+  // ── Labs ──────────────────────────────────────────────────────────
+  function renderLabs(){
+    const tbody = document.getElementById('labs-body');
+    const labs = D.labs || [];
+    const warn = labs.filter(l => l.status !== 'ok').length;
+    document.getElementById('labs-chip').textContent = warn ? (warn + ' to review') : 'All in range';
+    labs.forEach(l => {
+      const tr = document.createElement('tr');
+      const cls = l.status === 'ok' ? 'ok' : (l.status === 'warn' ? 'warn' : 'fail');
+      tr.innerHTML = `
+        <td><strong>${l.name}</strong></td>
+        <td>${l.value} ${l.unit||''}</td>
+        <td>${l.range||''}</td>
+        <td><span class="chip ${cls}">${l.status}</span></td>
+        <td>${l.notes||''}</td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // ── Habits ────────────────────────────────────────────────────────
+  function renderHabits(){
+    const wrap = document.getElementById('habits-body');
+    const habits = D.habits || [];
+    document.getElementById('habits-chip').textContent = habits.length + ' habits';
+    wrap.innerHTML = habits.map(h => {
+      const pct = Math.min(100, Math.round((h.streak / (h.targetDays||7)) * 100));
+      return `<div class="bar-row">
+        <div class="bar-label"><span class="lbl">${h.name}</span><span class="v">${h.streak} ${h.unit||'days'}</span></div>
+        <div class="track"><div class="fill mint" style="width:${pct}%"></div><div class="pct">${pct}%</div></div>
+      </div>`;
+    }).join('');
+  }
+
   // ── Goals ─────────────────────────────────────────────────────────
   function renderGoals(){
     const grid = document.getElementById('goals-grid');
@@ -1047,6 +1121,8 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     renderKPIs();
     renderChecklist();
     renderVitals();
+    renderLabs();
+    renderHabits();
     renderMeds();
     renderFitness();
     renderNutrition();
