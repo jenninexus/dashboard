@@ -16,7 +16,7 @@ There is **no** root `dashboard.html`. The scaffolder copies `{id}.html` to `my-
 
 1. Scaffold copies `example-data.json` to `my-dashboard/data.json`.
 2. Name/domain values are injected if provided (`site{}` or `profile{}`).
-3. The profile HTML and `themes/` are copied into output.
+3. The profile HTML and `themes/` are copied into output. Existing `docs/images/<folder>/` assets referenced as `../../docs/images/` are copied and rewritten to `docs/images/` so `file://` banners work from `my-dashboard/`.
 4. If `dataInjection.scriptId` is set, that inline JSON block is replaced with the stamped data.
 5. Open `my-dashboard/dashboard.html` from `file://`.
 

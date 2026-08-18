@@ -49,6 +49,7 @@ Continue the 2026-08-17 cross-repo run. Pets HTML is approved; restyle dusk-comp
 - VERIFIED: source `D:\AI\2024\Pink Cat\cats\Slide3.PNG` still exists (copied, not deleted).
 - VERIFIED: vid-scroll wrote `docs/screenshots/hero/1920/pets-1920.png` (592 KB) from `file:///C:/Github/dashboard/profiles/pets/pets.html`.
 - VERIFIED: `node scripts/build-dashboard.mjs --profile pets --name "Scaffold Pink"` injects name + `#f472b6`.
+- VERIFIED: 2026-08-18 follow-up — pets scaffold copies `docs/images/pets/*.webp` and rewrites srcs to `docs/images/pets/` (no leftover `../../docs/images`); SEO rewrite without copying missing `agency/` art.
 - VERIFIED: JSON.parse of www-theme-kit dashboard.json + dashboard-palettes.json + syn-themes all-palettes.json.
 - UNVERIFIED: live jenninexus.com until `/deploy jenni` git-pull succeeds.
 - UNVERIFIED: headed visual QA of health labs/habits (code present; not re-opened in a headed browser this run).
@@ -56,7 +57,7 @@ Continue the 2026-08-17 cross-repo run. Pets HTML is approved; restyle dusk-comp
 ## Deferred
 
 - Live droplet deploy of JN (sanctioned `/deploy jenni` after git push).
-- Scaffolder still leaves `../../docs/images/pets/` relative paths in `my-dashboard/` (same class of bug as missing agency banners).
+- ~~Scaffolder left `../../docs/images/pets/` in `my-dashboard/`~~ — 2026-08-18 follow-up: copy existing `docs/images/<folder>/` + rewrite srcs to `docs/images/`. Agency art still not shipped (onerror).
 - `/theme` source (`~/.claude/commands/syn/theme.md`) is corrected; generated Codex skill may still lag if write-protected. Confirm before treating the skill mirror as SSOT.
 - www-theme-kit sibling dirty `profiles/discord-bot.json` on `codex/social-notifier-release` — not staged.
 - syn-themes `.gitignore` / `.code-workspace` dirty — not staged.
