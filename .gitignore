@@ -2,14 +2,29 @@ node_modules/
 storage/
 
 # Secrets & local config — copy the .example files and fill in
-.env
-.env.local
+.env*
+!.env.example
+!.env.*.example
 *.code-workspace
 !*.code-workspace.example
 
 # Per-user generated output (your dashboard lives here)
 my-dashboard/
 _scratch/
+
+# Private/commercial experiments are never part of this public repository.
+# If private work needs commit history, use a separate sibling repo with no remote;
+# a local-only branch here is still part of the public repo's pushable history.
+_private/
+.private/
+paid-app/
+product-app-private/
+
+# Local QA/build evidence can contain user data or machine-specific paths.
+coverage/
+test-results/
+playwright-report/
+.nyc_output/
 
 # Local agent scratch (Codex / Claude Code state)
 .codex/

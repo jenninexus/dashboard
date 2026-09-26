@@ -7,7 +7,8 @@
   "scripts": {
     "open": "start profiles/seo/seo.html",
     "build-dashboard": "node scripts/build-dashboard.mjs",
-    "profiles": "node scripts/build-dashboard.mjs --list"
+    "profiles": "node scripts/build-dashboard.mjs --list",
+    "check:public-boundary": "node scripts/check-public-boundary.mjs"
   },
   "keywords": ["dashboard", "analytics", "template", "seo", "finances", "health", "pets", "charts", "self-contained", "starter-kit"],
   "license": "MIT"
