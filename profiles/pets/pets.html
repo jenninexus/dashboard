@@ -4,10 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard — Senior Pet Care</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
 /* ── Theme tokens: Dusk Companion ───────────────────────────────── */
 :root {
@@ -272,10 +268,16 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 }
 .footer-note a{color:var(--secondary);font-weight:600}
 
-@media(max-width:720px){
+@media(max-width:767.98px){
   .banner{height:110px}
   .stats{gap:.4rem}
   .kpi{min-width:100px}
+}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+button,.tab,.todo-item{user-select:none}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .anim{opacity:1!important;transform:none!important}
 }
 </style>
 </head>
@@ -301,6 +303,8 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     </div>
     <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">&#9790; Theme</button>
   </div>
+
+  <p class="storage-note" style="font-size:.7rem;color:var(--dim);line-height:1.6">Data source: local <code>data.json</code>. JSON, this HTML view, exports and backups are unencrypted plaintext. Checklist completion, theme and collapsed sections are browser-local, disposable state and are not included in JSON backups.</p>
 
   <div class="controls anim">
     <button class="ctrl-btn" onclick="expandAll()">Expand All</button>
@@ -340,7 +344,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     </div>
     <div class="card-body">
       <div class="chart-meta" id="weight-meta"></div>
-      <div class="chart-wrap"><canvas id="weight-chart"></canvas></div>
+      <div class="chart-wrap"><svg id="weight-chart" viewBox="0 0 640 220" width="100%" height="100%" role="img" aria-label="Weight readings over time; the exact readings are also in the table below"></svg></div>
       <table class="tbl" id="weight-table">
         <thead><tr><th>Date</th><th>Weight</th><th>Notes</th></tr></thead>
         <tbody id="weight-body"></tbody>
@@ -477,16 +481,59 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
   },
   "weight": {
     "unit": "lbs",
-    "target_range": { "min": 8.5, "max": 9.2 },
+    "target_range": {
+      "min": 8.5,
+      "max": 9.2
+    },
     "readings": [
-      { "date": "2026-06-23", "lbs": 9.1, "notes": "Baseline at specialist recheck" },
-      { "date": "2026-06-30", "lbs": 9.0, "notes": "Stable" },
-      { "date": "2026-07-07", "lbs": 9.0, "notes": "Good appetite week" },
-      { "date": "2026-07-14", "lbs": 8.9, "notes": "Slight dip, watching" },
-      { "date": "2026-07-21", "lbs": 8.9, "notes": "Holding steady" },
-      { "date": "2026-07-28", "lbs": 8.8, "notes": "Within target range" },
-      { "date": "2026-08-04", "lbs": 8.8, "notes": "Stable on renal diet" },
-      { "date": "2026-08-11", "lbs": 8.8, "notes": "Today — stable-ish trend" }
+      {
+        "date": "2026-06-23",
+        "lbs": 9.1,
+        "notes": "Baseline at specialist recheck",
+        "id": "weight-readings-1"
+      },
+      {
+        "date": "2026-06-30",
+        "lbs": 9,
+        "notes": "Stable",
+        "id": "weight-readings-2"
+      },
+      {
+        "date": "2026-07-07",
+        "lbs": 9,
+        "notes": "Good appetite week",
+        "id": "weight-readings-3"
+      },
+      {
+        "date": "2026-07-14",
+        "lbs": 8.9,
+        "notes": "Slight dip, watching",
+        "id": "weight-readings-4"
+      },
+      {
+        "date": "2026-07-21",
+        "lbs": 8.9,
+        "notes": "Holding steady",
+        "id": "weight-readings-5"
+      },
+      {
+        "date": "2026-07-28",
+        "lbs": 8.8,
+        "notes": "Within target range",
+        "id": "weight-readings-6"
+      },
+      {
+        "date": "2026-08-04",
+        "lbs": 8.8,
+        "notes": "Stable on renal diet",
+        "id": "weight-readings-7"
+      },
+      {
+        "date": "2026-08-11",
+        "lbs": 8.8,
+        "notes": "Today — stable-ish trend",
+        "id": "weight-readings-8"
+      }
     ]
   },
   "medications": [
@@ -497,7 +544,8 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       "time": "Morning & evening with food",
       "purpose": "Hyperthyroidism",
       "refill_status": "ok",
-      "notes": "Transdermal gel alternate if GI upset"
+      "notes": "Transdermal gel alternate if GI upset",
+      "id": "medications-1"
     },
     {
       "name": "Phosphate binder",
@@ -506,7 +554,8 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       "time": "Breakfast & dinner",
       "purpose": "CKD — phosphorus control",
       "refill_status": "ok",
-      "notes": "Crush into wet food"
+      "notes": "Crush into wet food",
+      "id": "medications-2"
     },
     {
       "name": "Cyanocobalamin (B12)",
@@ -515,7 +564,8 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       "time": "Sunday morning",
       "purpose": "CKD support",
       "refill_status": "refill_soon",
-      "notes": "Sub-Q injection at home — ~2 doses left"
+      "notes": "Sub-Q injection at home — ~2 doses left",
+      "id": "medications-3"
     }
   ],
   "vetVisits": [
@@ -524,52 +574,87 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       "clinic": "Riverside Animal Clinic",
       "reason": "Senior wellness & bloodwork",
       "findings": "Creatinine mildly elevated; T4 high — started methimazole",
-      "follow_up": "Recheck labs in 6 weeks"
+      "follow_up": "Recheck labs in 6 weeks",
+      "id": "vetVisits-1"
     },
     {
       "date": "2026-06-21",
       "clinic": "Riverside Animal Clinic",
       "reason": "Renal diet transition follow-up",
       "findings": "Weight stable; appetite good on prescription diet",
-      "follow_up": "Continue fluids 2× weekly"
+      "follow_up": "Continue fluids 2× weekly",
+      "id": "vetVisits-2"
     },
     {
       "date": "2026-08-02",
       "clinic": "Riverside Animal Clinic",
       "reason": "Quarterly senior panel",
       "findings": "IRIS stage 2 unchanged; thyroid controlled on current dose",
-      "follow_up": "Next labs in 3 months"
+      "follow_up": "Next labs in 3 months",
+      "id": "vetVisits-3"
     }
   ],
   "qol": {
     "_scale": "HHHHHMM — each dimension scored 0–10 (higher = better)",
     "last_assessed": "2026-08-15",
     "scores": {
-      "hurt": { "label": "Hurt", "score": 8, "note": "Mild stiffness after long naps; no vocalizing" },
-      "hunger": { "label": "Hunger", "score": 7, "note": "Eats most of renal wet food; occasional pickiness" },
-      "hydration": { "label": "Hydration", "score": 6, "note": "Sub-Q fluids help; still drinks less than ideal" },
-      "hygiene": { "label": "Hygiene", "score": 9, "note": "Self-grooms well; coat shiny" },
-      "happiness": { "label": "Happiness", "score": 7, "note": "Purr when petted; enjoys window perch" },
-      "mobility": { "label": "Mobility", "score": 6, "note": "Jumps to couch; slower on stairs" },
-      "moreGoodDays": { "label": "More Good Days", "score": 7, "note": "Mostly good days this month" }
+      "hurt": {
+        "label": "Hurt",
+        "score": 8,
+        "note": "Mild stiffness after long naps; no vocalizing"
+      },
+      "hunger": {
+        "label": "Hunger",
+        "score": 7,
+        "note": "Eats most of renal wet food; occasional pickiness"
+      },
+      "hydration": {
+        "label": "Hydration",
+        "score": 6,
+        "note": "Sub-Q fluids help; still drinks less than ideal"
+      },
+      "hygiene": {
+        "label": "Hygiene",
+        "score": 9,
+        "note": "Self-grooms well; coat shiny"
+      },
+      "happiness": {
+        "label": "Happiness",
+        "score": 7,
+        "note": "Purr when petted; enjoys window perch"
+      },
+      "mobility": {
+        "label": "Mobility",
+        "score": 6,
+        "note": "Jumps to couch; slower on stairs"
+      },
+      "moreGoodDays": {
+        "label": "More Good Days",
+        "score": 7,
+        "note": "Mostly good days this month"
+      }
     }
   },
   "redFlags": [
     {
       "symptom": "Not eating for 24 hours",
-      "action": "Call Riverside Animal Clinic same day; may need appetite stimulant or fluids"
+      "action": "Call Riverside Animal Clinic same day; may need appetite stimulant or fluids",
+      "id": "redFlags-1"
     },
     {
       "symptom": "Labored or open-mouth breathing",
-      "action": "Emergency — go to nearest ER vet immediately"
+      "action": "Emergency — go to nearest ER vet immediately",
+      "id": "redFlags-2"
     },
     {
       "symptom": "Hiding more than usual / withdrawn",
-      "action": "Monitor closely; call vet if persists beyond one day"
+      "action": "Monitor closely; call vet if persists beyond one day",
+      "id": "redFlags-3"
     },
     {
       "symptom": "Collapse or unable to stand",
-      "action": "Emergency — transport to ER vet immediately"
+      "action": "Emergency — transport to ER vet immediately",
+      "id": "redFlags-4"
     }
   ],
   "appointments": [
@@ -578,28 +663,32 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       "clinic": "Riverside Animal Clinic",
       "type": "Bloodwork recheck",
       "notes": "Fasting not required; bring med list",
-      "past": false
+      "past": false,
+      "id": "appointments-1"
     },
     {
       "date": "2026-10-12",
       "clinic": "Riverside Animal Clinic",
       "type": "Senior wellness exam",
       "notes": "Discuss fluid schedule & weight trend",
-      "past": false
+      "past": false,
+      "id": "appointments-2"
     },
     {
       "date": "2026-11-08",
       "clinic": "Riverside Animal Clinic",
       "type": "Dental assessment",
       "notes": "Non-anesthetic cleaning vs extraction decision",
-      "past": false
+      "past": false,
+      "id": "appointments-3"
     },
     {
       "date": "2026-04-18",
       "clinic": "Riverside Animal Clinic",
       "type": "Vaccination update",
       "notes": "Rabies booster; declined non-core vaccines",
-      "past": true
+      "past": true,
+      "id": "appointments-4"
     }
   ],
   "eol": {
@@ -610,7 +699,8 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       "Keep a comfort-care list: favorite bed, quiet room, pain plan",
       "Printable decision worksheets: github.com/jenninexus/senior-pet-care"
     ]
-  }
+  },
+  "schemaVersion": 1
 }
 </script>
 
@@ -619,26 +709,68 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
   'use strict';
 
   const D = JSON.parse(document.getElementById('pets-data').textContent);
-  let weightChart = null;
+
+// Existing collapse/tab controls also work with Enter/Space and expose state.
+function enableKeyboardControls(){
+  const controls = document.querySelectorAll(".card-head[onclick], .tab[onclick]");
+  const sync = () => controls.forEach(control => {
+    const card = control.closest(".card");
+    if(card) control.setAttribute("aria-expanded", String(card.classList.contains("open")));
+  });
+  controls.forEach(control => {
+    control.setAttribute("role","button");
+    control.setAttribute("tabindex","0");
+    control.addEventListener("keydown", event => {
+      if(event.key === "Enter" || event.key === " "){ event.preventDefault(); control.click(); }
+    });
+  });
+  document.addEventListener("click", () => queueMicrotask(sync));
+  sync();
+}
+
+// View/checklist state is disposable: blocked or corrupt storage must not stop rendering.
+function readLocal(key){ try { return localStorage.getItem(key); } catch { return null; } }
+function writeLocal(key,value){ try { localStorage.setItem(key,value); } catch {} }
+function readLocalJSON(key,fallback={}){
+  try { const value=JSON.parse(readLocal(key)); return value && typeof value === "object" && !Array.isArray(value) ? value : fallback; } catch { return fallback; }
+}
+
+  // JSON fields are plain text, never rich HTML. Encode values at HTML boundaries.
+  function escapeText(value){
+    return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function localToday(){
+    if (window.dashboardToday != null) {
+    const value = window.dashboardToday;
+    if(typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) throw new Error('dashboardToday must be an ISO calendar date');
+    const [year,month,day] = value.split('-').map(Number);
+    const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+    const days = [31,leap ? 29 : 28,31,30,31,30,31,31,30,31,30,31];
+    if(year < 1 || month < 1 || month > 12 || day < 1 || day > days[month-1]) throw new Error('dashboardToday must be a real calendar date');
+    return value;
+  }
+    const date = new Date();
+    return date.getFullYear() + '-' + String(date.getMonth()+1).padStart(2,'0') + '-' + String(date.getDate()).padStart(2,'0');
+  }
 
   function toggleTheme(){
     const html = document.documentElement;
     const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
-    localStorage.setItem('pets-theme', next);
-    if(weightChart) renderWeightChart();
+    writeLocal('pets-theme', next);
+    renderWeightChart();
   }
   window.toggleTheme = toggleTheme;
-  const savedTheme = localStorage.getItem('pets-theme');
-  if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+  const savedTheme = readLocal('pets-theme');
+  if(['dark','light'].includes(savedTheme)) document.documentElement.setAttribute('data-theme', savedTheme);
 
   function toggleCard(id){
     const card = document.getElementById(id);
     if(card.classList.contains('no-collapse')) return;
     const open = card.classList.toggle('open');
-    const state = JSON.parse(localStorage.getItem('pets-cards') || '{}');
+    const state = readLocalJSON('pets-cards');
     state[id] = open;
-    localStorage.setItem('pets-cards', JSON.stringify(state));
+    writeLocal('pets-cards', JSON.stringify(state));
   }
   window.toggleCard = toggleCard;
 
@@ -646,19 +778,19 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     document.querySelectorAll('.card:not(.no-collapse)').forEach(c => c.classList.add('open'));
     const ids = {};
     document.querySelectorAll('.card[id]:not(.no-collapse)').forEach(c => { ids[c.id] = true; });
-    localStorage.setItem('pets-cards', JSON.stringify(ids));
+    writeLocal('pets-cards', JSON.stringify(ids));
   }
   window.expandAll = expandAll;
 
   function collapseAll(){
     document.querySelectorAll('.card:not(.no-collapse)').forEach(c => c.classList.remove('open'));
     document.getElementById('card-redflags').classList.add('open');
-    localStorage.setItem('pets-cards', '{}');
+    writeLocal('pets-cards', '{}');
   }
   window.collapseAll = collapseAll;
 
   function restoreCards(){
-    const state = JSON.parse(localStorage.getItem('pets-cards') || '{}');
+    const state = readLocalJSON('pets-cards');
     const defaults = ['card-today','card-weight','card-redflags'];
     document.querySelectorAll('.card[id]').forEach(c => {
       if(c.classList.contains('no-collapse')){ c.classList.add('open'); return; }
@@ -703,9 +835,9 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
   }
 
   function renderChecklist(){
-    const today = new Date().toISOString().slice(0,10);
+    const today = localToday();
     const storageKey = 'pets-checklist-' + today;
-    const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    const saved = readLocalJSON(storageKey);
     const grid = document.getElementById('checklist-grid');
     const keys = [];
 
@@ -723,11 +855,10 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       lbl.textContent = label;
       item.appendChild(cb);
       item.appendChild(lbl);
-      item.addEventListener('click', function(e){
-        if(e.target.tagName !== 'INPUT') cb.checked = !cb.checked;
-        const s = JSON.parse(localStorage.getItem(storageKey) || '{}');
+      item.addEventListener('change', function(){
+        const s = readLocalJSON(storageKey);
         s[key] = cb.checked;
-        localStorage.setItem(storageKey, JSON.stringify(s));
+        writeLocal(storageKey, JSON.stringify(s));
         item.classList.toggle('done', cb.checked);
         updateCheckProgress(storageKey, keys);
       });
@@ -737,10 +868,10 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
   }
 
   function updateCheckProgress(storageKey, keys){
-    const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    const saved = readLocalJSON(storageKey);
     const done = keys.filter(k => saved[k]).length;
     const total = keys.length;
-    const pct = Math.round((done/total)*100);
+    const pct = (total ? Math.round((done/total)*100) : 0);
     document.getElementById('check-progress-chip').textContent = done + ' / ' + total;
     document.getElementById('check-pct-label').textContent = pct + '%';
     document.getElementById('check-fill').style.width = pct + '%';
@@ -748,59 +879,43 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
   }
 
   function renderWeightChart(){
-    const canvas = document.getElementById('weight-chart');
+    const svg = document.getElementById('weight-chart');
     const readings = D.weight.readings;
-    const labels = readings.map(r => fmtDate(r.date));
-    const data = readings.map(r => r.lbs);
     const primary = cssVar('--primary') || '#f472b6';
     const secondary = cssVar('--secondary') || '#fb923c';
     const dim = cssVar('--dim') || '#c4a0b4';
     const border = cssVar('--border') || 'rgba(244,114,182,0.14)';
-    const text = cssVar('--text') || '#f5e6f0';
-
-    if(weightChart) weightChart.destroy();
-    weightChart = new Chart(canvas, {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [{
-          label: 'Weight (' + D.weight.unit + ')',
-          data,
-          borderColor: primary,
-          backgroundColor: 'rgba(244,114,182,0.12)',
-          pointBackgroundColor: secondary,
-          pointBorderColor: primary,
-          pointRadius: 4,
-          tension: 0.35,
-          fill: true
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: 'rgba(18,8,20,0.95)',
-            titleColor: text,
-            bodyColor: text,
-            borderColor: border,
-            borderWidth: 1
-          }
-        },
-        scales: {
-          x: {
-            ticks: { color: dim, font: { family: cssVar('--mono'), size: 10 } },
-            grid: { color: border }
-          },
-          y: {
-            min: D.weight.target_range.min - 0.3,
-            max: D.weight.target_range.max + 0.3,
-            ticks: { color: dim, font: { family: cssVar('--mono'), size: 10 } },
-            grid: { color: border }
-          }
-        }
-      }
+    svg.replaceChildren();
+    function add(tag, attributes, text, parent=svg){
+      const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      Object.entries(attributes).forEach(([name,value]) => node.setAttribute(name, String(value)));
+      if(text != null) node.textContent = text;
+      parent.appendChild(node);
+      return node;
+    }
+    if(!readings.length){ add('text', {x:20,y:30,fill:dim}, 'No weight readings'); return; }
+    const values = readings.map(r => Number(r.lbs));
+    const low = Math.min(Number(D.weight.target_range.min), ...values) - 0.3;
+    const high = Math.max(Number(D.weight.target_range.max), ...values) + 0.3;
+    const y = value => 180 - (value-low) / (high-low) * 160;
+    const x = i => 55 + (readings.length === 1 ? 280 : i/(readings.length-1)*560);
+    add('title', {}, 'Weight (' + D.weight.unit + ') over time');
+    // Target band and axes retain the original chart's full dataset and range.
+    add('rect', {x:55,y:y(D.weight.target_range.max),width:560,height:y(D.weight.target_range.min)-y(D.weight.target_range.max),fill:primary,opacity:0.09});
+    for(let i=0;i<=4;i++){
+      const value = low+(high-low)*i/4;
+      add('line', {x1:55,x2:615,y1:y(value),y2:y(value),stroke:border});
+      add('text', {x:47,y:y(value)+4,fill:dim,'font-size':11,'text-anchor':'end'}, value.toFixed(1));
+    }
+    const points = values.map((value,i) => x(i)+','+y(value));
+    add('polygon', {points:x(0)+',180 '+points.join(' ')+' '+x(values.length-1)+',180',fill:primary,opacity:0.12});
+    add('polyline', {points:points.join(' '),fill:'none',stroke:primary,'stroke-width':2});
+    readings.forEach((reading,i) => {
+      const label = reading.date + ': ' + reading.lbs + ' ' + D.weight.unit + (reading.notes ? ' — ' + reading.notes : '');
+      const point = add('circle', {cx:x(i),cy:y(reading.lbs),r:4,fill:secondary,stroke:primary,tabindex:0,'aria-label':label});
+      add('title', {}, label, point);
+      if(i===0 || i===readings.length-1 || i % Math.ceil(readings.length/6) === 0)
+        add('text', {x:x(i),y:205,fill:dim,'font-size':10,'text-anchor':'middle'},fmtDate(reading.date));
     });
   }
 
@@ -810,10 +925,10 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     const latest = readings[readings.length - 1].lbs;
     const delta = (latest - first).toFixed(1);
     const sign = delta <= 0 ? '' : '+';
-    document.getElementById('weight-chip').textContent = sign + delta + ' ' + D.weight.unit + ' (8 wk)';
+    document.getElementById('weight-chip').textContent = sign + delta + ' ' + D.weight.unit + ' over recorded readings';
     document.getElementById('weight-meta').innerHTML =
-      'Target range: <strong>' + D.weight.target_range.min + '–' + D.weight.target_range.max + ' ' + D.weight.unit + '</strong>' +
-      ' · Latest: <strong>' + latest + ' ' + D.weight.unit + '</strong>';
+      'Target range: <strong>' + escapeText(D.weight.target_range.min) + '–' + escapeText(D.weight.target_range.max) + ' ' + escapeText(D.weight.unit) + '</strong>' +
+      ' · Latest: <strong>' + escapeText(latest) + ' ' + escapeText(D.weight.unit) + '</strong>';
 
     const tbody = document.getElementById('weight-body');
     readings.forEach((r, i) => {
@@ -821,8 +936,8 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       if(i === readings.length - 1) tr.className = 'today';
       tr.innerHTML =
         '<td><strong>' + fmtDate(r.date) + '</strong>' + (i === readings.length - 1 ? ' <span class="chip ok">Latest</span>' : '') + '</td>' +
-        '<td>' + r.lbs + ' ' + D.weight.unit + '</td>' +
-        '<td style="color:var(--dim)">' + r.notes + '</td>';
+        '<td>' + escapeText(r.lbs) + ' ' + escapeText(D.weight.unit) + '</td>' +
+        '<td style="color:var(--dim)">' + escapeText(r.notes) + '</td>';
       tbody.appendChild(tr);
     });
     renderWeightChart();
@@ -837,11 +952,11 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       if(m.refill_status !== 'ok') hasWarn = true;
       const tr = document.createElement('tr');
       tr.innerHTML =
-        '<td><strong>' + m.name + '</strong><br><span style="color:var(--dim);font-size:.68rem">' + m.notes + '</span></td>' +
-        '<td><code>' + m.dose + '</code></td>' +
-        '<td>' + m.frequency + '</td>' +
-        '<td>' + m.time + '</td>' +
-        '<td style="color:var(--dim)">' + m.purpose + '</td>' +
+        '<td><strong>' + escapeText(m.name) + '</strong><br><span style="color:var(--dim);font-size:.68rem">' + escapeText(m.notes) + '</span></td>' +
+        '<td><code>' + escapeText(m.dose) + '</code></td>' +
+        '<td>' + escapeText(m.frequency) + '</td>' +
+        '<td>' + escapeText(m.time) + '</td>' +
+        '<td style="color:var(--dim)">' + escapeText(m.purpose) + '</td>' +
         '<td><span class="chip ' + chipClass + '">' + chipLabel + '</span></td>';
       tbody.appendChild(tr);
     });
@@ -855,10 +970,10 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       const tr = document.createElement('tr');
       tr.innerHTML =
         '<td><strong>' + fmtDate(v.date) + '</strong></td>' +
-        '<td>' + v.clinic + '</td>' +
-        '<td>' + v.reason + '</td>' +
-        '<td style="color:var(--dim)">' + v.findings + '</td>' +
-        '<td style="color:var(--dim)">' + v.follow_up + '</td>';
+        '<td>' + escapeText(v.clinic) + '</td>' +
+        '<td>' + escapeText(v.reason) + '</td>' +
+        '<td style="color:var(--dim)">' + escapeText(v.findings) + '</td>' +
+        '<td style="color:var(--dim)">' + escapeText(v.follow_up) + '</td>';
       tbody.appendChild(tr);
     });
     const ul = document.getElementById('conditions-list');
@@ -884,9 +999,9 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       const div = document.createElement('div');
       div.className = 'bar-row';
       div.innerHTML =
-        '<div class="bar-label"><span class="lbl">' + item.label + '</span><span class="v" style="color:' + color + '">' + item.score + ' / 10</span></div>' +
+        '<div class="bar-label"><span class="lbl">' + escapeText(item.label) + '</span><span class="v" style="color:' + color + '">' + escapeText(item.score) + ' / 10</span></div>' +
         '<div class="track"><div class="fill teal" style="width:' + pct + '%"></div></div>' +
-        '<div style="font-size:.66rem;color:var(--dim2);margin-top:.25rem">' + item.note + '</div>';
+        '<div style="font-size:.66rem;color:var(--dim2);margin-top:.25rem">' + escapeText(item.note) + '</div>';
       container.appendChild(div);
     });
     const avg = (total / order.length).toFixed(1);
@@ -898,7 +1013,10 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     const ul = document.getElementById('redflags-list');
     D.redFlags.forEach(f => {
       const li = document.createElement('li');
-      li.innerHTML = '<strong>' + f.symptom + '</strong>' + f.action;
+      const symptom = document.createElement('strong');
+      symptom.textContent = f.symptom;
+      li.appendChild(symptom);
+      li.appendChild(document.createTextNode(f.action));
       ul.appendChild(li);
     });
   }
@@ -914,9 +1032,9 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       const tr = document.createElement('tr');
       tr.innerHTML =
         '<td><strong>' + fmtDate(a.date) + '</strong></td>' +
-        '<td>' + a.clinic + '</td>' +
-        '<td>' + a.type + '</td>' +
-        '<td style="color:var(--dim)">' + a.notes + '</td>';
+        '<td>' + escapeText(a.clinic) + '</td>' +
+        '<td>' + escapeText(a.type) + '</td>' +
+        '<td style="color:var(--dim)">' + escapeText(a.notes) + '</td>';
       tbody.appendChild(tr);
     });
 
@@ -926,9 +1044,9 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       tr.className = 'past';
       tr.innerHTML =
         '<td>' + fmtDate(a.date) + '</td>' +
-        '<td>' + a.clinic + '</td>' +
-        '<td>' + a.type + '</td>' +
-        '<td>' + a.notes + '</td>';
+        '<td>' + escapeText(a.clinic) + '</td>' +
+        '<td>' + escapeText(a.type) + '</td>' +
+        '<td>' + escapeText(a.notes) + '</td>';
       pastTbody.appendChild(tr);
     });
   }
@@ -955,6 +1073,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     renderAppointments();
     renderEOL();
     restoreCards();
+    enableKeyboardControls();
   }
 
   if(document.readyState === 'loading'){

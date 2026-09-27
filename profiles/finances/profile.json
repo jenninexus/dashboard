@@ -6,14 +6,36 @@
   "theme": "emerald-finance",
   "render": "profiles/finances/finances.html",
   "exampleData": "example-data.json",
-  "dataInjection": { "scriptId": "fin-data" },
+  "dataInjection": {
+    "scriptId": "fin-data"
+  },
   "sections": [
-    { "id": "holdings", "title": "Current Holdings",     "data": "holdings.accounts[] + compare[] → cash vs obligation bars" },
-    { "id": "bills",    "title": "Bills & Amounts Due",  "data": "bills[] → status table (Overdue/Due/Paid/Autopay)" },
-    { "id": "loans",    "title": "Loans & Repayments",   "data": "loans[] → collapsible foldouts + stillOwed" },
-    { "id": "income",   "title": "Income Sources",       "data": "income[] → YTD rollup" }
+    {
+      "id": "holdings",
+      "title": "Current Holdings",
+      "data": "holdings.accounts[] + compare[] → cash vs obligation bars"
+    },
+    {
+      "id": "bills",
+      "title": "Bills & Amounts Due",
+      "data": "bills[] → status table (Overdue/Due/Paid/Autopay)"
+    },
+    {
+      "id": "loans",
+      "title": "Loans & Repayments",
+      "data": "loans[] → collapsible foldouts + stillOwed"
+    },
+    {
+      "id": "income",
+      "title": "Income Sources",
+      "data": "income[] → YTD rollup"
+    }
   ],
-  "dataSources": ["manual JSON (data.json)"],
+  "dataSources": [
+    "manual JSON (data.json)"
+  ],
   "blogPost": "A private finances dashboard you fully control (local, no SaaS)",
-  "_note": "Public snapshot demo (Alex Rivera, fictional). For an operational workspace (autopay, archive, startup pipeline) see github.com/jenninexus/fin. Never copy a household dashboard here."
+  "_note": "Public snapshot demo (Alex Rivera, fictional). For an operational workspace (autopay, archive, startup pipeline) see github.com/jenninexus/fin. Never copy a household dashboard here.",
+  "dataContractVersion": 1,
+  "editorSchema": "editor-schema.json"
 }

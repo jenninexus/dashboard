@@ -6,20 +6,65 @@
   "theme": "aurora-seo",
   "render": "profiles/seo/seo.html",
   "exampleData": "example-data.json",
-  "dataInjection": { "scriptId": "seo-data" },
+  "dataInjection": {
+    "scriptId": "seo-data"
+  },
   "tier1Tokens": "../../themes/seo-tokens.css",
   "sections": [
-    { "id": "progress",  "title": "6-Month Progress",  "data": "progress.metrics[]" },
-    { "id": "ga4",       "title": "GA4 Summary",        "data": "ga4[]" },
-    { "id": "traffic",   "title": "Traffic Sources",    "data": "traffic[]" },
-    { "id": "pages",     "title": "Top Pages",          "data": "topPages[]" },
-    { "id": "gsc",       "title": "GSC Coverage",       "data": "gsc" },
-    { "id": "pagespeed", "title": "PageSpeed",          "data": "pagespeed" },
-    { "id": "onpage",    "title": "On-Page SEO",        "data": "checklist[]" },
-    { "id": "actions",   "title": "Action Plan",        "data": "actions" },
-    { "id": "milestones","title": "Site Milestones",    "data": "milestones[]" }
+    {
+      "id": "progress",
+      "title": "6-Month Progress",
+      "data": "progress.metrics[]"
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 Summary",
+      "data": "ga4[]"
+    },
+    {
+      "id": "traffic",
+      "title": "Traffic Sources",
+      "data": "traffic[]"
+    },
+    {
+      "id": "pages",
+      "title": "Top Pages",
+      "data": "topPages[]"
+    },
+    {
+      "id": "gsc",
+      "title": "GSC Coverage",
+      "data": "gsc"
+    },
+    {
+      "id": "pagespeed",
+      "title": "PageSpeed",
+      "data": "pagespeed"
+    },
+    {
+      "id": "onpage",
+      "title": "On-Page SEO",
+      "data": "checklist[]"
+    },
+    {
+      "id": "actions",
+      "title": "Action Plan",
+      "data": "actions"
+    },
+    {
+      "id": "milestones",
+      "title": "Site Milestones",
+      "data": "milestones[]"
+    }
   ],
-  "dataSources": ["GA4", "Google Search Console", "PageSpeed Insights", "Cloudflare"],
+  "dataSources": [
+    "GA4",
+    "Google Search Console",
+    "PageSpeed Insights",
+    "Cloudflare"
+  ],
   "blogPost": "Build a client-ready SEO report dashboard (no backend)",
-  "_note": "Render is data-driven: reads inline <script id=\"seo-data\">. example-data.json matches that schema."
+  "_note": "Render is data-driven: reads inline <script id=\"seo-data\">. example-data.json matches that schema.",
+  "dataContractVersion": 1,
+  "editorSchema": "editor-schema.json"
 }

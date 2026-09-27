@@ -1,10 +1,11 @@
 {
   "profile": {
     "name": "Jordan Lee",
-    "age": 32,
+    "age": 34,
     "dob": "1992-03-14",
     "location": "Portland, OR",
-    "last_updated": "2026-06-20"
+    "last_updated": "2026-06-20",
+    "averageDailySteps": 8240
   },
   "vitals": [
     {
@@ -13,7 +14,8 @@
       "bp_diastolic": 76,
       "heart_rate": 68,
       "weight_lbs": 162.4,
-      "notes": "Felt rested"
+      "notes": "Felt rested",
+      "id": "vitals-1"
     },
     {
       "date": "2026-06-15",
@@ -21,7 +23,8 @@
       "bp_diastolic": 78,
       "heart_rate": 72,
       "weight_lbs": 162.8,
-      "notes": "After coffee"
+      "notes": "After coffee",
+      "id": "vitals-2"
     },
     {
       "date": "2026-06-16",
@@ -29,7 +32,8 @@
       "bp_diastolic": 74,
       "heart_rate": 65,
       "weight_lbs": 161.9,
-      "notes": "Morning walk"
+      "notes": "Morning walk",
+      "id": "vitals-3"
     },
     {
       "date": "2026-06-17",
@@ -37,7 +41,8 @@
       "bp_diastolic": 77,
       "heart_rate": 70,
       "weight_lbs": 162.1,
-      "notes": ""
+      "notes": "",
+      "id": "vitals-4"
     },
     {
       "date": "2026-06-18",
@@ -45,7 +50,8 @@
       "bp_diastolic": 80,
       "heart_rate": 74,
       "weight_lbs": 163,
-      "notes": "Stressful meeting"
+      "notes": "Stressful meeting",
+      "id": "vitals-5"
     },
     {
       "date": "2026-06-19",
@@ -53,7 +59,8 @@
       "bp_diastolic": 75,
       "heart_rate": 66,
       "weight_lbs": 162.2,
-      "notes": "Post yoga"
+      "notes": "Post yoga",
+      "id": "vitals-6"
     },
     {
       "date": "2026-06-20",
@@ -61,7 +68,8 @@
       "bp_diastolic": 76,
       "heart_rate": 67,
       "weight_lbs": 161.8,
-      "notes": "Today"
+      "notes": "Today",
+      "id": "vitals-7"
     }
   ],
   "medications": [
@@ -72,7 +80,8 @@
       "time": "Morning",
       "pharmacy": "CVS Pharmacy",
       "refill_status": "ok",
-      "notes": "With breakfast"
+      "notes": "With breakfast",
+      "id": "medications-1"
     },
     {
       "name": "Omega-3 Fish Oil",
@@ -81,7 +90,8 @@
       "time": "Morning",
       "pharmacy": "Amazon",
       "refill_status": "ok",
-      "notes": "Cardiovascular support"
+      "notes": "Cardiovascular support",
+      "id": "medications-2"
     },
     {
       "name": "Magnesium Glycinate",
@@ -90,7 +100,8 @@
       "time": "Evening",
       "pharmacy": "Whole Foods",
       "refill_status": "refill_soon",
-      "notes": "~12 days left"
+      "notes": "~12 days left",
+      "id": "medications-3"
     },
     {
       "name": "Loratadine (Claritin)",
@@ -99,7 +110,8 @@
       "time": "Morning",
       "pharmacy": "Walgreens",
       "refill_status": "ok",
-      "notes": "Seasonal allergies"
+      "notes": "Seasonal allergies",
+      "id": "medications-4"
     },
     {
       "name": "Sertraline",
@@ -108,7 +120,8 @@
       "time": "Morning",
       "pharmacy": "CVS Pharmacy",
       "refill_status": "ok",
-      "notes": "Dr. Patel — anxiety mgmt"
+      "notes": "Dr. Patel — anxiety mgmt",
+      "id": "medications-5"
     },
     {
       "name": "Multivitamin",
@@ -117,7 +130,8 @@
       "time": "Morning",
       "pharmacy": "Costco",
       "refill_status": "overdue",
-      "notes": "Ran out 3 days ago"
+      "notes": "Ran out 3 days ago",
+      "id": "medications-6"
     },
     {
       "name": "Melatonin",
@@ -126,7 +140,8 @@
       "time": "Before bed",
       "pharmacy": "Amazon",
       "refill_status": "ok",
-      "notes": "Travel/circadian reset"
+      "notes": "Travel/circadian reset",
+      "id": "medications-7"
     }
   ],
   "fitness": [
@@ -135,49 +150,56 @@
       "day": "Sat",
       "activity": "Running",
       "duration_min": 35,
-      "type": "cardio"
+      "type": "cardio",
+      "id": "fitness-1"
     },
     {
       "date": "2026-06-15",
       "day": "Sun",
       "activity": "Rest",
       "duration_min": 0,
-      "type": "rest"
+      "type": "rest",
+      "id": "fitness-2"
     },
     {
       "date": "2026-06-16",
       "day": "Mon",
       "activity": "Weights",
       "duration_min": 50,
-      "type": "strength"
+      "type": "strength",
+      "id": "fitness-3"
     },
     {
       "date": "2026-06-17",
       "day": "Tue",
       "activity": "Yoga",
       "duration_min": 40,
-      "type": "stretch"
+      "type": "stretch",
+      "id": "fitness-4"
     },
     {
       "date": "2026-06-18",
       "day": "Wed",
       "activity": "Cycling",
       "duration_min": 45,
-      "type": "cardio"
+      "type": "cardio",
+      "id": "fitness-5"
     },
     {
       "date": "2026-06-19",
       "day": "Thu",
       "activity": "Weights",
       "duration_min": 55,
-      "type": "strength"
+      "type": "strength",
+      "id": "fitness-6"
     },
     {
       "date": "2026-06-20",
       "day": "Fri",
       "activity": "Walk/Cardio",
       "duration_min": 30,
-      "type": "cardio"
+      "type": "cardio",
+      "id": "fitness-7"
     }
   ],
   "nutrition": {
@@ -198,7 +220,8 @@
         "snacks": "Apple, almonds",
         "calories": 1920,
         "protein": 112,
-        "water": 7
+        "water": 7,
+        "id": "nutrition-log-1"
       },
       {
         "date": "2026-06-19",
@@ -208,7 +231,8 @@
         "snacks": "Banana, protein bar",
         "calories": 1840,
         "protein": 108,
-        "water": 8
+        "water": 8,
+        "id": "nutrition-log-2"
       },
       {
         "date": "2026-06-20",
@@ -218,7 +242,8 @@
         "snacks": "Orange, trail mix",
         "calories": 1680,
         "protein": 94,
-        "water": 6
+        "water": 6,
+        "id": "nutrition-log-3"
       }
     ]
   },
@@ -228,49 +253,56 @@
       "bedtime": "22:45",
       "wake": "06:30",
       "hours": 7.75,
-      "quality": 4
+      "quality": 4,
+      "id": "sleep-1"
     },
     {
       "date": "2026-06-15",
       "bedtime": "23:30",
       "wake": "07:15",
       "hours": 7.75,
-      "quality": 5
+      "quality": 5,
+      "id": "sleep-2"
     },
     {
       "date": "2026-06-16",
       "bedtime": "22:00",
       "wake": "05:45",
       "hours": 7.75,
-      "quality": 3
+      "quality": 3,
+      "id": "sleep-3"
     },
     {
       "date": "2026-06-17",
       "bedtime": "23:00",
       "wake": "06:45",
       "hours": 7.75,
-      "quality": 4
+      "quality": 4,
+      "id": "sleep-4"
     },
     {
       "date": "2026-06-18",
       "bedtime": "00:15",
       "wake": "07:00",
       "hours": 6.75,
-      "quality": 2
+      "quality": 2,
+      "id": "sleep-5"
     },
     {
       "date": "2026-06-19",
       "bedtime": "22:30",
       "wake": "06:15",
       "hours": 7.75,
-      "quality": 5
+      "quality": 5,
+      "id": "sleep-6"
     },
     {
       "date": "2026-06-20",
       "bedtime": "23:00",
       "wake": "06:45",
       "hours": 7.75,
-      "quality": 4
+      "quality": 4,
+      "id": "sleep-7"
     }
   ],
   "mood": [
@@ -278,43 +310,50 @@
       "date": "2026-06-14",
       "score": 7,
       "emoji": "😊",
-      "note": "Good energy, productive day"
+      "note": "Good energy, productive day",
+      "id": "mood-1"
     },
     {
       "date": "2026-06-15",
       "score": 8,
       "emoji": "😄",
-      "note": "Relaxed Sunday, time outside"
+      "note": "Relaxed Sunday, time outside",
+      "id": "mood-2"
     },
     {
       "date": "2026-06-16",
       "score": 6,
       "emoji": "😐",
-      "note": "Monday fatigue, picked up after lunch"
+      "note": "Monday fatigue, picked up after lunch",
+      "id": "mood-3"
     },
     {
       "date": "2026-06-17",
       "score": 7,
       "emoji": "😊",
-      "note": "Yoga helped, steady day"
+      "note": "Yoga helped, steady day",
+      "id": "mood-4"
     },
     {
       "date": "2026-06-18",
       "score": 4,
       "emoji": "😓",
-      "note": "Stressful deadline, poor sleep"
+      "note": "Stressful deadline, poor sleep",
+      "id": "mood-5"
     },
     {
       "date": "2026-06-19",
       "score": 8,
       "emoji": "😄",
-      "note": "Deadline done, huge relief"
+      "note": "Deadline done, huge relief",
+      "id": "mood-6"
     },
     {
       "date": "2026-06-20",
       "score": 7,
       "emoji": "😊",
-      "note": "Calm Friday, good week overall"
+      "note": "Calm Friday, good week overall",
+      "id": "mood-7"
     }
   ],
   "labs": [
@@ -324,7 +363,8 @@
       "unit": "mg/dL",
       "range": "<100",
       "status": "ok",
-      "notes": "May 2026 panel"
+      "notes": "May 2026 panel",
+      "id": "labs-1"
     },
     {
       "name": "HDL Cholesterol",
@@ -332,7 +372,8 @@
       "unit": "mg/dL",
       "range": ">50",
       "status": "ok",
-      "notes": ""
+      "notes": "",
+      "id": "labs-2"
     },
     {
       "name": "HbA1c",
@@ -340,7 +381,8 @@
       "unit": "%",
       "range": "<5.7",
       "status": "ok",
-      "notes": "Prediabetes cutoff 5.7"
+      "notes": "Prediabetes cutoff 5.7",
+      "id": "labs-3"
     },
     {
       "name": "Vitamin D",
@@ -348,7 +390,8 @@
       "unit": "ng/mL",
       "range": "30–80",
       "status": "warn",
-      "notes": "Supplementing D3 2000 IU"
+      "notes": "Supplementing D3 2000 IU",
+      "id": "labs-4"
     },
     {
       "name": "TSH",
@@ -356,7 +399,8 @@
       "unit": "mIU/L",
       "range": "0.4–4.0",
       "status": "ok",
-      "notes": ""
+      "notes": "",
+      "id": "labs-5"
     }
   ],
   "habits": [
@@ -364,25 +408,29 @@
       "name": "Morning walk",
       "streak": 12,
       "targetDays": 7,
-      "unit": "days"
+      "unit": "days",
+      "id": "habits-1"
     },
     {
       "name": "Meds taken",
       "streak": 20,
       "targetDays": 7,
-      "unit": "days"
+      "unit": "days",
+      "id": "habits-2"
     },
     {
       "name": "No alcohol",
       "streak": 19,
       "targetDays": 30,
-      "unit": "days"
+      "unit": "days",
+      "id": "habits-3"
     },
     {
       "name": "Journal 5 min",
       "streak": 4,
       "targetDays": 7,
-      "unit": "days"
+      "unit": "days",
+      "id": "habits-4"
     }
   ],
   "appointments": [
@@ -392,7 +440,8 @@
       "type": "Annual Check-up",
       "location": "Providence Medical Center",
       "notes": "Fasting bloodwork",
-      "past": false
+      "past": false,
+      "id": "appointments-1"
     },
     {
       "date": "2026-07-08",
@@ -400,7 +449,8 @@
       "type": "Dental Cleaning",
       "location": "Pearl District Dental",
       "notes": "6-month cleaning + X-ray",
-      "past": false
+      "past": false,
+      "id": "appointments-2"
     },
     {
       "date": "2026-07-15",
@@ -408,7 +458,8 @@
       "type": "Therapy Session",
       "location": "Telehealth (Zoom)",
       "notes": "Monthly — anxiety mgmt",
-      "past": false
+      "past": false,
+      "id": "appointments-3"
     },
     {
       "date": "2026-08-02",
@@ -416,7 +467,8 @@
       "type": "Sports Medicine",
       "location": "OHSU Sports Medicine",
       "notes": "Left knee follow-up",
-      "past": false
+      "past": false,
+      "id": "appointments-4"
     },
     {
       "date": "2026-05-20",
@@ -424,62 +476,75 @@
       "type": "Medication Review",
       "location": "Providence Medical Center",
       "notes": "Sertraline confirmed 50mg",
-      "past": true
+      "past": true,
+      "id": "appointments-5"
     }
   ],
   "goals": {
     "this_month": [
       {
         "title": "Run 30+ min 3x per week",
-        "progress": 70
+        "progress": 70,
+        "id": "goals-this_month-1"
       },
       {
         "title": "Average 7.5 hrs sleep",
-        "progress": 80
+        "progress": 80,
+        "id": "goals-this_month-2"
       },
       {
         "title": "8 cups water daily",
-        "progress": 60
+        "progress": 60,
+        "id": "goals-this_month-3"
       },
       {
         "title": "No alcohol for 30 days",
-        "progress": 65
+        "progress": 65,
+        "id": "goals-this_month-4"
       }
     ],
     "this_quarter": [
       {
         "title": "Lose 5 lbs (target 158)",
-        "progress": 45
+        "progress": 45,
+        "id": "goals-this_quarter-1"
       },
       {
         "title": "12-week strength program",
-        "progress": 58
+        "progress": 58,
+        "id": "goals-this_quarter-2"
       },
       {
         "title": "Meditate 10 min daily",
-        "progress": 40
+        "progress": 40,
+        "id": "goals-this_quarter-3"
       },
       {
         "title": "Cook at home 5 nights/wk",
-        "progress": 72
+        "progress": 72,
+        "id": "goals-this_quarter-4"
       }
     ],
     "long_term": [
       {
         "title": "Consistent sleep schedule",
-        "progress": 65
+        "progress": 65,
+        "id": "goals-long_term-1"
       },
       {
         "title": "5K under 25 minutes",
-        "progress": 50
+        "progress": 50,
+        "id": "goals-long_term-2"
       },
       {
         "title": "Reduce anxiety (GAD-7 < 5)",
-        "progress": 55
+        "progress": 55,
+        "id": "goals-long_term-3"
       },
       {
         "title": "Sustainable meal-prep habit",
-        "progress": 35
+        "progress": 35,
+        "id": "goals-long_term-4"
       }
     ]
   },
@@ -498,5 +563,6 @@
       "Wind down screens by 10pm",
       "Aim for 7+ hrs sleep tonight"
     ]
-  }
+  },
+  "schemaVersion": 1
 }

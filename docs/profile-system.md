@@ -1,39 +1,46 @@
 # Profile system
 
-A profile is a complete domain package: render, schema, and behavior.
+A profile is a complete domain package under `profiles/<id>/`:
 
-## Minimum profile files
+- `profile.json` — routing identity, renderer, default theme, and contract version.
+- `editor-schema.json` — compact `dashboard-editor` editing/validation contract.
+- `example-data.json` — fictional versioned fixture.
+- `<id>.html` — profile-specific standalone renderer.
 
-Inside `profiles/<id>/`:
+The editor format is intentionally small and is not advertised as JSON Schema. Its ordered sections
+describe fields, types, required/nullable state, bounds, enums, help text, and collection identities.
+Unknown fields are preserved. Changing a contract version requires an explicit migration; current
+generated outputs are rejected rather than guessed or silently upgraded.
 
-- `profile.json` for metadata, status, theme, and section intent.
-- `example-data.json` for data shape (must match the inline `<script id="…">` the HTML reads).
-- `{id}.html` for profile-specific rendering.
+## Scaffold and update lifecycle
 
-There is **no** root `dashboard.html`. The scaffolder copies `{id}.html` to `my-dashboard/dashboard.html`.
+1. The scaffolder loads and validates the profile manifest, editor contract, fixture, renderer, and
+   default theme.
+2. It creates a new output folder and writes `data.json`, `dashboard.html`, and
+   `.dashboard-meta.json`; existing output is never overwritten.
+3. Runtime art actually referenced under `docs/images/` is copied and paths are rewritten for the
+   generated folder.
+4. `dashboard:update` validates local `data.json` and provenance, then replaces only the one marked
+   embedded-data region in the existing HTML.
+5. Custom HTML/CSS outside that region remains byte-identical. A changed update rotates one
+   `dashboard.html.bak`; a no-op creates no backup.
 
-## How profiles work
+The wizard calls the same core APIs for profile loading, validation, serialization, saves, updates,
+and restores. It is not a second data path.
 
-1. Scaffold copies `example-data.json` to `my-dashboard/data.json`.
-2. Name/domain values are injected if provided (`site{}` or `profile{}`).
-3. The profile HTML and `themes/` are copied into output. Existing `docs/images/<folder>/` assets referenced as `../../docs/images/` are copied and rewritten to `docs/images/` so `file://` banners work from `my-dashboard/`.
-4. If `dataInjection.scriptId` is set, that inline JSON block is replaced with the stamped data.
-5. Open `my-dashboard/dashboard.html` from `file://`.
+## Build a profile
 
-## Build your own profile
+1. Copy the closest profile folder and give every manifest/schema identity a new lowercase id.
+2. Keep the fixture's `schemaVersion`, manifest `dataContractVersion`, and editor schema version in
+   agreement.
+3. Give object records stable ids and declare collection identity; primitive arrays remain ordered.
+4. Treat user text as plain text. Use DOM text nodes or encode it at fixed HTML boundaries; allowlist
+   colors, URLs, enums, and numeric ranges.
+5. Keep the inline `application/json` block exactly equal to `example-data.json`.
+6. Use only canonical media-query max widths: `389.98`, `575.98`, `767.98`, and `991.98px`.
+7. Keep the renderer useful offline and expose exact chart values in accessible text/table form.
+8. Add a compatible default to `themes/manifest.json`, then run `npm test`.
+9. Test a fresh output folder; never use `--force` as a shortcut.
 
-1. Copy the closest profile folder.
-2. Change `profile.json` identity, `theme`, `render` (`profiles/<id>/<id>.html`), and `dataInjection.scriptId`.
-3. Edit `example-data.json` so every field is clear (`_comment` keys welcome).
-4. Adjust the HTML for new sections only where needed.
-5. Test with `npm run build-dashboard -- --profile <your-profile> --force --out my-dashboard`.
-6. Add a row to `profiles/README.md`.
-
-## Design tips
-
-- Start by removing fields, not adding first.
-- Keep status colors obvious for people skimming.
-- Stay static-friendly: generated output should open from `file://`.
-- Per-profile themes stay distinct (aurora-seo / emerald-finance / vitality-health / dusk-companion). Shared chrome is collapse, radii, and breakpoints — not the same accent.
-
-See also: [Getting started](getting-started.md) · [Existing profiles](../profiles/README.md)
+See [profiles/README.md](../profiles/README.md) for field semantics and
+[getting-started.md](getting-started.md) for the user flow.

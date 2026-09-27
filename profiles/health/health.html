@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard — Health Profile</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ── Theme tokens: Vitality Health ──────────────────────────────── */
 :root {
@@ -226,7 +223,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 
 /* ── Checklist ───────────────────────────────────────────────────── */
 .check-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-bottom:.8rem}
-@media(max-width:620px){.check-grid{grid-template-columns:1fr}}
+@media(max-width:575.98px){.check-grid{grid-template-columns:1fr}}
 .check-group h3{
   font-size:.64rem;font-family:var(--mono);text-transform:uppercase;
   letter-spacing:.08em;color:var(--dim);margin-bottom:.55rem;
@@ -281,7 +278,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 
 /* ── Goals ───────────────────────────────────────────────────────── */
 .goals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
-@media(max-width:720px){.goals-grid{grid-template-columns:1fr}}
+@media(max-width:767.98px){.goals-grid{grid-template-columns:1fr}}
 .goal-group{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:.75rem}
 .goal-group h3{
   font-size:.62rem;font-family:var(--mono);text-transform:uppercase;
@@ -314,16 +311,22 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 }
 
 /* ── Responsive ──────────────────────────────────────────────────── */
-@media(max-width:720px){
+@media(max-width:767.98px){
   .banner{height:110px}
   .stats{gap:.4rem}
   .kpi{min-width:100px}
   .week-strip{gap:.3rem}
   .day-pill{min-width:70px}
 }
-@media(max-width:480px){
+@media(max-width:389.98px){
   .stats .kpi .n{font-size:.95rem}
   .week-strip{grid-template-columns:repeat(4,1fr)}
+}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+button,.tab,.todo-item{user-select:none}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .anim{opacity:1!important;transform:none!important}
 }
 </style>
 </head>
@@ -333,7 +336,6 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 
   <!-- Banner -->
   <div class="banner anim">
-    <img src="../../docs/images/agency/bloggie-16x9.webp" alt="Health dashboard banner" onerror="this.style.display='none'">
     <div class="banner-label">
       <strong>JORDAN LEE</strong>
       Health Dashboard
@@ -343,7 +345,6 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
   <!-- Header -->
   <div class="head anim">
     <div class="head-left">
-      <img class="avatar" src="../../docs/images/agency/bloggie-1x1.webp" alt="Jordan Lee avatar" onerror="this.style.background='var(--surface2)'">
       <div>
         <h1>Health Dashboard</h1>
         <div class="meta">jordan-lee &middot; example data &middot; June 2026</div>
@@ -351,6 +352,8 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     </div>
     <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">&#9790; Theme</button>
   </div>
+
+<p class="storage-note" style="font-size:.7rem;color:var(--dim);line-height:1.6">Data source: local <code>data.json</code>. JSON, this HTML view, exports and backups are unencrypted plaintext. Checklist completion, theme and collapsed sections are browser-local, disposable state and are not included in JSON backups.</p>
 
   <!-- Controls -->
   <div class="controls anim">
@@ -362,7 +365,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
   <div class="stats anim" id="stats-bar">
     <div class="kpi"><div class="n" id="kpi-appt">—</div><div class="l">Next Appt</div></div>
     <div class="kpi"><div class="n" id="kpi-meds">—</div><div class="l">Meds Today</div></div>
-    <div class="kpi"><div class="n" id="kpi-steps">8,240</div><div class="l">Steps (avg)</div></div>
+    <div class="kpi"><div class="n" id="kpi-steps">—</div><div class="l">Steps (snapshot avg)</div></div>
     <div class="kpi"><div class="n" id="kpi-sleep">—</div><div class="l">Sleep (avg)</div></div>
     <div class="kpi"><div class="n" id="kpi-water">6 / 8</div><div class="l">Water Today</div></div>
     <div class="kpi"><div class="n" id="kpi-mood">—</div><div class="l">Mood Score</div></div>
@@ -572,105 +575,551 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 {
   "profile": {
     "name": "Jordan Lee",
-    "age": 32,
+    "age": 34,
     "dob": "1992-03-14",
     "location": "Portland, OR",
-    "last_updated": "2026-06-20"
+    "last_updated": "2026-06-20",
+    "averageDailySteps": 8240
   },
   "vitals": [
-    { "date": "2026-06-14", "bp_systolic": 118, "bp_diastolic": 76, "heart_rate": 68, "weight_lbs": 162.4, "notes": "Felt rested" },
-    { "date": "2026-06-15", "bp_systolic": 122, "bp_diastolic": 78, "heart_rate": 72, "weight_lbs": 162.8, "notes": "After coffee" },
-    { "date": "2026-06-16", "bp_systolic": 116, "bp_diastolic": 74, "heart_rate": 65, "weight_lbs": 161.9, "notes": "Morning walk" },
-    { "date": "2026-06-17", "bp_systolic": 120, "bp_diastolic": 77, "heart_rate": 70, "weight_lbs": 162.1, "notes": "" },
-    { "date": "2026-06-18", "bp_systolic": 124, "bp_diastolic": 80, "heart_rate": 74, "weight_lbs": 163.0, "notes": "Stressful meeting" },
-    { "date": "2026-06-19", "bp_systolic": 117, "bp_diastolic": 75, "heart_rate": 66, "weight_lbs": 162.2, "notes": "Post yoga" },
-    { "date": "2026-06-20", "bp_systolic": 119, "bp_diastolic": 76, "heart_rate": 67, "weight_lbs": 161.8, "notes": "Today" }
+    {
+      "date": "2026-06-14",
+      "bp_systolic": 118,
+      "bp_diastolic": 76,
+      "heart_rate": 68,
+      "weight_lbs": 162.4,
+      "notes": "Felt rested",
+      "id": "vitals-1"
+    },
+    {
+      "date": "2026-06-15",
+      "bp_systolic": 122,
+      "bp_diastolic": 78,
+      "heart_rate": 72,
+      "weight_lbs": 162.8,
+      "notes": "After coffee",
+      "id": "vitals-2"
+    },
+    {
+      "date": "2026-06-16",
+      "bp_systolic": 116,
+      "bp_diastolic": 74,
+      "heart_rate": 65,
+      "weight_lbs": 161.9,
+      "notes": "Morning walk",
+      "id": "vitals-3"
+    },
+    {
+      "date": "2026-06-17",
+      "bp_systolic": 120,
+      "bp_diastolic": 77,
+      "heart_rate": 70,
+      "weight_lbs": 162.1,
+      "notes": "",
+      "id": "vitals-4"
+    },
+    {
+      "date": "2026-06-18",
+      "bp_systolic": 124,
+      "bp_diastolic": 80,
+      "heart_rate": 74,
+      "weight_lbs": 163,
+      "notes": "Stressful meeting",
+      "id": "vitals-5"
+    },
+    {
+      "date": "2026-06-19",
+      "bp_systolic": 117,
+      "bp_diastolic": 75,
+      "heart_rate": 66,
+      "weight_lbs": 162.2,
+      "notes": "Post yoga",
+      "id": "vitals-6"
+    },
+    {
+      "date": "2026-06-20",
+      "bp_systolic": 119,
+      "bp_diastolic": 76,
+      "heart_rate": 67,
+      "weight_lbs": 161.8,
+      "notes": "Today",
+      "id": "vitals-7"
+    }
   ],
   "medications": [
-    { "name": "Vitamin D3", "dose": "2000 IU", "frequency": "Daily", "time": "Morning", "pharmacy": "CVS Pharmacy", "refill_status": "ok", "notes": "With breakfast" },
-    { "name": "Omega-3 Fish Oil", "dose": "1000 mg", "frequency": "Daily", "time": "Morning", "pharmacy": "Amazon", "refill_status": "ok", "notes": "Cardiovascular support" },
-    { "name": "Magnesium Glycinate", "dose": "400 mg", "frequency": "Daily", "time": "Evening", "pharmacy": "Whole Foods", "refill_status": "refill_soon", "notes": "~12 days left" },
-    { "name": "Loratadine (Claritin)", "dose": "10 mg", "frequency": "Daily (seasonal)", "time": "Morning", "pharmacy": "Walgreens", "refill_status": "ok", "notes": "Seasonal allergies" },
-    { "name": "Sertraline", "dose": "50 mg", "frequency": "Daily", "time": "Morning", "pharmacy": "CVS Pharmacy", "refill_status": "ok", "notes": "Dr. Patel — anxiety mgmt" },
-    { "name": "Multivitamin", "dose": "1 tablet", "frequency": "Daily", "time": "Morning", "pharmacy": "Costco", "refill_status": "overdue", "notes": "Ran out 3 days ago" },
-    { "name": "Melatonin", "dose": "0.5 mg", "frequency": "As needed", "time": "Before bed", "pharmacy": "Amazon", "refill_status": "ok", "notes": "Travel/circadian reset" }
+    {
+      "name": "Vitamin D3",
+      "dose": "2000 IU",
+      "frequency": "Daily",
+      "time": "Morning",
+      "pharmacy": "CVS Pharmacy",
+      "refill_status": "ok",
+      "notes": "With breakfast",
+      "id": "medications-1"
+    },
+    {
+      "name": "Omega-3 Fish Oil",
+      "dose": "1000 mg",
+      "frequency": "Daily",
+      "time": "Morning",
+      "pharmacy": "Amazon",
+      "refill_status": "ok",
+      "notes": "Cardiovascular support",
+      "id": "medications-2"
+    },
+    {
+      "name": "Magnesium Glycinate",
+      "dose": "400 mg",
+      "frequency": "Daily",
+      "time": "Evening",
+      "pharmacy": "Whole Foods",
+      "refill_status": "refill_soon",
+      "notes": "~12 days left",
+      "id": "medications-3"
+    },
+    {
+      "name": "Loratadine (Claritin)",
+      "dose": "10 mg",
+      "frequency": "Daily (seasonal)",
+      "time": "Morning",
+      "pharmacy": "Walgreens",
+      "refill_status": "ok",
+      "notes": "Seasonal allergies",
+      "id": "medications-4"
+    },
+    {
+      "name": "Sertraline",
+      "dose": "50 mg",
+      "frequency": "Daily",
+      "time": "Morning",
+      "pharmacy": "CVS Pharmacy",
+      "refill_status": "ok",
+      "notes": "Dr. Patel — anxiety mgmt",
+      "id": "medications-5"
+    },
+    {
+      "name": "Multivitamin",
+      "dose": "1 tablet",
+      "frequency": "Daily",
+      "time": "Morning",
+      "pharmacy": "Costco",
+      "refill_status": "overdue",
+      "notes": "Ran out 3 days ago",
+      "id": "medications-6"
+    },
+    {
+      "name": "Melatonin",
+      "dose": "0.5 mg",
+      "frequency": "As needed",
+      "time": "Before bed",
+      "pharmacy": "Amazon",
+      "refill_status": "ok",
+      "notes": "Travel/circadian reset",
+      "id": "medications-7"
+    }
   ],
   "fitness": [
-    { "date": "2026-06-14", "day": "Sat", "activity": "Running", "duration_min": 35, "type": "cardio" },
-    { "date": "2026-06-15", "day": "Sun", "activity": "Rest", "duration_min": 0, "type": "rest" },
-    { "date": "2026-06-16", "day": "Mon", "activity": "Weights", "duration_min": 50, "type": "strength" },
-    { "date": "2026-06-17", "day": "Tue", "activity": "Yoga", "duration_min": 40, "type": "stretch" },
-    { "date": "2026-06-18", "day": "Wed", "activity": "Cycling", "duration_min": 45, "type": "cardio" },
-    { "date": "2026-06-19", "day": "Thu", "activity": "Weights", "duration_min": 55, "type": "strength" },
-    { "date": "2026-06-20", "day": "Fri", "activity": "Walk/Cardio", "duration_min": 30, "type": "cardio" }
+    {
+      "date": "2026-06-14",
+      "day": "Sat",
+      "activity": "Running",
+      "duration_min": 35,
+      "type": "cardio",
+      "id": "fitness-1"
+    },
+    {
+      "date": "2026-06-15",
+      "day": "Sun",
+      "activity": "Rest",
+      "duration_min": 0,
+      "type": "rest",
+      "id": "fitness-2"
+    },
+    {
+      "date": "2026-06-16",
+      "day": "Mon",
+      "activity": "Weights",
+      "duration_min": 50,
+      "type": "strength",
+      "id": "fitness-3"
+    },
+    {
+      "date": "2026-06-17",
+      "day": "Tue",
+      "activity": "Yoga",
+      "duration_min": 40,
+      "type": "stretch",
+      "id": "fitness-4"
+    },
+    {
+      "date": "2026-06-18",
+      "day": "Wed",
+      "activity": "Cycling",
+      "duration_min": 45,
+      "type": "cardio",
+      "id": "fitness-5"
+    },
+    {
+      "date": "2026-06-19",
+      "day": "Thu",
+      "activity": "Weights",
+      "duration_min": 55,
+      "type": "strength",
+      "id": "fitness-6"
+    },
+    {
+      "date": "2026-06-20",
+      "day": "Fri",
+      "activity": "Walk/Cardio",
+      "duration_min": 30,
+      "type": "cardio",
+      "id": "fitness-7"
+    }
   ],
   "nutrition": {
     "goal_calories": 2000,
     "goal_protein_g": 120,
     "goal_water_cups": 8,
-    "today": { "calories": 1680, "protein": 94, "water": 6 },
+    "today": {
+      "calories": 1680,
+      "protein": 94,
+      "water": 6
+    },
     "log": [
-      { "date": "2026-06-18", "breakfast": "Greek yogurt, berries, granola", "lunch": "Grilled chicken salad, quinoa", "dinner": "Salmon, sweet potato, broccoli", "snacks": "Apple, almonds", "calories": 1920, "protein": 112, "water": 7 },
-      { "date": "2026-06-19", "breakfast": "Avocado toast, 2 eggs", "lunch": "Turkey wrap, side salad", "dinner": "Lentil soup, whole grain bread", "snacks": "Banana, protein bar", "calories": 1840, "protein": 108, "water": 8 },
-      { "date": "2026-06-20", "breakfast": "Oatmeal, chia seeds, blueberries", "lunch": "Grain bowl, chickpeas, tahini", "dinner": "Planned: Stir-fry tofu + veggies", "snacks": "Orange, trail mix", "calories": 1680, "protein": 94, "water": 6 }
+      {
+        "date": "2026-06-18",
+        "breakfast": "Greek yogurt, berries, granola",
+        "lunch": "Grilled chicken salad, quinoa",
+        "dinner": "Salmon, sweet potato, broccoli",
+        "snacks": "Apple, almonds",
+        "calories": 1920,
+        "protein": 112,
+        "water": 7,
+        "id": "nutrition-log-1"
+      },
+      {
+        "date": "2026-06-19",
+        "breakfast": "Avocado toast, 2 eggs",
+        "lunch": "Turkey wrap, side salad",
+        "dinner": "Lentil soup, whole grain bread",
+        "snacks": "Banana, protein bar",
+        "calories": 1840,
+        "protein": 108,
+        "water": 8,
+        "id": "nutrition-log-2"
+      },
+      {
+        "date": "2026-06-20",
+        "breakfast": "Oatmeal, chia seeds, blueberries",
+        "lunch": "Grain bowl, chickpeas, tahini",
+        "dinner": "Planned: Stir-fry tofu + veggies",
+        "snacks": "Orange, trail mix",
+        "calories": 1680,
+        "protein": 94,
+        "water": 6,
+        "id": "nutrition-log-3"
+      }
     ]
   },
   "sleep": [
-    { "date": "2026-06-14", "bedtime": "22:45", "wake": "06:30", "hours": 7.75, "quality": 4 },
-    { "date": "2026-06-15", "bedtime": "23:30", "wake": "07:15", "hours": 7.75, "quality": 5 },
-    { "date": "2026-06-16", "bedtime": "22:00", "wake": "05:45", "hours": 7.75, "quality": 3 },
-    { "date": "2026-06-17", "bedtime": "23:00", "wake": "06:45", "hours": 7.75, "quality": 4 },
-    { "date": "2026-06-18", "bedtime": "00:15", "wake": "07:00", "hours": 6.75, "quality": 2 },
-    { "date": "2026-06-19", "bedtime": "22:30", "wake": "06:15", "hours": 7.75, "quality": 5 },
-    { "date": "2026-06-20", "bedtime": "23:00", "wake": "06:45", "hours": 7.75, "quality": 4 }
+    {
+      "date": "2026-06-14",
+      "bedtime": "22:45",
+      "wake": "06:30",
+      "hours": 7.75,
+      "quality": 4,
+      "id": "sleep-1"
+    },
+    {
+      "date": "2026-06-15",
+      "bedtime": "23:30",
+      "wake": "07:15",
+      "hours": 7.75,
+      "quality": 5,
+      "id": "sleep-2"
+    },
+    {
+      "date": "2026-06-16",
+      "bedtime": "22:00",
+      "wake": "05:45",
+      "hours": 7.75,
+      "quality": 3,
+      "id": "sleep-3"
+    },
+    {
+      "date": "2026-06-17",
+      "bedtime": "23:00",
+      "wake": "06:45",
+      "hours": 7.75,
+      "quality": 4,
+      "id": "sleep-4"
+    },
+    {
+      "date": "2026-06-18",
+      "bedtime": "00:15",
+      "wake": "07:00",
+      "hours": 6.75,
+      "quality": 2,
+      "id": "sleep-5"
+    },
+    {
+      "date": "2026-06-19",
+      "bedtime": "22:30",
+      "wake": "06:15",
+      "hours": 7.75,
+      "quality": 5,
+      "id": "sleep-6"
+    },
+    {
+      "date": "2026-06-20",
+      "bedtime": "23:00",
+      "wake": "06:45",
+      "hours": 7.75,
+      "quality": 4,
+      "id": "sleep-7"
+    }
   ],
   "mood": [
-    { "date": "2026-06-14", "score": 7, "emoji": "😊", "note": "Good energy, productive day" },
-    { "date": "2026-06-15", "score": 8, "emoji": "😄", "note": "Relaxed Sunday, time outside" },
-    { "date": "2026-06-16", "score": 6, "emoji": "😐", "note": "Monday fatigue, picked up after lunch" },
-    { "date": "2026-06-17", "score": 7, "emoji": "😊", "note": "Yoga helped, steady day" },
-    { "date": "2026-06-18", "score": 4, "emoji": "😓", "note": "Stressful deadline, poor sleep" },
-    { "date": "2026-06-19", "score": 8, "emoji": "😄", "note": "Deadline done, huge relief" },
-    { "date": "2026-06-20", "score": 7, "emoji": "😊", "note": "Calm Friday, good week overall" }
+    {
+      "date": "2026-06-14",
+      "score": 7,
+      "emoji": "😊",
+      "note": "Good energy, productive day",
+      "id": "mood-1"
+    },
+    {
+      "date": "2026-06-15",
+      "score": 8,
+      "emoji": "😄",
+      "note": "Relaxed Sunday, time outside",
+      "id": "mood-2"
+    },
+    {
+      "date": "2026-06-16",
+      "score": 6,
+      "emoji": "😐",
+      "note": "Monday fatigue, picked up after lunch",
+      "id": "mood-3"
+    },
+    {
+      "date": "2026-06-17",
+      "score": 7,
+      "emoji": "😊",
+      "note": "Yoga helped, steady day",
+      "id": "mood-4"
+    },
+    {
+      "date": "2026-06-18",
+      "score": 4,
+      "emoji": "😓",
+      "note": "Stressful deadline, poor sleep",
+      "id": "mood-5"
+    },
+    {
+      "date": "2026-06-19",
+      "score": 8,
+      "emoji": "😄",
+      "note": "Deadline done, huge relief",
+      "id": "mood-6"
+    },
+    {
+      "date": "2026-06-20",
+      "score": 7,
+      "emoji": "😊",
+      "note": "Calm Friday, good week overall",
+      "id": "mood-7"
+    }
   ],
   "labs": [
-    { "name": "LDL Cholesterol", "value": "98", "unit": "mg/dL", "range": "<100", "status": "ok", "notes": "May 2026 panel" },
-    { "name": "HDL Cholesterol", "value": "62", "unit": "mg/dL", "range": ">50", "status": "ok", "notes": "" },
-    { "name": "HbA1c", "value": "5.4", "unit": "%", "range": "<5.7", "status": "ok", "notes": "Prediabetes cutoff 5.7" },
-    { "name": "Vitamin D", "value": "28", "unit": "ng/mL", "range": "30–80", "status": "warn", "notes": "Supplementing D3 2000 IU" },
-    { "name": "TSH", "value": "2.1", "unit": "mIU/L", "range": "0.4–4.0", "status": "ok", "notes": "" }
+    {
+      "name": "LDL Cholesterol",
+      "value": "98",
+      "unit": "mg/dL",
+      "range": "<100",
+      "status": "ok",
+      "notes": "May 2026 panel",
+      "id": "labs-1"
+    },
+    {
+      "name": "HDL Cholesterol",
+      "value": "62",
+      "unit": "mg/dL",
+      "range": ">50",
+      "status": "ok",
+      "notes": "",
+      "id": "labs-2"
+    },
+    {
+      "name": "HbA1c",
+      "value": "5.4",
+      "unit": "%",
+      "range": "<5.7",
+      "status": "ok",
+      "notes": "Prediabetes cutoff 5.7",
+      "id": "labs-3"
+    },
+    {
+      "name": "Vitamin D",
+      "value": "28",
+      "unit": "ng/mL",
+      "range": "30–80",
+      "status": "warn",
+      "notes": "Supplementing D3 2000 IU",
+      "id": "labs-4"
+    },
+    {
+      "name": "TSH",
+      "value": "2.1",
+      "unit": "mIU/L",
+      "range": "0.4–4.0",
+      "status": "ok",
+      "notes": "",
+      "id": "labs-5"
+    }
   ],
   "habits": [
-    { "name": "Morning walk", "streak": 12, "targetDays": 7, "unit": "days" },
-    { "name": "Meds taken", "streak": 20, "targetDays": 7, "unit": "days" },
-    { "name": "No alcohol", "streak": 19, "targetDays": 30, "unit": "days" },
-    { "name": "Journal 5 min", "streak": 4, "targetDays": 7, "unit": "days" }
+    {
+      "name": "Morning walk",
+      "streak": 12,
+      "targetDays": 7,
+      "unit": "days",
+      "id": "habits-1"
+    },
+    {
+      "name": "Meds taken",
+      "streak": 20,
+      "targetDays": 7,
+      "unit": "days",
+      "id": "habits-2"
+    },
+    {
+      "name": "No alcohol",
+      "streak": 19,
+      "targetDays": 30,
+      "unit": "days",
+      "id": "habits-3"
+    },
+    {
+      "name": "Journal 5 min",
+      "streak": 4,
+      "targetDays": 7,
+      "unit": "days",
+      "id": "habits-4"
+    }
   ],
   "appointments": [
-    { "date": "2026-06-25", "provider": "Dr. Sarah Patel, MD", "type": "Annual Check-up", "location": "Providence Medical Center", "notes": "Fasting bloodwork", "past": false },
-    { "date": "2026-07-08", "provider": "Dr. Marcus Webb, DDS", "type": "Dental Cleaning", "location": "Pearl District Dental", "notes": "6-month cleaning + X-ray", "past": false },
-    { "date": "2026-07-15", "provider": "Dr. Aisha Ramos, PsyD", "type": "Therapy Session", "location": "Telehealth (Zoom)", "notes": "Monthly — anxiety mgmt", "past": false },
-    { "date": "2026-08-02", "provider": "Dr. Tom Nguyen, DO", "type": "Sports Medicine", "location": "OHSU Sports Medicine", "notes": "Left knee follow-up", "past": false },
-    { "date": "2026-05-20", "provider": "Dr. Sarah Patel, MD", "type": "Medication Review", "location": "Providence Medical Center", "notes": "Sertraline confirmed 50mg", "past": true }
+    {
+      "date": "2026-06-25",
+      "provider": "Dr. Sarah Patel, MD",
+      "type": "Annual Check-up",
+      "location": "Providence Medical Center",
+      "notes": "Fasting bloodwork",
+      "past": false,
+      "id": "appointments-1"
+    },
+    {
+      "date": "2026-07-08",
+      "provider": "Dr. Marcus Webb, DDS",
+      "type": "Dental Cleaning",
+      "location": "Pearl District Dental",
+      "notes": "6-month cleaning + X-ray",
+      "past": false,
+      "id": "appointments-2"
+    },
+    {
+      "date": "2026-07-15",
+      "provider": "Dr. Aisha Ramos, PsyD",
+      "type": "Therapy Session",
+      "location": "Telehealth (Zoom)",
+      "notes": "Monthly — anxiety mgmt",
+      "past": false,
+      "id": "appointments-3"
+    },
+    {
+      "date": "2026-08-02",
+      "provider": "Dr. Tom Nguyen, DO",
+      "type": "Sports Medicine",
+      "location": "OHSU Sports Medicine",
+      "notes": "Left knee follow-up",
+      "past": false,
+      "id": "appointments-4"
+    },
+    {
+      "date": "2026-05-20",
+      "provider": "Dr. Sarah Patel, MD",
+      "type": "Medication Review",
+      "location": "Providence Medical Center",
+      "notes": "Sertraline confirmed 50mg",
+      "past": true,
+      "id": "appointments-5"
+    }
   ],
   "goals": {
     "this_month": [
-      { "title": "Run 30+ min 3x per week", "progress": 70 },
-      { "title": "Average 7.5 hrs sleep", "progress": 80 },
-      { "title": "8 cups water daily", "progress": 60 },
-      { "title": "No alcohol for 30 days", "progress": 65 }
+      {
+        "title": "Run 30+ min 3x per week",
+        "progress": 70,
+        "id": "goals-this_month-1"
+      },
+      {
+        "title": "Average 7.5 hrs sleep",
+        "progress": 80,
+        "id": "goals-this_month-2"
+      },
+      {
+        "title": "8 cups water daily",
+        "progress": 60,
+        "id": "goals-this_month-3"
+      },
+      {
+        "title": "No alcohol for 30 days",
+        "progress": 65,
+        "id": "goals-this_month-4"
+      }
     ],
     "this_quarter": [
-      { "title": "Lose 5 lbs (target 158)", "progress": 45 },
-      { "title": "12-week strength program", "progress": 58 },
-      { "title": "Meditate 10 min daily", "progress": 40 },
-      { "title": "Cook at home 5 nights/wk", "progress": 72 }
+      {
+        "title": "Lose 5 lbs (target 158)",
+        "progress": 45,
+        "id": "goals-this_quarter-1"
+      },
+      {
+        "title": "12-week strength program",
+        "progress": 58,
+        "id": "goals-this_quarter-2"
+      },
+      {
+        "title": "Meditate 10 min daily",
+        "progress": 40,
+        "id": "goals-this_quarter-3"
+      },
+      {
+        "title": "Cook at home 5 nights/wk",
+        "progress": 72,
+        "id": "goals-this_quarter-4"
+      }
     ],
     "long_term": [
-      { "title": "Consistent sleep schedule", "progress": 65 },
-      { "title": "5K under 25 minutes", "progress": 50 },
-      { "title": "Reduce anxiety (GAD-7 < 5)", "progress": 55 },
-      { "title": "Sustainable meal-prep habit", "progress": 35 }
+      {
+        "title": "Consistent sleep schedule",
+        "progress": 65,
+        "id": "goals-long_term-1"
+      },
+      {
+        "title": "5K under 25 minutes",
+        "progress": 50,
+        "id": "goals-long_term-2"
+      },
+      {
+        "title": "Reduce anxiety (GAD-7 < 5)",
+        "progress": 55,
+        "id": "goals-long_term-3"
+      },
+      {
+        "title": "Sustainable meal-prep habit",
+        "progress": 35,
+        "id": "goals-long_term-4"
+      }
     ]
   },
   "checklist": {
@@ -688,7 +1137,8 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       "Wind down screens by 10pm",
       "Aim for 7+ hrs sleep tonight"
     ]
-  }
+  },
+  "schemaVersion": 1
 }
 </script>
 
@@ -699,24 +1149,68 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
   // ── Data ──────────────────────────────────────────────────────────
   const D = JSON.parse(document.getElementById('health-data').textContent);
 
+// Existing collapse/tab controls also work with Enter/Space and expose state.
+function enableKeyboardControls(){
+  const controls = document.querySelectorAll(".card-head[onclick], .tab[onclick]");
+  const sync = () => controls.forEach(control => {
+    const card = control.closest(".card");
+    if(card) control.setAttribute("aria-expanded", String(card.classList.contains("open")));
+  });
+  controls.forEach(control => {
+    control.setAttribute("role","button");
+    control.setAttribute("tabindex","0");
+    control.addEventListener("keydown", event => {
+      if(event.key === "Enter" || event.key === " "){ event.preventDefault(); control.click(); }
+    });
+  });
+  document.addEventListener("click", () => queueMicrotask(sync));
+  sync();
+}
+
+// View/checklist state is disposable: blocked or corrupt storage must not stop rendering.
+function readLocal(key){ try { return localStorage.getItem(key); } catch { return null; } }
+function writeLocal(key,value){ try { localStorage.setItem(key,value); } catch {} }
+function readLocalJSON(key,fallback={}){
+  try { const value=JSON.parse(readLocal(key)); return value && typeof value === "object" && !Array.isArray(value) ? value : fallback; } catch { return fallback; }
+}
+
+  // JSON fields are plain text, never rich HTML. Encode values at HTML boundaries.
+  function escapeText(value){
+    return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function safePercent(value){ return Math.max(0, Math.min(100, Number(value) || 0)); }
+  function localToday(){
+    if (window.dashboardToday != null) {
+    const value = window.dashboardToday;
+    if(typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) throw new Error('dashboardToday must be an ISO calendar date');
+    const [year,month,day] = value.split('-').map(Number);
+    const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+    const days = [31,leap ? 29 : 28,31,30,31,30,31,31,30,31,30,31];
+    if(year < 1 || month < 1 || month > 12 || day < 1 || day > days[month-1]) throw new Error('dashboardToday must be a real calendar date');
+    return value;
+  }
+    const date = new Date();
+    return date.getFullYear() + '-' + String(date.getMonth()+1).padStart(2,'0') + '-' + String(date.getDate()).padStart(2,'0');
+  }
+
   // ── Theme toggle ──────────────────────────────────────────────────
   function toggleTheme(){
     const html = document.documentElement;
     const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
-    localStorage.setItem('health-theme', next);
+    writeLocal('health-theme', next);
   }
   window.toggleTheme = toggleTheme;
-  const savedTheme = localStorage.getItem('health-theme');
-  if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+  const savedTheme = readLocal('health-theme');
+  if(['dark','light'].includes(savedTheme)) document.documentElement.setAttribute('data-theme', savedTheme);
 
   // ── Card collapse ─────────────────────────────────────────────────
   function toggleCard(id){
     const card = document.getElementById(id);
     const open = card.classList.toggle('open');
-    const state = JSON.parse(localStorage.getItem('health-cards') || '{}');
+    const state = readLocalJSON('health-cards');
     state[id] = open;
-    localStorage.setItem('health-cards', JSON.stringify(state));
+    writeLocal('health-cards', JSON.stringify(state));
   }
   window.toggleCard = toggleCard;
 
@@ -724,18 +1218,18 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     document.querySelectorAll('.card').forEach(c => c.classList.add('open'));
     const ids = {};
     document.querySelectorAll('.card[id]').forEach(c => { ids[c.id] = true; });
-    localStorage.setItem('health-cards', JSON.stringify(ids));
+    writeLocal('health-cards', JSON.stringify(ids));
   }
   window.expandAll = expandAll;
 
   function collapseAll(){
     document.querySelectorAll('.card').forEach(c => c.classList.remove('open'));
-    localStorage.setItem('health-cards', '{}');
+    writeLocal('health-cards', '{}');
   }
   window.collapseAll = collapseAll;
 
   function restoreCards(){
-    const state = JSON.parse(localStorage.getItem('health-cards') || '{}');
+    const state = readLocalJSON('health-cards');
     // Default: open first 3 cards
     const defaults = ['card-checklist','card-vitals','card-meds'];
     document.querySelectorAll('.card[id]').forEach(c => {
@@ -788,9 +1282,9 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 
   // ── Checklist ─────────────────────────────────────────────────────
   function renderChecklist(){
-    const today = new Date().toISOString().slice(0,10);
+    const today = localToday();
     const storageKey = 'health-checklist-' + today;
-    const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    const saved = readLocalJSON(storageKey);
     const grid = document.getElementById('checklist-grid');
     const allItems = [];
 
@@ -813,13 +1307,10 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
         lbl.textContent = label;
         item.appendChild(cb);
         item.appendChild(lbl);
-        item.addEventListener('click', function(e){
-          if(e.target.tagName !== 'INPUT'){
-            cb.checked = !cb.checked;
-          }
-          const s = JSON.parse(localStorage.getItem(storageKey) || '{}');
+        item.addEventListener('change', function(){
+          const s = readLocalJSON(storageKey);
           s[key] = cb.checked;
-          localStorage.setItem(storageKey, JSON.stringify(s));
+          writeLocal(storageKey, JSON.stringify(s));
           item.classList.toggle('done', cb.checked);
           updateCheckProgress(storageKey, allItems);
         });
@@ -834,10 +1325,10 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
   }
 
   function updateCheckProgress(storageKey, allItems){
-    const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    const saved = readLocalJSON(storageKey);
     const done = allItems.filter(k => saved[k]).length;
     const total = allItems.length;
-    const pct = Math.round((done/total)*100);
+    const pct = (total ? Math.round((done/total)*100) : 0);
     document.getElementById('check-progress-chip').textContent = done + ' / ' + total;
     document.getElementById('check-pct-label').textContent = pct + '%';
     document.getElementById('check-fill').style.width = pct + '%';
@@ -851,11 +1342,11 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       const tr = document.createElement('tr');
       if(isToday) tr.className = 'today';
       tr.innerHTML = `
-        <td><strong>${fmtDate(v.date)}</strong>${isToday ? ' <span class="chip ok">Today</span>' : ''}</td>
-        <td>${v.bp_systolic}/${v.bp_diastolic} mmHg</td>
-        <td>${v.heart_rate} bpm</td>
-        <td>${v.weight_lbs}</td>
-        <td style="color:var(--dim)">${v.notes || '—'}</td>
+        <td><strong>${fmtDate(v.date)}</strong>${isToday ? ' <span class="chip ok">Latest</span>' : ''}</td>
+        <td>${escapeText(v.bp_systolic)}/${escapeText(v.bp_diastolic)} mmHg</td>
+        <td>${escapeText(v.heart_rate)} bpm</td>
+        <td>${escapeText(v.weight_lbs)}</td>
+        <td style="color:var(--dim)">${escapeText(v.notes || '—')}</td>
       `;
       tbody.appendChild(tr);
     });
@@ -871,11 +1362,11 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       if(m.refill_status !== 'ok') hasWarn = true;
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td><strong>${m.name}</strong></td>
-        <td><code>${m.dose}</code></td>
-        <td>${m.frequency}</td>
-        <td>${m.time}</td>
-        <td style="color:var(--dim)">${m.notes}</td>
+        <td><strong>${escapeText(m.name)}</strong></td>
+        <td><code>${escapeText(m.dose)}</code></td>
+        <td>${escapeText(m.frequency)}</td>
+        <td>${escapeText(m.time)}</td>
+        <td style="color:var(--dim)">${escapeText(m.notes)}</td>
         <td><span class="chip ${chipClass}">${chipLabel}</span></td>
       `;
       tbody.appendChild(tr);
@@ -898,9 +1389,9 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       const pill = document.createElement('div');
       pill.className = `day-pill ${f.type}`;
       pill.innerHTML = `
-        <div class="day-name">${f.day}</div>
+        <div class="day-name">${escapeText(f.day)}</div>
         <div class="day-icon">${icons[f.type] || '🏃'}</div>
-        <div class="day-dur">${f.duration_min > 0 ? f.duration_min + ' min' : 'Rest'}</div>
+        <div class="day-dur">${escapeText(f.duration_min > 0 ? f.duration_min + ' min' : 'Rest')}</div>
       `;
       strip.appendChild(pill);
     });
@@ -916,7 +1407,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     Object.entries(breakdown).forEach(([type, min]) => {
       const pill = document.createElement('div');
       pill.style.cssText = `background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:.3rem .6rem;font-size:.67rem`;
-      pill.innerHTML = `<span style="color:${colors[type]};font-weight:700">${type}</span> <span style="color:var(--dim)">${min} min</span>`;
+      pill.innerHTML = `<span style="color:${colors[type]};font-weight:700">${type}</span> <span style="color:var(--dim)">${escapeText(min)} min</span>`;
       bdEl.appendChild(pill);
     });
   }
@@ -938,7 +1429,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       div.innerHTML = `
         <div class="bar-label">
           <span class="lbl">${m.label}</span>
-          <span class="v">${m.current} / ${m.max} ${m.unit}</span>
+          <span class="v">${escapeText(m.current)} / ${escapeText(m.max)} ${escapeText(m.unit)}</span>
         </div>
         <div class="track">
           <div class="fill ${m.fillClass}" style="width:${pct}%"></div>
@@ -954,12 +1445,12 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       if(i === D.nutrition.log.length - 1) tr.className = 'today';
       tr.innerHTML = `
         <td><strong>${fmtDate(day.date)}</strong></td>
-        <td>${day.breakfast}</td>
-        <td>${day.lunch}</td>
-        <td>${day.dinner}</td>
-        <td>${day.snacks}</td>
-        <td>${day.calories}</td>
-        <td>${day.protein}g</td>
+        <td>${escapeText(day.breakfast)}</td>
+        <td>${escapeText(day.lunch)}</td>
+        <td>${escapeText(day.dinner)}</td>
+        <td>${escapeText(day.snacks)}</td>
+        <td>${escapeText(day.calories)}</td>
+        <td>${escapeText(day.protein)}g</td>
       `;
       tbody.appendChild(tr);
     });
@@ -976,9 +1467,9 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       if(isLatest) tr.className = 'today';
       tr.innerHTML = `
         <td><strong>${fmtDate(s.date)}</strong>${isLatest ? ' <span class="chip ok">Latest</span>' : ''}</td>
-        <td>${s.bedtime}</td>
-        <td>${s.wake}</td>
-        <td>${s.hours} hrs</td>
+        <td>${escapeText(s.bedtime)}</td>
+        <td>${escapeText(s.wake)}</td>
+        <td>${escapeText(s.hours)} hrs</td>
         <td>${qualityDots(s.quality)}</td>
       `;
       tbody.appendChild(tr);
@@ -1009,9 +1500,9 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       const shortDate = fmtDate(m.date);
       d.innerHTML = `
         <div class="m-date">${shortDate}</div>
-        <div class="m-emoji">${m.emoji}</div>
-        <div class="m-score" style="color:${scoreColor}">${m.score}/10</div>
-        <div class="m-note">${m.note}</div>
+        <div class="m-emoji">${escapeText(m.emoji)}</div>
+        <div class="m-score" style="color:${scoreColor}">${escapeText(m.score)}/10</div>
+        <div class="m-note">${escapeText(m.note)}</div>
       `;
       row.appendChild(d);
     });
@@ -1029,10 +1520,10 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td><strong>${fmtDate(a.date)}</strong></td>
-        <td>${a.provider}</td>
-        <td>${a.type}</td>
-        <td style="color:var(--dim)">${a.location}</td>
-        <td style="color:var(--dim)">${a.notes}</td>
+        <td>${escapeText(a.provider)}</td>
+        <td>${escapeText(a.type)}</td>
+        <td style="color:var(--dim)">${escapeText(a.location)}</td>
+        <td style="color:var(--dim)">${escapeText(a.notes)}</td>
       `;
       tbody.appendChild(tr);
     });
@@ -1043,9 +1534,9 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       tr.className = 'past';
       tr.innerHTML = `
         <td>${fmtDate(a.date)}</td>
-        <td>${a.provider}</td>
-        <td>${a.type}</td>
-        <td>${a.notes}</td>
+        <td>${escapeText(a.provider)}</td>
+        <td>${escapeText(a.type)}</td>
+        <td>${escapeText(a.notes)}</td>
       `;
       pastTbody.appendChild(tr);
     });
@@ -1065,11 +1556,11 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
       const tr = document.createElement('tr');
       const cls = l.status === 'ok' ? 'ok' : (l.status === 'warn' ? 'warn' : 'fail');
       tr.innerHTML = `
-        <td><strong>${l.name}</strong></td>
-        <td>${l.value} ${l.unit||''}</td>
-        <td>${l.range||''}</td>
-        <td><span class="chip ${cls}">${l.status}</span></td>
-        <td>${l.notes||''}</td>`;
+        <td><strong>${escapeText(l.name)}</strong></td>
+        <td>${escapeText(l.value)} ${escapeText(l.unit||'')}</td>
+        <td>${escapeText(l.range||'')}</td>
+        <td><span class="chip ${cls}">${escapeText(l.status)}</span></td>
+        <td>${escapeText(l.notes||'')}</td>`;
       tbody.appendChild(tr);
     });
   }
@@ -1082,7 +1573,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     wrap.innerHTML = habits.map(h => {
       const pct = Math.min(100, Math.round((h.streak / (h.targetDays||7)) * 100));
       return `<div class="bar-row">
-        <div class="bar-label"><span class="lbl">${h.name}</span><span class="v">${h.streak} ${h.unit||'days'}</span></div>
+        <div class="bar-label"><span class="lbl">${escapeText(h.name)}</span><span class="v">${escapeText(h.streak)} ${escapeText(h.unit||'days')}</span></div>
         <div class="track"><div class="fill mint" style="width:${pct}%"></div><div class="pct">${pct}%</div></div>
       </div>`;
     }).join('');
@@ -1104,11 +1595,11 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
         const item = document.createElement('div');
         item.className = 'goal-item';
         item.innerHTML = `
-          <div class="g-name">${g.title}</div>
+          <div class="g-name">${escapeText(g.title)}</div>
           <div class="goal-mini-track">
-            <div class="goal-mini-fill ${b.fillClass}" style="width:${g.progress}%"></div>
+            <div class="goal-mini-fill ${b.fillClass}" style="width:${safePercent(g.progress)}%"></div>
           </div>
-          <div class="goal-pct">${g.progress}%</div>
+          <div class="goal-pct">${safePercent(g.progress)}%</div>
         `;
         group.appendChild(item);
       });
@@ -1118,6 +1609,9 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
 
   // ── Init ──────────────────────────────────────────────────────────
   function init(){
+    document.querySelector(".meta").textContent = D.profile.name + " · snapshot as of " + D.profile.last_updated;
+    document.querySelector(".banner-label strong").textContent = D.profile.name;
+    document.getElementById("kpi-steps").textContent = D.profile.averageDailySteps == null ? "Unknown" : Number(D.profile.averageDailySteps).toLocaleString();
     renderKPIs();
     renderChecklist();
     renderVitals();
@@ -1131,6 +1625,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--secondary)}
     renderAppointments();
     renderGoals();
     restoreCards();
+    enableKeyboardControls();
   }
 
   if(document.readyState === 'loading'){

@@ -2,7 +2,7 @@
    Plasma Green (Default) — dashboard theme.
    Dashboard-only industrial neon green. NOT Synagraphic Plasma Drift
    (that VS Code theme is pink #e050a0). Text tokens use the green family
-   to match fin.html / www-theme-kit plasma text.
+   to match the public finances profile's plasma text family.
    Copy this token block into a dashboard <style>, or link it over HTTP.
    ============================================================ */
 :root {

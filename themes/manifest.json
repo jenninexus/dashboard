@@ -1,0 +1,77 @@
+{
+  "format": "dashboard-themes",
+  "version": 1,
+  "updated": "2026-09-26",
+  "themes": [
+    {
+      "id": "aurora-seo",
+      "name": "Aurora SEO",
+      "version": "1.0.0",
+      "sourceDate": "2026-09-26",
+      "files": ["aurora-seo.css"],
+      "defaultFor": ["seo"],
+      "compatibleProfiles": ["seo"]
+    },
+    {
+      "id": "emerald-finance",
+      "name": "Emerald Finance",
+      "version": "1.0.0",
+      "sourceDate": "2026-09-26",
+      "files": ["emerald-finance.css"],
+      "defaultFor": ["finances"],
+      "compatibleProfiles": ["finances"]
+    },
+    {
+      "id": "vitality-health",
+      "name": "Vitality Health",
+      "version": "1.0.0",
+      "sourceDate": "2026-09-26",
+      "files": ["vitality-health.css"],
+      "defaultFor": ["health"],
+      "compatibleProfiles": ["health"]
+    },
+    {
+      "id": "dusk-companion",
+      "name": "Dusk Companion",
+      "version": "1.0.0",
+      "sourceDate": "2026-09-26",
+      "files": ["dusk-companion.css"],
+      "defaultFor": ["pets"],
+      "compatibleProfiles": ["pets"]
+    },
+    {
+      "id": "plasma-green",
+      "name": "Plasma Green",
+      "version": "1.0.0",
+      "sourceDate": "2026-09-26",
+      "files": ["plasma-green.css"],
+      "defaultFor": [],
+      "compatibleProfiles": ["seo", "finances", "health", "pets"]
+    },
+    {
+      "id": "aurora-borealis",
+      "name": "Aurora Borealis",
+      "version": "1.0.0",
+      "sourceDate": "2026-09-26",
+      "files": ["aurora-borealis.css", "aurora-borealis.effects.css"],
+      "defaultFor": [],
+      "compatibleProfiles": ["seo", "finances", "health", "pets"]
+    },
+    {
+      "id": "midnight-blue",
+      "name": "Midnight Blue",
+      "version": "1.0.0",
+      "sourceDate": "2026-09-26",
+      "files": ["midnight-blue.css"],
+      "defaultFor": [],
+      "compatibleProfiles": ["seo", "finances", "health", "pets"]
+    }
+  ],
+  "supportingFiles": [
+    {
+      "id": "seo-tokens",
+      "role": "canonical vendor-color token reference",
+      "files": ["seo-tokens.css"]
+    }
+  ]
+}

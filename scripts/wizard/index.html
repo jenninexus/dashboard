@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>Dashboard · Local editor</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+  <header>
+    <div><p class="eyebrow">YOUR DATA · YOUR FILES</p><h1>Dashboard</h1><p class="subtitle">A quiet place to keep things in view.</p></div>
+    <button id="stop" class="subtle" type="button">Stop editor</button>
+  </header>
+  <main>
+    <p id="status" class="status" role="status" tabindex="-1">Connecting to your local editor…</p>
+    <aside class="privacy"><strong>Local files, openly stored.</strong> Your data.json, dashboard HTML, exports and one rotating backup are unencrypted plaintext. Browser-local checklists and view settings are disposable and are not included in JSON exports. This editor has no account, telemetry or network dependency.</aside>
+    <section class="panel" aria-labelledby="folder-heading">
+      <div class="section-head"><span class="step">01</span><div><h2 id="folder-heading">Choose a home</h2><p>Enter a new folder to start, or the folder of an existing generated dashboard to return.</p></div></div>
+      <form id="folder-form"><label for="output-path">Dashboard folder</label><div class="inline"><input id="output-path" autocomplete="off" spellcheck="false" required><button type="submit">Use folder</button></div></form>
+      <p id="selected-path" class="muted"></p>
+    </section>
+    <section id="setup" class="panel" hidden aria-labelledby="setup-heading">
+      <div class="section-head"><span class="step">02</span><div><h2 id="setup-heading">Make it yours</h2><p>Start with a fictional example, then replace it with your own information.</p></div></div>
+      <form id="setup-form"><div class="field-grid"><label>What would you like to track?<select id="profile"></select></label><label>Theme<select id="theme"></select></label><label>Name <span class="muted">(optional)</span><input id="name" maxlength="4000" autocomplete="off"></label><label>Website domain <span class="muted">(optional)</span><input id="domain" placeholder="example.com" autocomplete="off"></label></div><button type="submit">Create dashboard</button></form>
+    </section>
+    <section id="editor" class="panel" hidden aria-labelledby="editor-heading">
+      <div class="section-head"><span class="step">03</span><div><h2 id="editor-heading">Keep it current</h2><p id="editor-summary"></p></div></div>
+      <div class="actions"><button id="save" type="button">Save &amp; update dashboard</button><button id="preview" class="subtle" type="button">Preview draft</button><button id="reload" class="subtle" type="button">Reload from disk</button><button id="update" class="subtle" type="button">Update from data.json</button></div>
+      <p class="muted">Saving replaces only the generated data region in your dashboard. Custom layout, CSS and other HTML stay intact. Unknown JSON fields are preserved.</p>
+      <fieldset id="fields"><legend class="visually-hidden">Dashboard fields</legend><div id="forms"></div></fieldset>
+      <details id="advanced"><summary>Advanced JSON, import &amp; export</summary><p>JSON is the durable content source. Apply JSON to refresh the form fields. Imported JSON stays a draft until you save.</p><label for="json-source">Dashboard JSON</label><textarea id="json-source" spellcheck="false" rows="18"></textarea><div class="actions"><button id="apply-json" class="subtle" type="button">Validate &amp; apply JSON to forms</button><label class="file-label">Import JSON<input id="import" type="file" accept=".json,application/json"></label><button id="export" class="subtle" type="button">Export draft JSON</button></div></details>
+      <div class="backup"><div><strong>One previous version</strong><p id="backup-status">A backup is created when the dashboard HTML changes.</p></div><button id="restore" class="subtle" type="button" disabled>Restore previous data</button></div>
+    </section>
+    <section id="preview-panel" class="panel" hidden aria-labelledby="preview-heading"><h2 id="preview-heading">Draft preview</h2><p class="muted">An isolated, offline preview. Your files change only after Save. Optional local artwork may be absent here; open dashboard.html directly for its full local assets.</p><iframe id="preview-frame" title="Draft dashboard preview" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe></section>
+  </main>
+  <footer><span id="session-note">This editor listens only on your computer.</span><span>No login. No cloud. Just a dashboard.</span></footer>
+</body>
+</html>

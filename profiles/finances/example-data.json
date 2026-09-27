@@ -5,152 +5,157 @@
     "person": "Alex Rivera",
     "asOf": "2026-06-20",
     "city": "Austin, TX",
-    "monthlyExpenses": 3840
-  },
-  "kpi": {
-    "netWorth": 14685,
-    "monthlyIncome": 6045,
     "monthlyExpenses": 3840,
-    "savingsRate": 36,
-    "billsThisMonth": 2739
+    "liabilitiesComplete": false,
+    "source": "Fictional manual snapshot; no creditor reconciliation",
+    "billCycle": "2026-06"
   },
   "alerts": [
     {
       "severity": "urgent",
       "icon": "🔴",
-      "title": "Rent due in 3 days — $1,400",
-      "sub": "June 23 deadline. Transfer from savings now to avoid late fee ($75)."
+      "title": "Rent due 2026-06-23 — $1,400",
+      "sub": "Listed as unpaid in the 2026-06-20 snapshot. Verify the current account before paying.",
+      "id": "alerts-1"
     },
     {
       "severity": "warn",
       "icon": "🟡",
-      "title": "Car insurance autopay Jun 1 — $127",
-      "sub": "Autopay confirmed on Visa ending 4421. Ensure $127 balance before billing date."
+      "title": "Car insurance scheduled 2026-06-01 — $127",
+      "sub": "Autopay is a schedule, not payment evidence. No completed payment is recorded in this example.",
+      "id": "alerts-2"
     },
     {
       "severity": "warn",
       "icon": "🟡",
-      "title": "Q2 Estimated Tax due Jun 15 — $580",
-      "sub": "IRS Form 1040-ES. Pay via IRS Direct Pay or EFTPS. Penalty avoidance threshold: pay by Jun 15."
+      "title": "Estimated tax dated 2026-06-15 — $580",
+      "sub": "Listed as unpaid in this fictional snapshot. Confirm the applicable amount and deadline using current records.",
+      "id": "alerts-3"
     }
   ],
   "reminders": [
     {
       "label": "Rent due Jun 23",
-      "urgent": true
+      "urgent": true,
+      "id": "reminders-1"
     },
     {
-      "label": "Car ins. autopay Jun 1",
-      "urgent": false
+      "label": "Verify car insurance payment",
+      "urgent": false,
+      "id": "reminders-2"
     },
     {
       "label": "Est. tax due Jun 15",
-      "urgent": false
+      "urgent": false,
+      "id": "reminders-3"
     },
     {
       "label": "Student loan auto-debit Jun 28",
-      "urgent": false
+      "urgent": false,
+      "id": "reminders-4"
     }
   ],
   "holdings": {
     "accounts": [
       {
         "name": "Checking",
-        "amount": 2840
+        "amount": 2840,
+        "id": "account-1"
       },
       {
         "name": "Savings",
-        "amount": 8200
+        "amount": 8200,
+        "id": "account-2"
       },
       {
         "name": "Emergency Fund",
-        "amount": 3500
+        "amount": 3500,
+        "id": "account-3"
       },
       {
         "name": "Cash App",
-        "amount": 145
+        "amount": 145,
+        "id": "account-4"
       }
-    ],
-    "compare": [
-      {
-        "label": "Rent — due Jun 23",
-        "amount": 1400,
-        "urgent": true
-      },
-      {
-        "label": "All bills this cycle",
-        "amount": 2739,
-        "urgent": false
-      }
-    ],
-    "monthsOfExpenses": 3840
+    ]
   },
   "bills": [
     {
       "name": "Rent",
-      "due": "Jun 23",
+      "due": "2026-06-23",
       "amount": 1400,
-      "status": "Due"
+      "status": "due",
+      "id": "bill-1"
     },
     {
       "name": "Car Insurance",
-      "due": "Jun 01",
+      "due": "2026-06-01",
       "amount": 127,
-      "status": "Autopay"
+      "status": "autopay",
+      "id": "bill-2"
     },
     {
       "name": "Electric",
-      "due": "Jun 12",
+      "due": "2026-06-12",
       "amount": 88,
-      "status": "Paid"
+      "status": "paid",
+      "id": "bill-3"
     },
     {
       "name": "Internet",
-      "due": "Jun 15",
+      "due": "2026-06-15",
       "amount": 65,
-      "status": "Paid"
+      "status": "paid",
+      "id": "bill-4"
     },
     {
       "name": "Spotify",
-      "due": "Jun 08",
+      "due": "2026-06-08",
       "amount": 11,
-      "status": "Autopay"
+      "status": "autopay",
+      "id": "bill-5"
     },
     {
       "name": "Adobe CC",
-      "due": "Jun 18",
+      "due": "2026-06-18",
       "amount": 55,
-      "status": "Due"
+      "status": "due",
+      "id": "bill-6"
     },
     {
       "name": "Phone (T-Mobile)",
-      "due": "Jun 25",
+      "due": "2026-06-25",
       "amount": 52,
-      "status": "Due"
+      "status": "due",
+      "id": "bill-7"
     },
     {
       "name": "Q2 Estimated Tax",
-      "due": "Jun 15",
+      "due": "2026-06-15",
       "amount": 580,
-      "status": "Due"
+      "status": "due",
+      "id": "bill-8"
     },
     {
       "name": "Gym",
-      "due": "Jun 30",
+      "due": "2026-06-30",
       "amount": 35,
-      "status": "Due"
+      "status": "due",
+      "id": "bill-9"
     },
     {
       "name": "Student Loan",
-      "due": "Jun 28",
+      "due": "2026-06-28",
       "amount": 226,
-      "status": "Autopay"
+      "status": "autopay",
+      "id": "bill-10"
     },
     {
       "name": "Car Loan",
-      "due": "Jun 05",
+      "due": "2026-06-05",
       "amount": 287,
-      "status": "Paid"
+      "status": "paid",
+      "id": "bill-11"
     }
   ],
   "loans": [
@@ -160,8 +165,10 @@
       "principal": 800,
       "paidToDate": 500,
       "stillOwed": 300,
-      "targetPayoff": "Jul 15 2026",
-      "note": "Helped with emergency car repair. No interest, flexible. Pay $150 on Jun 27 and $150 on Jul 15."
+      "targetPayoff": "2026-07-15",
+      "note": "Helped with emergency car repair. No interest, flexible. Pay $150 on Jun 27 and $150 on Jul 15.",
+      "id": "loan-1",
+      "balanceBasis": "principal-minus-paid"
     },
     {
       "name": "Federal Student Loan",
@@ -169,8 +176,10 @@
       "principal": 28000,
       "paidToDate": 9400,
       "stillOwed": 18600,
-      "targetPayoff": "Nov 2032",
-      "note": "IBR plan — $226/mo auto-debit. On track. Consider lump sum when freelance income rises."
+      "targetPayoff": null,
+      "note": "Fictional payment snapshot: $226/mo scheduled. Target payoff date is unknown; no interest/amortization schedule is modeled.",
+      "id": "loan-2",
+      "balanceBasis": "principal-minus-paid"
     },
     {
       "name": "Car Loan (2022 Honda Civic)",
@@ -178,8 +187,10 @@
       "principal": 18500,
       "paidToDate": 9870,
       "stillOwed": 8630,
-      "targetPayoff": "Mar 2028",
-      "note": "3.9% APR. $287/mo. 22 months remain. Overpay by $50/mo to cut 3 months off term."
+      "targetPayoff": null,
+      "note": "Fictional payment snapshot: $287/mo. No verified amortization or payoff estimate is included.",
+      "id": "loan-3",
+      "balanceBasis": "principal-minus-paid"
     }
   ],
   "income": [
@@ -188,22 +199,25 @@
       "type": "W2",
       "monthlyEst": 5200,
       "ytd": 31200,
-      "status": "Active"
+      "status": "active",
+      "id": "income-1"
     },
     {
       "source": "Freelance Design",
       "type": "1099",
       "monthlyEst": 800,
       "ytd": 4100,
-      "status": "Variable",
-      "note": "Avg $680-$940/mo. Q2 slow. Picked up 2 new clients in May."
+      "status": "variable",
+      "note": "Avg $680-$940/mo. Q2 slow. Picked up 2 new clients in May.",
+      "id": "income-2"
     },
     {
       "source": "Patreon",
       "type": "passive",
       "monthlyEst": 45,
       "ytd": 270,
-      "status": "Growing"
+      "status": "active",
+      "id": "income-3"
     }
   ],
   "todos": [
@@ -226,7 +240,8 @@
           "label": "Pay Adobe CC invoice manually",
           "amount": "$55"
         }
-      ]
+      ],
+      "id": "todos-1"
     },
     {
       "bucket": "This Month",
@@ -247,7 +262,8 @@
           "label": "Review freelance invoices — chase late payment from client B",
           "amount": null
         }
-      ]
+      ],
+      "id": "todos-2"
     },
     {
       "bucket": "Financial Goals",
@@ -268,7 +284,9 @@
           "label": "Set up automatic $200/mo savings transfer",
           "amount": null
         }
-      ]
+      ],
+      "id": "todos-3"
     }
-  ]
+  ],
+  "schemaVersion": 1
 }

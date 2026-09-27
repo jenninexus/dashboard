@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEO Dashboard — Stellar Digital</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ── Aurora SEO theme tokens ──────────────────────────────────────── */
 :root {
@@ -109,7 +106,7 @@ code{font-family:var(--mono);font-size:.84em;color:var(--secondary)}
   overflow:hidden;
   display:none;
 }
-@media(min-width:720px){.banner{display:block}}
+@media(min-width:767.98px){.banner{display:block}}
 .banner img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .banner::before{
   content:'';
@@ -457,7 +454,7 @@ tr.highlight td{background:rgba(77,159,255,.06)}
 .foot a:hover{opacity:1}
 
 /* ── Responsive ──────────────────────────────────────────────────────── */
-@media(max-width:600px){
+@media(max-width:575.98px){
   .stats-bar{gap:.35rem}
   .kpi{min-width:90px}
   .kpi .n{font-size:.9rem}
@@ -465,13 +462,18 @@ tr.highlight td{background:rgba(77,159,255,.06)}
   .psi-grid{justify-content:center}
 }
 @media print{.controls,.theme-btn,.tabs{display:none}.card-body{display:block!important}}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+button,.tab,.todo-item{user-select:none}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .anim{opacity:1!important;transform:none!important}
+}
 </style>
 </head>
 <body>
 
 <!-- Banner (≥720px only) -->
 <div class="banner">
-  <img src="../../docs/images/agency/graph-viz-16x9.webp" alt="Stellar Digital analytics banner" onerror="this.closest('.banner').style.display='none'">
   <div class="banner-label">STELLAR DIGITAL &nbsp;/&nbsp; SEO Intelligence</div>
 </div>
 
@@ -480,7 +482,6 @@ tr.highlight td{background:rgba(77,159,255,.06)}
   <!-- Header -->
   <div class="head">
     <div class="head-left">
-      <img class="avatar" src="../../docs/images/agency/metrica-1x1.webp" alt="Stellar Digital" onerror="this.style.display='none'">
       <div>
         <h1>SEO Dashboard</h1>
         <div class="meta">stellar-digital.co &nbsp;·&nbsp; example data &nbsp;·&nbsp; June 2026</div>
@@ -490,6 +491,8 @@ tr.highlight td{background:rgba(77,159,255,.06)}
       <button class="theme-btn" onclick="toggleTheme()"><span id="themeIcon">☾</span> <span id="themeLabel">Dark</span></button>
     </div>
   </div>
+
+<p class="storage-note" style="font-size:.7rem;color:var(--dim);line-height:1.6">Data source: local <code>data.json</code>. JSON, this HTML view, exports and backups are unencrypted plaintext. Checklist completion, theme and collapsed sections are browser-local, disposable state and are not included in JSON backups.</p>
 
   <!-- Tabs -->
   <div class="tabs">
@@ -619,89 +622,430 @@ tr.highlight td{background:rgba(77,159,255,.06)}
   "profile": {
     "name": "Stellar Digital",
     "site": "stellar-digital.co",
-    "asOf": "June 2026",
+    "asOf": "2026-06-30",
     "period": "Jan 2026 – Jun 2026"
   },
   "kpis": [
-    { "label": "Sessions",        "value": "4,210",  "key": "sessions" },
-    { "label": "Clicks",          "value": "1,340",  "key": "clicks" },
-    { "label": "Impressions",     "value": "38,500", "key": "impressions" },
-    { "label": "Avg Position",    "value": "14.2",   "key": "position" },
-    { "label": "Indexed Pages",   "value": "84",     "key": "indexed" },
-    { "label": "PageSpeed Score", "value": "94",     "key": "psi" }
+    {
+      "label": "Sessions",
+      "value": "4,210",
+      "key": "sessions",
+      "id": "kpis-1"
+    },
+    {
+      "label": "Clicks",
+      "value": "1,340",
+      "key": "clicks",
+      "id": "kpis-2"
+    },
+    {
+      "label": "Impressions",
+      "value": "38,500",
+      "key": "impressions",
+      "id": "kpis-3"
+    },
+    {
+      "label": "Avg Position",
+      "value": "14.2",
+      "key": "position",
+      "id": "kpis-4"
+    },
+    {
+      "label": "Indexed Pages",
+      "value": "84",
+      "key": "indexed",
+      "id": "kpis-5"
+    },
+    {
+      "label": "PageSpeed Score",
+      "value": "94",
+      "key": "psi",
+      "id": "kpis-6"
+    }
   ],
   "progress": {
     "metrics": [
-      { "metric": "Organic Sessions",  "before": 310,   "after": 1180,   "unit": "",    "lowerIsBetter": false },
-      { "metric": "Impressions / mo",  "before": 4200,  "after": 38500,  "unit": "",    "lowerIsBetter": false },
-      { "metric": "Clicks / mo",       "before": 82,    "after": 1340,   "unit": "",    "lowerIsBetter": false },
-      { "metric": "Avg Position",      "before": 48.3,  "after": 14.2,   "unit": "",    "lowerIsBetter": true  },
-      { "metric": "Indexed Pages",     "before": 22,    "after": 84,     "unit": "",    "lowerIsBetter": false },
-      { "metric": "Domain Rating",     "before": 0,     "after": 14,     "unit": " DR", "lowerIsBetter": false }
+      {
+        "metric": "Organic Sessions",
+        "before": 310,
+        "after": 1180,
+        "unit": "",
+        "lowerIsBetter": false,
+        "id": "progress-metrics-1"
+      },
+      {
+        "metric": "Impressions / mo",
+        "before": 4200,
+        "after": 38500,
+        "unit": "",
+        "lowerIsBetter": false,
+        "id": "progress-metrics-2"
+      },
+      {
+        "metric": "Clicks / mo",
+        "before": 82,
+        "after": 1340,
+        "unit": "",
+        "lowerIsBetter": false,
+        "id": "progress-metrics-3"
+      },
+      {
+        "metric": "Avg Position",
+        "before": 48.3,
+        "after": 14.2,
+        "unit": "",
+        "lowerIsBetter": true,
+        "id": "progress-metrics-4"
+      },
+      {
+        "metric": "Indexed Pages",
+        "before": 22,
+        "after": 84,
+        "unit": "",
+        "lowerIsBetter": false,
+        "id": "progress-metrics-5"
+      },
+      {
+        "metric": "Domain Rating",
+        "before": 0,
+        "after": 14,
+        "unit": " DR",
+        "lowerIsBetter": false,
+        "id": "progress-metrics-6"
+      }
     ]
   },
   "ga4": [
-    { "label": "Active Users",    "value": "1,842", "trend": [30,38,44,51,60,72] },
-    { "label": "Sessions",        "value": "4,210", "trend": [55,64,72,84,96,108] },
-    { "label": "Pageviews",       "value": "12,540","trend": [160,192,220,258,290,340] },
-    { "label": "Bounce Rate",     "value": "38.2%", "trend": [60,56,52,48,44,38], "invert": true },
-    { "label": "Avg Session Dur", "value": "2m 34s","trend": [30,42,52,65,70,78] },
-    { "label": "New Users",       "value": "61%",   "trend": [40,45,50,54,57,61] }
+    {
+      "label": "Active Users",
+      "value": "1,842",
+      "trend": [
+        30,
+        38,
+        44,
+        51,
+        60,
+        72
+      ],
+      "id": "ga4-1"
+    },
+    {
+      "label": "Sessions",
+      "value": "4,210",
+      "trend": [
+        55,
+        64,
+        72,
+        84,
+        96,
+        108
+      ],
+      "id": "ga4-2"
+    },
+    {
+      "label": "Pageviews",
+      "value": "12,540",
+      "trend": [
+        160,
+        192,
+        220,
+        258,
+        290,
+        340
+      ],
+      "id": "ga4-3"
+    },
+    {
+      "label": "Bounce Rate",
+      "value": "38.2%",
+      "trend": [
+        60,
+        56,
+        52,
+        48,
+        44,
+        38
+      ],
+      "invert": true,
+      "id": "ga4-4"
+    },
+    {
+      "label": "Avg Session Dur",
+      "value": "2m 34s",
+      "trend": [
+        30,
+        42,
+        52,
+        65,
+        70,
+        78
+      ],
+      "id": "ga4-5"
+    },
+    {
+      "label": "New Users",
+      "value": "61%",
+      "trend": [
+        40,
+        45,
+        50,
+        54,
+        57,
+        61
+      ],
+      "id": "ga4-6"
+    }
   ],
   "traffic": [
-    { "source": "Organic Search", "pct": 48, "color": "#4d9fff" },
-    { "source": "Direct",         "pct": 22, "color": "#1de9c0" },
-    { "source": "Referral",       "pct": 15, "color": "#9b72ff" },
-    { "source": "Social",         "pct":  9, "color": "#60b4ff" },
-    { "source": "Paid Search",    "pct":  4, "color": "#ffb347" },
-    { "source": "Email",          "pct":  2, "color": "#39e8a0" }
+    {
+      "source": "Organic Search",
+      "pct": 48,
+      "color": "#4d9fff",
+      "id": "traffic-1"
+    },
+    {
+      "source": "Direct",
+      "pct": 22,
+      "color": "#1de9c0",
+      "id": "traffic-2"
+    },
+    {
+      "source": "Referral",
+      "pct": 15,
+      "color": "#9b72ff",
+      "id": "traffic-3"
+    },
+    {
+      "source": "Social",
+      "pct": 9,
+      "color": "#60b4ff",
+      "id": "traffic-4"
+    },
+    {
+      "source": "Paid Search",
+      "pct": 4,
+      "color": "#ffb347",
+      "id": "traffic-5"
+    },
+    {
+      "source": "Email",
+      "pct": 2,
+      "color": "#39e8a0",
+      "id": "traffic-6"
+    }
   ],
   "topPages": [
-    { "page": "/",                       "views": 3840, "duration": "1m 52s", "bounce": "41%", "top": true },
-    { "page": "/services",               "views": 2210, "duration": "2m 44s", "bounce": "32%" },
-    { "page": "/portfolio",              "views": 1780, "duration": "3m 10s", "bounce": "28%" },
-    { "page": "/blog/seo-guide-2026",    "views": 1460, "duration": "4m 02s", "bounce": "22%" },
-    { "page": "/about",                  "views": 920,  "duration": "1m 38s", "bounce": "50%" },
-    { "page": "/contact",                "views": 640,  "duration": "0m 55s", "bounce": "63%" }
+    {
+      "page": "/",
+      "views": 3840,
+      "duration": "1m 52s",
+      "bounce": "41%",
+      "top": true,
+      "id": "topPages-1"
+    },
+    {
+      "page": "/services",
+      "views": 2210,
+      "duration": "2m 44s",
+      "bounce": "32%",
+      "id": "topPages-2"
+    },
+    {
+      "page": "/portfolio",
+      "views": 1780,
+      "duration": "3m 10s",
+      "bounce": "28%",
+      "id": "topPages-3"
+    },
+    {
+      "page": "/blog/seo-guide-2026",
+      "views": 1460,
+      "duration": "4m 02s",
+      "bounce": "22%",
+      "id": "topPages-4"
+    },
+    {
+      "page": "/about",
+      "views": 920,
+      "duration": "1m 38s",
+      "bounce": "50%",
+      "id": "topPages-5"
+    },
+    {
+      "page": "/contact",
+      "views": 640,
+      "duration": "0m 55s",
+      "bounce": "63%",
+      "id": "topPages-6"
+    }
   ],
   "gsc": {
     "coverage": [
-      { "label": "Indexed",     "value": 84,  "status": "ok" },
-      { "label": "Not Indexed", "value": 12,  "status": "warn" },
-      { "label": "Errors",      "value": 3,   "status": "fail" }
+      {
+        "label": "Indexed",
+        "value": 84,
+        "status": "ok",
+        "id": "gsc-coverage-1"
+      },
+      {
+        "label": "Not Indexed",
+        "value": 12,
+        "status": "warn",
+        "id": "gsc-coverage-2"
+      },
+      {
+        "label": "Errors",
+        "value": 3,
+        "status": "fail",
+        "id": "gsc-coverage-3"
+      }
     ],
     "issues": [
-      { "type": "Crawl errors",        "count": 3,  "severity": "fail", "note": "Broken internal links on /old-pricing" },
-      { "type": "Mobile usability",    "count": 2,  "severity": "warn", "note": "Tap targets too small on contact form" },
-      { "type": "Core Web Vitals",     "count": 0,  "severity": "ok",   "note": "All URLs pass desktop; 2 mobile pending" },
-      { "type": "Soft 404s",           "count": 5,  "severity": "warn", "note": "Redirect legacy /old-blog/* paths" },
-      { "type": "Duplicate meta desc", "count": 8,  "severity": "warn", "note": "Service sub-pages share identical descriptions" }
+      {
+        "type": "Crawl errors",
+        "count": 3,
+        "severity": "fail",
+        "note": "Broken internal links on /old-pricing",
+        "id": "gsc-issues-1"
+      },
+      {
+        "type": "Mobile usability",
+        "count": 2,
+        "severity": "warn",
+        "note": "Tap targets too small on contact form",
+        "id": "gsc-issues-2"
+      },
+      {
+        "type": "Core Web Vitals",
+        "count": 0,
+        "severity": "ok",
+        "note": "All URLs pass desktop; 2 mobile pending",
+        "id": "gsc-issues-3"
+      },
+      {
+        "type": "Soft 404s",
+        "count": 5,
+        "severity": "warn",
+        "note": "Redirect legacy /old-blog/* paths",
+        "id": "gsc-issues-4"
+      },
+      {
+        "type": "Duplicate meta desc",
+        "count": 8,
+        "severity": "warn",
+        "note": "Service sub-pages share identical descriptions",
+        "id": "gsc-issues-5"
+      }
     ]
   },
   "pagespeed": {
-    "mobile":  { "score": 76, "grade": "warn" },
-    "desktop": { "score": 94, "grade": "pass" },
+    "mobile": {
+      "score": 76,
+      "grade": "warn"
+    },
+    "desktop": {
+      "score": 94,
+      "grade": "pass"
+    },
     "cwv": [
-      { "label": "LCP",  "value": "2.4s",  "status": "pass", "target": "< 2.5s" },
-      { "label": "INP",  "value": "88ms",  "status": "pass", "target": "< 200ms" },
-      { "label": "CLS",  "value": "0.08",  "status": "pass", "target": "< 0.1" },
-      { "label": "FCP",  "value": "1.6s",  "status": "pass", "target": "< 1.8s" },
-      { "label": "TTFB", "value": "340ms", "status": "warn", "target": "< 200ms" }
+      {
+        "label": "LCP",
+        "value": "2.4s",
+        "status": "pass",
+        "target": "< 2.5s",
+        "id": "pagespeed-cwv-1"
+      },
+      {
+        "label": "INP",
+        "value": "88ms",
+        "status": "pass",
+        "target": "< 200ms",
+        "id": "pagespeed-cwv-2"
+      },
+      {
+        "label": "CLS",
+        "value": "0.08",
+        "status": "pass",
+        "target": "< 0.1",
+        "id": "pagespeed-cwv-3"
+      },
+      {
+        "label": "FCP",
+        "value": "1.6s",
+        "status": "pass",
+        "target": "< 1.8s",
+        "id": "pagespeed-cwv-4"
+      },
+      {
+        "label": "TTFB",
+        "value": "340ms",
+        "status": "warn",
+        "target": "< 200ms",
+        "id": "pagespeed-cwv-5"
+      }
     ]
   },
   "checklist": [
-    { "item": "Title tags (unique, <60 chars)",    "status": "pass" },
-    { "item": "Meta descriptions",                 "status": "warn" },
-    { "item": "H1 tags (one per page)",            "status": "pass" },
-    { "item": "Image alt text",                    "status": "warn" },
-    { "item": "Schema markup (org + article)",     "status": "pass" },
-    { "item": "XML Sitemap submitted",             "status": "pass" },
-    { "item": "Robots.txt configured",             "status": "pass" },
-    { "item": "SSL / HTTPS",                       "status": "pass" },
-    { "item": "Mobile-friendly",                   "status": "pass" },
-    { "item": "Page speed (desktop)",              "status": "pass" },
-    { "item": "Internal linking",                  "status": "warn" },
-    { "item": "Canonical tags",                    "status": "fail" }
+    {
+      "item": "Title tags (unique, <60 chars)",
+      "status": "pass",
+      "id": "checklist-1"
+    },
+    {
+      "item": "Meta descriptions",
+      "status": "warn",
+      "id": "checklist-2"
+    },
+    {
+      "item": "H1 tags (one per page)",
+      "status": "pass",
+      "id": "checklist-3"
+    },
+    {
+      "item": "Image alt text",
+      "status": "warn",
+      "id": "checklist-4"
+    },
+    {
+      "item": "Schema markup (org + article)",
+      "status": "pass",
+      "id": "checklist-5"
+    },
+    {
+      "item": "XML Sitemap submitted",
+      "status": "pass",
+      "id": "checklist-6"
+    },
+    {
+      "item": "Robots.txt configured",
+      "status": "pass",
+      "id": "checklist-7"
+    },
+    {
+      "item": "SSL / HTTPS",
+      "status": "pass",
+      "id": "checklist-8"
+    },
+    {
+      "item": "Mobile-friendly",
+      "status": "pass",
+      "id": "checklist-9"
+    },
+    {
+      "item": "Page speed (desktop)",
+      "status": "pass",
+      "id": "checklist-10"
+    },
+    {
+      "item": "Internal linking",
+      "status": "warn",
+      "id": "checklist-11"
+    },
+    {
+      "item": "Canonical tags",
+      "status": "fail",
+      "id": "checklist-12"
+    }
   ],
   "actions": {
     "critical": [
@@ -729,21 +1073,107 @@ tr.highlight td{background:rgba(77,159,255,.06)}
     ]
   },
   "milestones": [
-    { "label": "Site launch",           "date": "Jan 2026", "done": true },
-    { "label": "GSC verified",          "date": "Jan 2026", "done": true },
-    { "label": "First 100 clicks",      "date": "Feb 2026", "done": true },
-    { "label": "DA 14 achieved",        "date": "Mar 2026", "done": true },
-    { "label": "Mobile score 76",       "date": "Apr 2026", "done": true },
-    { "label": "1k monthly sessions",   "date": "May 2026", "done": true },
-    { "label": "DA 25 target",          "date": "Sep 2026", "done": false },
-    { "label": "5k sessions / mo",      "date": "Dec 2026", "done": false }
-  ]
+    {
+      "label": "Site launch",
+      "date": "2026-01-01",
+      "done": true,
+      "datePrecision": "month",
+      "id": "milestones-1"
+    },
+    {
+      "label": "GSC verified",
+      "date": "2026-01-01",
+      "done": true,
+      "datePrecision": "month",
+      "id": "milestones-2"
+    },
+    {
+      "label": "First 100 clicks",
+      "date": "2026-02-01",
+      "done": true,
+      "datePrecision": "month",
+      "id": "milestones-3"
+    },
+    {
+      "label": "DA 14 achieved",
+      "date": "2026-03-01",
+      "done": true,
+      "datePrecision": "month",
+      "id": "milestones-4"
+    },
+    {
+      "label": "Mobile score 76",
+      "date": "2026-04-01",
+      "done": true,
+      "datePrecision": "month",
+      "id": "milestones-5"
+    },
+    {
+      "label": "1k monthly sessions",
+      "date": "2026-05-01",
+      "done": true,
+      "datePrecision": "month",
+      "id": "milestones-6"
+    },
+    {
+      "label": "DA 25 target",
+      "date": "2026-09-01",
+      "done": false,
+      "datePrecision": "month",
+      "id": "milestones-7"
+    },
+    {
+      "label": "5k sessions / mo",
+      "date": "2026-12-01",
+      "done": false,
+      "datePrecision": "month",
+      "id": "milestones-8"
+    }
+  ],
+  "schemaVersion": 1
 }
 </script>
 
 <!-- ── JavaScript ────────────────────────────────────────────────────── -->
 <script>
 const D = JSON.parse(document.getElementById('seo-data').textContent);
+
+// Existing collapse/tab controls also work with Enter/Space and expose state.
+function enableKeyboardControls(){
+  const controls = document.querySelectorAll(".card-head[onclick], .tab[onclick]");
+  const sync = () => controls.forEach(control => {
+    const card = control.closest(".card");
+    if(card) control.setAttribute("aria-expanded", String(card.classList.contains("open")));
+  });
+  controls.forEach(control => {
+    control.setAttribute("role","button");
+    control.setAttribute("tabindex","0");
+    control.addEventListener("keydown", event => {
+      if(event.key === "Enter" || event.key === " "){ event.preventDefault(); control.click(); }
+    });
+  });
+  document.addEventListener("click", () => queueMicrotask(sync));
+  sync();
+}
+
+// View/checklist state is disposable: blocked or corrupt storage must not stop rendering.
+function readLocal(key){ try { return localStorage.getItem(key); } catch { return null; } }
+function writeLocal(key,value){ try { localStorage.setItem(key,value); } catch {} }
+function readLocalJSON(key,fallback={}){
+  try { const value=JSON.parse(readLocal(key)); return value && typeof value === "object" && !Array.isArray(value) ? value : fallback; } catch { return fallback; }
+}
+
+// JSON fields are plain text, never rich HTML. Encode values at HTML boundaries.
+function escapeText(value){
+  return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function safeColor(value){
+  return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(String(value)) ? value : 'var(--primary)';
+}
+function safePercent(value){ return Math.max(0, Math.min(100, Number(value) || 0)); }
+
+document.querySelector(".meta").textContent = D.profile.site + " · snapshot as of " + D.profile.asOf + " · " + D.profile.period;
+document.querySelector(".tab").textContent = D.profile.name;
 
 // ── Theme ────────────────────────────────────────────────────────────
 function toggleTheme() {
@@ -752,9 +1182,9 @@ function toggleTheme() {
   h.setAttribute('data-theme', isDark ? 'light' : 'dark');
   document.getElementById('themeIcon').textContent = isDark ? '☀' : '☾';
   document.getElementById('themeLabel').textContent = isDark ? 'Light' : 'Dark';
-  localStorage.setItem('seo-theme', isDark ? 'light' : 'dark');
+  writeLocal('seo-theme', isDark ? 'light' : 'dark');
 }
-if (localStorage.getItem('seo-theme') === 'light') toggleTheme();
+if (readLocal('seo-theme') === 'light') toggleTheme();
 
 // ── Tabs ─────────────────────────────────────────────────────────────
 function switchTab(id, el) {
@@ -779,11 +1209,11 @@ function saveCards() {
   document.querySelectorAll('.card[id]').forEach(c => {
     state[c.id] = c.classList.contains('open');
   });
-  localStorage.setItem('seo-cards', JSON.stringify(state));
+  writeLocal('seo-cards', JSON.stringify(state));
 }
 function restoreCards() {
   try {
-    const state = JSON.parse(localStorage.getItem('seo-cards') || '{}');
+    const state = readLocalJSON('seo-cards');
     Object.entries(state).forEach(([id, open]) => {
       const el = document.getElementById(id);
       if (el) el.classList.toggle('open', open);
@@ -793,7 +1223,7 @@ function restoreCards() {
 
 // ── KPI Stats Bar ────────────────────────────────────────────────────
 document.getElementById('stats-bar').innerHTML = D.kpis.map(k =>
-  `<div class="kpi"><div class="n">${k.value}</div><div class="l">${k.label}</div></div>`
+  `<div class="kpi"><div class="n">${escapeText(k.value)}</div><div class="l">${escapeText(k.label)}</div></div>`
 ).join('');
 
 // ── SEO Progress ─────────────────────────────────────────────────────
@@ -809,9 +1239,9 @@ document.getElementById('stats-bar').innerHTML = D.kpis.map(k =>
     const cls = improved ? 'delta-pos' : (diff === 0 ? 'delta-neut' : 'delta-neg');
     const fmtNum = n => Number.isInteger(n) ? n.toLocaleString() : n;
     return `<tr>
-      <td><strong>${r.metric}</strong></td>
-      <td style="color:var(--dim);font-family:var(--mono)">${fmtNum(r.before)}${r.unit}</td>
-      <td style="color:var(--bright);font-family:var(--mono);font-weight:700">${fmtNum(r.after)}${r.unit}</td>
+      <td><strong>${escapeText(r.metric)}</strong></td>
+      <td style="color:var(--dim);font-family:var(--mono)">${escapeText(fmtNum(r.before))}${escapeText(r.unit)}</td>
+      <td style="color:var(--bright);font-family:var(--mono);font-weight:700">${escapeText(fmtNum(r.after))}${escapeText(r.unit)}</td>
       <td class="${cls}" style="font-family:var(--mono)">${arrow} ${pct}%</td>
     </tr>`;
   }).join('');
@@ -836,8 +1266,8 @@ document.getElementById('stats-bar').innerHTML = D.kpis.map(k =>
       return `<div class="spark-bar" style="height:${h}%"></div>`;
     }).join('');
     return `<div class="ga4-stat">
-      <div class="n">${s.value}</div>
-      <div class="l">${s.label}</div>
+      <div class="n">${escapeText(s.value)}</div>
+      <div class="l">${escapeText(s.label)}</div>
       <div class="spark">${bars}</div>
     </div>`;
   }).join('');
@@ -850,13 +1280,13 @@ document.getElementById('stats-bar').innerHTML = D.kpis.map(k =>
 (function(){
   const rows = D.traffic.map(t =>
     `<tr>
-      <td><strong>${t.source}</strong></td>
+      <td><strong>${escapeText(t.source)}</strong></td>
       <td style="width:55%">
         <div class="pbar-wrap">
           <div class="pbar-track">
-            <div class="pbar-fill" style="width:${t.pct}%;background:${t.color}"></div>
+            <div class="pbar-fill" style="width:${safePercent(t.pct)}%;background:${safeColor(t.color)}"></div>
           </div>
-          <div class="pbar-lbl" style="color:${t.color}">${t.pct}%</div>
+          <div class="pbar-lbl" style="color:${safeColor(t.color)}">${safePercent(t.pct)}%</div>
         </div>
       </td>
       <td style="font-family:var(--mono);font-size:.7rem;color:var(--dim)">${Math.round(4210 * t.pct / 100).toLocaleString()} sessions</td>
@@ -873,10 +1303,10 @@ document.getElementById('stats-bar').innerHTML = D.kpis.map(k =>
 (function(){
   const rows = D.topPages.map(p =>
     `<tr${p.top ? ' class="highlight"' : ''}>
-      <td style="font-family:var(--mono);font-size:.7rem">${p.page}${p.top ? ' <span class="iss ok">top</span>' : ''}</td>
-      <td style="font-family:var(--mono);font-weight:700;color:var(--primary)">${p.views.toLocaleString()}</td>
-      <td style="font-family:var(--mono)">${p.duration}</td>
-      <td style="font-family:var(--mono)">${p.bounce}</td>
+      <td style="font-family:var(--mono);font-size:.7rem">${escapeText(p.page)}${p.top ? ' <span class="iss ok">top</span>' : ''}</td>
+      <td style="font-family:var(--mono);font-weight:700;color:var(--primary)">${escapeText(p.views.toLocaleString())}</td>
+      <td style="font-family:var(--mono)">${escapeText(p.duration)}</td>
+      <td style="font-family:var(--mono)">${escapeText(p.bounce)}</td>
     </tr>`
   ).join('');
   document.getElementById('pages-body').innerHTML =
@@ -889,18 +1319,18 @@ document.getElementById('stats-bar').innerHTML = D.kpis.map(k =>
 // ── GSC ───────────────────────────────────────────────────────────────
 (function(){
   const blocks = D.gsc.coverage.map(c =>
-    `<div class="cov-block ${c.status}">
-      <div class="n">${c.value}</div>
-      <div class="l">${c.label}</div>
+    `<div class="cov-block ${escapeText(['ok','warn','fail','pass'].includes(c.status) ? c.status : 'warn')}">
+      <div class="n">${escapeText(c.value)}</div>
+      <div class="l">${escapeText(c.label)}</div>
     </div>`
   ).join('');
 
   const issRows = D.gsc.issues.map(i =>
     `<tr>
-      <td><strong>${i.type}</strong></td>
-      <td style="font-family:var(--mono);font-weight:700;color:${i.severity==='fail'?'var(--red)':i.severity==='warn'?'var(--yellow)':'var(--green)'}">${i.count}</td>
-      <td><span class="iss ${i.severity}">${i.severity}</span></td>
-      <td style="font-size:.66rem;color:var(--dim)">${i.note}</td>
+      <td><strong>${escapeText(i.type)}</strong></td>
+      <td style="font-family:var(--mono);font-weight:700;color:${i.severity==='fail'?'var(--red)':i.severity==='warn'?'var(--yellow)':'var(--green)'}">${escapeText(i.count)}</td>
+      <td><span class="iss ${escapeText(['ok','warn','fail','pass'].includes(i.severity) ? i.severity : 'warn')}">${escapeText(['ok','warn','fail','pass'].includes(i.severity) ? i.severity : 'warn')}</span></td>
+      <td style="font-size:.66rem;color:var(--dim)">${escapeText(i.note)}</td>
     </tr>`
   ).join('');
 
@@ -921,16 +1351,16 @@ document.getElementById('stats-bar').innerHTML = D.kpis.map(k =>
     const deg = Math.round(score / 100 * 360);
     return `<div class="psi-gauge">
       <div class="psi-ring" style="background:conic-gradient(${color} ${deg}deg, var(--bg2) ${deg}deg)">
-        <span style="color:${color}">${score}</span>
+        <span style="color:${color}">${escapeText(score)}</span>
       </div>
       <div class="psi-label">${label}</div>
     </div>`;
   }
 
   const cwvHtml = D.pagespeed.cwv.map(v =>
-    `<div class="cwv ${v.status}">
-      <div class="n">${v.value}</div>
-      <div class="l">${v.label}</div>
+    `<div class="cwv ${escapeText(['ok','warn','fail','pass'].includes(v.status) ? v.status : 'warn')}">
+      <div class="n">${escapeText(v.value)}</div>
+      <div class="l">${escapeText(v.label)}</div>
     </div>`
   ).join('');
 
@@ -948,10 +1378,10 @@ document.getElementById('stats-bar').innerHTML = D.kpis.map(k =>
 (function(){
   const items = D.checklist.map(c => {
     const icon = c.status === 'pass' ? '✓' : c.status === 'warn' ? '⚠' : '✗';
-    const cls = `check-${c.status}`;
+    const cls = `check-${escapeText(['ok','warn','fail','pass'].includes(c.status) ? c.status : 'warn')}`;
     return `<div class="check-item ${cls}">
       <span class="check-icon">${icon}</span>
-      <span>${c.item}</span>
+      <span>${escapeText(c.item)}</span>
     </div>`;
   }).join('');
   document.getElementById('checklist-body').innerHTML =
@@ -962,7 +1392,7 @@ document.getElementById('stats-bar').innerHTML = D.kpis.map(k =>
 (function(){
   const a = D.actions;
   function bucket(cls, label, items) {
-    const lis = items.map(i => `<div class="action-item">${i}</div>`).join('');
+    const lis = items.map(i => `<div class="action-item">${escapeText(i)}</div>`).join('');
     return `<div class="action-bucket ${cls}">
       <div class="bucket-head"><span class="bucket-dot"></span>${label}</div>
       ${lis}
@@ -982,8 +1412,8 @@ document.getElementById('stats-bar').innerHTML = D.kpis.map(k =>
   const ms = D.milestones.map(m =>
     `<div class="milestone">
       <div class="ms-dot ${m.done ? 'done' : ''}"></div>
-      <div class="ms-chip">${m.label}</div>
-      <div class="ms-date">${m.date}</div>
+      <div class="ms-chip">${escapeText(m.label)}</div>
+      <div class="ms-date">${escapeText(m.date)}</div>
     </div>`
   ).join('');
   document.getElementById('milestones-body').innerHTML =
@@ -994,6 +1424,7 @@ document.getElementById('stats-bar').innerHTML = D.kpis.map(k =>
 
 // ── Restore card states ───────────────────────────────────────────────
 restoreCards();
+enableKeyboardControls();
 </script>
 </body>
 </html>

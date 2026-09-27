@@ -9,8 +9,8 @@
 
 **Make one dashboard. For everyone.** ✨
 
-`dashboard` is a profile-based, local-first seed kit. Pick a profile (`SEO`, `finances`, `health`, `pets`),
-drop in JSON, get a polished single-file dashboard in seconds — no server, no build, no backend.
+Choose SEO, finances, health, or pets; edit local JSON; get a polished standalone dashboard. No
+account, backend, telemetry, API key, package install, or network connection is required.
 
 </div>
 
@@ -21,119 +21,109 @@ drop in JSON, get a polished single-file dashboard in seconds — no server, no 
 | SEO | Finances | Health | Pets |
 |---|---|---|---|
 | ![SEO Dashboard](docs/screenshots/hero/1920/seo-1920.png) | ![Finance Dashboard](docs/screenshots/hero/1920/finances-1920.png) | ![Health Dashboard](docs/screenshots/hero/1920/health-1920.png) | ![Pets Dashboard](docs/screenshots/hero/1920/pets-1920.png) |
-| `profiles/seo/seo.html` | `profiles/finances/finances.html` | `profiles/health/health.html` | `profiles/pets/pets.html` |
-| Aurora · midnight blue | Emerald · gold | Vitality · teal · lavender | Dusk · rose · sunset |
+| Aurora SEO | Emerald Finance | Vitality Health | Dusk Companion |
 
-Open any of these directly in your browser. They're self-contained — only Chart.js + Google Fonts load from the network.
+The example HTML files under `profiles/` open directly from `file://` and use fictional data. They
+have no required CDN, remote font, or remote chart runtime.
 
----
+## Quick start
 
-## Quick Start
+Download or clone the repository, then choose a workflow.
 
-**Don't want to use a terminal?** Download this repo as a ZIP from GitHub, unzip it, and double-click
-`profiles/seo/seo.html` (or any profile HTML) in your file explorer. That's your dashboard.
+### Local wizard
 
-**Prefer the terminal?**
+On Windows, double-click `Dashboard.cmd`. On macOS or Linux, use:
+
+```bash
+npm run dashboard
+```
+
+The temporary wizard runs only on `127.0.0.1`, edits the output folder you choose, and shuts down
+when you press **Stop** or it becomes idle. Its forms and raw-JSON editor use the same validation and
+update core as the command line.
+
+### Command line
 
 ```bash
 git clone https://github.com/jenninexus/dashboard.git
 cd dashboard
-```
-
-Then pick one:
-
-```bash
-# Option A — open a profile directly in your browser
-start profiles/seo/seo.html           # Windows
-open profiles/seo/seo.html             # macOS
-xdg-open profiles/seo/seo.html        # Linux
-```
-
-```bash
-# Option B — scaffold your own copy into ./my-dashboard/
 npm run build-dashboard -- --profile seo --name "Your Name"
 ```
 
-Then edit `my-dashboard/data.json` (every field has a `_comment` explaining what to put there) and open `my-dashboard/dashboard.html`.
+Then edit `my-dashboard/data.json`, rebuild only the embedded data region, and open the result:
 
-**Prefer an IDE?** Open this repo in VS Code, Cursor, opencode, or your favorite editor. Open `dashboard.code-workspace.example` as a workspace (or copy it to `dashboard.code-workspace` for a themed Plasma Green window — the local copy is gitignored so your tweaks stay private).
+```bash
+npm run dashboard:update -- --out my-dashboard
+```
 
----
+The updater validates the profile contract, preserves custom HTML/CSS outside the generated data
+block, and keeps one rotating `dashboard.html.bak`. It never treats `--force` as an update path and
+never rewrites `data.json`.
 
 ## Profiles
 
-Each profile is a self-contained dashboard for one domain. Open the example HTML directly, or scaffold your own copy.
-
-| Profile | Tracks | Per-profile theme |
+| Profile | Tracks | Default theme |
 |---|---|---|
-| **SEO** — `profiles/seo/seo.html` | GA4 · Search Console · PageSpeed · Cloudflare | Aurora SEO (midnight blue / aurora) |
-| **Finances** — `profiles/finances/finances.html` | Cash vs obligations · bills · loans · income | Emerald Finance (emerald / gold) |
-| **Health** — `profiles/health/health.html` | Vitals · meds · labs · habits · sleep | Vitality Health (teal / lavender) |
-| **Pets** — `profiles/pets/pets.html` | Weight · QoL · fluids · red flags | Dusk Companion (rose / sunset coral) |
+| **SEO** | GA4 · Search Console · PageSpeed · Cloudflare | `aurora-seo` |
+| **Finances** | cash · bills · loans · income snapshot | `emerald-finance` |
+| **Health** | vitals · meds · labs · habits · sleep | `vitality-health` |
+| **Pets** | weight · quality of life · fluids · red flags | `dusk-companion` |
 
-Replace the example numbers in `data.json` with your own. The example data is fictional on purpose — easy to swap without leaking anything real.
+Each profile owns four public files: its renderer, fictional example, routing manifest, and compact
+versioned editor contract. See [profiles/README.md](profiles/README.md) for the exact format.
 
-**Sister repos** (same family, different job):
-
-- [jenninexus/fin](https://github.com/jenninexus/fin) — operational finance *workspace* (autopay, archive, startup script). This kit’s finances profile is the snapshot demo.
-- [jenninexus/senior-pet-care](https://github.com/jenninexus/senior-pet-care) — printable Markdown pet-care tracker. This kit’s pets profile is the optional visual layer.
-
----
+The finances profile is a customizable snapshot, not a payment ledger. For an operational finance
+workspace seed, use [jenninexus/fin](https://github.com/jenninexus/fin). For printable pet-care sheets,
+use [jenninexus/senior-pet-care](https://github.com/jenninexus/senior-pet-care).
 
 ## Themes
 
-Palettes live in `themes/` and can be copied into a profile's `<style>` block or `<link>`-ed when served over HTTP.
+`themes/manifest.json` is the public theme catalog. It lists default/compatible profiles and the CSS
+files shipped by each theme. Profile defaults remain intentionally distinct; alternates include
+Plasma Green, Aurora Borealis, and Midnight Blue.
 
-The palette direction is inspired by the workspace themes in [jenninexus/syn-themes](https://github.com/jenninexus/syn-themes).
+The committed CSS is the complete public runtime contract. A generated dashboard never imports a
+private kit or machine-local path.
 
-Bundled palettes:
+## Privacy and safety
 
-- `plasma-green.css` — default dark neon palette
-- `aurora-borealis.css` — prismatic turquoise, purple, and pink (+ `aurora-borealis.effects.css` for shimmer)
-- `midnight-blue.css` — cooler blue starter
-- `aurora-seo.css` — used by the SEO profile
-- `emerald-finance.css` — used by the Finances profile
-- `vitality-health.css` — used by the Health profile
-- `dusk-companion.css` — used by the Pets profile (pink dusk, not brown/amber)
+- `data.json`, generated HTML, exports, and `dashboard.html.bak` are unencrypted plaintext files.
+- Generated dashboards, local plans, secrets, agent state, and QA captures are gitignored.
+- Profile examples are fictional. Do not use real financial, health, analytics, or pet records as
+  fixtures, screenshots, issues, or documentation.
+- Browser-local theme, collapse, and checklist state is disposable and is not included in JSON
+  backups.
 
-Public teaching starter for making *your* kit: [jenninexus/theme-designer](https://github.com/jenninexus/theme-designer) (copy-on-update; do not `@import` a kit path).
+The exact public/local boundary is documented in
+[docs/PUBLIC-LOCAL-SPLIT.md](docs/PUBLIC-LOCAL-SPLIT.md).
 
-`plasma-green` is dashboard neon green (`#00e879`). It is **not** Synagraphic Plasma Drift (pink `#e050a0`).
+## Repository map
 
----
+| Path | Purpose |
+|---|---|
+| `profiles/` | Four domain renderers, examples, manifests, and editor contracts |
+| `themes/` | Public theme CSS and compatibility manifest |
+| `scripts/` | Shared core, CLI, local wizard, boundary check, and optional capture wrapper |
+| `docs/images/` | Runtime art referenced by profiles and copied into generated output |
+| `docs/screenshots/hero/` | Curated four-image README gallery only |
+| `configs/` | Portable optional screenshot-capture configuration |
 
-## Why this kit?
+Full breakpoint captures are local QA evidence, not public documentation assets.
 
-- **Zero install** — open a profile HTML from `file://`. Chart.js + Google Fonts load from CDN. That's it.
-- **Zero deps** — `package.json` declares nothing. The scaffolder uses only Node's built-ins.
-- **Zero backend** — every profile is hand-fed JSON today. No API keys, no servers, no telemetry.
-- **Profiles drive what you track.** Themes drive how it looks. AI agents can scaffold + customize either.
+## Verify or contribute
 
----
+```bash
+npm test
+npm run profiles
+npm run check:public-boundary
+```
 
-## Make it your own
+Keep changes static, offline-capable, fictional, and profile-specific. A new profile must include all
+four profile files, safe text rendering, contract tests, and documentation for any new behavior.
 
-- **Add a metric** → add the field to `example-data.json` (with a `_comment`) + reference it in the profile HTML.
-- **Add a chart** → drop a `<canvas id="x">` in a `.chart-container`, init `new Chart(...)` in the script block.
-- **Add a section** → copy a card block, give it an id, wire its data.
-- **New domain entirely** → copy `profiles/<closest>` → `profiles/<yours>`, edit the manifest + schema.
-
-Point an AI coding agent at this repo (Claude Code, Cursor, opencode, Copilot) and ask it to extend a profile — see [docs/architecture.md](docs/architecture.md) for the deeper how-it-works.
-
----
-
-## Docs
-
-- **[Getting started](docs/getting-started.md)** — pick a profile, edit data, deploy
-- **[Profile system](docs/profile-system.md)** — how profiles work + how to build your own
-- **[Architecture](docs/architecture.md)** — tech stack, deps, env vars, screenshots
-- **[Finances profile](docs/finances-profile.md)** — playbook for the personal finance variant
-
----
-
-## Contributing
-
-Prefer focused PRs: one new profile at a time, include a clear `example-data.json`, keep output static and local-first, add or update docs for any new behavior.
+More detail: [getting started](docs/getting-started.md) ·
+[profile system](docs/profile-system.md) · [architecture](docs/architecture.md) ·
+[finances profile](docs/finances-profile.md)
 
 MIT — use, fork, customize.
 
@@ -141,9 +131,7 @@ MIT — use, fork, customize.
 
 <div align="center">
 
-If this dashboard seed helps you build something useful: ✨
-
-[Star this repo](https://github.com/jenninexus/dashboard) · [jenninexus.com/links](https://jenninexus.com/links) · [Patreon](https://www.patreon.com/c/JenniNexus) · [PayPal](https://paypal.me/jenninexus)
+[Star this repo](https://github.com/jenninexus/dashboard) · [jenninexus.com/links](https://jenninexus.com/links)
 
 Made with 💚 by [Jenni](https://github.com/jenninexus) at [Monofinity Studio](https://github.com/monofinitystudio)
 

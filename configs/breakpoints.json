@@ -1,6 +1,6 @@
 {
   "name": "dashboard-profiles",
-  "description": "Full-page screenshot sweep for all dashboard profiles. Used by `scripts/capture.ps1` (which dispatches to the sibling vid-scroll repo) or directly: `npx tsx <vid-scroll>/src/cli.ts --breakpoints configs/breakpoints.json --local --output docs/screenshots`.",
+  "description": "Local full-page QA sweep for all dashboard profiles. `scripts/capture.ps1` resolves the clone path and writes ignored evidence to storage/screenshots by default.",
   "breakpoints": [
     { "name": "390-mobile", "width": 390,  "height": 844,  "mobile": true,  "label": "Mobile (390px)" },
     { "name": "768-tablet", "width": 768,  "height": 1024, "mobile": false, "label": "Tablet (768px)" },
@@ -20,7 +20,7 @@
     "fullPage":        true
   },
   "notes": {
-    "local": "Use --local flag (or scripts/capture.ps1 -Local) to capture from file:// — no server needed. Replace <repo-root> with the absolute path to your clone (e.g. C:/Github/dashboard).",
+    "local": "Use scripts/capture.ps1; it replaces <repo-root> in a temporary ignored config so file:// capture works from any clone path.",
     "output": "Files land in <output>/<width>/<slug>-<width>[-collapsed].webp",
     "collapseVariants": "Produces both expanded and collapsed variants per page × breakpoint.",
     "webp": "Requires ffmpeg on PATH. Install: winget install Gyan.FFmpeg"

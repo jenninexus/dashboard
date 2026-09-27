@@ -1,51 +1,60 @@
 # Getting started
 
-## Pick your profile first
-
-- **SEO** — site analytics (GA4, Search Console, PageSpeed).
-- **Finances** — local money snapshot (cash, bills, loans, income).
-- **Health** — human wellness (vitals, meds, labs, habits, sleep).
-- **Pets** — senior pet care (weight, QoL, fluids, red flags).
-
-Each one is fully built. Open the example HTML or scaffold a copy.
-
 ## Prerequisites
 
-- A browser. That's it for viewing.
-- Optional: Node 18+ for `npm run build-dashboard`.
+- Any current browser for viewing a profile or generated dashboard.
+- Node.js 18 or newer for scaffolding, updating, tests, or the local wizard.
+- No `npm install`, account, API key, backend, or internet connection.
 
-## 3-step setup
+## Choose a workflow
 
-1. **Open the profile** — `profiles/{id}/{id}.html` directly in your browser.
-2. **Or scaffold your own** — `npm run build-dashboard -- --profile <id> --name "Your Name"`. This creates `my-dashboard/` with `dashboard.html`, `themes/`, a stamped `data.json`, and any in-repo banner images (pets: `docs/images/pets/`).
-3. **Replace example data** — open `my-dashboard/data.json` and fill in your real numbers.
+### Wizard
 
-No server. No build step for viewing.
+On Windows, double-click `Dashboard.cmd`. On macOS or Linux:
 
-## What to open first
+```bash
+npm run dashboard
+```
 
-| Profile | Example HTML | Config |
-|---------|-------------|--------|
-| SEO | `profiles/seo/seo.html` | `profiles/seo/profile.json` |
-| Finances | `profiles/finances/finances.html` | `profiles/finances/profile.json` |
-| Health | `profiles/health/health.html` | `profiles/health/profile.json` |
-| Pets | `profiles/pets/pets.html` | `profiles/pets/profile.json` |
+Choose a profile and compatible public theme, enter an output folder, and create or open a local
+dashboard. The wizard offers schema-driven fields plus a raw-JSON route. It validates before saving,
+preserves unknown fields, updates the existing HTML, and can import/export JSON. Press **Stop** when
+finished; the loopback-only server also has an idle shutdown.
 
-## Commands
+### Command line
 
-| Command | What it does |
-|---|---|
-| `npm run profiles` | Lists available profiles |
-| `npm run build-dashboard -- --profile <id> --name <name> [--domain <domain>] [--out <folder>]` | Scaffolds `<folder>` |
-| `npm run open` | Opens `profiles/seo/seo.html` |
+```bash
+npm run profiles
+npm run build-dashboard -- --profile finances --name "My Finances" --out my-dashboard
+```
 
-## Customize safely
+Edit `my-dashboard/data.json`, then publish that validated data into the existing HTML:
 
-- Keep `example-data.json` as the contract example.
-- Keep sensitive values in your personal `data.json` only.
-- Want a daily finance *workspace* (autopay, archive, startup script)? That is [jenninexus/fin](https://github.com/jenninexus/fin), not this profile.
-- Want printable pet-care sheets? That is [jenninexus/senior-pet-care](https://github.com/jenninexus/senior-pet-care).
+```bash
+npm run dashboard:update -- --out my-dashboard
+```
 
-## Open in your editor
+Open `my-dashboard/dashboard.html`. Repeat the edit/update step whenever JSON changes. Scaffolding
+refuses an existing output directory; `--force` is intentionally not an update mechanism.
 
-Open `dashboard.code-workspace.example` as a workspace (or copy it to `dashboard.code-workspace` — gitignored).
+### View an example only
+
+Open any `profiles/<id>/<id>.html` directly. These committed examples are fictional and require no
+network resources.
+
+## Profiles
+
+| id | Focus | Files |
+|---|---|---|
+| `seo` | analytics and search visibility | `profiles/seo/` |
+| `finances` | local money snapshot | `profiles/finances/` |
+| `health` | personal wellness | `profiles/health/` |
+| `pets` | senior pet care | `profiles/pets/` |
+
+## What stays local
+
+Your output is ignored by Git. `data.json`, generated HTML, exports, and the rotating backup are
+unencrypted plaintext, so keep the output folder private and protected like the records it contains.
+Theme/collapse/checklist browser state is disposable and is not part of JSON backups.
+
+See [PUBLIC-LOCAL-SPLIT.md](PUBLIC-LOCAL-SPLIT.md) for the full repository boundary.

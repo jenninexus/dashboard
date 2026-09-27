@@ -1,0 +1,110 @@
+{
+  "format": "dashboard-editor",
+  "version": 1,
+  "profile": "seo",
+  "unknownFields": "preserve",
+  "privacyHelp": "data.json, dashboard.html, exports and backups are unencrypted plaintext. Browser-local checklist and view state are disposable and excluded from JSON backups.",
+  "sections": [
+    {"id":"profile","label":"Profile","order":1, "fields": [
+      {"path":"profile.name","label":"Name","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"profile.site","label":"Site","type":"string","required":true,"order":2,"maxLength":4000},
+      {"path":"profile.asOf","label":"As Of","type":"date","required":true,"order":3,"maxLength":4000},
+      {"path":"profile.period","label":"Period","type":"string","required":true,"order":4,"maxLength":4000}
+    ]},
+    {"id":"kpis","label":"Kpis","order":2, "fields": [
+      {"path":"kpis[].label","label":"Label","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"kpis[].value","label":"Value","type":"string","required":true,"order":2,"maxLength":4000},
+      {"path":"kpis[].key","label":"Key","type":"string","required":true,"order":3,"maxLength":4000},
+      {"path":"kpis[].id","label":"Record ID","type":"string","required":true,"order":4,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"progress","label":"Progress","order":3, "fields": [
+      {"path":"progress.metrics[].metric","label":"Metric","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"progress.metrics[].before","label":"Before","type":"number","required":true,"order":2,"min":0,"max":1000000000},
+      {"path":"progress.metrics[].after","label":"After","type":"number","required":true,"order":3,"min":0,"max":1000000000},
+      {"path":"progress.metrics[].unit","label":"Unit","type":"string","required":true,"order":4,"maxLength":4000},
+      {"path":"progress.metrics[].lowerIsBetter","label":"Lower Is Better","type":"boolean","required":true,"order":5},
+      {"path":"progress.metrics[].id","label":"Record ID","type":"string","required":true,"order":6,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"ga4","label":"Ga4","order":4, "fields": [
+      {"path":"ga4[].label","label":"Label","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"ga4[].value","label":"Value","type":"string","required":true,"order":2,"maxLength":4000},
+      {"path":"ga4[].trend[]","label":"Trend","type":"number","required":true,"order":3,"min":0,"max":1000000000},
+      {"path":"ga4[].invert","label":"Invert","type":"boolean","required":false,"order":4},
+      {"path":"ga4[].id","label":"Record ID","type":"string","required":true,"order":5,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"traffic","label":"Traffic","order":5, "fields": [
+      {"path":"traffic[].source","label":"Source","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"traffic[].pct","label":"Pct","type":"number","required":true,"order":2,"min":0,"max":100},
+      {"path":"traffic[].color","label":"Color","type":"string","required":true,"order":3,"maxLength":4000,"pattern":"^#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$","help":"Hex color only; CSS and URLs are not accepted."},
+      {"path":"traffic[].id","label":"Record ID","type":"string","required":true,"order":4,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"topPages","label":"Top Pages","order":6, "fields": [
+      {"path":"topPages[].page","label":"Page","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"topPages[].views","label":"Views","type":"number","required":true,"order":2,"min":0,"max":1000000000},
+      {"path":"topPages[].duration","label":"Duration","type":"string","required":true,"order":3,"maxLength":4000},
+      {"path":"topPages[].bounce","label":"Bounce","type":"string","required":true,"order":4,"maxLength":4000},
+      {"path":"topPages[].top","label":"Top","type":"boolean","required":false,"order":5},
+      {"path":"topPages[].id","label":"Record ID","type":"string","required":true,"order":6,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"gsc","label":"Gsc","order":7, "fields": [
+      {"path":"gsc.coverage[].label","label":"Label","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"gsc.coverage[].value","label":"Value","type":"number","required":true,"order":2,"min":0,"max":1000000000},
+      {"path":"gsc.coverage[].status","label":"Status","type":"enum","required":true,"order":3,"maxLength":4000,"values":["ok","warn","fail"]},
+      {"path":"gsc.issues[].type","label":"Type","type":"string","required":true,"order":4,"maxLength":4000},
+      {"path":"gsc.issues[].count","label":"Count","type":"number","required":true,"order":5,"min":0,"max":1000000000},
+      {"path":"gsc.issues[].severity","label":"Severity","type":"enum","required":true,"order":6,"maxLength":4000,"values":["ok","warn","fail"]},
+      {"path":"gsc.issues[].note","label":"Note","type":"string","required":true,"order":7,"maxLength":4000},
+      {"path":"gsc.coverage[].id","label":"Record ID","type":"string","required":true,"order":8,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."},
+      {"path":"gsc.issues[].id","label":"Record ID","type":"string","required":true,"order":9,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"pagespeed","label":"Pagespeed","order":8, "fields": [
+      {"path":"pagespeed.mobile.score","label":"Score","type":"number","required":true,"order":1,"min":0,"max":100},
+      {"path":"pagespeed.mobile.grade","label":"Grade","type":"string","required":true,"order":2,"maxLength":4000},
+      {"path":"pagespeed.desktop.score","label":"Score","type":"number","required":true,"order":3,"min":0,"max":100},
+      {"path":"pagespeed.desktop.grade","label":"Grade","type":"string","required":true,"order":4,"maxLength":4000},
+      {"path":"pagespeed.cwv[].label","label":"Label","type":"string","required":true,"order":5,"maxLength":4000},
+      {"path":"pagespeed.cwv[].value","label":"Value","type":"string","required":true,"order":6,"maxLength":4000},
+      {"path":"pagespeed.cwv[].status","label":"Status","type":"enum","required":true,"order":7,"maxLength":4000,"values":["pass","warn","fail"]},
+      {"path":"pagespeed.cwv[].target","label":"Target","type":"string","required":true,"order":8,"maxLength":4000},
+      {"path":"pagespeed.cwv[].id","label":"Record ID","type":"string","required":true,"order":9,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"checklist","label":"Checklist","order":9, "fields": [
+      {"path":"checklist[].item","label":"Item","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"checklist[].status","label":"Status","type":"enum","required":true,"order":2,"maxLength":4000,"values":["pass","warn","fail"]},
+      {"path":"checklist[].id","label":"Record ID","type":"string","required":true,"order":3,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"actions","label":"Actions","order":10, "fields": [
+      {"path":"actions.critical[]","label":"Critical","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"actions.high[]","label":"High","type":"string","required":true,"order":2,"maxLength":4000},
+      {"path":"actions.medium[]","label":"Medium","type":"string","required":true,"order":3,"maxLength":4000},
+      {"path":"actions.done[]","label":"Done","type":"string","required":true,"order":4,"maxLength":4000}
+    ]},
+    {"id":"milestones","label":"Milestones","order":11, "fields": [
+      {"path":"milestones[].label","label":"Label","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"milestones[].date","label":"Date","type":"date","required":true,"order":2,"maxLength":4000},
+      {"path":"milestones[].done","label":"Done","type":"boolean","required":true,"order":3},
+      {"path":"milestones[].datePrecision","label":"Date Precision","type":"string","required":true,"order":4,"maxLength":4000},
+      {"path":"milestones[].id","label":"Record ID","type":"string","required":true,"order":5,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"schemaVersion","label":"Schema Version","order":12, "fields": [
+      {"path":"schemaVersion","label":"Schema Version","type":"number","required":true,"order":1,"min":1,"max":1,"help":"Contract version; migrations must be explicit."}
+    ]}
+  ],
+  "collections": [
+    {"path":"kpis","label":"Kpis","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"progress.metrics","label":"Metrics","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"ga4","label":"Ga4","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"ga4[].trend","label":"Trend","identity":null,"maxItems":1000,"minItems":0,"required":true},
+    {"path":"traffic","label":"Traffic","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"topPages","label":"Top Pages","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"gsc.coverage","label":"Coverage","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"gsc.issues","label":"Issues","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"pagespeed.cwv","label":"Cwv","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"checklist","label":"Checklist","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"actions.critical","label":"Critical","identity":null,"maxItems":1000,"minItems":0,"required":true},
+    {"path":"actions.high","label":"High","identity":null,"maxItems":1000,"minItems":0,"required":true},
+    {"path":"actions.medium","label":"Medium","identity":null,"maxItems":1000,"minItems":0,"required":true},
+    {"path":"actions.done","label":"Done","identity":null,"maxItems":1000,"minItems":0,"required":true},
+    {"path":"milestones","label":"Milestones","identity":"id","maxItems":1000,"minItems":0,"required":true}
+  ]
+}

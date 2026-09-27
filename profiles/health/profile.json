@@ -6,21 +6,71 @@
   "theme": "vitality-health",
   "render": "profiles/health/health.html",
   "exampleData": "example-data.json",
-  "dataInjection": { "scriptId": "health-data" },
+  "dataInjection": {
+    "scriptId": "health-data"
+  },
   "sections": [
-    { "id": "checklist",    "title": "Daily Checklist",     "data": "checklist.morning[] + evening[]" },
-    { "id": "vitals",       "title": "Vitals Tracking",     "data": "vitals[]" },
-    { "id": "medications",  "title": "Medications",         "data": "medications[]" },
-    { "id": "labs",         "title": "Lab Results",         "data": "labs[] → in/out-of-range table" },
-    { "id": "habits",       "title": "Habit Streaks",       "data": "habits[] → streak bars" },
-    { "id": "fitness",      "title": "Fitness & Activity",  "data": "fitness[]" },
-    { "id": "nutrition",    "title": "Nutrition",           "data": "nutrition" },
-    { "id": "sleep",        "title": "Sleep Tracking",      "data": "sleep[]" },
-    { "id": "mood",         "title": "Mental Health",       "data": "mood[]" },
-    { "id": "appointments", "title": "Appointments",        "data": "appointments[]" },
-    { "id": "goals",        "title": "Health Goals",        "data": "goals" }
+    {
+      "id": "checklist",
+      "title": "Daily Checklist",
+      "data": "checklist.morning[] + evening[]"
+    },
+    {
+      "id": "vitals",
+      "title": "Vitals Tracking",
+      "data": "vitals[]"
+    },
+    {
+      "id": "medications",
+      "title": "Medications",
+      "data": "medications[]"
+    },
+    {
+      "id": "labs",
+      "title": "Lab Results",
+      "data": "labs[] → in/out-of-range table"
+    },
+    {
+      "id": "habits",
+      "title": "Habit Streaks",
+      "data": "habits[] → streak bars"
+    },
+    {
+      "id": "fitness",
+      "title": "Fitness & Activity",
+      "data": "fitness[]"
+    },
+    {
+      "id": "nutrition",
+      "title": "Nutrition",
+      "data": "nutrition"
+    },
+    {
+      "id": "sleep",
+      "title": "Sleep Tracking",
+      "data": "sleep[]"
+    },
+    {
+      "id": "mood",
+      "title": "Mental Health",
+      "data": "mood[]"
+    },
+    {
+      "id": "appointments",
+      "title": "Appointments",
+      "data": "appointments[]"
+    },
+    {
+      "id": "goals",
+      "title": "Health Goals",
+      "data": "goals"
+    }
   ],
-  "dataSources": ["manual JSON (data.json)"],
+  "dataSources": [
+    "manual JSON (data.json)"
+  ],
   "blogPost": "Build a personal health dashboard you actually own",
-  "_note": "Human wellness only. Senior pet care → profiles/pets + github.com/jenninexus/senior-pet-care."
+  "_note": "Human wellness only. Senior pet care → profiles/pets + github.com/jenninexus/senior-pet-care.",
+  "dataContractVersion": 1,
+  "editorSchema": "editor-schema.json"
 }

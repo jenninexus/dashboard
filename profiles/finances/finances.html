@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Finance Dashboard — Alex Rivera</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ── Emerald Finance tokens ─────────────────────────────────────────── */
 :root {
@@ -120,7 +117,7 @@ code{font-family:var(--mono);font-size:.84em;color:var(--teal)}
   text-transform:uppercase;
   color:rgba(240,253,248,0.55);
 }
-@media(max-width:719px){.banner{display:none}}
+@media(max-width:767.98px){.banner{display:none}}
 
 /* ── Header ─────────────────────────────────────────────────────────── */
 .head{
@@ -280,7 +277,7 @@ code{font-family:var(--mono);font-size:.84em;color:var(--teal)}
   align-items:start;
 }
 .grid .full{grid-column:1/-1}
-@media(max-width:700px){.grid{grid-template-columns:1fr}}
+@media(max-width:767.98px){.grid{grid-template-columns:1fr}}
 
 .card{
   background:var(--surface);
@@ -676,6 +673,12 @@ tr:last-child td{border-bottom:none}
   .card-body{display:block!important}
   body::before{display:none}
 }
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+button,.tab,.todo-item{user-select:none}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .anim{opacity:1!important;transform:none!important}
+}
 </style>
 </head>
 <body>
@@ -683,19 +686,12 @@ tr:last-child td{border-bottom:none}
 
   <!-- Banner -->
   <div class="banner">
-    <img src="../../docs/images/agency/divine-design-16x9.webp"
-         alt="Finance Dashboard banner"
-         onerror="this.closest('.banner').style.display='none'">
     <div class="banner-label">Alex Rivera &nbsp;/&nbsp; Finance Dashboard</div>
   </div>
 
   <!-- Header -->
   <div class="head">
     <div class="head-left">
-      <img class="avatar"
-           src="../../docs/images/agency/divine-design-1x1.webp"
-           alt="Alex Rivera"
-           onerror="this.style.display='none'">
       <div>
         <h1>Finance Dashboard</h1>
         <div class="meta">alex-rivera &nbsp;·&nbsp; example data &nbsp;·&nbsp; June 2026</div>
@@ -705,6 +701,8 @@ tr:last-child td{border-bottom:none}
       <span id="themeIcon">☾</span> <span id="themeLabel">Dark</span>
     </button>
   </div>
+
+<p class="storage-note" style="font-size:.7rem;color:var(--dim);line-height:1.6">Data source: local <code>data.json</code>. JSON, this HTML view, exports and backups are unencrypted plaintext. Checklist completion, theme and collapsed sections are browser-local, disposable state and are not included in JSON backups.</p>
 
   <!-- KPI pills -->
   <div class="kpi-bar" id="kpi-bar"></div>
@@ -835,66 +833,158 @@ tr:last-child td{border-bottom:none}
     "person": "Alex Rivera",
     "asOf": "2026-06-20",
     "city": "Austin, TX",
-    "monthlyExpenses": 3840
-  },
-  "kpi": {
-    "netWorth":       14685,
-    "monthlyIncome":  6045,
-    "monthlyExpenses":3840,
-    "savingsRate":    36,
-    "billsThisMonth": 2739
+    "monthlyExpenses": 3840,
+    "liabilitiesComplete": false,
+    "source": "Fictional manual snapshot; no creditor reconciliation",
+    "billCycle": "2026-06"
   },
   "alerts": [
     {
       "severity": "urgent",
       "icon": "🔴",
-      "title": "Rent due in 3 days — $1,400",
-      "sub": "June 23 deadline. Transfer from savings now to avoid late fee ($75)."
+      "title": "Rent due 2026-06-23 — $1,400",
+      "sub": "Listed as unpaid in the 2026-06-20 snapshot. Verify the current account before paying.",
+      "id": "alerts-1"
     },
     {
       "severity": "warn",
       "icon": "🟡",
-      "title": "Car insurance autopay Jun 1 — $127",
-      "sub": "Autopay confirmed on Visa ending 4421. Ensure $127 balance before billing date."
+      "title": "Car insurance scheduled 2026-06-01 — $127",
+      "sub": "Autopay is a schedule, not payment evidence. No completed payment is recorded in this example.",
+      "id": "alerts-2"
     },
     {
       "severity": "warn",
       "icon": "🟡",
-      "title": "Q2 Estimated Tax due Jun 15 — $580",
-      "sub": "IRS Form 1040-ES. Pay via IRS Direct Pay or EFTPS. Penalty avoidance threshold: pay by Jun 15."
+      "title": "Estimated tax dated 2026-06-15 — $580",
+      "sub": "Listed as unpaid in this fictional snapshot. Confirm the applicable amount and deadline using current records.",
+      "id": "alerts-3"
     }
   ],
   "reminders": [
-    { "label": "Rent due Jun 23", "urgent": true },
-    { "label": "Car ins. autopay Jun 1", "urgent": false },
-    { "label": "Est. tax due Jun 15", "urgent": false },
-    { "label": "Student loan auto-debit Jun 28", "urgent": false }
+    {
+      "label": "Rent due Jun 23",
+      "urgent": true,
+      "id": "reminders-1"
+    },
+    {
+      "label": "Verify car insurance payment",
+      "urgent": false,
+      "id": "reminders-2"
+    },
+    {
+      "label": "Est. tax due Jun 15",
+      "urgent": false,
+      "id": "reminders-3"
+    },
+    {
+      "label": "Student loan auto-debit Jun 28",
+      "urgent": false,
+      "id": "reminders-4"
+    }
   ],
   "holdings": {
     "accounts": [
-      { "name": "Checking",       "amount": 2840 },
-      { "name": "Savings",        "amount": 8200 },
-      { "name": "Emergency Fund", "amount": 3500 },
-      { "name": "Cash App",       "amount": 145  }
-    ],
-    "compare": [
-      { "label": "Rent — due Jun 23",       "amount": 1400, "urgent": true },
-      { "label": "All bills this cycle",     "amount": 2739, "urgent": false }
-    ],
-    "monthsOfExpenses": 3840
+      {
+        "name": "Checking",
+        "amount": 2840,
+        "id": "account-1"
+      },
+      {
+        "name": "Savings",
+        "amount": 8200,
+        "id": "account-2"
+      },
+      {
+        "name": "Emergency Fund",
+        "amount": 3500,
+        "id": "account-3"
+      },
+      {
+        "name": "Cash App",
+        "amount": 145,
+        "id": "account-4"
+      }
+    ]
   },
   "bills": [
-    { "name": "Rent",               "due": "Jun 23", "amount": 1400, "status": "Due"     },
-    { "name": "Car Insurance",      "due": "Jun 01", "amount": 127,  "status": "Autopay" },
-    { "name": "Electric",           "due": "Jun 12", "amount": 88,   "status": "Paid"    },
-    { "name": "Internet",           "due": "Jun 15", "amount": 65,   "status": "Paid"    },
-    { "name": "Spotify",            "due": "Jun 08", "amount": 11,   "status": "Autopay" },
-    { "name": "Adobe CC",           "due": "Jun 18", "amount": 55,   "status": "Due"     },
-    { "name": "Phone (T-Mobile)",   "due": "Jun 25", "amount": 52,   "status": "Due"     },
-    { "name": "Q2 Estimated Tax",   "due": "Jun 15", "amount": 580,  "status": "Due"     },
-    { "name": "Gym",                "due": "Jun 30", "amount": 35,   "status": "Due"     },
-    { "name": "Student Loan",       "due": "Jun 28", "amount": 226,  "status": "Autopay" },
-    { "name": "Car Loan",           "due": "Jun 05", "amount": 287,  "status": "Paid"    }
+    {
+      "name": "Rent",
+      "due": "2026-06-23",
+      "amount": 1400,
+      "status": "due",
+      "id": "bill-1"
+    },
+    {
+      "name": "Car Insurance",
+      "due": "2026-06-01",
+      "amount": 127,
+      "status": "autopay",
+      "id": "bill-2"
+    },
+    {
+      "name": "Electric",
+      "due": "2026-06-12",
+      "amount": 88,
+      "status": "paid",
+      "id": "bill-3"
+    },
+    {
+      "name": "Internet",
+      "due": "2026-06-15",
+      "amount": 65,
+      "status": "paid",
+      "id": "bill-4"
+    },
+    {
+      "name": "Spotify",
+      "due": "2026-06-08",
+      "amount": 11,
+      "status": "autopay",
+      "id": "bill-5"
+    },
+    {
+      "name": "Adobe CC",
+      "due": "2026-06-18",
+      "amount": 55,
+      "status": "due",
+      "id": "bill-6"
+    },
+    {
+      "name": "Phone (T-Mobile)",
+      "due": "2026-06-25",
+      "amount": 52,
+      "status": "due",
+      "id": "bill-7"
+    },
+    {
+      "name": "Q2 Estimated Tax",
+      "due": "2026-06-15",
+      "amount": 580,
+      "status": "due",
+      "id": "bill-8"
+    },
+    {
+      "name": "Gym",
+      "due": "2026-06-30",
+      "amount": 35,
+      "status": "due",
+      "id": "bill-9"
+    },
+    {
+      "name": "Student Loan",
+      "due": "2026-06-28",
+      "amount": 226,
+      "status": "autopay",
+      "id": "bill-10"
+    },
+    {
+      "name": "Car Loan",
+      "due": "2026-06-05",
+      "amount": 287,
+      "status": "paid",
+      "id": "bill-11"
+    }
   ],
   "loans": [
     {
@@ -903,8 +993,10 @@ tr:last-child td{border-bottom:none}
       "principal": 800,
       "paidToDate": 500,
       "stillOwed": 300,
-      "targetPayoff": "Jul 15 2026",
-      "note": "Helped with emergency car repair. No interest, flexible. Pay $150 on Jun 27 and $150 on Jul 15."
+      "targetPayoff": "2026-07-15",
+      "note": "Helped with emergency car repair. No interest, flexible. Pay $150 on Jun 27 and $150 on Jul 15.",
+      "id": "loan-1",
+      "balanceBasis": "principal-minus-paid"
     },
     {
       "name": "Federal Student Loan",
@@ -912,8 +1004,10 @@ tr:last-child td{border-bottom:none}
       "principal": 28000,
       "paidToDate": 9400,
       "stillOwed": 18600,
-      "targetPayoff": "Nov 2032",
-      "note": "IBR plan — $226/mo auto-debit. On track. Consider lump sum when freelance income rises."
+      "targetPayoff": null,
+      "note": "Fictional payment snapshot: $226/mo scheduled. Target payoff date is unknown; no interest/amortization schedule is modeled.",
+      "id": "loan-2",
+      "balanceBasis": "principal-minus-paid"
     },
     {
       "name": "Car Loan (2022 Honda Civic)",
@@ -921,8 +1015,10 @@ tr:last-child td{border-bottom:none}
       "principal": 18500,
       "paidToDate": 9870,
       "stillOwed": 8630,
-      "targetPayoff": "Mar 2028",
-      "note": "3.9% APR. $287/mo. 22 months remain. Overpay by $50/mo to cut 3 months off term."
+      "targetPayoff": null,
+      "note": "Fictional payment snapshot: $287/mo. No verified amortization or payoff estimate is included.",
+      "id": "loan-3",
+      "balanceBasis": "principal-minus-paid"
     }
   ],
   "income": [
@@ -931,22 +1027,25 @@ tr:last-child td{border-bottom:none}
       "type": "W2",
       "monthlyEst": 5200,
       "ytd": 31200,
-      "status": "Active"
+      "status": "active",
+      "id": "income-1"
     },
     {
       "source": "Freelance Design",
       "type": "1099",
       "monthlyEst": 800,
       "ytd": 4100,
-      "status": "Variable",
-      "note": "Avg $680-$940/mo. Q2 slow. Picked up 2 new clients in May."
+      "status": "variable",
+      "note": "Avg $680-$940/mo. Q2 slow. Picked up 2 new clients in May.",
+      "id": "income-2"
     },
     {
       "source": "Patreon",
       "type": "passive",
       "monthlyEst": 45,
       "ytd": 270,
-      "status": "Growing"
+      "status": "active",
+      "id": "income-3"
     }
   ],
   "todos": [
@@ -954,30 +1053,70 @@ tr:last-child td{border-bottom:none}
       "bucket": "Pay This Week",
       "dot": "#f43f5e",
       "items": [
-        { "id": "t1", "label": "Transfer $1,400 to checking for rent",     "amount": "$1,400" },
-        { "id": "t2", "label": "Pay friend Marcus — first installment",    "amount": "$150"   },
-        { "id": "t3", "label": "Pay Adobe CC invoice manually",            "amount": "$55"    }
-      ]
+        {
+          "id": "t1",
+          "label": "Transfer $1,400 to checking for rent",
+          "amount": "$1,400"
+        },
+        {
+          "id": "t2",
+          "label": "Pay friend Marcus — first installment",
+          "amount": "$150"
+        },
+        {
+          "id": "t3",
+          "label": "Pay Adobe CC invoice manually",
+          "amount": "$55"
+        }
+      ],
+      "id": "todos-1"
     },
     {
       "bucket": "This Month",
       "dot": "#f59e0b",
       "items": [
-        { "id": "t4", "label": "File Q2 estimated tax via IRS Direct Pay", "amount": "$580"   },
-        { "id": "t5", "label": "Pay phone bill (T-Mobile)",                "amount": "$52"    },
-        { "id": "t6", "label": "Review freelance invoices — chase late payment from client B", "amount": null }
-      ]
+        {
+          "id": "t4",
+          "label": "File Q2 estimated tax via IRS Direct Pay",
+          "amount": "$580"
+        },
+        {
+          "id": "t5",
+          "label": "Pay phone bill (T-Mobile)",
+          "amount": "$52"
+        },
+        {
+          "id": "t6",
+          "label": "Review freelance invoices — chase late payment from client B",
+          "amount": null
+        }
+      ],
+      "id": "todos-2"
     },
     {
       "bucket": "Financial Goals",
       "dot": "#10b981",
       "items": [
-        { "id": "t7", "label": "Boost emergency fund to $5,000 target",    "amount": null },
-        { "id": "t8", "label": "Overpay car loan by $50 this month",       "amount": "$50" },
-        { "id": "t9", "label": "Set up automatic $200/mo savings transfer", "amount": null }
-      ]
+        {
+          "id": "t7",
+          "label": "Boost emergency fund to $5,000 target",
+          "amount": null
+        },
+        {
+          "id": "t8",
+          "label": "Overpay car loan by $50 this month",
+          "amount": "$50"
+        },
+        {
+          "id": "t9",
+          "label": "Set up automatic $200/mo savings transfer",
+          "amount": null
+        }
+      ],
+      "id": "todos-3"
     }
-  ]
+  ],
+  "schemaVersion": 1
 }
 </script>
 
@@ -987,27 +1126,100 @@ tr:last-child td{border-bottom:none}
 
 /* ── Data ───────────────────────────────────────────────────────────── */
 const D = JSON.parse(document.getElementById('fin-data').textContent);
-const TODAY = new Date('2026-06-20');
+
+// Existing collapse/tab controls also work with Enter/Space and expose state.
+function enableKeyboardControls(){
+  const controls = document.querySelectorAll(".card-head[onclick], .tab[onclick]");
+  const sync = () => controls.forEach(control => {
+    const card = control.closest(".card");
+    if(card) control.setAttribute("aria-expanded", String(card.classList.contains("open")));
+  });
+  controls.forEach(control => {
+    control.setAttribute("role","button");
+    control.setAttribute("tabindex","0");
+    control.addEventListener("keydown", event => {
+      if(event.key === "Enter" || event.key === " "){ event.preventDefault(); control.click(); }
+    });
+  });
+  document.addEventListener("click", () => queueMicrotask(sync));
+  sync();
+}
+
+// View/checklist state is disposable: blocked or corrupt storage must not stop rendering.
+function readLocal(key){ try { return localStorage.getItem(key); } catch { return null; } }
+function writeLocal(key,value){ try { localStorage.setItem(key,value); } catch {} }
+function readLocalJSON(key,fallback={}){
+  try { const value=JSON.parse(readLocal(key)); return value && typeof value === "object" && !Array.isArray(value) ? value : fallback; } catch { return fallback; }
+}
+
+// JSON fields are plain text, never rich HTML. Encode values at HTML boundaries.
+function escapeText(value){
+  return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function safeColor(value){
+  return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(String(value)) ? value : 'var(--primary)';
+}
+function localToday(){
+  if (window.dashboardToday != null) {
+    const value = window.dashboardToday;
+    if(typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) throw new Error('dashboardToday must be an ISO calendar date');
+    const [year,month,day] = value.split('-').map(Number);
+    const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+    const days = [31,leap ? 29 : 28,31,30,31,30,31,31,30,31,30,31];
+    if(year < 1 || month < 1 || month > 12 || day < 1 || day > days[month-1]) throw new Error('dashboardToday must be a real calendar date');
+    return value;
+  }
+  const date = new Date();
+  return date.getFullYear() + '-' + String(date.getMonth()+1).padStart(2,'0') + '-' + String(date.getDate()).padStart(2,'0');
+}
+const TODAY = localToday();
+// Calendar dates compare lexically without converting them into UTC instants.
+function balance(loan){
+  return loan.balanceBasis === 'principal-minus-paid'
+    ? Number(loan.principal) - Number(loan.paidToDate) : Number(loan.stillOwed);
+}
+function deriveFinance(data){
+  const sum = (rows, field) => rows.reduce((total, row) => total + Number(row[field]), 0);
+  const liquidHoldings = sum(data.holdings.accounts, 'amount');
+  const monthlyIncome = sum(data.income.filter(row => ['active','variable'].includes(row.status)), 'monthlyEst');
+  const monthlyExpenses = data.profile.monthlyExpenses;
+  const cycleBills = data.bills.filter(row => row.due.startsWith(data.profile.billCycle));
+  const liabilities = data.loans.reduce((total, loan) => total + balance(loan), 0);
+  return { liquidHoldings, monthlyIncome, monthlyExpenses, liabilities,
+    billCycleTotal: sum(cycleBills, 'amount'),
+    billsOutstanding: sum(cycleBills.filter(row => row.status !== 'paid'), 'amount'),
+    savingsRate: monthlyIncome > 0 && typeof monthlyExpenses === 'number'
+      ? Math.round((monthlyIncome - monthlyExpenses) / monthlyIncome * 100) : null,
+    netWorth: data.profile.liabilitiesComplete === true ? liquidHoldings - liabilities : null
+  };
+}
+const derived = deriveFinance(D);
+document.title = D.profile.name + ' — ' + D.profile.person;
+document.querySelector('h1').textContent = D.profile.name;
+document.querySelector('.meta').textContent = D.profile.person + ' · as of ' + D.profile.asOf + ' · ' + D.profile.source + ' · due states today: ' + TODAY;
+document.querySelector('.banner-label').textContent = D.profile.person + ' / ' + D.profile.name;
 
 /* ── Helpers ─────────────────────────────────────────────────────────── */
 function money(n){
+  if(n == null || !Number.isFinite(Number(n))) return 'Unknown';
   const v = Number(n)||0;
   return (v<0?'-$':'$') + Math.abs(v).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
 }
 function pct(cash, amt){ return Math.max(2, Math.min(100, amt ? cash/amt*100 : 100)); }
 function clamp(n,a,b){ return Math.max(a,Math.min(b,n)); }
-function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
-function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+function lsGet(k){ try{ return readLocal(k); }catch(e){ return null; } }
+function lsSet(k,v){ try{ writeLocal(k,v); }catch(e){} }
 
 /* ── KPI bar ─────────────────────────────────────────────────────────── */
 (function renderKpi(){
-  const k = D.kpi||{};
+  const k = derived;
   const items = [
-    { label:'Net Worth',       val: money(k.netWorth),        accent:'var(--primary)' },
+    { label:'Liquid Holdings', val: money(k.liquidHoldings),  accent:'var(--primary)' },
     { label:'Monthly Income',  val: money(k.monthlyIncome),   accent:'var(--teal)'   },
-    { label:'Monthly Expenses',val: money(k.monthlyExpenses), accent:'var(--yellow)' },
-    { label:'Savings Rate',    val: (k.savingsRate||0)+'%',   accent:'var(--accent)' },
-    { label:'Bills This Month',val: money(k.billsThisMonth),  accent:'#f87171'       }
+    { label:'Expenses Snapshot',val: money(k.monthlyExpenses), accent:'var(--yellow)' },
+    { label:'Savings Rate',    val: k.savingsRate == null ? 'Unknown' : k.savingsRate+'%', accent:'var(--accent)' },
+    { label:'Bill Cycle Total',val: money(k.billCycleTotal), accent:'#f87171' },
+    { label:'Net Worth', val: money(k.netWorth), accent:'var(--primary)' }
   ];
   document.getElementById('kpi-bar').innerHTML = items.map(i=>
     `<div class="kpi" style="--kpi-accent:${i.accent}">
@@ -1022,7 +1234,7 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
   const rem = D.reminders||[];
   document.getElementById('reminders-strip').innerHTML = rem.map(r=>
     `<div class="reminder${r.urgent?' urgent':''}">
-       <span class="rdot"></span>${r.label}
+       <span class="rdot"></span>${escapeText(r.label)}
      </div>`
   ).join('');
 })();
@@ -1033,10 +1245,10 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
   document.getElementById('alerts-list').innerHTML = alerts.map(a=>{
     const cls = a.severity==='urgent'?'rose':'amber';
     return `<div class="alert ${cls}">
-      <span class="alert-icon">${a.icon||'!'}</span>
+      <span class="alert-icon">${escapeText(a.icon||'!')}</span>
       <div>
-        <div class="alert-title">${a.title}</div>
-        <div class="alert-sub">${a.sub||''}</div>
+        <div class="alert-title">${escapeText(a.title)}</div>
+        <div class="alert-sub">${escapeText(a.sub||'')}</div>
       </div>
     </div>`;
   }).join('') || '<div style="color:var(--dim);font-size:.7rem">No active alerts.</div>';
@@ -1047,12 +1259,12 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
   const h = D.holdings||{};
   const accts = h.accounts||[];
   const cash = accts.reduce((s,a)=>s+(+a.amount||0),0);
-  const monthlyExp = h.monthsOfExpenses || D.profile.monthlyExpenses || 0;
+  const monthlyExp = D.profile.monthlyExpenses;
   const monthsCovered = monthlyExp ? (cash/monthlyExp).toFixed(1) : '—';
 
   // Account chips
   document.getElementById('hold-accts').innerHTML =
-    accts.map(a=>`<div class="acct">${a.name}<b>${money(a.amount)}</b></div>`).join('') +
+    accts.map(a=>`<div class="acct">${escapeText(a.name)}<b>${money(a.amount)}</b></div>`).join('') +
     `<div class="acct" style="border-color:var(--border2);color:var(--bright)">Total<b>${money(cash)}</b></div>`;
 
   // Comparison bars
@@ -1065,7 +1277,10 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
        <div class="track"><div class="fill" style="width:100%"></div><span class="pct">ready</span></div>
      </div>`
   ];
-  (h.compare||[]).forEach(c=>{
+  [
+    {label:'All bills in ' + D.profile.billCycle, amount:derived.billCycleTotal},
+    {label:'Unpaid or unconfirmed bills', amount:derived.billsOutstanding, urgent:true}
+  ].forEach(c=>{
     const cov = pct(cash, c.amount);
     const diff = cash - c.amount;
     const cls = c.urgent ? 'danger' : 'warn';
@@ -1075,7 +1290,7 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
       : `<span class="short">short ${money(-diff)}</span> · ${Math.round(cov)}% covered`;
     bars.push(`<div class="bar-row">
       <div class="bar-label">
-        <span class="lbl">${c.label}</span>
+        <span class="lbl">${escapeText(c.label)}</span>
         <span class="v" style="color:${col}">${money(c.amount)}</span>
       </div>
       <div class="track">
@@ -1089,7 +1304,7 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 
   // Coverage note
   document.getElementById('coverage-note').innerHTML =
-    `Cash on hand covers <strong>${monthsCovered} months</strong> of expenses at $${(monthlyExp||0).toLocaleString()}/mo.` +
+    `Cash on hand covers <strong>${monthsCovered} months</strong> of expenses at ${money(monthlyExp)}/mo. Net worth is unknown unless the liability list is declared complete.` +
     (parseFloat(monthsCovered)>=3
       ? ' Emergency buffer looks healthy.'
       : ' Goal: 3+ months. Consider building emergency fund before discretionary spending.');
@@ -1097,17 +1312,19 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 
 /* ── Bills ───────────────────────────────────────────────────────────── */
 (function renderBills(){
-  const bills = D.bills||[];
+  const bills = (D.bills||[]).filter(b => b.due.startsWith(D.profile.billCycle));
   let dueTotal = 0;
   document.getElementById('bills-body').innerHTML = bills.map(b=>{
     const st = (b.status||'').toLowerCase();
-    const stClass = st==='paid'?'paid' : st==='autopay'?'autopay' : st==='overdue'?'overdue' : 'due';
+    const isPast = b.due < TODAY;
+    const stClass = st==='paid'?'paid' : isPast || st==='overdue'?'overdue' : st==='autopay'?'autopay' : 'due';
+    const statusLabel = st==='paid' ? 'Paid (recorded)' : st==='autopay' ? (isPast ? 'Past date · autopay unconfirmed' : 'Autopay scheduled') : isPast || st==='overdue' ? 'Overdue (snapshot)' : 'Due';
     if(stClass!=='paid') dueTotal += (+b.amount||0);
     return `<tr>
-      <td><strong>${b.name}</strong></td>
-      <td style="color:var(--dim);font-family:var(--mono);font-size:.68rem">${b.due||'—'}</td>
+      <td><strong>${escapeText(b.name)}</strong></td>
+      <td style="color:var(--dim);font-family:var(--mono);font-size:.68rem">${escapeText(b.due||'—')}</td>
       <td style="font-variant-numeric:tabular-nums;font-weight:700">${b.amount!=null?money(b.amount):'—'}</td>
-      <td><span class="st ${stClass}">${b.status||''}</span></td>
+      <td><span class="st ${stClass}">${statusLabel}</span></td>
     </tr>`;
   }).join('') || '<tr><td colspan="4" style="color:var(--dim)">No bills listed.</td></tr>';
 
@@ -1118,7 +1335,7 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 /* ── Loans ───────────────────────────────────────────────────────────── */
 (function renderLoans(){
   const loans = D.loans||[];
-  const totalOwed = loans.reduce((s,l)=>s+(+l.stillOwed||0),0);
+  const totalOwed = loans.reduce((s,l)=>s+balance(l),0);
   const totalPaid  = loans.reduce((s,l)=>s+(+l.paidToDate||0),0);
 
   document.getElementById('loan-summary').innerHTML = `
@@ -1128,7 +1345,7 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
   `;
 
   document.getElementById('loan-folds').innerHTML = loans.map((l,i)=>{
-    const owed = +l.stillOwed||0;
+    const owed = balance(l);
     const prin = +l.principal||0;
     const paid = +l.paidToDate||0;
     const progress = prin ? clamp(Math.round(paid/prin*100),0,100) : 0;
@@ -1140,7 +1357,7 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
     return `<details class="fold" id="fold-${i}">
       <summary>
         <span class="caret">▶</span>
-        <span class="fname">${l.name} <span style="font-size:.56rem;color:var(--dim);font-weight:400">(${kindBadge})</span></span>
+        <span class="fname">${escapeText(l.name)} <span style="font-size:.56rem;color:var(--dim);font-weight:400">(${escapeText(kindBadge)})</span></span>
         ${owedHtml}
       </summary>
       <div class="fold-body">
@@ -1148,7 +1365,7 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
           <span><span class="mk">Principal</span><span class="mv">${money(prin)}</span></span>
           <span><span class="mk">Paid</span><span class="mv" style="color:var(--primary)">${money(paid)}</span></span>
           <span><span class="mk">Remaining</span><span class="mv" style="color:var(--yellow)">${money(owed)}</span></span>
-          <span><span class="mk">Target Payoff</span><span class="mv">${l.targetPayoff||'—'}</span></span>
+          <span><span class="mk">Target Payoff</span><span class="mv">${escapeText(l.targetPayoff||'—')}</span></span>
         </div>
         <div class="loan-bar-row">
           <div class="bar-label" style="font-size:.64rem;margin-bottom:.25rem">
@@ -1160,7 +1377,7 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
             <span class="pct" style="font-size:.54rem">${progress}%</span>
           </div>
         </div>
-        ${l.note?`<div style="margin-top:.45rem;font-size:.65rem;color:var(--dim);line-height:1.55">${l.note}</div>`:''}
+        ${l.note?`<div style="margin-top:.45rem;font-size:.65rem;color:var(--dim);line-height:1.55">${escapeText(l.note)}</div>`:''}
       </div>
     </details>`;
   }).join('') || '<div style="color:var(--dim);font-size:.7rem">No loans listed.</div>';
@@ -1170,18 +1387,18 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 (function renderIncome(){
   const inc = D.income||[];
   const totalYTD = inc.reduce((s,x)=>s+(+x.ytd||0),0);
-  const totalMo  = inc.reduce((s,x)=>s+(+x.monthlyEst||0),0);
+  const totalMo = derived.monthlyIncome;
 
   document.getElementById('income-body').innerHTML = inc.map(x=>{
     const typeKey = x.type==='W2'?'w2' : x.type==='1099'?'t1099' : 'passive';
-    const stColor = x.status==='Active'?'var(--primary)' : x.status==='Variable'?'var(--yellow)' : 'var(--teal)';
+    const stColor = x.status==='active'?'var(--primary)' : x.status==='variable'?'var(--yellow)' : 'var(--dim)';
     return `<tr>
-      <td><strong>${x.source}</strong>${x.note?`<div style="font-size:.6rem;color:var(--dim);margin-top:.1rem">${x.note}</div>`:''}
+      <td><strong>${escapeText(x.source)}</strong>${x.note?`<div style="font-size:.6rem;color:var(--dim);margin-top:.1rem">${escapeText(x.note)}</div>`:''}
       </td>
-      <td><span class="income-type ${typeKey}">${x.type}</span></td>
+      <td><span class="income-type ${typeKey}">${escapeText(x.type)}</span></td>
       <td style="font-variant-numeric:tabular-nums;color:var(--dim);font-family:var(--mono);font-size:.7rem">${money(x.monthlyEst)}</td>
       <td class="income-ytd">${money(x.ytd)}</td>
-      <td style="font-size:.65rem;font-weight:700;color:${stColor}">${x.status}</td>
+      <td style="font-size:.65rem;font-weight:700;color:${stColor}">${escapeText(x.status)}</td>
     </tr>`;
   }).join('') || '<tr><td colspan="5" style="color:var(--dim)">No income data.</td></tr>';
 
@@ -1193,7 +1410,7 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 /* ── Todos ───────────────────────────────────────────────────────────── */
 (function renderTodos(){
   const buckets = D.todos||[];
-  const saved = JSON.parse(lsGet('fin-todos')||'{}');
+  const saved = readLocalJSON('fin-todos');
 
   function saveTodos(){
     const state = {};
@@ -1205,16 +1422,16 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 
   document.getElementById('todo-buckets').innerHTML = buckets.map(b=>`
     <div class="todo-bucket">
-      <div class="todo-bucket-title" style="--bucket-dot:${b.dot||'var(--primary)'}">
-        ${b.bucket}
+      <div class="todo-bucket-title" style="--bucket-dot:${safeColor(b.dot)}">
+        ${escapeText(b.bucket)}
       </div>
       <div class="todo-list">
         ${(b.items||[]).map(item=>{
-          const done = !!saved[item.id];
-          return `<div class="todo-item${done?' done':''}" data-id="${item.id}" onclick="todoToggle(this)">
+          const done = Object.hasOwn(saved,item.id) && saved[item.id] === true;
+          return `<div class="todo-item${done?' done':''}" role="checkbox" tabindex="0" aria-checked="${done}" data-id="${escapeText(item.id)}">
             <div class="todo-check"></div>
-            <span class="todo-label">${item.label}</span>
-            ${item.amount?`<span class="todo-amount">${item.amount}</span>`:''}
+            <span class="todo-label">${escapeText(item.label)}</span>
+            ${item.amount?`<span class="todo-amount">${escapeText(item.amount)}</span>`:''}
           </div>`;
         }).join('')}
       </div>
@@ -1223,8 +1440,15 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 
   window.todoToggle = function(el){
     el.classList.toggle('done');
+    el.setAttribute('aria-checked', String(el.classList.contains('done')));
     saveTodos();
   };
+  document.querySelectorAll('.todo-item').forEach(el => {
+    el.addEventListener('click', () => window.todoToggle(el));
+    el.addEventListener('keydown', event => {
+      if(event.key === ' ' || event.key === 'Enter'){ event.preventDefault(); window.todoToggle(el); }
+    });
+  });
 })();
 
 /* ── Card collapse ───────────────────────────────────────────────────── */
@@ -1234,7 +1458,7 @@ window.loansAll = function(open){ document.querySelectorAll('.fold').forEach(f=>
 
 // Restore card states from localStorage
 (function restoreCards(){
-  const savedOpen = JSON.parse(lsGet('fin-cards')||'null');
+  const savedOpen = readLocalJSON('fin-cards',null);
   if(!savedOpen) return;
   document.querySelectorAll('.card[id]').forEach(c=>{
     if(Object.prototype.hasOwnProperty.call(savedOpen,c.id)){
@@ -1263,6 +1487,7 @@ window.toggleTheme = function(){
   lsSet('fin-theme', isDark?'light':'dark');
 };
 if(lsGet('fin-theme')==='light') toggleTheme();
+enableKeyboardControls();
 
 })();
 </script>

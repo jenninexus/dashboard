@@ -1,9 +1,18 @@
 import { execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
 
 const ignoredSamples = [
   '.env.local',
   '.env.production',
   'my-dashboard/data.json',
+  'Plans/_active/session.md',
+  'dev-chat.md',
+  'dev-log.yaml',
+  '.codex/skills/build-dashboard/SKILL.md',
+  '.claude/commands/build-dashboard.md',
+  '_scratch/output/dashboard.html',
+  'storage/screenshots/seo.webp',
+  'dashboard.code-workspace',
   '_private/app.ts',
   '.private/notes.md',
   'paid-app/main.js',
@@ -12,15 +21,25 @@ const ignoredSamples = [
   'test-results/report.json',
   'playwright-report/index.html',
   '.nyc_output/out.json',
+  'docs/screenshots/390/seo-390.webp',
 ];
 
 const publicSamples = [
   '.env.example',
   '.env.production.example',
   'profiles/finances/example-data.json',
+  'docs/screenshots/hero/1920/seo-1920.png',
+  'docs/images/pets/pink-cats-16x9.webp',
 ];
 
-const privateTrackedPath = /(^|\/)(_private|\.private|paid-app|product-app-private|my-dashboard|coverage|test-results|playwright-report|\.nyc_output)(\/|$)/;
+const privateTrackedPath =
+  /(^|\/)(plans|_private|\.private|paid-app|product-app-private|my-dashboard|_scratch|storage|\.codex|\.claude|coverage|test-results|playwright-report|\.nyc_output)(\/|$)/i;
+
+const privateTrackedFile = /(^|\/)(dev-chat\.md|dev-log\.ya?ml|.*\.code-workspace)$/i;
+const nonHeroScreenshot = /^docs\/screenshots\/(?!hero\/)/i;
+const secretOrLocalConfig = /(^|\/)\.env(?!\.example$|\.[^/]+\.example$)/i;
+const textFile = /\.(?:c?js|mjs|json|md|html|css|ps1|txt|ya?ml|example)$/i;
+const machineSpecificAbsolutePath = /(?:^|[\s"'`(])(?:[a-z]:[\\/]|file:\/\/\/[a-z]:)/im;
 
 function isIgnored(path) {
   try {
@@ -55,6 +74,15 @@ const trackedPaths = execFileSync('git', ['ls-files', '-z'], {
 
 for (const path of trackedPaths) {
   if (privateTrackedPath.test(path)) failures.push(`private/generated path is tracked: ${path}`);
+  if (privateTrackedFile.test(path)) failures.push(`local agent/workspace file is tracked: ${path}`);
+  if (nonHeroScreenshot.test(path)) failures.push(`uncurated QA screenshot is tracked: ${path}`);
+  if (secretOrLocalConfig.test(path)) failures.push(`secret/local env file is tracked: ${path}`);
+  if (textFile.test(path)) {
+    const contents = readFileSync(path, 'utf8');
+    if (machineSpecificAbsolutePath.test(contents)) {
+      failures.push(`machine-specific absolute path appears in public text: ${path}`);
+    }
+  }
 }
 
 if (failures.length > 0) {

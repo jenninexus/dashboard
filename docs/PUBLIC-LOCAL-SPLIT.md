@@ -1,83 +1,79 @@
-# Public vs local split — dashboard
+# Public vs local split — Dashboard
 
-This repository is a **public dashboard seed kit**. Tracked profiles ship **fictional**
-sample data only. Real numbers, API keys, and generated `my-dashboard/` output stay local.
+This repository is a public, local-first dashboard seed kit. Tracked profiles contain fictional
+sample data only. A user's generated dashboard, real data, secrets, plans, and QA evidence stay local.
 
-Sibling pattern: [`agency/docs/PUBLIC-LOCAL-SPLIT.md`](../../agency/docs/PUBLIC-LOCAL-SPLIT.md) ·
-[`pdf-designer/docs/PUBLIC-LOCAL-SPLIT.md`](../../pdf-designer/docs/PUBLIC-LOCAL-SPLIT.md).
+## Public product surface
 
-## Track public
-
-| Surface | Path |
-|---|---|
-| Profiles + example JSON | `profiles/{seo,finances,health,pets}/` |
-| Themes | `themes/*.css` |
-| Docs | `docs/getting-started.md` · `architecture.md` · `profile-system.md` · `finances-profile.md` |
-| Scaffolder | `scripts/build-dashboard.mjs` |
-| Agent map | `AGENTS.md` |
-
-## Keep local
-
-| Surface | Path |
-|---|---|
-| Generated user dashboard | `my-dashboard/` |
-| Secrets / optional API keys | `.env` (see `.env.example`) |
-| Real financial / health / SEO dumps | never commit — paste into local `data.json` only |
-| Disposable private/product experiments | `_private/`, `.private/`, `paid-app/`, `product-app-private/` |
-| Local QA/build evidence | `coverage/`, `test-results/`, `playwright-report/`, `.nyc_output/` |
-
-Run `npm run check:public-boundary` before committing. It verifies representative ignore rules and
-fails if a generated/private quarantine path is already tracked.
-
-## Private code that needs commits
-
-Do **not** use a "local-only" branch in this public repository for paid, private, or household code.
-The commits remain part of the same object database and can be pushed, mirrored, bundled, or disclosed
-accidentally.
-
-- Disposable uncommitted experiments may use one of the ignored quarantine folders above.
-- Private work that needs Git history belongs in a separate sibling repository outside this checkout.
-- That sibling starts with **no remote**. Adding a private remote is a later explicit product/security
-  decision; adding a public remote is a separate publication task.
-- The public dashboard updater, CLI, launcher, and local wizard remain the free foundation. A future
-  paid shell may consume their public contracts but must not fork or hide required seed behavior.
-
-## Product surfaces
-
-```
-PUBLIC — seed kit (profiles + themes + scaffolder + fictional examples)
-PRIVATE — my-dashboard/ + .env + real metrics
-PAID / APP later (hypothesis) — hosted multi-profile dash shell using the same token system
-             (www-theme-kit/profiles/dashboard.json stays private kit infra)
-```
-
-The hypothesis is not authorization to implement or list a paid app. First finish and QA the public
-four-profile workflow with fictional data. Then make a separate product decision covering thesis,
-privacy, packaging, price, fulfilment, and repository/remote policy.
-
-The public `profiles/finances` example uses this repo’s seed theme (`themes/`, emerald/plasma
-example data). The household `/fin` dashboard (`<finances-dir>\fin.html`, palette
-`aurora-finance`) is a **separate local file** and must never be copied into this repo.
-
-The order is fixed: implement and verify in this public repo with fictional fixtures first; only after
-the full offline, security, accessibility, SynQA, and human-simulated gates pass may a separate `/fin`
-task evaluate household adoption. Passing the public seed does not itself authorize touching the
-Finances workspace.
-
-Three public-or-local finance surfaces:
-
-| Surface | Where | Job |
+| Surface | Path | Why it is public |
 |---|---|---|
-| `profiles/finances` | this repo | Public snapshot demo (Alex Rivera) |
-| [jenninexus/fin](https://github.com/jenninexus/fin) | sister GitHub repo | Public operational workspace seed |
-| `fin-local` | `<finances-dir>` | Household production — never GitHub |
+| Profile renderers and fictional examples | `profiles/{seo,finances,health,pets}/` | The four complete domain examples and their versioned editor contracts |
+| Theme tokens | `themes/*.css` | Vendored, self-contained public palette contract |
+| Scaffolder and updater | `scripts/` | Zero-dependency creation, validation, and safe local updates |
+| Contributor capture configuration | `configs/` | Reproducible optional screenshot tooling without machine-specific paths |
+| Runtime profile art | `docs/images/` | Assets referenced by profile HTML and copied into generated output |
+| Curated README gallery | `docs/screenshots/hero/` | One public hero image per profile |
+| User and contributor guidance | `README.md`, `AGENTS.md`, `docs/*.md` | Durable behavior, architecture, safety, and extension contracts |
 
-Palette registry (private kit): `www-theme-kit/profiles/dashboard.json` → `profiles.finances` vs `profiles.fin-local`.
+The committed repository must be sufficient to scaffold, update, and open every profile. It must not
+require a private theme kit, another local checkout, an AI account, API keys, a backend, or internet
+access for the core data and navigation experience.
 
-Sister content tracker: [jenninexus/senior-pet-care](https://github.com/jenninexus/senior-pet-care) (Markdown) pairs with `profiles/pets` here.
+## Local-only surface
+
+| Surface | Ignored path |
+|---|---|
+| Generated dashboard and personal data | `my-dashboard/` |
+| Secrets and optional local configuration | `.env*` except public `*.example` templates |
+| Execution plans | `Plans/` |
+| Retired/unsupported agent handoffs | `dev-chat.md`, `dev-log.yaml` |
+| Agent/editor state | `.codex/`, `.claude/`, `*.code-workspace` |
+| Scratch and capture staging | `_scratch/`, `storage/` |
+| Private experiments | `_private/`, `.private/`, `paid-app/`, `product-app-private/` |
+| Test and browser evidence | `coverage/`, `test-results/`, `playwright-report/`, `.nyc_output/` |
+| Full breakpoint screenshot sweeps | `docs/screenshots/` outside `docs/screenshots/hero/` |
+
+Real financial, health, pet-care, or analytics exports are never fixtures. Put them only in the
+generated dashboard's ignored `data.json`; do not paste them into profile examples, plans, screenshots,
+tests, issue reproductions, or documentation.
+
+## Why Plans and agent logs are local
+
+Plans often contain transient machine paths, internal coordination, incomplete ideas, and facts about
+other workspaces. This project uses ignored `Plans/_active/` for live execution and
+`Plans/_complete/` for local history. It does not use root `dev-chat.md` or `dev-log.yaml` files.
+
+Before completing a plan, promote every fact a public user or contributor needs into `README.md`,
+`AGENTS.md`, or the relevant `docs/` page. This keeps the public product self-contained without
+publishing private coordination history.
+
+## Private code that needs history
+
+An ignored directory or a "local-only" branch is not a privacy boundary once content enters this
+repository's Git object database. Disposable, uncommitted experiments may use the ignored quarantine
+folders. Private work that genuinely needs commits belongs in a separate sibling repository with no
+remote until a later, explicit security and publication decision.
+
+The public updater, CLI, and profile contracts remain the foundation. Private or commercial work may
+consume those public contracts later, but cannot replace, hide, or weaken the public behavior.
+
+## Finance boundaries
+
+The public finances profile is a fictional customizable snapshot. It is distinct from both the
+[public operational finance workspace seed](https://github.com/jenninexus/fin) and any person's local
+household workspace. Passing this repository's tests never authorizes reading or migrating household
+records.
+
+## Verification
+
+Run `npm run check:public-boundary` before committing. It verifies representative ignore rules,
+ensures required public samples remain trackable, and rejects tracked local/private/generated paths.
+Also review `git diff --cached --name-only` before pushing; an ignore rule cannot protect content that
+is already tracked.
 
 ## Related
 
-- [`AGENTS.md`](../AGENTS.md) § Private vs public
+- [`AGENTS.md`](../AGENTS.md)
 - [`getting-started.md`](getting-started.md)
+- [`profile-system.md`](profile-system.md)
 - [`profiles/README.md`](../profiles/README.md)

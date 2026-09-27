@@ -1,0 +1,135 @@
+{
+  "format": "dashboard-editor",
+  "version": 1,
+  "profile": "health",
+  "unknownFields": "preserve",
+  "privacyHelp": "data.json, dashboard.html, exports and backups are unencrypted plaintext. Browser-local checklist and view state are disposable and excluded from JSON backups.",
+  "sections": [
+    {"id":"profile","label":"Profile","order":1, "fields": [
+      {"path":"profile.name","label":"Name","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"profile.age","label":"Age","type":"number","required":true,"order":2,"min":0,"max":1000000000},
+      {"path":"profile.dob","label":"Dob","type":"date","required":true,"order":3,"maxLength":4000},
+      {"path":"profile.location","label":"Location","type":"string","required":true,"order":4,"maxLength":4000},
+      {"path":"profile.last_updated","label":"Last updated","type":"date","required":true,"order":5,"maxLength":4000},
+      {"path":"profile.averageDailySteps","label":"Average daily steps","type":"number","required":false,"order":6,"min":0,"max":100000,"unit":"steps/day","nullable":true,"help":"Explicit snapshot average; null when unknown."}
+    ]},
+    {"id":"vitals","label":"Vitals","order":2, "fields": [
+      {"path":"vitals[].date","label":"Date","type":"date","required":true,"order":1,"maxLength":4000},
+      {"path":"vitals[].bp_systolic","label":"Bp systolic","type":"number","required":true,"order":2,"min":0,"max":1000000000},
+      {"path":"vitals[].bp_diastolic","label":"Bp diastolic","type":"number","required":true,"order":3,"min":0,"max":1000000000},
+      {"path":"vitals[].heart_rate","label":"Heart rate","type":"number","required":true,"order":4,"min":0,"max":1000000000},
+      {"path":"vitals[].weight_lbs","label":"Weight lbs","type":"number","required":true,"order":5,"min":0,"max":1000000000},
+      {"path":"vitals[].notes","label":"Notes","type":"string","required":true,"order":6,"maxLength":4000},
+      {"path":"vitals[].id","label":"Record ID","type":"string","required":true,"order":7,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"medications","label":"Medications","order":3, "fields": [
+      {"path":"medications[].name","label":"Name","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"medications[].dose","label":"Dose","type":"string","required":true,"order":2,"maxLength":4000},
+      {"path":"medications[].frequency","label":"Frequency","type":"string","required":true,"order":3,"maxLength":4000},
+      {"path":"medications[].time","label":"Time","type":"string","required":true,"order":4,"maxLength":4000},
+      {"path":"medications[].pharmacy","label":"Pharmacy","type":"string","required":true,"order":5,"maxLength":4000},
+      {"path":"medications[].refill_status","label":"Refill status","type":"enum","required":true,"order":6,"maxLength":4000,"values":["ok","refill_soon","overdue"]},
+      {"path":"medications[].notes","label":"Notes","type":"string","required":true,"order":7,"maxLength":4000},
+      {"path":"medications[].id","label":"Record ID","type":"string","required":true,"order":8,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"fitness","label":"Fitness","order":4, "fields": [
+      {"path":"fitness[].date","label":"Date","type":"date","required":true,"order":1,"maxLength":4000},
+      {"path":"fitness[].day","label":"Day","type":"string","required":true,"order":2,"maxLength":4000},
+      {"path":"fitness[].activity","label":"Activity","type":"string","required":true,"order":3,"maxLength":4000},
+      {"path":"fitness[].duration_min","label":"Duration min","type":"number","required":true,"order":4,"min":0,"max":1000000000},
+      {"path":"fitness[].type","label":"Type","type":"enum","required":true,"order":5,"maxLength":4000,"values":["cardio","strength","stretch","rest"]},
+      {"path":"fitness[].id","label":"Record ID","type":"string","required":true,"order":6,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"nutrition","label":"Nutrition","order":5, "fields": [
+      {"path":"nutrition.goal_calories","label":"Goal calories","type":"number","required":true,"order":1,"min":0,"max":1000000000},
+      {"path":"nutrition.goal_protein_g","label":"Goal protein g","type":"number","required":true,"order":2,"min":0,"max":1000000000},
+      {"path":"nutrition.goal_water_cups","label":"Goal water cups","type":"number","required":true,"order":3,"min":0,"max":1000000000},
+      {"path":"nutrition.today.calories","label":"Calories","type":"number","required":true,"order":4,"min":0,"max":1000000000},
+      {"path":"nutrition.today.protein","label":"Protein","type":"number","required":true,"order":5,"min":0,"max":1000000000},
+      {"path":"nutrition.today.water","label":"Water","type":"number","required":true,"order":6,"min":0,"max":1000000000},
+      {"path":"nutrition.log[].date","label":"Date","type":"date","required":true,"order":7,"maxLength":4000},
+      {"path":"nutrition.log[].breakfast","label":"Breakfast","type":"string","required":true,"order":8,"maxLength":4000},
+      {"path":"nutrition.log[].lunch","label":"Lunch","type":"string","required":true,"order":9,"maxLength":4000},
+      {"path":"nutrition.log[].dinner","label":"Dinner","type":"string","required":true,"order":10,"maxLength":4000},
+      {"path":"nutrition.log[].snacks","label":"Snacks","type":"string","required":true,"order":11,"maxLength":4000},
+      {"path":"nutrition.log[].calories","label":"Calories","type":"number","required":true,"order":12,"min":0,"max":1000000000},
+      {"path":"nutrition.log[].protein","label":"Protein","type":"number","required":true,"order":13,"min":0,"max":1000000000},
+      {"path":"nutrition.log[].water","label":"Water","type":"number","required":true,"order":14,"min":0,"max":1000000000},
+      {"path":"nutrition.log[].id","label":"Record ID","type":"string","required":true,"order":15,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"sleep","label":"Sleep","order":6, "fields": [
+      {"path":"sleep[].date","label":"Date","type":"date","required":true,"order":1,"maxLength":4000},
+      {"path":"sleep[].bedtime","label":"Bedtime","type":"string","required":true,"order":2,"maxLength":4000},
+      {"path":"sleep[].wake","label":"Wake","type":"string","required":true,"order":3,"maxLength":4000},
+      {"path":"sleep[].hours","label":"Hours","type":"number","required":true,"order":4,"min":0,"max":1000000000},
+      {"path":"sleep[].quality","label":"Quality","type":"number","required":true,"order":5,"min":0,"max":5},
+      {"path":"sleep[].id","label":"Record ID","type":"string","required":true,"order":6,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"mood","label":"Mood","order":7, "fields": [
+      {"path":"mood[].date","label":"Date","type":"date","required":true,"order":1,"maxLength":4000},
+      {"path":"mood[].score","label":"Score","type":"number","required":true,"order":2,"min":0,"max":10},
+      {"path":"mood[].emoji","label":"Emoji","type":"string","required":true,"order":3,"maxLength":4000},
+      {"path":"mood[].note","label":"Note","type":"string","required":true,"order":4,"maxLength":4000},
+      {"path":"mood[].id","label":"Record ID","type":"string","required":true,"order":5,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"labs","label":"Labs","order":8, "fields": [
+      {"path":"labs[].name","label":"Name","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"labs[].value","label":"Value","type":"string","required":true,"order":2,"maxLength":4000},
+      {"path":"labs[].unit","label":"Unit","type":"string","required":true,"order":3,"maxLength":4000},
+      {"path":"labs[].range","label":"Range","type":"string","required":true,"order":4,"maxLength":4000},
+      {"path":"labs[].status","label":"Status","type":"enum","required":true,"order":5,"maxLength":4000,"values":["ok","warn","fail"]},
+      {"path":"labs[].notes","label":"Notes","type":"string","required":true,"order":6,"maxLength":4000},
+      {"path":"labs[].id","label":"Record ID","type":"string","required":true,"order":7,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"habits","label":"Habits","order":9, "fields": [
+      {"path":"habits[].name","label":"Name","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"habits[].streak","label":"Streak","type":"number","required":true,"order":2,"min":0,"max":1000000000},
+      {"path":"habits[].targetDays","label":"Target Days","type":"number","required":true,"order":3,"min":0,"max":1000000000},
+      {"path":"habits[].unit","label":"Unit","type":"string","required":true,"order":4,"maxLength":4000},
+      {"path":"habits[].id","label":"Record ID","type":"string","required":true,"order":5,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"appointments","label":"Appointments","order":10, "fields": [
+      {"path":"appointments[].date","label":"Date","type":"date","required":true,"order":1,"maxLength":4000},
+      {"path":"appointments[].provider","label":"Provider","type":"string","required":true,"order":2,"maxLength":4000},
+      {"path":"appointments[].type","label":"Type","type":"string","required":true,"order":3,"maxLength":4000},
+      {"path":"appointments[].location","label":"Location","type":"string","required":true,"order":4,"maxLength":4000},
+      {"path":"appointments[].notes","label":"Notes","type":"string","required":true,"order":5,"maxLength":4000},
+      {"path":"appointments[].past","label":"Past","type":"boolean","required":true,"order":6},
+      {"path":"appointments[].id","label":"Record ID","type":"string","required":true,"order":7,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"goals","label":"Goals","order":11, "fields": [
+      {"path":"goals.this_month[].title","label":"Title","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"goals.this_month[].progress","label":"Progress","type":"number","required":true,"order":2,"min":0,"max":100},
+      {"path":"goals.this_quarter[].title","label":"Title","type":"string","required":true,"order":3,"maxLength":4000},
+      {"path":"goals.this_quarter[].progress","label":"Progress","type":"number","required":true,"order":4,"min":0,"max":100},
+      {"path":"goals.long_term[].title","label":"Title","type":"string","required":true,"order":5,"maxLength":4000},
+      {"path":"goals.long_term[].progress","label":"Progress","type":"number","required":true,"order":6,"min":0,"max":100},
+      {"path":"goals.this_month[].id","label":"Record ID","type":"string","required":true,"order":7,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."},
+      {"path":"goals.this_quarter[].id","label":"Record ID","type":"string","required":true,"order":8,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."},
+      {"path":"goals.long_term[].id","label":"Record ID","type":"string","required":true,"order":9,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"checklist","label":"Checklist","order":12, "fields": [
+      {"path":"checklist.morning[]","label":"Morning","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"checklist.evening[]","label":"Evening","type":"string","required":true,"order":2,"maxLength":4000}
+    ]},
+    {"id":"schemaVersion","label":"Schema Version","order":13, "fields": [
+      {"path":"schemaVersion","label":"Schema Version","type":"number","required":true,"order":1,"min":1,"max":1,"help":"Contract version; migrations must be explicit."}
+    ]}
+  ],
+  "collections": [
+    {"path":"vitals","label":"Vitals","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"medications","label":"Medications","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"fitness","label":"Fitness","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"nutrition.log","label":"Log","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"sleep","label":"Sleep","identity":"id","maxItems":1000,"minItems":1,"required":true},
+    {"path":"mood","label":"Mood","identity":"id","maxItems":1000,"minItems":1,"required":true},
+    {"path":"labs","label":"Labs","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"habits","label":"Habits","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"appointments","label":"Appointments","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"goals.this_month","label":"This month","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"goals.this_quarter","label":"This quarter","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"goals.long_term","label":"Long term","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"checklist.morning","label":"Morning","identity":null,"maxItems":1000,"minItems":0,"required":true},
+    {"path":"checklist.evening","label":"Evening","identity":null,"maxItems":1000,"minItems":0,"required":true}
+  ]
+}

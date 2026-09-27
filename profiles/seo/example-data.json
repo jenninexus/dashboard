@@ -3,39 +3,45 @@
   "profile": {
     "name": "Stellar Digital",
     "site": "stellar-digital.co",
-    "asOf": "June 2026",
+    "asOf": "2026-06-30",
     "period": "Jan 2026 – Jun 2026"
   },
   "kpis": [
     {
       "label": "Sessions",
       "value": "4,210",
-      "key": "sessions"
+      "key": "sessions",
+      "id": "kpis-1"
     },
     {
       "label": "Clicks",
       "value": "1,340",
-      "key": "clicks"
+      "key": "clicks",
+      "id": "kpis-2"
     },
     {
       "label": "Impressions",
       "value": "38,500",
-      "key": "impressions"
+      "key": "impressions",
+      "id": "kpis-3"
     },
     {
       "label": "Avg Position",
       "value": "14.2",
-      "key": "position"
+      "key": "position",
+      "id": "kpis-4"
     },
     {
       "label": "Indexed Pages",
       "value": "84",
-      "key": "indexed"
+      "key": "indexed",
+      "id": "kpis-5"
     },
     {
       "label": "PageSpeed Score",
       "value": "94",
-      "key": "psi"
+      "key": "psi",
+      "id": "kpis-6"
     }
   ],
   "progress": {
@@ -45,42 +51,48 @@
         "before": 310,
         "after": 1180,
         "unit": "",
-        "lowerIsBetter": false
+        "lowerIsBetter": false,
+        "id": "progress-metrics-1"
       },
       {
         "metric": "Impressions / mo",
         "before": 4200,
         "after": 38500,
         "unit": "",
-        "lowerIsBetter": false
+        "lowerIsBetter": false,
+        "id": "progress-metrics-2"
       },
       {
         "metric": "Clicks / mo",
         "before": 82,
         "after": 1340,
         "unit": "",
-        "lowerIsBetter": false
+        "lowerIsBetter": false,
+        "id": "progress-metrics-3"
       },
       {
         "metric": "Avg Position",
         "before": 48.3,
         "after": 14.2,
         "unit": "",
-        "lowerIsBetter": true
+        "lowerIsBetter": true,
+        "id": "progress-metrics-4"
       },
       {
         "metric": "Indexed Pages",
         "before": 22,
         "after": 84,
         "unit": "",
-        "lowerIsBetter": false
+        "lowerIsBetter": false,
+        "id": "progress-metrics-5"
       },
       {
         "metric": "Domain Rating",
         "before": 0,
         "after": 14,
         "unit": " DR",
-        "lowerIsBetter": false
+        "lowerIsBetter": false,
+        "id": "progress-metrics-6"
       }
     ]
   },
@@ -95,7 +107,8 @@
         51,
         60,
         72
-      ]
+      ],
+      "id": "ga4-1"
     },
     {
       "label": "Sessions",
@@ -107,7 +120,8 @@
         84,
         96,
         108
-      ]
+      ],
+      "id": "ga4-2"
     },
     {
       "label": "Pageviews",
@@ -119,7 +133,8 @@
         258,
         290,
         340
-      ]
+      ],
+      "id": "ga4-3"
     },
     {
       "label": "Bounce Rate",
@@ -132,7 +147,8 @@
         44,
         38
       ],
-      "invert": true
+      "invert": true,
+      "id": "ga4-4"
     },
     {
       "label": "Avg Session Dur",
@@ -144,7 +160,8 @@
         65,
         70,
         78
-      ]
+      ],
+      "id": "ga4-5"
     },
     {
       "label": "New Users",
@@ -156,39 +173,46 @@
         54,
         57,
         61
-      ]
+      ],
+      "id": "ga4-6"
     }
   ],
   "traffic": [
     {
       "source": "Organic Search",
       "pct": 48,
-      "color": "#4d9fff"
+      "color": "#4d9fff",
+      "id": "traffic-1"
     },
     {
       "source": "Direct",
       "pct": 22,
-      "color": "#1de9c0"
+      "color": "#1de9c0",
+      "id": "traffic-2"
     },
     {
       "source": "Referral",
       "pct": 15,
-      "color": "#9b72ff"
+      "color": "#9b72ff",
+      "id": "traffic-3"
     },
     {
       "source": "Social",
       "pct": 9,
-      "color": "#60b4ff"
+      "color": "#60b4ff",
+      "id": "traffic-4"
     },
     {
       "source": "Paid Search",
       "pct": 4,
-      "color": "#ffb347"
+      "color": "#ffb347",
+      "id": "traffic-5"
     },
     {
       "source": "Email",
       "pct": 2,
-      "color": "#39e8a0"
+      "color": "#39e8a0",
+      "id": "traffic-6"
     }
   ],
   "topPages": [
@@ -197,37 +221,43 @@
       "views": 3840,
       "duration": "1m 52s",
       "bounce": "41%",
-      "top": true
+      "top": true,
+      "id": "topPages-1"
     },
     {
       "page": "/services",
       "views": 2210,
       "duration": "2m 44s",
-      "bounce": "32%"
+      "bounce": "32%",
+      "id": "topPages-2"
     },
     {
       "page": "/portfolio",
       "views": 1780,
       "duration": "3m 10s",
-      "bounce": "28%"
+      "bounce": "28%",
+      "id": "topPages-3"
     },
     {
       "page": "/blog/seo-guide-2026",
       "views": 1460,
       "duration": "4m 02s",
-      "bounce": "22%"
+      "bounce": "22%",
+      "id": "topPages-4"
     },
     {
       "page": "/about",
       "views": 920,
       "duration": "1m 38s",
-      "bounce": "50%"
+      "bounce": "50%",
+      "id": "topPages-5"
     },
     {
       "page": "/contact",
       "views": 640,
       "duration": "0m 55s",
-      "bounce": "63%"
+      "bounce": "63%",
+      "id": "topPages-6"
     }
   ],
   "gsc": {
@@ -235,17 +265,20 @@
       {
         "label": "Indexed",
         "value": 84,
-        "status": "ok"
+        "status": "ok",
+        "id": "gsc-coverage-1"
       },
       {
         "label": "Not Indexed",
         "value": 12,
-        "status": "warn"
+        "status": "warn",
+        "id": "gsc-coverage-2"
       },
       {
         "label": "Errors",
         "value": 3,
-        "status": "fail"
+        "status": "fail",
+        "id": "gsc-coverage-3"
       }
     ],
     "issues": [
@@ -253,31 +286,36 @@
         "type": "Crawl errors",
         "count": 3,
         "severity": "fail",
-        "note": "Broken internal links on /old-pricing"
+        "note": "Broken internal links on /old-pricing",
+        "id": "gsc-issues-1"
       },
       {
         "type": "Mobile usability",
         "count": 2,
         "severity": "warn",
-        "note": "Tap targets too small on contact form"
+        "note": "Tap targets too small on contact form",
+        "id": "gsc-issues-2"
       },
       {
         "type": "Core Web Vitals",
         "count": 0,
         "severity": "ok",
-        "note": "All URLs pass desktop; 2 mobile pending"
+        "note": "All URLs pass desktop; 2 mobile pending",
+        "id": "gsc-issues-3"
       },
       {
         "type": "Soft 404s",
         "count": 5,
         "severity": "warn",
-        "note": "Redirect legacy /old-blog/* paths"
+        "note": "Redirect legacy /old-blog/* paths",
+        "id": "gsc-issues-4"
       },
       {
         "type": "Duplicate meta desc",
         "count": 8,
         "severity": "warn",
-        "note": "Service sub-pages share identical descriptions"
+        "note": "Service sub-pages share identical descriptions",
+        "id": "gsc-issues-5"
       }
     ]
   },
@@ -295,82 +333,99 @@
         "label": "LCP",
         "value": "2.4s",
         "status": "pass",
-        "target": "< 2.5s"
+        "target": "< 2.5s",
+        "id": "pagespeed-cwv-1"
       },
       {
         "label": "INP",
         "value": "88ms",
         "status": "pass",
-        "target": "< 200ms"
+        "target": "< 200ms",
+        "id": "pagespeed-cwv-2"
       },
       {
         "label": "CLS",
         "value": "0.08",
         "status": "pass",
-        "target": "< 0.1"
+        "target": "< 0.1",
+        "id": "pagespeed-cwv-3"
       },
       {
         "label": "FCP",
         "value": "1.6s",
         "status": "pass",
-        "target": "< 1.8s"
+        "target": "< 1.8s",
+        "id": "pagespeed-cwv-4"
       },
       {
         "label": "TTFB",
         "value": "340ms",
         "status": "warn",
-        "target": "< 200ms"
+        "target": "< 200ms",
+        "id": "pagespeed-cwv-5"
       }
     ]
   },
   "checklist": [
     {
       "item": "Title tags (unique, <60 chars)",
-      "status": "pass"
+      "status": "pass",
+      "id": "checklist-1"
     },
     {
       "item": "Meta descriptions",
-      "status": "warn"
+      "status": "warn",
+      "id": "checklist-2"
     },
     {
       "item": "H1 tags (one per page)",
-      "status": "pass"
+      "status": "pass",
+      "id": "checklist-3"
     },
     {
       "item": "Image alt text",
-      "status": "warn"
+      "status": "warn",
+      "id": "checklist-4"
     },
     {
       "item": "Schema markup (org + article)",
-      "status": "pass"
+      "status": "pass",
+      "id": "checklist-5"
     },
     {
       "item": "XML Sitemap submitted",
-      "status": "pass"
+      "status": "pass",
+      "id": "checklist-6"
     },
     {
       "item": "Robots.txt configured",
-      "status": "pass"
+      "status": "pass",
+      "id": "checklist-7"
     },
     {
       "item": "SSL / HTTPS",
-      "status": "pass"
+      "status": "pass",
+      "id": "checklist-8"
     },
     {
       "item": "Mobile-friendly",
-      "status": "pass"
+      "status": "pass",
+      "id": "checklist-9"
     },
     {
       "item": "Page speed (desktop)",
-      "status": "pass"
+      "status": "pass",
+      "id": "checklist-10"
     },
     {
       "item": "Internal linking",
-      "status": "warn"
+      "status": "warn",
+      "id": "checklist-11"
     },
     {
       "item": "Canonical tags",
-      "status": "fail"
+      "status": "fail",
+      "id": "checklist-12"
     }
   ],
   "actions": {
@@ -401,43 +456,60 @@
   "milestones": [
     {
       "label": "Site launch",
-      "date": "Jan 2026",
-      "done": true
+      "date": "2026-01-01",
+      "done": true,
+      "datePrecision": "month",
+      "id": "milestones-1"
     },
     {
       "label": "GSC verified",
-      "date": "Jan 2026",
-      "done": true
+      "date": "2026-01-01",
+      "done": true,
+      "datePrecision": "month",
+      "id": "milestones-2"
     },
     {
       "label": "First 100 clicks",
-      "date": "Feb 2026",
-      "done": true
+      "date": "2026-02-01",
+      "done": true,
+      "datePrecision": "month",
+      "id": "milestones-3"
     },
     {
       "label": "DA 14 achieved",
-      "date": "Mar 2026",
-      "done": true
+      "date": "2026-03-01",
+      "done": true,
+      "datePrecision": "month",
+      "id": "milestones-4"
     },
     {
       "label": "Mobile score 76",
-      "date": "Apr 2026",
-      "done": true
+      "date": "2026-04-01",
+      "done": true,
+      "datePrecision": "month",
+      "id": "milestones-5"
     },
     {
       "label": "1k monthly sessions",
-      "date": "May 2026",
-      "done": true
+      "date": "2026-05-01",
+      "done": true,
+      "datePrecision": "month",
+      "id": "milestones-6"
     },
     {
       "label": "DA 25 target",
-      "date": "Sep 2026",
-      "done": false
+      "date": "2026-09-01",
+      "done": false,
+      "datePrecision": "month",
+      "id": "milestones-7"
     },
     {
       "label": "5k sessions / mo",
-      "date": "Dec 2026",
-      "done": false
+      "date": "2026-12-01",
+      "done": false,
+      "datePrecision": "month",
+      "id": "milestones-8"
     }
-  ]
+  ],
+  "schemaVersion": 1
 }

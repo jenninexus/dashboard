@@ -1,68 +1,64 @@
 # Architecture
 
-This page is the deeper "how it works" for people who want to extend the kit. The root README
-is the elevator pitch — start there if you haven't.
+Dashboard has two runtimes with one shared core:
 
-## Tech stack
+- Generated dashboards are standalone HTML/CSS/JavaScript files opened from `file://`.
+- Authoring tools use Node.js built-ins only: the CLI and a temporary loopback wizard.
 
-- **Plain HTML/CSS/JS** — each profile is a single self-contained `.html` file (inline `<style>` + inline `<script>`). No framework, no bundler, no build step.
-- **[Chart.js](https://www.chartjs.org/)** (via CDN `<script>` tag) — renders trend lines, doughnuts, and gauges inside each dashboard.
-- **Google Fonts** (`Outfit`, `JetBrains Mono`, via `<link>` `preconnect`) — the only external network calls a dashboard makes when opened normally.
-- **Node.js 18+** — only needed to run the scaffolder (`scripts/build-dashboard.mjs`), not to view a dashboard.
-- **PowerShell 7 + [vid-scroll](https://github.com/monofinitystudio/vid-scroll)** — optional screenshot tooling (see [Screenshots](#screenshots)).
+There is no framework, bundler, package dependency, backend, telemetry, remote font, CDN chart
+runtime, or environment-variable integration. The pet profile draws its chart as inline SVG and
+keeps exact readings in an accessible table.
 
-## Dependencies
+## Shared authoring core
 
-The dashboards themselves have **zero installed dependencies** (`package.json` declares none) — everything runs from `file://` with no `npm install`.
-
-| Dependency | Where | Purpose |
-|---|---|---|
-| Chart.js | CDN `<script>` in each profile HTML | Charts/gauges/trend lines |
-| Google Fonts | CDN `<link>` in each profile HTML | `Outfit` / `JetBrains Mono` type |
-| Node.js 18+ | `scripts/build-dashboard.mjs` | Zero-dep scaffolder (uses only `node:fs`, `node:path`, `node:url`) |
-| ffmpeg | `scripts/capture.ps1` (optional) | WebP encoding for screenshot captures |
-
-## Integrating with the rest of your tools
-
-This repo intentionally stays alone. You can freely fork it to wire your own:
-
-- **AI coding agents** — point Claude Code, Copilot, Cursor, or Gemini at the repo and ask them to customize a profile.
-- **Static hosts** — GitHub Pages, Netlify, Cloudflare Pages, Vercel, S3, anywhere that serves static files works. Drop `profiles/<id>/<id>.html` + `themes/` into your page and you're done.
-- **vid-scroll** — use this repo's `configs/breakpoints.json` as a starting point if you want a multi-breakpoint screenshot sweep of your dashboards.
-
-## Screenshots
-
-Two configs are bundled:
-
-- **`configs/breakpoints.json`** — multi-breakpoint sweep (mobile 390 / tablet 768 / desktop 1280) for QA.
-- **`configs/hero-screenshots.json`** — single 1920×1080 (16:9) hero shot per profile, used for the README gallery.
-
-Run with the bundled `scripts/capture.ps1` (which delegates to vid-scroll) or directly:
-
-```bash
-npx tsx <path-to-vid-scroll>/src/cli.ts \
-  --breakpoints configs/hero-screenshots.json \
-  --local \
-  --output docs/screenshots/hero \
-  --no-cursor
-```
-
-Outputs land in `docs/screenshots/hero/<width>/<slug>-<width>.png`.
-
-## Env / config (all optional)
-
-The dashboard needs **none of these to run.** Everything below is optional, only used by
-AI agents you point at this repo, or by future profiles that automate live data fetches.
-
-| Variable | Purpose |
+| Surface | Responsibility |
 |---|---|
-| `GA4_PROPERTY_ID`, `GSC_SITE_URL`, `PAGESPEED_API_KEY`, `CLOUDFLARE_API_TOKEN` | Reserved for a future automated SEO profile fetch — unused today (SEO profile is hand-fed JSON) |
-| `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` | Only if you point a local AI agent at this repo to customize/extend a dashboard |
+| `scripts/lib/strict-json.mjs` | bounded strict JSON parsing and safe script serialization |
+| `scripts/lib/dashboard-paths.mjs` | containment, protected-source, link, and hardlink checks |
+| `scripts/lib/dashboard-core.mjs` | profile/schema/theme loading, scaffold, read/save/update/restore transactions, provenance and backup handling |
+| `scripts/build-dashboard.mjs` | new-output CLI |
+| `scripts/update-dashboard.mjs` | existing-output CLI |
+| `scripts/wizard/` | capability-protected localhost UI over the same core |
 
-Copy `.env.example` → `.env` and fill in only what you use. Names only, no values are ever committed.
+Generated HTML contains marked data and theme regions plus embedded provenance mirrored in
+`.dashboard-meta.json`. The updater verifies the profile, contract, template/theme metadata, unique
+markers, and local files before publishing. Writes stage and verify content before the publish rename;
+invalid input leaves the last good dashboard intact.
 
-## Repo conventions
+## Local wizard threat boundary
 
-- **Profile config files** are named `profile.json` (not `seo.json` / `finances.json` / `health.json`). Example HTML files are named after the profile (`seo.html`, `finances.html`, `health.html`).
-- **Tier-1 brand-service colors** in `themes/seo-tokens.css` are canonical vendor values — don't change them.
-- **Fonts** are `Outfit` (UI / display) + `JetBrains Mono` (numerals + code blocks), both with system fallbacks.
+The wizard binds to `127.0.0.1`, uses a random per-run capability, checks Host/Origin/method/content
+type/request size, and limits all dashboard I/O to the selected safe output root. Repository source
+directories, filesystem roots, symbolic links/junctions, and multiply-linked data files are rejected.
+Optimistic revisions prevent two browser views from silently overwriting one another. Stop and idle
+shutdown release the port.
+
+This protects against incidental local cross-origin writes and path mistakes; it does not encrypt
+the user's files or turn an untrusted computer account into a safe vault.
+
+## Profile rendering rules
+
+Each profile keeps its own renderer and visual identity. `editor-schema.json` is the common editing
+contract, not a generic visual renderer. Text is plain text, dynamic attributes are allowlisted, and
+required content remains available offline. Browser-local view/checklist state is explicitly
+disposable; durable content belongs in `data.json`.
+
+## Themes and media
+
+`themes/manifest.json` is the public theme authority. A generated dashboard inlines the selected
+shipped CSS in its marked theme region; it never reads another checkout at runtime.
+
+`docs/images/` is for runtime profile art copied into outputs. `docs/screenshots/hero/` is the four-
+image README gallery. Full responsive sweeps are ignored local QA evidence under
+`storage/screenshots/`.
+
+The optional `scripts/capture.ps1` wrapper discovers a sibling `vid-scroll` checkout or
+`VID_SCROLL_DIR`, resolves the current clone path into a temporary ignored config, and writes local
+evidence by default. It is contributor tooling, not a runtime dependency.
+
+## Verification
+
+`npm test` covers the core, schema contracts, hostile data, finance derivations, offline render
+scripts, themes, and wizard security/flows. `npm run check:public-boundary` rejects tracked local or
+generated surfaces and machine-specific absolute paths. Browser QA is still required for layout,
+real keyboard behavior, contrast, and full user-flow claims.

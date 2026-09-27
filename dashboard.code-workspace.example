@@ -58,16 +58,23 @@
         "problemMatcher": []
       },
       {
-        "label": "✨ Build dashboard (SEO)",
+        "label": "✨ Scaffold dashboard (SEO)",
         "type": "shell",
-        "command": "node scripts/build-dashboard.mjs --profile seo --name \"My Brand\" --force",
+        "command": "node scripts/build-dashboard.mjs --profile seo --name \"My Brand\"",
         "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
         "problemMatcher": []
       },
       {
-        "label": "💰 Build dashboard (Finances)",
+        "label": "💰 Scaffold dashboard (Finances)",
         "type": "shell",
-        "command": "node scripts/build-dashboard.mjs --profile finances --name \"My Finances\" --force",
+        "command": "node scripts/build-dashboard.mjs --profile finances --name \"My Finances\"",
+        "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+        "problemMatcher": []
+      },
+      {
+        "label": "🔄 Update dashboard from data.json",
+        "type": "shell",
+        "command": "npm run dashboard:update",
         "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
         "problemMatcher": []
       },

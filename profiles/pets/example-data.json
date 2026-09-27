@@ -31,42 +31,50 @@
       {
         "date": "2026-06-23",
         "lbs": 9.1,
-        "notes": "Baseline at specialist recheck"
+        "notes": "Baseline at specialist recheck",
+        "id": "weight-readings-1"
       },
       {
         "date": "2026-06-30",
         "lbs": 9,
-        "notes": "Stable"
+        "notes": "Stable",
+        "id": "weight-readings-2"
       },
       {
         "date": "2026-07-07",
         "lbs": 9,
-        "notes": "Good appetite week"
+        "notes": "Good appetite week",
+        "id": "weight-readings-3"
       },
       {
         "date": "2026-07-14",
         "lbs": 8.9,
-        "notes": "Slight dip, watching"
+        "notes": "Slight dip, watching",
+        "id": "weight-readings-4"
       },
       {
         "date": "2026-07-21",
         "lbs": 8.9,
-        "notes": "Holding steady"
+        "notes": "Holding steady",
+        "id": "weight-readings-5"
       },
       {
         "date": "2026-07-28",
         "lbs": 8.8,
-        "notes": "Within target range"
+        "notes": "Within target range",
+        "id": "weight-readings-6"
       },
       {
         "date": "2026-08-04",
         "lbs": 8.8,
-        "notes": "Stable on renal diet"
+        "notes": "Stable on renal diet",
+        "id": "weight-readings-7"
       },
       {
         "date": "2026-08-11",
         "lbs": 8.8,
-        "notes": "Today — stable-ish trend"
+        "notes": "Today — stable-ish trend",
+        "id": "weight-readings-8"
       }
     ]
   },
@@ -78,7 +86,8 @@
       "time": "Morning & evening with food",
       "purpose": "Hyperthyroidism",
       "refill_status": "ok",
-      "notes": "Transdermal gel alternate if GI upset"
+      "notes": "Transdermal gel alternate if GI upset",
+      "id": "medications-1"
     },
     {
       "name": "Phosphate binder",
@@ -87,7 +96,8 @@
       "time": "Breakfast & dinner",
       "purpose": "CKD — phosphorus control",
       "refill_status": "ok",
-      "notes": "Crush into wet food"
+      "notes": "Crush into wet food",
+      "id": "medications-2"
     },
     {
       "name": "Cyanocobalamin (B12)",
@@ -96,7 +106,8 @@
       "time": "Sunday morning",
       "purpose": "CKD support",
       "refill_status": "refill_soon",
-      "notes": "Sub-Q injection at home — ~2 doses left"
+      "notes": "Sub-Q injection at home — ~2 doses left",
+      "id": "medications-3"
     }
   ],
   "vetVisits": [
@@ -105,21 +116,24 @@
       "clinic": "Riverside Animal Clinic",
       "reason": "Senior wellness & bloodwork",
       "findings": "Creatinine mildly elevated; T4 high — started methimazole",
-      "follow_up": "Recheck labs in 6 weeks"
+      "follow_up": "Recheck labs in 6 weeks",
+      "id": "vetVisits-1"
     },
     {
       "date": "2026-06-21",
       "clinic": "Riverside Animal Clinic",
       "reason": "Renal diet transition follow-up",
       "findings": "Weight stable; appetite good on prescription diet",
-      "follow_up": "Continue fluids 2× weekly"
+      "follow_up": "Continue fluids 2× weekly",
+      "id": "vetVisits-2"
     },
     {
       "date": "2026-08-02",
       "clinic": "Riverside Animal Clinic",
       "reason": "Quarterly senior panel",
       "findings": "IRIS stage 2 unchanged; thyroid controlled on current dose",
-      "follow_up": "Next labs in 3 months"
+      "follow_up": "Next labs in 3 months",
+      "id": "vetVisits-3"
     }
   ],
   "qol": {
@@ -166,19 +180,23 @@
   "redFlags": [
     {
       "symptom": "Not eating for 24 hours",
-      "action": "Call Riverside Animal Clinic same day; may need appetite stimulant or fluids"
+      "action": "Call Riverside Animal Clinic same day; may need appetite stimulant or fluids",
+      "id": "redFlags-1"
     },
     {
       "symptom": "Labored or open-mouth breathing",
-      "action": "Emergency — go to nearest ER vet immediately"
+      "action": "Emergency — go to nearest ER vet immediately",
+      "id": "redFlags-2"
     },
     {
       "symptom": "Hiding more than usual / withdrawn",
-      "action": "Monitor closely; call vet if persists beyond one day"
+      "action": "Monitor closely; call vet if persists beyond one day",
+      "id": "redFlags-3"
     },
     {
       "symptom": "Collapse or unable to stand",
-      "action": "Emergency — transport to ER vet immediately"
+      "action": "Emergency — transport to ER vet immediately",
+      "id": "redFlags-4"
     }
   ],
   "appointments": [
@@ -187,28 +205,32 @@
       "clinic": "Riverside Animal Clinic",
       "type": "Bloodwork recheck",
       "notes": "Fasting not required; bring med list",
-      "past": false
+      "past": false,
+      "id": "appointments-1"
     },
     {
       "date": "2026-10-12",
       "clinic": "Riverside Animal Clinic",
       "type": "Senior wellness exam",
       "notes": "Discuss fluid schedule & weight trend",
-      "past": false
+      "past": false,
+      "id": "appointments-2"
     },
     {
       "date": "2026-11-08",
       "clinic": "Riverside Animal Clinic",
       "type": "Dental assessment",
       "notes": "Non-anesthetic cleaning vs extraction decision",
-      "past": false
+      "past": false,
+      "id": "appointments-3"
     },
     {
       "date": "2026-04-18",
       "clinic": "Riverside Animal Clinic",
       "type": "Vaccination update",
       "notes": "Rabies booster; declined non-core vaccines",
-      "past": true
+      "past": true,
+      "id": "appointments-4"
     }
   ],
   "eol": {
@@ -219,5 +241,6 @@
       "Keep a comfort-care list: favorite bed, quiet room, pain plan",
       "Printable decision worksheets: github.com/jenninexus/senior-pet-care"
     ]
-  }
+  },
+  "schemaVersion": 1
 }

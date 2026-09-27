@@ -1,0 +1,93 @@
+{
+  "format": "dashboard-editor",
+  "version": 1,
+  "profile": "finances",
+  "unknownFields": "preserve",
+  "privacyHelp": "data.json, dashboard.html, exports and backups are unencrypted plaintext. Browser-local checklist and view state are disposable and excluded from JSON backups.",
+  "sections": [
+    {"id":"profile","label":"Profile","order":1, "fields": [
+      {"path":"profile.name","label":"Name","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"profile.person","label":"Person","type":"string","required":true,"order":2,"maxLength":4000},
+      {"path":"profile.asOf","label":"As Of","type":"date","required":true,"order":3,"maxLength":4000},
+      {"path":"profile.city","label":"City","type":"string","required":true,"order":4,"maxLength":4000},
+      {"path":"profile.monthlyExpenses","label":"Monthly Expenses","type":"number","required":true,"order":5,"min":0,"max":1000000000,"nullable":true,"unit":"USD/month","help":"Explicit expense snapshot; leave null if unknown. Not inferred from bills."},
+      {"path":"profile.liabilitiesComplete","label":"Liabilities Complete","type":"boolean","required":true,"order":6,"help":"Enable only when every liability is included. Otherwise net worth remains unknown."},
+      {"path":"profile.source","label":"Source","type":"string","required":true,"order":7,"maxLength":4000},
+      {"path":"profile.billCycle","label":"Bill Cycle","type":"string","required":true,"order":8,"maxLength":4000,"pattern":"^\\d{4}-(0[1-9]|1[0-2])$"}
+    ]},
+    {"id":"alerts","label":"Alerts","order":2, "fields": [
+      {"path":"alerts[].severity","label":"Severity","type":"enum","required":true,"order":1,"maxLength":4000,"values":["urgent","warn","info"]},
+      {"path":"alerts[].icon","label":"Icon","type":"string","required":true,"order":2,"maxLength":4000},
+      {"path":"alerts[].title","label":"Title","type":"string","required":true,"order":3,"maxLength":4000},
+      {"path":"alerts[].sub","label":"Sub","type":"string","required":true,"order":4,"maxLength":4000},
+      {"path":"alerts[].id","label":"Record ID","type":"string","required":true,"order":5,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"reminders","label":"Reminders","order":3, "fields": [
+      {"path":"reminders[].label","label":"Label","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"reminders[].urgent","label":"Urgent","type":"boolean","required":true,"order":2},
+      {"path":"reminders[].id","label":"Record ID","type":"string","required":true,"order":3,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"holdings","label":"Holdings","order":4, "fields": [
+      {"path":"holdings.accounts[].name","label":"Name","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"holdings.accounts[].amount","label":"Amount","type":"number","required":true,"order":2,"min":0,"max":1000000000,"unit":"USD"},
+      {"path":"holdings.accounts[].id","label":"Id","type":"string","required":true,"order":3,"maxLength":4000}
+    ]},
+    {"id":"bills","label":"Bills","order":5, "fields": [
+      {"path":"bills[].name","label":"Name","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"bills[].due","label":"Due","type":"date","required":true,"order":2,"maxLength":4000},
+      {"path":"bills[].amount","label":"Amount","type":"number","required":true,"order":3,"min":0,"max":1000000000,"unit":"USD"},
+      {"path":"bills[].status","label":"Status","type":"enum","required":true,"order":4,"maxLength":4000,"values":["due","paid","autopay","overdue"]},
+      {"path":"bills[].id","label":"Id","type":"string","required":true,"order":5,"maxLength":4000}
+    ]},
+    {"id":"loans","label":"Loans","order":6, "fields": [
+      {"path":"loans[].name","label":"Name","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"loans[].kind","label":"Kind","type":"enum","required":true,"order":2,"maxLength":4000,"values":["personal","student","auto","investment","other"]},
+      {"path":"loans[].principal","label":"Principal","type":"number","required":true,"order":3,"min":0,"max":1000000000,"unit":"USD"},
+      {"path":"loans[].paidToDate","label":"Paid To Date","type":"number","required":true,"order":4,"min":0,"max":1000000000,"unit":"USD"},
+      {"path":"loans[].stillOwed","label":"Still Owed","type":"number","required":true,"order":5,"min":0,"max":1000000000,"unit":"USD"},
+      {"path":"loans[].targetPayoff","label":"Target Payoff","type":"date","required":true,"order":6,"nullable":true,"maxLength":4000,"help":"Exact confirmed date only; null when unknown. Do not invent a day from a month-only estimate."},
+      {"path":"loans[].note","label":"Note","type":"string","required":true,"order":7,"maxLength":4000},
+      {"path":"loans[].id","label":"Id","type":"string","required":true,"order":8,"maxLength":4000},
+      {"path":"loans[].balanceBasis","label":"Balance Basis","type":"enum","required":true,"order":9,"maxLength":4000,"values":["principal-minus-paid","reported"]}
+    ]},
+    {"id":"income","label":"Income","order":7, "fields": [
+      {"path":"income[].source","label":"Source","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"income[].type","label":"Type","type":"string","required":true,"order":2,"maxLength":4000},
+      {"path":"income[].monthlyEst","label":"Monthly Est","type":"number","required":true,"order":3,"min":0,"max":1000000000,"unit":"USD"},
+      {"path":"income[].ytd","label":"Ytd","type":"number","required":true,"order":4,"min":0,"max":1000000000,"unit":"USD"},
+      {"path":"income[].status","label":"Status","type":"enum","required":true,"order":5,"maxLength":4000,"values":["active","variable","paused"]},
+      {"path":"income[].id","label":"Id","type":"string","required":true,"order":6,"maxLength":4000},
+      {"path":"income[].note","label":"Note","type":"string","required":false,"order":7,"maxLength":4000}
+    ]},
+    {"id":"todos","label":"Todos","order":8, "fields": [
+      {"path":"todos[].bucket","label":"Bucket","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"todos[].dot","label":"Dot","type":"string","required":true,"order":2,"maxLength":4000,"pattern":"^#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$","help":"Hex color only; CSS and URLs are not accepted."},
+      {"path":"todos[].items[].id","label":"Id","type":"string","required":true,"order":3,"maxLength":4000},
+      {"path":"todos[].items[].label","label":"Label","type":"string","required":true,"order":4,"maxLength":4000},
+      {"path":"todos[].items[].amount","label":"Amount","type":"string","required":true,"order":5,"nullable":true,"maxLength":4000},
+      {"path":"todos[].id","label":"Record ID","type":"string","required":true,"order":6,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"schemaVersion","label":"Schema Version","order":9, "fields": [
+      {"path":"schemaVersion","label":"Schema Version","type":"number","required":true,"order":1,"min":1,"max":1,"help":"Contract version; migrations must be explicit."}
+    ]}
+  ],
+  "collections": [
+    {"path":"alerts","label":"Alerts","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"reminders","label":"Reminders","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"holdings.accounts","label":"Accounts","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"bills","label":"Bills","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"loans","label":"Loans","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"income","label":"Income","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"todos","label":"Todos","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"todos[].items","label":"Items","identity":"id","maxItems":1000,"minItems":0,"required":true}
+  ],
+  "derived": [
+    {"path":"liquidHoldings","formula":"sum(holdings.accounts[].amount)"},
+    {"path":"monthlyIncome","formula":"sum(income[].monthlyEst where status is active or variable)"},
+    {"path":"billCycleTotal","formula":"sum(bills[].amount where due starts with profile.billCycle)"},
+    {"path":"billsOutstanding","formula":"sum(cycle bills[].amount where status is not paid; autopay is unconfirmed)"},
+    {"path":"loanBalance","formula":"principal - paidToDate when balanceBasis is principal-minus-paid; explicit stillOwed must agree"},
+    {"path":"netWorth","formula":"liquidHoldings - sum(loanBalance) only when profile.liabilitiesComplete; otherwise unknown"},
+    {"path":"savingsRate","formula":"round((monthlyIncome - profile.monthlyExpenses) / monthlyIncome * 100) when both known and income > 0; otherwise unknown"}
+  ]
+}

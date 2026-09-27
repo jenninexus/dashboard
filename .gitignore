@@ -1,7 +1,8 @@
 node_modules/
 storage/
 
-# Secrets & local config — copy the .example files and fill in
+# Secrets and local config. This static kit does not require environment variables;
+# safe public templates may still use the *.example exception if one is added later.
 .env*
 !.env.example
 !.env.*.example
@@ -11,6 +12,12 @@ storage/
 # Per-user generated output (your dashboard lives here)
 my-dashboard/
 _scratch/
+
+# Local execution plans and legacy agent handoffs. Durable public guidance belongs
+# in AGENTS.md, README.md, or docs/; these files must never become public history.
+Plans/
+dev-chat.md
+dev-log.yaml
 
 # Private/commercial experiments are never part of this public repository.
 # If private work needs commit history, use a separate sibling repo with no remote;
@@ -25,6 +32,11 @@ coverage/
 test-results/
 playwright-report/
 .nyc_output/
+
+# Keep only the curated README gallery public. Full breakpoint sweeps are local QA evidence.
+docs/screenshots/**
+!docs/screenshots/hero/
+!docs/screenshots/hero/**
 
 # Local agent scratch (Codex / Claude Code state)
 .codex/
