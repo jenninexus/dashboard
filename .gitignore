@@ -41,6 +41,7 @@ docs/screenshots/**
 # Local agent scratch (Codex / Claude Code state)
 .codex/
 .claude/
+.agents/
 
 *.log
 .DS_Store
