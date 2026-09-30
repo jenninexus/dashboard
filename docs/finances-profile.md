@@ -32,6 +32,3 @@ ids when editing. Leave nullable unknowns as `null` rather than inventing a numb
 
 The JSON, generated HTML, exports, and rotating backup are unencrypted plaintext. Checklist/theme/
 collapse browser state is disposable and is not a payment record or JSON backup content.
-
-For an operational finance workspace seed with a different scope, see
-[jenninexus/fin](https://github.com/jenninexus/fin).

@@ -35,7 +35,7 @@
     "manual JSON (data.json)"
   ],
   "blogPost": "A private finances dashboard you fully control (local, no SaaS)",
-  "_note": "Public snapshot demo (Alex Rivera, fictional). For an operational workspace (autopay, archive, startup pipeline) see github.com/jenninexus/fin. Never copy a household dashboard here.",
+  "_note": "Public snapshot demo (Alex Rivera, fictional). Never copy a household dashboard here.",
   "dataContractVersion": 1,
   "editorSchema": "editor-schema.json"
 }

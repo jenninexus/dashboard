@@ -72,8 +72,8 @@ never rewrites `data.json`.
 Each profile owns four public files: its renderer, fictional example, routing manifest, and compact
 versioned editor contract. See [profiles/README.md](profiles/README.md) for the exact format.
 
-The finances profile is a customizable snapshot, not a payment ledger. For an operational finance
-workspace seed, use [jenninexus/fin](https://github.com/jenninexus/fin). For printable pet-care sheets,
+The finances profile is a customizable snapshot, not a payment ledger. See
+[docs/finances-profile.md](docs/finances-profile.md) for its scope. For printable pet-care sheets,
 use [jenninexus/senior-pet-care](https://github.com/jenninexus/senior-pet-care).
 
 ## Themes

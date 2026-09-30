@@ -59,10 +59,9 @@ consume those public contracts later, but cannot replace, hide, or weaken the pu
 
 ## Finance boundaries
 
-The public finances profile is a fictional customizable snapshot. It is distinct from both the
-[public operational finance workspace seed](https://github.com/jenninexus/fin) and any person's local
-household workspace. Passing this repository's tests never authorizes reading or migrating household
-records.
+The public finances profile is a fictional customizable snapshot. It is distinct from any
+person's local household workspace. Passing this repository's tests never authorizes reading or
+migrating household records.
 
 ## Verification
 

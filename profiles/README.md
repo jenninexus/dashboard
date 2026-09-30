@@ -31,7 +31,6 @@ Run `node --test tests/profiles.test.mjs` for fixture/contract consistency, host
 
 ## Sister trackers (not profiles)
 
-- Operational finance workspace: [jenninexus/fin](https://github.com/jenninexus/fin)
 - Printable pet-care Markdown: [jenninexus/senior-pet-care](https://github.com/jenninexus/senior-pet-care)
 
 See [docs/profile-system.md](../docs/profile-system.md) to add your own.

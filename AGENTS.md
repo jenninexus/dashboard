@@ -70,7 +70,6 @@ Tier-1 vendor colors (`themes/seo-tokens.css`) are canonical — don't change th
 
 | Repo | Job |
 |---|---|
-| [jenninexus/fin](https://github.com/jenninexus/fin) | Operational finance workspace seed |
 | [jenninexus/senior-pet-care](https://github.com/jenninexus/senior-pet-care) | Printable Markdown pet tracker |
 | Local household workspace | Household production dashboard — **LOCAL ONLY; never copy into this repo** |
 
