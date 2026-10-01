@@ -10,6 +10,8 @@ const ignoredSamples = [
   'dev-log.yaml',
   '.codex/skills/build-dashboard/SKILL.md',
   '.claude/commands/build-dashboard.md',
+  '.claude/commands/fin-start.md',
+  '.claude/settings.local.json',
   '_scratch/output/dashboard.html',
   'storage/screenshots/seo.webp',
   'dashboard.code-workspace',
@@ -30,6 +32,7 @@ const publicSamples = [
   'profiles/finances/example-data.json',
   'docs/screenshots/hero/1920/seo-1920.png',
   'docs/images/pets/pink-cats-16x9.webp',
+  '.claude/commands.example/fin-start.md',
 ];
 
 const privateTrackedPath =
@@ -72,8 +75,11 @@ const trackedPaths = execFileSync('git', ['ls-files', '-z'], {
   .filter(Boolean)
   .map((path) => path.replaceAll('\\', '/'));
 
+// Example AI commands are public templates: Markdown only, directly inside .claude/commands.example/.
+const publicCommandExample = /^\.claude\/commands\.example\/[a-z0-9-]+\.md$/;
+
 for (const path of trackedPaths) {
-  if (privateTrackedPath.test(path)) failures.push(`private/generated path is tracked: ${path}`);
+  if (privateTrackedPath.test(path) && !publicCommandExample.test(path)) failures.push(`private/generated path is tracked: ${path}`);
   if (privateTrackedFile.test(path)) failures.push(`local agent/workspace file is tracked: ${path}`);
   if (nonHeroScreenshot.test(path)) failures.push(`uncurated QA screenshot is tracked: ${path}`);
   if (secretOrLocalConfig.test(path)) failures.push(`secret/local env file is tracked: ${path}`);

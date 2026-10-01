@@ -14,6 +14,7 @@ sample data only. A user's generated dashboard, real data, secrets, plans, and Q
 | Runtime profile art | `docs/images/` | Assets referenced by profile HTML and copied into generated output |
 | Curated README gallery | `docs/screenshots/hero/` | One public hero image per profile |
 | User and contributor guidance | `README.md`, `AGENTS.md`, `docs/*.md` | Durable behavior, architecture, safety, and extension contracts |
+| Example AI commands | `.claude/commands.example/*.md` | Optional finance commands to copy into your own clone's ignored `.claude/commands/` |
 
 The committed repository must be sufficient to scaffold, update, and open every profile. It must not
 require a private theme kit, another local checkout, an AI account, API keys, a backend, or internet
@@ -27,7 +28,7 @@ access for the core data and navigation experience.
 | Secrets and optional local configuration | `.env*` except public `*.example` templates |
 | Execution plans | `Plans/` |
 | Retired/unsupported agent handoffs | `dev-chat.md`, `dev-log.yaml` |
-| Agent/editor state | `.codex/`, `.claude/`, `*.code-workspace` |
+| Agent/editor state | `.codex/`, `.claude/` (except `.claude/commands.example/`), `*.code-workspace` |
 | Scratch and capture staging | `_scratch/`, `storage/` |
 | Private experiments | `_private/`, `.private/`, `paid-app/`, `product-app-private/` |
 | Test and browser evidence | `coverage/`, `test-results/`, `playwright-report/`, `.nyc_output/` |

@@ -35,13 +35,15 @@ This public repository does **not** use root `dev-chat.md` or `dev-log.yaml` fil
 plans live in ignored `Plans/_active/` and move to ignored `Plans/_complete/` when finished. Promote
 anything users or contributors must know into `AGENTS.md`, `README.md`, or `docs/` before completing
 the plan. `.codex/`, `.claude/`, `_scratch/`, generated dashboards, and QA evidence are local-only.
+The single tracked exception is `.claude/commands.example/` (Markdown command templates users copy
+into their own ignored `.claude/commands/`); never commit a live `.claude/commands/` folder here.
 
 ## Profiles
 
 | Profile | Status | Tracks | Theme id |
 |---------|--------|--------|----------|
 | **seo** | ✅ ready | GA4 · Search Console · PageSpeed · Cloudflare | `aurora-seo` |
-| **finances** | ✅ ready | cash vs obligations · bills · loans · income | `emerald-finance` |
+| **finances** | ✅ ready | cash vs obligations · bills · autopay escalation · deadlines · payment history · action plan · loans · income | `emerald-finance` |
 | **health** | ✅ ready | vitals · meds · labs · habits · sleep | `vitality-health` |
 | **pets** | ✅ ready | weight · QoL · fluids · red flags | `dusk-companion` |
 

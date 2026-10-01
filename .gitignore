@@ -38,9 +38,11 @@ docs/screenshots/**
 !docs/screenshots/hero/
 !docs/screenshots/hero/**
 
-# Local agent scratch (Codex / Claude Code state)
+# Local agent scratch (Codex / Claude Code state). The one public exception is the example
+# command folder; copy it to .claude/commands/ in your own clone, which stays ignored.
 .codex/
-.claude/
+.claude/*
+!.claude/commands.example/
 .agents/
 
 *.log

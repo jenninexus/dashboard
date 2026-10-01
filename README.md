@@ -65,16 +65,38 @@ never rewrites `data.json`.
 | Profile | Tracks | Default theme |
 |---|---|---|
 | **SEO** | GA4 · Search Console · PageSpeed · Cloudflare | `aurora-seo` |
-| **Finances** | cash · bills · loans · income snapshot | `emerald-finance` |
+| **Finances** | cash · bills · deadlines · payment history · action plan · loans · income | `emerald-finance` |
 | **Health** | vitals · meds · labs · habits · sleep | `vitality-health` |
 | **Pets** | weight · quality of life · fluids · red flags | `dusk-companion` |
 
 Each profile owns four public files: its renderer, fictional example, routing manifest, and compact
 versioned editor contract. See [profiles/README.md](profiles/README.md) for the exact format.
 
-The finances profile is a customizable snapshot, not a payment ledger. See
-[docs/finances-profile.md](docs/finances-profile.md) for its scope. For printable pet-care sheets,
+The finances profile is a customizable snapshot, not a payment ledger. It adds bill-tracker
+helpers on top of the snapshot:
+
+- **Autopay escalation** — autopay badges go calm → amber at ≤7 days → pulsing rose at ≤3 days
+  (static under reduced motion); a passed autopay date stays *unconfirmed* until you log it.
+- **Auto priority alerts** — generated from overdue/near bills and deadlines, listed after your
+  hand-written alerts.
+- **Urgency-sorted deadlines** — most overdue first, then soonest.
+- **Append-only payment history** — `npm run fin:history` appends an entry and refreshes the page.
+- **ACTION-PLAN.md checklist** — `npm run fin:action-plan` syncs a Markdown plan into a checklist
+  with archive/restore.
+
+See [docs/finances-profile.md](docs/finances-profile.md) for the scope, thresholds and data fields. For printable pet-care sheets,
 use [jenninexus/senior-pet-care](https://github.com/jenninexus/senior-pet-care).
+
+### Optional AI commands (finances)
+
+`.claude/commands.example/` ships three example commands for AI coding assistants that read
+`.claude/commands/` — `/fin-start`, `/bills` and `/ap-done`. They are templates, not live commands.
+To use them in your own clone, copy the folder (the destination is gitignored, so your edits stay local):
+
+```bash
+mkdir -p .claude/commands && cp .claude/commands.example/*.md .claude/commands/
+# Windows PowerShell: New-Item -ItemType Directory -Force .claude/commands; Copy-Item .claude/commands.example/*.md .claude/commands/
+```
 
 ## Themes
 
