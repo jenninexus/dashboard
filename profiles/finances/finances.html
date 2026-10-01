@@ -700,6 +700,11 @@ tr:last-child td{border-bottom:none}
 }
 [data-theme="light"] .ap-badge.ap-warn{color:#a16207}
 [data-theme="light"] .ap-badge.ap-unconfirmed{color:#a16207}
+/* Bills table is a half-width card: the autopay badge sits on its own line under the bill name and long
+   status labels wrap, so the Due date never breaks and nothing clips at the card edge. */
+#bills-body .ap-badge{display:table;margin:.25rem 0 0;white-space:normal}
+#bills-body td:nth-child(2){white-space:nowrap}
+#bills-body .st{white-space:normal;display:inline-block}
 [data-theme="light"] .ap-badge.ap-alert{color:#be123c}
 .alert.teal{background:rgba(45,212,191,.06);border-color:rgba(45,212,191,.22)}
 .alert.teal .alert-title{color:var(--teal)}
