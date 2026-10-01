@@ -37,7 +37,8 @@
       {"path":"bills[].due","label":"Due","type":"date","required":true,"order":2,"maxLength":4000},
       {"path":"bills[].amount","label":"Amount","type":"number","required":true,"order":3,"min":0,"max":1000000000,"unit":"USD"},
       {"path":"bills[].status","label":"Status","type":"enum","required":true,"order":4,"maxLength":4000,"values":["due","paid","autopay","overdue"]},
-      {"path":"bills[].id","label":"Id","type":"string","required":true,"order":5,"maxLength":4000}
+      {"path":"bills[].id","label":"Id","type":"string","required":true,"order":5,"maxLength":4000},
+      {"path":"bills[].autopayAccount","label":"Autopay Account","type":"string","required":false,"order":6,"maxLength":200,"help":"Optional label such as a card or account nickname. Never a full account number."}
     ]},
     {"id":"loans","label":"Loans","order":6, "fields": [
       {"path":"loans[].name","label":"Name","type":"string","required":true,"order":1,"maxLength":4000},
@@ -67,7 +68,31 @@
       {"path":"todos[].items[].amount","label":"Amount","type":"string","required":true,"order":5,"nullable":true,"maxLength":4000},
       {"path":"todos[].id","label":"Record ID","type":"string","required":true,"order":6,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
     ]},
-    {"id":"schemaVersion","label":"Schema Version","order":9, "fields": [
+    {"id":"deadlines","label":"Deadlines","order":9, "fields": [
+      {"path":"deadlines[].label","label":"Label","type":"string","required":true,"order":1,"maxLength":4000},
+      {"path":"deadlines[].date","label":"Date","type":"date","required":true,"order":2,"maxLength":4000},
+      {"path":"deadlines[].category","label":"Category","type":"enum","required":true,"order":3,"maxLength":4000,"values":["bills","taxes","income","loans","insurance","other"]},
+      {"path":"deadlines[].priority","label":"Priority","type":"boolean","required":false,"order":4,"help":"Always show in Priority Alerts, even when more than 7 days away."},
+      {"path":"deadlines[].autopay","label":"Autopay","type":"boolean","required":false,"order":5,"help":"Escalates at 7 and 3 days; a passed date stays unconfirmed until you record it in history."},
+      {"path":"deadlines[].autopayAccount","label":"Autopay Account","type":"string","required":false,"order":6,"maxLength":200,"help":"Optional card or account nickname. Never a full account number."},
+      {"path":"deadlines[].amount","label":"Amount","type":"number","required":false,"order":7,"min":0,"max":1000000000,"nullable":true,"unit":"USD"},
+      {"path":"deadlines[].note","label":"Note","type":"string","required":false,"order":8,"maxLength":4000},
+      {"path":"deadlines[].id","label":"Record ID","type":"string","required":true,"order":9,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Stable ID within this collection; keep unchanged when editing a record."}
+    ]},
+    {"id":"history","label":"Payment History","order":10, "fields": [
+      {"path":"history[].date","label":"Date","type":"date","required":true,"order":1,"maxLength":4000},
+      {"path":"history[].type","label":"Type","type":"enum","required":true,"order":2,"maxLength":4000,"values":["payment","todo-done","deadline-cleared","deadline-passed"]},
+      {"path":"history[].label","label":"Label","type":"string","required":true,"order":3,"maxLength":4000},
+      {"path":"history[].amount","label":"Amount","type":"number","required":false,"order":4,"min":0,"max":1000000000,"nullable":true,"unit":"USD"},
+      {"path":"history[].source","label":"Source","type":"enum","required":true,"order":5,"maxLength":4000,"values":["bills","deadlines","todos","action-plan"]},
+      {"path":"history[].note","label":"Note","type":"string","required":false,"order":6,"maxLength":4000},
+      {"path":"history[].id","label":"Record ID","type":"string","required":true,"order":7,"maxLength":100,"pattern":"^[a-zA-Z0-9_-]+$","help":"Append-only log: add new entries with npm run fin:history; correct mistakes with a new entry."}
+    ]},
+    {"id":"actionPlan","label":"Action Plan Markdown","order":11, "fields": [
+      {"path":"actionPlan.source","label":"Source File","type":"string","required":false,"order":1,"maxLength":200},
+      {"path":"actionPlan.markdown","label":"Markdown","type":"string","required":false,"order":2,"maxLength":65536,"multiline":true,"help":"## headings become groups and - [ ] lines become checklist items. Sync from a file with npm run fin:action-plan."}
+    ]},
+    {"id":"schemaVersion","label":"Schema Version","order":12, "fields": [
       {"path":"schemaVersion","label":"Schema Version","type":"number","required":true,"order":1,"min":1,"max":1,"help":"Contract version; migrations must be explicit."}
     ]}
   ],
@@ -79,7 +104,9 @@
     {"path":"loans","label":"Loans","identity":"id","maxItems":1000,"minItems":0,"required":true},
     {"path":"income","label":"Income","identity":"id","maxItems":1000,"minItems":0,"required":true},
     {"path":"todos","label":"Todos","identity":"id","maxItems":1000,"minItems":0,"required":true},
-    {"path":"todos[].items","label":"Items","identity":"id","maxItems":1000,"minItems":0,"required":true}
+    {"path":"todos[].items","label":"Items","identity":"id","maxItems":1000,"minItems":0,"required":true},
+    {"path":"deadlines","label":"Deadlines","identity":"id","maxItems":1000,"minItems":0,"required":false},
+    {"path":"history","label":"History","identity":"id","maxItems":10000,"minItems":0,"required":false}
   ],
   "derived": [
     {"path":"liquidHoldings","formula":"sum(holdings.accounts[].amount)"},

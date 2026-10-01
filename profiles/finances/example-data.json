@@ -12,25 +12,11 @@
   },
   "alerts": [
     {
-      "severity": "urgent",
-      "icon": "🔴",
-      "title": "Rent due 2026-06-23 — $1,400",
-      "sub": "Listed as unpaid in the 2026-06-20 snapshot. Verify the current account before paying.",
+      "severity": "warn",
+      "icon": "🟡",
+      "title": "Client B invoice is 45 days past terms — $420",
+      "sub": "Hand-written alert: not derivable from bills or deadlines. Send a reminder before counting it as July income.",
       "id": "alerts-1"
-    },
-    {
-      "severity": "warn",
-      "icon": "🟡",
-      "title": "Car insurance scheduled 2026-06-01 — $127",
-      "sub": "Autopay is a schedule, not payment evidence. No completed payment is recorded in this example.",
-      "id": "alerts-2"
-    },
-    {
-      "severity": "warn",
-      "icon": "🟡",
-      "title": "Estimated tax dated 2026-06-15 — $580",
-      "sub": "Listed as unpaid in this fictional snapshot. Confirm the applicable amount and deadline using current records.",
-      "id": "alerts-3"
     }
   ],
   "reminders": [
@@ -50,7 +36,7 @@
       "id": "reminders-3"
     },
     {
-      "label": "Student loan auto-debit Jun 28",
+      "label": "Student loan auto-debit Jun 26",
       "urgent": false,
       "id": "reminders-4"
     }
@@ -92,7 +78,8 @@
       "due": "2026-06-01",
       "amount": 127,
       "status": "autopay",
-      "id": "bill-2"
+      "id": "bill-2",
+      "autopayAccount": "Visa ending 4821"
     },
     {
       "name": "Electric",
@@ -113,7 +100,8 @@
       "due": "2026-06-08",
       "amount": 11,
       "status": "autopay",
-      "id": "bill-5"
+      "id": "bill-5",
+      "autopayAccount": "Visa ending 4821"
     },
     {
       "name": "Adobe CC",
@@ -138,17 +126,19 @@
     },
     {
       "name": "Gym",
-      "due": "2026-06-30",
+      "due": "2026-06-22",
       "amount": 35,
-      "status": "due",
-      "id": "bill-9"
+      "status": "autopay",
+      "id": "bill-9",
+      "autopayAccount": "Checking ending 0917"
     },
     {
       "name": "Student Loan",
-      "due": "2026-06-28",
+      "due": "2026-06-26",
       "amount": 226,
       "status": "autopay",
-      "id": "bill-10"
+      "id": "bill-10",
+      "autopayAccount": "Checking ending 0917"
     },
     {
       "name": "Car Loan",
@@ -288,5 +278,96 @@
       "id": "todos-3"
     }
   ],
+  "deadlines": [
+    {
+      "id": "dl-1",
+      "label": "Renew vehicle registration",
+      "date": "2026-06-24",
+      "category": "bills",
+      "priority": true,
+      "amount": 92,
+      "note": "Online renewal needs current insurance on file."
+    },
+    {
+      "id": "dl-2",
+      "label": "Renters insurance annual renewal",
+      "date": "2026-06-21",
+      "category": "insurance",
+      "autopay": true,
+      "autopayAccount": "Visa ending 4821",
+      "amount": 168
+    },
+    {
+      "id": "dl-3",
+      "label": "Submit FSA receipts for Q1",
+      "date": "2026-06-12",
+      "category": "other",
+      "amount": null,
+      "note": "Plan administrator deadline for reimbursement."
+    },
+    {
+      "id": "dl-4",
+      "label": "Professional license renewal",
+      "date": "2026-07-10",
+      "category": "income",
+      "priority": true,
+      "amount": 75
+    },
+    {
+      "id": "dl-5",
+      "label": "Q3 estimated tax payment",
+      "date": "2026-09-15",
+      "category": "taxes",
+      "amount": null,
+      "note": "Amount depends on Q3 freelance income."
+    }
+  ],
+  "history": [
+    {
+      "id": "h-2026-04-15-1",
+      "date": "2026-04-15",
+      "type": "deadline-cleared",
+      "label": "Filed 2025 tax return",
+      "amount": null,
+      "source": "deadlines",
+      "note": "Filed on time; refund expected."
+    },
+    {
+      "id": "h-2026-05-30-1",
+      "date": "2026-05-30",
+      "type": "todo-done",
+      "label": "Set up gym membership autopay",
+      "amount": null,
+      "source": "todos"
+    },
+    {
+      "id": "h-2026-06-05-1",
+      "date": "2026-06-05",
+      "type": "payment",
+      "label": "Car Loan — June",
+      "amount": 287,
+      "source": "bills"
+    },
+    {
+      "id": "h-2026-06-12-1",
+      "date": "2026-06-12",
+      "type": "payment",
+      "label": "Electric — June",
+      "amount": 88,
+      "source": "bills"
+    },
+    {
+      "id": "h-2026-06-15-1",
+      "date": "2026-06-15",
+      "type": "payment",
+      "label": "Internet — June",
+      "amount": 65,
+      "source": "bills"
+    }
+  ],
+  "actionPlan": {
+    "source": "ACTION-PLAN.md",
+    "markdown": "# Action Plan\n\n## Paperwork\n- [ ] Renew vehicle registration online before Jun 24\n- [ ] Scan FSA receipts and submit to the plan administrator\n- [x] Download May freelance invoices\n\n## Tax Planning\n- [ ] Estimate Q3 freelance income\n- [ ] Move 25% of each freelance payment to tax savings\n"
+  },
   "schemaVersion": 1
 }

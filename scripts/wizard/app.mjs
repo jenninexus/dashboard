@@ -123,6 +123,9 @@ function renderForms() {
       input = el('select');
       for (const choice of field.values) { const option = el('option', choice); option.value = choice; input.append(option); }
       input.value = value ?? field.values[0];
+    } else if (field.multiline) {
+      input = el('textarea'); input.rows = 8; input.value = value ?? '';
+      if (field.maxLength) input.maxLength = field.maxLength;
     } else {
       input = el('input'); input.type = field.type === 'boolean' ? 'checkbox' : field.type === 'number' ? 'number' : field.type === 'date' ? 'date' : 'text';
       if (field.type === 'boolean') { input.checked = Boolean(value); label.className = 'check'; }
@@ -147,7 +150,8 @@ function renderForms() {
     if (!root || roots.has(root)) continue;
     roots.add(root);
     const group = el('details', undefined, 'group'); group.open = root === 'profile'; group.append(el('summary', section.label));
-    const fields = el('div', undefined, 'record-fields'); render(fields, draft[root], root, section.label); group.append(fields); $('forms').append(group);
+    const fields = el('div', undefined, 'record-fields'); // Optional collections absent from older data.json files still get an Add button.
+    render(fields, draft[root] === undefined && collection(root) ? [] : draft[root], root, section.label); group.append(fields); $('forms').append(group);
   }
 }
 

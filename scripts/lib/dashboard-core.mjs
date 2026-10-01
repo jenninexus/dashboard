@@ -162,11 +162,20 @@ export function validateData(data, profile) {
   if (Buffer.byteLength(JSON.stringify(data), 'utf8') > LIMITS.bytes) fail('Dashboard data exceeds size limit');
   for (const [key, example] of Object.entries(profile.example)) {
     if (key.startsWith('_')) continue;
-    if (!Object.hasOwn(data, key)) fail(`data.${key}: required for profile ${profile.id}`);
+    if (!Object.hasOwn(data, key) && !optionalRoot(profile.editorSchema, key)) fail(`data.${key}: required for profile ${profile.id}`);
     if (!profile.editorSchema) checkShape(data[key], example, `data.${key}`);
   }
   if (profile.editorSchema) validateEditorData(data, profile.editorSchema);
   return data;
+}
+
+/** A top-level section may be absent when its editor contract marks it optional (added after v1 shipped). */
+function optionalRoot(schema, key) {
+  if (!schema) return false;
+  const collection = schema.collections.find(item => item.path === key);
+  if (collection) return collection.required === false;
+  const fields = schema.sections.flatMap(section => section.fields).filter(field => field.path.split('.')[0] === key);
+  return fields.length > 0 && fields.every(field => field.required === false);
 }
 
 function checkShape(value, example, path) {
@@ -225,6 +234,12 @@ function scriptRegion(html, id) {
   }
   if (matches.length !== 1) fail(`Expected exactly one script with id ${id}`);
   return matches[0];
+}
+
+/** Parses the JSON currently embedded in a dashboard (what the page actually shows). */
+export function embeddedData(html, scriptId) {
+  const region = scriptRegion(html, scriptId);
+  return parseStrictJson(html.slice(region.bodyStart, region.bodyEnd), 'Embedded data');
 }
 
 export function replaceEmbeddedData(html, scriptId, data, { marked = true } = {}) {

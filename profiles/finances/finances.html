@@ -651,6 +651,99 @@ tr:last-child td{border-bottom:none}
   flex-shrink:0;
 }
 
+.todo-row{display:flex;align-items:stretch;gap:.3rem}
+.todo-row .todo-item{flex:1}
+.todo-archive,.todo-restore,.todo-show-archived{
+  font-family:var(--mono);
+  font-size:.58rem;
+  color:var(--dim);
+  background:transparent;
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:0 .5rem;
+  cursor:pointer;
+  transition:color .15s,border-color .15s;
+}
+.todo-archive:hover,.todo-restore:hover,.todo-show-archived:hover{color:var(--primary);border-color:var(--border2)}
+.todo-show-archived{align-self:flex-start;padding:.18rem .5rem;margin-top:.1rem}
+.todo-archived-list{display:flex;flex-direction:column;gap:.25rem;margin-top:.3rem}
+.todo-archived-item{display:flex;align-items:center;gap:.45rem;font-size:.66rem;color:var(--dim2)}
+.todo-archived-item span{text-decoration:line-through;flex:1}
+.todo-restore{padding:.12rem .45rem}
+.todo-source{font-size:.52rem;color:var(--dim2);letter-spacing:.06em;margin-left:auto;font-weight:600}
+.todo-empty{font-size:.66rem;color:var(--dim)}
+
+/* ── Autopay escalation: calm → ≤7 days → ≤3 days (pulsing) ─────────── */
+.ap-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.25rem;
+  margin-left:.35rem;
+  font-family:var(--mono);
+  font-size:.56rem;
+  font-weight:700;
+  letter-spacing:.03em;
+  padding:.08rem .38rem;
+  border-radius:4px;
+  white-space:nowrap;
+  vertical-align:middle;
+  color:var(--teal);
+  background:rgba(45,212,191,.08);
+  border:1px solid rgba(45,212,191,.25);
+}
+.ap-badge.ap-warn{color:var(--yellow);background:rgba(245,158,11,.10);border-color:rgba(245,158,11,.45)}
+.ap-badge.ap-alert{color:var(--red);background:rgba(244,63,94,.12);border-color:rgba(244,63,94,.55);animation:apPulse 1.8s ease-in-out infinite}
+.ap-badge.ap-unconfirmed{color:var(--yellow);background:transparent;border-style:dashed;border-color:rgba(245,158,11,.5)}
+@keyframes apPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(244,63,94,0)}
+  50%{box-shadow:0 0 0 3px rgba(244,63,94,.22),0 0 10px rgba(244,63,94,.35)}
+}
+[data-theme="light"] .ap-badge.ap-warn{color:#a16207}
+[data-theme="light"] .ap-badge.ap-unconfirmed{color:#a16207}
+[data-theme="light"] .ap-badge.ap-alert{color:#be123c}
+.alert.teal{background:rgba(45,212,191,.06);border-color:rgba(45,212,191,.22)}
+.alert.teal .alert-title{color:var(--teal)}
+[data-theme="light"] .alert.rose .alert-title{color:#be123c}
+[data-theme="light"] .alert.amber .alert-title{color:#a16207}
+[data-theme="light"] .alert.teal .alert-title{color:#0f766e}
+.alert-auto{
+  font-family:var(--mono);
+  font-size:.5rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--dim);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:0 .3rem;
+  margin-left:.35rem;
+  vertical-align:middle;
+}
+
+/* ── Deadlines ───────────────────────────────────────────────────────── */
+.dl-in{font-family:var(--mono);font-size:.64rem;font-weight:700;white-space:nowrap}
+.dl-in.overdue,.dl-in.today{color:var(--red)}
+.dl-in.soon{color:var(--yellow)}
+.dl-in.near{color:var(--primary)}
+.dl-in.later{color:var(--dim)}
+[data-theme="light"] .dl-in.soon{color:#a16207}
+[data-theme="light"] .dl-in.overdue,[data-theme="light"] .dl-in.today{color:#be123c}
+.dl-cat{font-family:var(--mono);font-size:.58rem;color:var(--dim);text-transform:uppercase;letter-spacing:.05em}
+.dl-note{font-size:.6rem;color:var(--dim);margin-top:.12rem;line-height:1.45}
+.dl-priority{font-size:.52rem;font-weight:700;color:var(--yellow);margin-left:.3rem;letter-spacing:.05em;text-transform:uppercase}
+[data-theme="light"] .dl-priority{color:#a16207}
+
+/* ── Payment history ─────────────────────────────────────────────────── */
+.hist-type{font-family:var(--mono);font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.08rem .36rem;border-radius:4px;white-space:nowrap}
+.hist-type.payment{color:var(--primary);background:rgba(var(--primary-rgb),.1);border:1px solid rgba(var(--primary-rgb),.22)}
+.hist-type.todo-done{color:var(--teal);background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.22)}
+.hist-type.deadline-cleared{color:#a78bfa;background:rgba(99,102,241,.10);border:1px solid rgba(99,102,241,.22)}
+.hist-type.deadline-passed{color:var(--yellow);background:rgba(245,158,11,.09);border:1px solid rgba(245,158,11,.22)}
+.hist-note{font-size:.6rem;color:var(--dim);margin-top:.1rem;line-height:1.45}
+.hist-footer{display:flex;gap:.5rem;justify-content:space-between;flex-wrap:wrap;padding:.6rem .6rem 0;border-top:1px solid var(--border);margin-top:.3rem;font-size:.66rem;color:var(--dim)}
+.hist-footer strong{color:var(--primary);font-variant-numeric:tabular-nums}
+.card-hint{font-size:.6rem;color:var(--dim2);margin-top:.55rem;line-height:1.5}
+
 /* ── Footer ──────────────────────────────────────────────────────────── */
 .foot{
   margin-top:2.5rem;
@@ -678,6 +771,8 @@ button,.tab,.todo-item{user-select:none}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .anim{opacity:1!important;transform:none!important}
+  /* No pulse: the ≤3-day autopay state stays distinct through a heavier static outline. */
+  .ap-badge.ap-alert{animation:none!important;box-shadow:0 0 0 2px rgba(244,63,94,.35)}
 }
 </style>
 </head>
@@ -723,11 +818,28 @@ button,.tab,.todo-item{user-select:none}
     <div class="card open full" style="--card-accent:#f43f5e" id="card-alerts">
       <div class="card-head" onclick="tog(this)">
         <h2>Priority Alerts</h2>
-        <span class="badge rose">urgent</span>
+        <span class="badge rose" id="alerts-count">urgent</span>
         <span class="card-toggle">▸</span>
       </div>
       <div class="card-body">
         <div class="alerts" id="alerts-list"></div>
+      </div>
+    </div>
+
+    <!-- 1b. Deadlines — full width, urgency-sorted -->
+    <div class="card open full" style="--card-accent:var(--red)" id="card-deadlines">
+      <div class="card-head" onclick="tog(this)">
+        <h2>Deadlines</h2>
+        <span class="badge rose" id="deadlines-count">by urgency</span>
+        <span class="card-toggle">▸</span>
+      </div>
+      <div class="card-body">
+        <table>
+          <thead>
+            <tr><th>Item</th><th>Date</th><th>In</th><th>Category</th><th>Amount</th></tr>
+          </thead>
+          <tbody id="deadlines-body"></tbody>
+        </table>
       </div>
     </div>
 
@@ -801,11 +913,30 @@ button,.tab,.todo-item{user-select:none}
     <div class="card open" style="--card-accent:var(--teal)" id="card-todos">
       <div class="card-head" onclick="tog(this)">
         <h2>Action Plan</h2>
-        <span class="badge teal">checklist</span>
+        <span class="badge teal" id="todo-pending">checklist</span>
         <span class="card-toggle">▸</span>
       </div>
       <div class="card-body">
         <div class="todo-buckets" id="todo-buckets"></div>
+      </div>
+    </div>
+
+    <!-- 7. Payment History — full width, append-only -->
+    <div class="card open full" style="--card-accent:var(--primary)" id="card-history">
+      <div class="card-head" onclick="tog(this)">
+        <h2>Payment History</h2>
+        <span class="badge">append-only</span>
+        <span class="card-toggle">▸</span>
+      </div>
+      <div class="card-body">
+        <table>
+          <thead>
+            <tr><th>Date</th><th>Type</th><th>Item</th><th>Amount</th><th>Source</th></tr>
+          </thead>
+          <tbody id="history-body"></tbody>
+        </table>
+        <div class="hist-footer" id="history-footer"></div>
+        <div class="card-hint">Entries are only ever appended. Add one with <code>npm run fin:history</code>; correct a mistake by appending a new entry, not by editing an old one.</div>
       </div>
     </div>
 
@@ -840,25 +971,11 @@ button,.tab,.todo-item{user-select:none}
   },
   "alerts": [
     {
-      "severity": "urgent",
-      "icon": "🔴",
-      "title": "Rent due 2026-06-23 — $1,400",
-      "sub": "Listed as unpaid in the 2026-06-20 snapshot. Verify the current account before paying.",
+      "severity": "warn",
+      "icon": "🟡",
+      "title": "Client B invoice is 45 days past terms — $420",
+      "sub": "Hand-written alert: not derivable from bills or deadlines. Send a reminder before counting it as July income.",
       "id": "alerts-1"
-    },
-    {
-      "severity": "warn",
-      "icon": "🟡",
-      "title": "Car insurance scheduled 2026-06-01 — $127",
-      "sub": "Autopay is a schedule, not payment evidence. No completed payment is recorded in this example.",
-      "id": "alerts-2"
-    },
-    {
-      "severity": "warn",
-      "icon": "🟡",
-      "title": "Estimated tax dated 2026-06-15 — $580",
-      "sub": "Listed as unpaid in this fictional snapshot. Confirm the applicable amount and deadline using current records.",
-      "id": "alerts-3"
     }
   ],
   "reminders": [
@@ -878,7 +995,7 @@ button,.tab,.todo-item{user-select:none}
       "id": "reminders-3"
     },
     {
-      "label": "Student loan auto-debit Jun 28",
+      "label": "Student loan auto-debit Jun 26",
       "urgent": false,
       "id": "reminders-4"
     }
@@ -920,7 +1037,8 @@ button,.tab,.todo-item{user-select:none}
       "due": "2026-06-01",
       "amount": 127,
       "status": "autopay",
-      "id": "bill-2"
+      "id": "bill-2",
+      "autopayAccount": "Visa ending 4821"
     },
     {
       "name": "Electric",
@@ -941,7 +1059,8 @@ button,.tab,.todo-item{user-select:none}
       "due": "2026-06-08",
       "amount": 11,
       "status": "autopay",
-      "id": "bill-5"
+      "id": "bill-5",
+      "autopayAccount": "Visa ending 4821"
     },
     {
       "name": "Adobe CC",
@@ -966,17 +1085,19 @@ button,.tab,.todo-item{user-select:none}
     },
     {
       "name": "Gym",
-      "due": "2026-06-30",
+      "due": "2026-06-22",
       "amount": 35,
-      "status": "due",
-      "id": "bill-9"
+      "status": "autopay",
+      "id": "bill-9",
+      "autopayAccount": "Checking ending 0917"
     },
     {
       "name": "Student Loan",
-      "due": "2026-06-28",
+      "due": "2026-06-26",
       "amount": 226,
       "status": "autopay",
-      "id": "bill-10"
+      "id": "bill-10",
+      "autopayAccount": "Checking ending 0917"
     },
     {
       "name": "Car Loan",
@@ -1116,6 +1237,97 @@ button,.tab,.todo-item{user-select:none}
       "id": "todos-3"
     }
   ],
+  "deadlines": [
+    {
+      "id": "dl-1",
+      "label": "Renew vehicle registration",
+      "date": "2026-06-24",
+      "category": "bills",
+      "priority": true,
+      "amount": 92,
+      "note": "Online renewal needs current insurance on file."
+    },
+    {
+      "id": "dl-2",
+      "label": "Renters insurance annual renewal",
+      "date": "2026-06-21",
+      "category": "insurance",
+      "autopay": true,
+      "autopayAccount": "Visa ending 4821",
+      "amount": 168
+    },
+    {
+      "id": "dl-3",
+      "label": "Submit FSA receipts for Q1",
+      "date": "2026-06-12",
+      "category": "other",
+      "amount": null,
+      "note": "Plan administrator deadline for reimbursement."
+    },
+    {
+      "id": "dl-4",
+      "label": "Professional license renewal",
+      "date": "2026-07-10",
+      "category": "income",
+      "priority": true,
+      "amount": 75
+    },
+    {
+      "id": "dl-5",
+      "label": "Q3 estimated tax payment",
+      "date": "2026-09-15",
+      "category": "taxes",
+      "amount": null,
+      "note": "Amount depends on Q3 freelance income."
+    }
+  ],
+  "history": [
+    {
+      "id": "h-2026-04-15-1",
+      "date": "2026-04-15",
+      "type": "deadline-cleared",
+      "label": "Filed 2025 tax return",
+      "amount": null,
+      "source": "deadlines",
+      "note": "Filed on time; refund expected."
+    },
+    {
+      "id": "h-2026-05-30-1",
+      "date": "2026-05-30",
+      "type": "todo-done",
+      "label": "Set up gym membership autopay",
+      "amount": null,
+      "source": "todos"
+    },
+    {
+      "id": "h-2026-06-05-1",
+      "date": "2026-06-05",
+      "type": "payment",
+      "label": "Car Loan — June",
+      "amount": 287,
+      "source": "bills"
+    },
+    {
+      "id": "h-2026-06-12-1",
+      "date": "2026-06-12",
+      "type": "payment",
+      "label": "Electric — June",
+      "amount": 88,
+      "source": "bills"
+    },
+    {
+      "id": "h-2026-06-15-1",
+      "date": "2026-06-15",
+      "type": "payment",
+      "label": "Internet — June",
+      "amount": 65,
+      "source": "bills"
+    }
+  ],
+  "actionPlan": {
+    "source": "ACTION-PLAN.md",
+    "markdown": "# Action Plan\n\n## Paperwork\n- [ ] Renew vehicle registration online before Jun 24\n- [ ] Scan FSA receipts and submit to the plan administrator\n- [x] Download May freelance invoices\n\n## Tax Planning\n- [ ] Estimate Q3 freelance income\n- [ ] Move 25% of each freelance payment to tax savings\n"
+  },
   "schemaVersion": 1
 }
 </script>
@@ -1210,6 +1422,115 @@ function clamp(n,a,b){ return Math.max(a,Math.min(b,n)); }
 function lsGet(k){ try{ return readLocal(k); }catch(e){ return null; } }
 function lsSet(k,v){ try{ writeLocal(k,v); }catch(e){} }
 
+/* ── Urgency logic (pure; exposed as window.financeLogic for tests) ─── */
+const AUTOPAY_WARN_DAYS = 7;   // autopay within a week: amber
+const AUTOPAY_ALERT_DAYS = 3;  // autopay within three days: rose + pulse
+const ALERT_WINDOW_DAYS = 7;   // deadlines auto-promoted into Priority Alerts
+function calendarDay(iso){
+  const [y,m,d] = String(iso).split('-').map(Number);
+  return Date.UTC(y, m-1, d) / 864e5;
+}
+// Whole calendar days from today to iso; negative when the date has passed.
+function daysUntil(iso, today){ return Math.round(calendarDay(iso) - calendarDay(today)); }
+function autopayLevel(days){
+  if(days < 0) return 'unconfirmed';
+  if(days <= AUTOPAY_ALERT_DAYS) return 'alert';
+  if(days <= AUTOPAY_WARN_DAYS) return 'warn';
+  return 'calm';
+}
+function dayLabel(days){
+  return days < 0 ? `${-days}d overdue` : days === 0 ? 'today' : days === 1 ? 'tomorrow' : `in ${days}d`;
+}
+function urgencyClass(days){
+  return days < 0 ? 'overdue' : days === 0 ? 'today' : days <= 7 ? 'soon' : days <= 30 ? 'near' : 'later';
+}
+// Most overdue first, then soonest; priority wins ties; otherwise data order is kept.
+function sortDeadlines(rows, today){
+  return (rows||[]).map((row, index) => ({ row, index, days: daysUntil(row.date, today) }))
+    .sort((a,b) => a.days - b.days || (b.row.priority === true) - (a.row.priority === true) || a.index - b.index);
+}
+const SEVERITY_RANK = { urgent:0, warn:1, info:2 };
+function buildAutoAlerts(data, today){
+  const alerts = [];
+  const cycle = data.profile && data.profile.billCycle;
+  for(const bill of data.bills||[]){
+    if(bill.status === 'paid' || (cycle && !String(bill.due).startsWith(cycle + '-'))) continue;
+    const days = daysUntil(bill.due, today);
+    const base = { id:'auto-bill-' + bill.id, auto:true, source:'bills', days, date:bill.due };
+    if(bill.status === 'autopay'){
+      const level = autopayLevel(days);
+      if(level === 'calm') continue;
+      alerts.push(level === 'unconfirmed'
+        ? { ...base, autopay:level, severity:'warn', icon:'🟡',
+            title:`${bill.name} autopay date passed (${bill.due}) — ${money(bill.amount)}`,
+            sub:'Autopay is a schedule, not payment evidence. Confirm it cleared, then append it to payment history.' }
+        : { ...base, autopay:level, severity: level === 'alert' ? 'urgent' : 'warn', icon: level === 'alert' ? '🔴' : '🟡',
+            title:`${bill.name} autopay ${dayLabel(days)} — ${money(bill.amount)}`,
+            sub:`Scheduled ${bill.due}${bill.autopayAccount ? ' from ' + bill.autopayAccount : ''}. Make sure the account has funds before then.` });
+    } else if(days < 0 || bill.status === 'overdue'){
+      alerts.push({ ...base, severity:'urgent', icon:'🔴',
+        title:`${bill.name} ${days < 0 ? dayLabel(days) : 'marked overdue'} — ${money(bill.amount)}`,
+        sub:`Due ${bill.due} and not recorded as paid. Verify the current account before paying.` });
+    } else if(days <= AUTOPAY_ALERT_DAYS){
+      alerts.push({ ...base, severity:'urgent', icon:'🔴',
+        title:`${bill.name} due ${dayLabel(days)} — ${money(bill.amount)}`,
+        sub:`Due ${bill.due} and not recorded as paid.` });
+    }
+  }
+  for(const { row, days } of sortDeadlines(data.deadlines, today)){
+    const priority = row.priority === true;
+    if(days > ALERT_WINDOW_DAYS && !priority) continue;
+    const level = row.autopay === true ? autopayLevel(days) : null;
+    const amount = row.amount != null ? ' — ' + money(row.amount) : '';
+    const base = { id:'auto-deadline-' + row.id, auto:true, source:'deadlines', days, date:row.date, autopay:level, priority };
+    if(level === 'unconfirmed'){
+      alerts.push({ ...base, severity:'warn', icon:'🟡', title:`${row.label} autopay date passed (${row.date})${amount}`,
+        sub:'Confirm it cleared, then append it to payment history and remove the deadline.' });
+      continue;
+    }
+    const severity = days <= AUTOPAY_ALERT_DAYS ? 'urgent' : days <= ALERT_WINDOW_DAYS ? 'warn' : 'info';
+    alerts.push({ ...base, severity, icon: severity === 'urgent' ? '🔴' : severity === 'warn' ? '🟡' : '🔵',
+      title:`${row.label} ${dayLabel(days)}${amount}`,
+      sub:[row.date, row.note || (level ? `Autopay${row.autopayAccount ? ' from ' + row.autopayAccount : ''} — make sure the account has funds.` : '')].filter(Boolean).join(' · ') });
+  }
+  return alerts.sort((a,b) => SEVERITY_RANK[a.severity] - SEVERITY_RANK[b.severity] || a.days - b.days);
+}
+// "## Heading" / "### 1. Heading" open a group; "- [ ]" / "- [x]" lines are its items.
+function hashText(text){
+  let h = 5381;
+  for(const ch of String(text)) h = ((h << 5) + h + ch.codePointAt(0)) >>> 0;
+  return h.toString(36);
+}
+function parseActionPlan(markdown){
+  const groups = [];
+  let current = null;
+  for(const line of String(markdown || '').split(/\r?\n/)){
+    const heading = line.match(/^#{2,4}\s+(.+?)\s*$/);
+    if(heading){
+      const label = heading[1].replace(/^\d+[.)]\s*/, '').replace(/[*_`]/g, '').trim();
+      const slug = label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'section';
+      current = { id:'md-' + slug, bucket:label, items:[], seen:new Map() };
+      groups.push(current);
+      continue;
+    }
+    const item = line.match(/^\s*[-*]\s+\[([ xX])\]\s+(.+?)\s*$/);
+    if(!item) continue;
+    if(!current){ current = { id:'md-plan', bucket:'Action Plan', items:[], seen:new Map() }; groups.push(current); }
+    const label = item[2].replace(/\*\*(.+?)\*\*/g, '$1');
+    const base = current.id + '-' + hashText(label);
+    const n = (current.seen.get(base) || 0) + 1;
+    current.seen.set(base, n);
+    current.items.push({ id: n === 1 ? base : base + '-' + n, label, amount:null, defaultDone: item[1] !== ' ' });
+  }
+  return groups.filter(g => g.items.length).map(({ seen, ...g }) => g);
+}
+window.financeLogic = Object.freeze({ daysUntil, autopayLevel, sortDeadlines, buildAutoAlerts, parseActionPlan,
+  thresholds: Object.freeze({ AUTOPAY_WARN_DAYS, AUTOPAY_ALERT_DAYS, ALERT_WINDOW_DAYS }) });
+function autopayBadge(level, days, account){
+  const text = level === 'unconfirmed' ? 'autopay unconfirmed' : level === 'calm' ? 'autopay' : `autopay ${dayLabel(days)}`;
+  return `<span class="ap-badge ap-${level}" title="Autopay escalates at ${AUTOPAY_WARN_DAYS} and ${AUTOPAY_ALERT_DAYS} days">⟳ ${escapeText(text)}${account ? ' · ' + escapeText(account) : ''}</span>`;
+}
+
 /* ── KPI bar ─────────────────────────────────────────────────────────── */
 (function renderKpi(){
   const k = derived;
@@ -1239,19 +1560,41 @@ function lsSet(k,v){ try{ writeLocal(k,v); }catch(e){} }
   ).join('');
 })();
 
-/* ── Priority Alerts ─────────────────────────────────────────────────── */
+/* ── Priority Alerts: hand-written first, then auto-generated by urgency ─ */
 (function renderAlerts(){
-  const alerts = D.alerts||[];
+  const manual = (D.alerts||[]).map(a => ({ ...a, auto:false }));
+  const alerts = manual.concat(buildAutoAlerts(D, TODAY));
+  const urgent = alerts.filter(a => a.severity === 'urgent').length;
+  document.getElementById('alerts-count').textContent = urgent ? urgent + ' urgent' : alerts.length ? alerts.length + ' active' : 'clear';
   document.getElementById('alerts-list').innerHTML = alerts.map(a=>{
-    const cls = a.severity==='urgent'?'rose':'amber';
+    const cls = a.severity==='urgent'?'rose':a.severity==='info'?'teal':'amber';
+    const badge = a.autopay ? autopayBadge(a.autopay, a.days) : '';
     return `<div class="alert ${cls}">
       <span class="alert-icon">${escapeText(a.icon||'!')}</span>
       <div>
-        <div class="alert-title">${escapeText(a.title)}</div>
+        <div class="alert-title">${escapeText(a.title)}${a.auto?'<span class="alert-auto" title="Generated from bills and deadlines">auto</span>':''}${badge}</div>
         <div class="alert-sub">${escapeText(a.sub||'')}</div>
       </div>
     </div>`;
   }).join('') || '<div style="color:var(--dim);font-size:.7rem">No active alerts.</div>';
+})();
+
+/* ── Deadlines (urgency-sorted) ──────────────────────────────────────── */
+(function renderDeadlines(){
+  const rows = sortDeadlines(D.deadlines, TODAY);
+  const soon = rows.filter(r => r.days <= ALERT_WINDOW_DAYS).length;
+  document.getElementById('deadlines-count').textContent = rows.length ? (soon ? soon + ' within ' + ALERT_WINDOW_DAYS + 'd' : rows.length + ' tracked') : 'none';
+  document.getElementById('deadlines-body').innerHTML = rows.map(({ row, days })=>{
+    const ap = row.autopay === true ? autopayBadge(autopayLevel(days), days, row.autopayAccount) : '';
+    return `<tr>
+      <td><strong>${escapeText(row.label)}</strong>${row.priority === true ? '<span class="dl-priority">★ priority</span>' : ''}${ap}
+        ${row.note ? `<div class="dl-note">${escapeText(row.note)}</div>` : ''}</td>
+      <td style="color:var(--dim);font-family:var(--mono);font-size:.68rem;white-space:nowrap">${escapeText(row.date)}</td>
+      <td><span class="dl-in ${urgencyClass(days)}">${escapeText(dayLabel(days))}</span></td>
+      <td><span class="dl-cat">${escapeText(row.category || '')}</span></td>
+      <td style="font-variant-numeric:tabular-nums;font-weight:700">${row.amount != null ? money(row.amount) : '—'}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="5" style="color:var(--dim)">No deadlines listed. Add rows to <code>deadlines[]</code> in data.json.</td></tr>';
 })();
 
 /* ── Holdings ────────────────────────────────────────────────────────── */
@@ -1319,9 +1662,11 @@ function lsSet(k,v){ try{ writeLocal(k,v); }catch(e){} }
     const isPast = b.due < TODAY;
     const stClass = st==='paid'?'paid' : isPast || st==='overdue'?'overdue' : st==='autopay'?'autopay' : 'due';
     const statusLabel = st==='paid' ? 'Paid (recorded)' : st==='autopay' ? (isPast ? 'Past date · autopay unconfirmed' : 'Autopay scheduled') : isPast || st==='overdue' ? 'Overdue (snapshot)' : 'Due';
+    const days = daysUntil(b.due, TODAY);
+    const apBadge = st==='autopay' && !isPast ? autopayBadge(autopayLevel(days), days, b.autopayAccount) : '';
     if(stClass!=='paid') dueTotal += (+b.amount||0);
     return `<tr>
-      <td><strong>${escapeText(b.name)}</strong></td>
+      <td><strong>${escapeText(b.name)}</strong>${apBadge}</td>
       <td style="color:var(--dim);font-family:var(--mono);font-size:.68rem">${escapeText(b.due||'—')}</td>
       <td style="font-variant-numeric:tabular-nums;font-weight:700">${b.amount!=null?money(b.amount):'—'}</td>
       <td><span class="st ${stClass}">${statusLabel}</span></td>
@@ -1407,48 +1752,93 @@ function lsSet(k,v){ try{ writeLocal(k,v); }catch(e){} }
      <span>YTD total: <strong>${money(totalYTD)}</strong></span>`;
 })();
 
-/* ── Todos ───────────────────────────────────────────────────────────── */
-(function renderTodos(){
-  const buckets = D.todos||[];
-  const saved = readLocalJSON('fin-todos');
+/* ── Action Plan: data.json todos[] + ACTION-PLAN.md checklist ───────── */
+// Completion and archive state are disposable browser state; without storage they last for the visit.
+(function renderActionPlan(){
+  const planSource = (D.actionPlan && D.actionPlan.source) || 'ACTION-PLAN.md';
+  const groups = (D.todos||[]).map(b => ({ id:b.id, bucket:b.bucket, dot:b.dot, source:'data.json',
+      items:(b.items||[]).map(item => ({ ...item, defaultDone:false })) }))
+    .concat(parseActionPlan(D.actionPlan && D.actionPlan.markdown).map(g => ({ ...g, source:planSource })));
+  const done = readLocalJSON('fin-todos');
+  const archived = readLocalJSON('fin-todos-archived');
+  const expanded = new Set();
+  const isDone = item => Object.hasOwn(done, item.id) ? done[item.id] === true : item.defaultDone === true;
+  const isArchived = item => archived[item.id] === true;
+  const box = document.getElementById('todo-buckets');
 
-  function saveTodos(){
-    const state = {};
-    document.querySelectorAll('.todo-item').forEach(el=>{
-      state[el.dataset.id] = el.classList.contains('done');
-    });
-    lsSet('fin-todos', JSON.stringify(state));
-  }
-
-  document.getElementById('todo-buckets').innerHTML = buckets.map(b=>`
-    <div class="todo-bucket">
-      <div class="todo-bucket-title" style="--bucket-dot:${safeColor(b.dot)}">
-        ${escapeText(b.bucket)}
-      </div>
-      <div class="todo-list">
-        ${(b.items||[]).map(item=>{
-          const done = Object.hasOwn(saved,item.id) && saved[item.id] === true;
-          return `<div class="todo-item${done?' done':''}" role="checkbox" tabindex="0" aria-checked="${done}" data-id="${escapeText(item.id)}">
+  function draw(){
+    let pending = 0;
+    box.innerHTML = groups.map(g=>{
+      const live = g.items.filter(item => !isArchived(item));
+      const gone = g.items.filter(isArchived);
+      pending += live.filter(item => !isDone(item)).length;
+      const rows = live.map(item=>{
+        const d = isDone(item);
+        return `<div class="todo-row">
+          <div class="todo-item${d?' done':''}" role="checkbox" tabindex="0" aria-checked="${d}" data-id="${escapeText(item.id)}">
             <div class="todo-check"></div>
             <span class="todo-label">${escapeText(item.label)}</span>
             ${item.amount?`<span class="todo-amount">${escapeText(item.amount)}</span>`:''}
-          </div>`;
-        }).join('')}
-      </div>
-    </div>
-  `).join('');
-
-  window.todoToggle = function(el){
-    el.classList.toggle('done');
-    el.setAttribute('aria-checked', String(el.classList.contains('done')));
-    saveTodos();
+          </div>
+          <button type="button" class="todo-archive" data-archive="${escapeText(item.id)}" aria-label="Archive: ${escapeText(item.label)}" title="Archive">↓</button>
+        </div>`;
+      }).join('') || '<div class="todo-empty">Everything here is archived.</div>';
+      const open = expanded.has(g.id);
+      const archivedHtml = gone.length ? `<button type="button" class="todo-show-archived" data-toggle="${escapeText(g.id)}" aria-expanded="${open}">${open?'hide':'show'} ${gone.length} archived</button>` +
+        (open ? `<div class="todo-archived-list">${gone.map(item => `<div class="todo-archived-item"><span>${escapeText(item.label)}</span>
+            <button type="button" class="todo-restore" data-restore="${escapeText(item.id)}" aria-label="Restore: ${escapeText(item.label)}">↺ restore</button></div>`).join('')}</div>` : '') : '';
+      return `<div class="todo-bucket">
+        <div class="todo-bucket-title" style="--bucket-dot:${safeColor(g.dot)}">
+          ${escapeText(g.bucket)}<span class="todo-source">${escapeText(g.source)}</span>
+        </div>
+        <div class="todo-list">${rows}${archivedHtml}</div>
+      </div>`;
+    }).join('') || '<div class="todo-empty">No checklist items. Add <code>todos[]</code> or sync an ACTION-PLAN.md with <code>npm run fin:action-plan</code>.</div>';
+    document.getElementById('todo-pending').textContent = pending + ' pending';
+  }
+  const find = id => groups.flatMap(g => g.items).find(item => item.id === id);
+  function toggle(id){
+    const item = find(id); if(!item) return;
+    done[id] = !isDone(item);
+    lsSet('fin-todos', JSON.stringify(done));
+    draw();
+  }
+  window.todoToggle = el => toggle(el.dataset.id);
+  window.todoArchive = (id, on) => {
+    if(on) archived[id] = true; else delete archived[id];
+    lsSet('fin-todos-archived', JSON.stringify(archived));
+    draw();
   };
-  document.querySelectorAll('.todo-item').forEach(el => {
-    el.addEventListener('click', () => window.todoToggle(el));
-    el.addEventListener('keydown', event => {
-      if(event.key === ' ' || event.key === 'Enter'){ event.preventDefault(); window.todoToggle(el); }
-    });
+  box.addEventListener('click', event => {
+    const target = event.target.closest('[data-archive],[data-restore],[data-toggle],.todo-item');
+    if(!target) return;
+    if(target.dataset.archive) window.todoArchive(target.dataset.archive, true);
+    else if(target.dataset.restore) window.todoArchive(target.dataset.restore, false);
+    else if(target.dataset.toggle){ const id = target.dataset.toggle; if(expanded.has(id)) expanded.delete(id); else expanded.add(id); draw(); }
+    else toggle(target.dataset.id);
   });
+  box.addEventListener('keydown', event => {
+    const target = event.target.closest('.todo-item');
+    if(target && (event.key === ' ' || event.key === 'Enter')){ event.preventDefault(); toggle(target.dataset.id); }
+  });
+  draw();
+})();
+
+/* ── Payment History (append-only log, newest first) ─────────────────── */
+(function renderHistory(){
+  const rows = (D.history||[]).map((row, index) => ({ row, index }))
+    .sort((a,b) => String(b.row.date).localeCompare(String(a.row.date)) || b.index - a.index);
+  const paid = rows.filter(r => r.row.type === 'payment' && r.row.amount != null).reduce((s,r) => s + Number(r.row.amount), 0);
+  const typeClass = type => ['payment','todo-done','deadline-cleared','deadline-passed'].includes(type) ? type : '';
+  document.getElementById('history-body').innerHTML = rows.map(({ row })=>`<tr>
+      <td style="color:var(--dim);font-family:var(--mono);font-size:.68rem;white-space:nowrap">${escapeText(row.date)}</td>
+      <td><span class="hist-type ${typeClass(row.type)}">${escapeText(String(row.type).replace('-', ' '))}</span></td>
+      <td><strong>${escapeText(row.label)}</strong>${row.note ? `<div class="hist-note">${escapeText(row.note)}</div>` : ''}</td>
+      <td style="font-variant-numeric:tabular-nums;font-weight:700">${row.amount != null ? money(row.amount) : '—'}</td>
+      <td><span class="dl-cat">${escapeText(row.source || '')}</span></td>
+    </tr>`).join('') || '<tr><td colspan="5" style="color:var(--dim)">No history yet. Append one with <code>npm run fin:history</code>.</td></tr>';
+  document.getElementById('history-footer').innerHTML =
+    `<span>${rows.length} entr${rows.length === 1 ? 'y' : 'ies'}</span><span>Payments recorded: <strong>${money(paid)}</strong></span>`;
 })();
 
 /* ── Card collapse ───────────────────────────────────────────────────── */

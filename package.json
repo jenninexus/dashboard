@@ -9,6 +9,8 @@
     "build-dashboard": "node scripts/build-dashboard.mjs",
     "dashboard:update": "node scripts/update-dashboard.mjs",
     "dashboard": "node scripts/wizard/launch.mjs --open",
+    "fin:history": "node scripts/fin-history.mjs",
+    "fin:action-plan": "node scripts/fin-action-plan.mjs",
     "test": "node --test",
     "profiles": "node scripts/build-dashboard.mjs --list",
     "check:public-boundary": "node scripts/check-public-boundary.mjs"

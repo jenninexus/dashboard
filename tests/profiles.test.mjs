@@ -42,7 +42,7 @@ function mutateAt(object, path, value) {
 function render(id, data = fixtures[id].data, options = {}) {
   const nodes = new Map();
   const all = [];
-  const storage = new Map();
+  const storage = new Map(Object.entries(options.seed ?? {}));
   const storageReads = [];
   class Element {
     constructor(tag = 'div') {
@@ -103,7 +103,7 @@ function render(id, data = fixtures[id].data, options = {}) {
     const script = match[1].replace('const derived = deriveFinance(D);', 'const derived = deriveFinance(D); window.testDerived = derived;');
     vm.runInContext(script, sandbox, { timeout: 1000, filename: `${id}.html` });
   }
-  return { nodes, all, storage, storageReads, derived: sandbox.testDerived };
+  return { nodes, all, storage, storageReads, derived: sandbox.testDerived, window: sandbox };
 }
 
 for (const id of ids) {
@@ -243,4 +243,131 @@ test('every default theme resolves uniquely to compatible, shipped CSS', () => {
       assert.ok(existsSync(resolve(root, 'themes', file)), `${entry.id}: ${file}`);
     }
   }
+});
+
+// ── Finance urgency features (ported bill-tracker behaviour) ─────────────
+const financeAt = (today, data, options = {}) => render('finances', data, { today, ...options });
+const plain = value => JSON.parse(JSON.stringify(value)); // vm-realm arrays fail deepStrictEqual on prototype
+
+test('finance autopay escalates calm → ≤7 days → ≤3 days, and a passed date stays unconfirmed', () => {
+  const { autopayLevel, thresholds } = financeAt('2026-06-20').window.financeLogic;
+  assert.deepEqual({ ...thresholds }, { AUTOPAY_WARN_DAYS: 7, AUTOPAY_ALERT_DAYS: 3, ALERT_WINDOW_DAYS: 7 });
+  assert.deepEqual([30, 8, 7, 4, 3, 1, 0, -1].map(autopayLevel),
+    ['calm', 'calm', 'warn', 'warn', 'alert', 'alert', 'alert', 'unconfirmed']);
+  const bills = financeAt('2026-06-20').nodes.get('bills-body').innerHTML;
+  assert.match(bills, /Gym<\/strong><span class="ap-badge ap-alert"[^>]*>⟳ autopay in 2d · Checking ending 0917/);
+  assert.match(bills, /Student Loan<\/strong><span class="ap-badge ap-warn"[^>]*>⟳ autopay in 6d/);
+  assert.match(bills, /Past date · autopay unconfirmed/);
+  const earlier = financeAt('2026-06-14').nodes.get('bills-body').innerHTML;
+  assert.match(earlier, /Student Loan<\/strong><span class="ap-badge ap-calm"/);
+  assert.match(earlier, /Gym<\/strong><span class="ap-badge ap-calm"/);   // 8 days out
+  assert.match(financeAt('2026-06-16').nodes.get('bills-body').innerHTML, /Gym<\/strong><span class="ap-badge ap-warn"/);
+  const html = fixtures.finances.html;
+  assert.match(html, /\.ap-badge\.ap-alert\{[^}]*animation:apPulse/);
+  assert.match(html, /prefers-reduced-motion:reduce\)\{[\s\S]*?\.ap-badge\.ap-alert\{animation:none!important/);
+});
+
+test('finance priority alerts keep hand-written alerts first, then generate urgency-ordered alerts', () => {
+  const result = financeAt('2026-06-20');
+  const alerts = result.window.financeLogic.buildAutoAlerts(fixtures.finances.data, '2026-06-20');
+  const byId = Object.fromEntries(alerts.map(alert => [alert.id, alert]));
+  assert.equal(byId['auto-bill-bill-9'].severity, 'urgent');      // Gym autopay in 2 days
+  assert.equal(byId['auto-bill-bill-9'].autopay, 'alert');
+  assert.equal(byId['auto-bill-bill-10'].severity, 'warn');       // Student loan autopay in 6 days
+  assert.equal(byId['auto-bill-bill-1'].severity, 'urgent');      // Rent due in 3 days
+  assert.equal(byId['auto-bill-bill-6'].severity, 'urgent');      // past due, not paid
+  assert.equal(byId['auto-bill-bill-2'].autopay, 'unconfirmed');
+  assert.equal(byId['auto-deadline-dl-3'].severity, 'urgent');    // overdue deadline
+  assert.equal(byId['auto-deadline-dl-2'].autopay, 'alert');      // autopay deadline tomorrow
+  assert.equal(byId['auto-deadline-dl-1'].severity, 'warn');      // 4 days
+  assert.equal(byId['auto-deadline-dl-4'].severity, 'info');      // priority, 20 days away
+  for (const id of ['bill-3', 'bill-4', 'bill-11']) assert.ok(!byId['auto-bill-' + id], `paid ${id} never alerts`);
+  assert.ok(!byId['auto-bill-bill-7'], 'unpaid bill 5 days out stays in the bills table only');
+  assert.ok(!byId['auto-deadline-dl-5'], 'non-priority deadline beyond 7 days is not promoted');
+  const rank = { urgent: 0, warn: 1, info: 2 };
+  for (let i = 1; i < alerts.length; i++) {
+    const [a, b] = [alerts[i - 1], alerts[i]];
+    assert.ok(rank[a.severity] < rank[b.severity] || (rank[a.severity] === rank[b.severity] && a.days <= b.days), `${a.id} before ${b.id}`);
+  }
+  const html = result.nodes.get('alerts-list').innerHTML;
+  assert.ok(html.indexOf('Client B invoice') < html.indexOf('auto</span>'), 'hand-written alert renders first');
+  assert.equal(result.nodes.get('alerts-count').textContent, `${alerts.filter(a => a.severity === 'urgent').length} urgent`);
+  const none = structuredClone(fixtures.finances.data);
+  none.alerts = [];
+  assert.match(financeAt('2026-06-20', none).nodes.get('alerts-list').innerHTML, /Gym autopay in 2d/);
+});
+
+test('finance deadlines sort by urgency: most overdue first, then soonest, priority on ties', () => {
+  const result = financeAt('2026-06-20');
+  const { sortDeadlines } = result.window.financeLogic;
+  assert.deepEqual(plain(sortDeadlines(fixtures.finances.data.deadlines, '2026-06-20').map(r => [r.row.id, r.days])),
+    [['dl-3', -8], ['dl-2', 1], ['dl-1', 4], ['dl-4', 20], ['dl-5', 87]]);
+  const tie = [{ id: 'a', date: '2026-07-01' }, { id: 'b', date: '2026-07-01', priority: true }, { id: 'c', date: '2026-06-01' }];
+  assert.deepEqual(plain(sortDeadlines(tie, '2026-06-20').map(r => r.row.id)), ['c', 'b', 'a']);
+  assert.deepEqual(plain(sortDeadlines([{ id: 'leap', date: '2028-03-01' }], '2028-02-28').map(r => r.days)), [2]);
+  const body = result.nodes.get('deadlines-body').innerHTML;
+  const order = ['Submit FSA receipts', 'Renters insurance', 'Renew vehicle registration', 'Professional license', 'Q3 estimated tax'].map(label => body.indexOf(label));
+  assert.deepEqual(order, [...order].sort((a, b) => a - b));
+  assert.match(body, /class="dl-in overdue">8d overdue/);
+  assert.match(body, /Renters insurance annual renewal<\/strong><span class="ap-badge ap-alert"/);
+  const empty = structuredClone(fixtures.finances.data);
+  delete empty.deadlines;
+  assert.match(financeAt('2026-06-20', empty).nodes.get('deadlines-body').innerHTML, /No deadlines listed/);
+});
+
+test('finance payment history renders newest first with a payments total', () => {
+  const result = financeAt('2026-06-20');
+  const body = result.nodes.get('history-body').innerHTML;
+  const dates = [...body.matchAll(/(\d{4}-\d{2}-\d{2})<\/td>/g)].map(m => m[1]);
+  assert.deepEqual(dates, [...dates].sort().reverse());
+  assert.equal(dates.length, fixtures.finances.data.history.length);
+  assert.match(result.nodes.get('history-footer').innerHTML, /5 entries[\s\S]*Payments recorded: <strong>\$440<\/strong>/);
+});
+
+test('finance ACTION-PLAN.md checklist parses, archives and restores, and renders without storage', () => {
+  const result = financeAt('2026-06-20');
+  const { parseActionPlan } = result.window.financeLogic;
+  const groups = parseActionPlan(fixtures.finances.data.actionPlan.markdown);
+  assert.deepEqual(plain(groups.map(g => g.bucket)), ['Paperwork', 'Tax Planning']);
+  assert.deepEqual(plain(groups[0].items.map(i => i.defaultDone)), [false, false, true]);
+  const reordered = parseActionPlan('### 1. **Paperwork**\n- [x] Download May freelance invoices\n- [ ] Renew vehicle registration online before Jun 24\n');
+  assert.equal(reordered[0].items[0].id, groups[0].items[2].id, 'ids follow text, not position');
+  const twins = parseActionPlan('- [ ] same\n- [ ] same');
+  assert.equal(new Set(twins[0].items.map(i => i.id)).size, 2);
+
+  const target = groups[0].items[0];
+  let html = result.nodes.get('todo-buckets').innerHTML;
+  assert.match(html, /ACTION-PLAN\.md/);
+  assert.ok(html.includes(target.label));
+  const pendingBefore = Number(result.nodes.get('todo-pending').textContent.split(' ')[0]);
+  result.window.todoArchive(target.id, true);
+  html = result.nodes.get('todo-buckets').innerHTML;
+  assert.ok(!html.includes(`data-id="${target.id}"`));
+  assert.match(html, /show 1 archived/);
+  assert.equal(JSON.parse(result.storage.get('fin-todos-archived'))[target.id], true);
+  assert.equal(Number(result.nodes.get('todo-pending').textContent.split(' ')[0]), pendingBefore - 1);
+  result.window.todoArchive(target.id, false);
+  assert.ok(result.nodes.get('todo-buckets').innerHTML.includes(`data-id="${target.id}"`));
+
+  const seeded = financeAt('2026-06-20', undefined, { seed: { 'fin-todos-archived': JSON.stringify({ [target.id]: true }) } });
+  assert.ok(!seeded.nodes.get('todo-buckets').innerHTML.includes(`data-id="${target.id}"`));
+  for (const storage of ['denied', 'corrupt']) {
+    const fallback = financeAt('2026-06-20', undefined, { storage }).nodes.get('todo-buckets').innerHTML;
+    assert.ok(fallback.includes(`data-id="${target.id}"`), storage);
+    assert.match(fallback, /todo-item done[^>]*>[\s\S]*?Download May freelance invoices/, `${storage}: [x] default`);
+  }
+});
+
+test('finance data from before deadlines/history/actionPlan still validates and renders', async () => {
+  const { loadProfile, validateData } = await import('../scripts/lib/dashboard-core.mjs');
+  const legacy = structuredClone(fixtures.finances.data);
+  for (const key of ['deadlines', 'history', 'actionPlan']) delete legacy[key];
+  for (const bill of legacy.bills) delete bill.autopayAccount;
+  assert.doesNotThrow(() => validateData(legacy, loadProfile('finances')));
+  const result = financeAt('2026-06-20', legacy);
+  assert.match(result.nodes.get('history-body').innerHTML, /No history yet/);
+  assert.ok(result.nodes.get('todo-buckets').innerHTML.includes('Pay This Week'));
+  const missingRequired = structuredClone(legacy);
+  delete missingRequired.bills;
+  assert.throws(() => validateData(missingRequired, loadProfile('finances')), /data\.bills/);
 });

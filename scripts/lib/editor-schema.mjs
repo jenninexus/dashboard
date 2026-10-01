@@ -28,6 +28,7 @@ export function validateEditorSchema(schema, profileId, version) {
           !['string', 'number', 'boolean', 'date', 'enum'].includes(field.type) || typeof field.required !== 'boolean') fail('invalid or duplicate field');
       paths.add(field.path);
       if (field.nullable !== undefined && typeof field.nullable !== 'boolean') fail(`${field.path}: invalid nullable flag`);
+      if (field.multiline !== undefined && (typeof field.multiline !== 'boolean' || field.type !== 'string')) fail(`${field.path}: multiline applies only to string fields`);
       for (const bound of ['min', 'max', 'maxLength']) if (field[bound] !== undefined && (!Number.isFinite(field[bound]) || Math.abs(field[bound]) > Number.MAX_SAFE_INTEGER)) fail(`${field.path}: invalid bound`);
       if (field.min !== undefined && field.max !== undefined && field.min > field.max) fail(`${field.path}: inverted bounds`);
       if (field.maxLength !== undefined && (!Number.isInteger(field.maxLength) || field.maxLength < 1 || field.maxLength > 65536)) fail(`${field.path}: invalid maximum length`);
@@ -89,7 +90,10 @@ export function validateEditorData(data, schema) {
       }
     }
   }
+  // Fields inside an optional collection that is absent entirely are not required.
+  const absent = schema.collections.filter(item => !item.required && valuesAt(data, item.path).every(entry => entry.value === undefined)).map(item => item.path + '[]');
   for (const section of schema.sections) for (const field of section.fields) for (const entry of valuesAt(data, field.path)) {
+    if (absent.some(prefix => field.path.startsWith(prefix))) continue;
     const value = entry.value;
     if (value === undefined && !field.required) continue;
     if (value === null && field.nullable) continue;

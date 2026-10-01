@@ -2,7 +2,7 @@
   "id": "finances",
   "name": "Personal Finances",
   "status": "ready",
-  "description": "Cash-on-hand vs obligations, bills, loans/repayments, and income — local-only snapshot, no SaaS.",
+  "description": "Cash-on-hand vs obligations, bills with autopay escalation, urgency-sorted deadlines, append-only payment history, an ACTION-PLAN.md checklist, loans and income — local-only snapshot, no SaaS.",
   "theme": "emerald-finance",
   "render": "profiles/finances/finances.html",
   "exampleData": "example-data.json",
@@ -11,6 +11,16 @@
   },
   "sections": [
     {
+      "id": "alerts",
+      "title": "Priority Alerts",
+      "data": "alerts[] (hand-written) + auto alerts from bills[] and deadlines[] (overdue, ≤3d urgent, ≤7d warn, autopay escalation)"
+    },
+    {
+      "id": "deadlines",
+      "title": "Deadlines",
+      "data": "deadlines[] → urgency-sorted table (most overdue first), autopay badges"
+    },
+    {
       "id": "holdings",
       "title": "Current Holdings",
       "data": "holdings.accounts[] + compare[] → cash vs obligation bars"
@@ -18,7 +28,7 @@
     {
       "id": "bills",
       "title": "Bills & Amounts Due",
-      "data": "bills[] → status table (Overdue/Due/Paid/Autopay)"
+      "data": "bills[] → status table (Overdue/Due/Paid/Autopay) + autopay escalation badge (calm → ≤7d → ≤3d pulsing)"
     },
     {
       "id": "loans",
@@ -29,6 +39,16 @@
       "id": "income",
       "title": "Income Sources",
       "data": "income[] → YTD rollup"
+    },
+    {
+      "id": "actionPlan",
+      "title": "Action Plan",
+      "data": "todos[] + actionPlan.markdown (ACTION-PLAN.md) → checklist with archive/restore"
+    },
+    {
+      "id": "history",
+      "title": "Payment History",
+      "data": "history[] → append-only log, newest first (npm run fin:history)"
     }
   ],
   "dataSources": [
