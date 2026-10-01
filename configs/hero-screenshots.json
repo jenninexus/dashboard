@@ -19,6 +19,6 @@
   "notes": {
     "purpose": "Public README hero gallery. Run with --local from any machine with this repo cloned.",
     "invocation": "pwsh -File scripts/capture.ps1 -Config configs/hero-screenshots.json -Output docs/screenshots/hero",
-    "finances": "capture.ps1 renders with the real date, which turns the 2026-06-20 example into months of overdue alerts and names the file finances_1920.png. Recapture finances with Playwright instead: addInitScript(() => { window.dashboardToday = '2026-06-20' }), 1920x1080, dark, fullPage, saved as docs/screenshots/hero/1920/finances-1920.png."
+    "dates": "capture.ps1 opens every page with ?today=asof, pinning 'today' to that profile's own asOf / last_updated, and renames hero output to <slug>-<width>.png for the README. Pass -RealDate to render with the machine's date instead."
   }
 }

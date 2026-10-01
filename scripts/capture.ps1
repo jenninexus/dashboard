@@ -34,6 +34,11 @@
 .PARAMETER Pages
   Comma-separated page slugs to limit capture (e.g. "seo,health").
 
+.PARAMETER RealDate
+  Render with the machine's real date. By default every page is opened with ?today=asof, which
+  pins "today" to that profile's own as-of date (profile.asOf or profile.last_updated), so the
+  fictional examples never show months of overdue items in a screenshot taken later.
+
 .EXAMPLE
   # Capture everything locally → storage/screenshots/ (default staging area)
   pwsh -File scripts/capture.ps1
@@ -57,7 +62,8 @@ param(
   [string]$Output = "",
   [string]$Config = "configs\breakpoints.json",
   [string]$Only   = "",
-  [string]$Pages  = ""
+  [string]$Pages  = "",
+  [switch]$RealDate = $false
 )
 
 $ErrorActionPreference = "Stop"
@@ -105,6 +111,15 @@ if (-not $Live) {
   }
   $configText = $configText.Replace('file:///<repo-root>/', $repoUri)
 }
+if (-not $RealDate) {
+  # Pin each page to its own as-of date (see .PARAMETER RealDate). Pages that already carry a query
+  # string are left alone so a config can still choose its own parameters.
+  $runtimeConfig = $configText | ConvertFrom-Json
+  foreach ($page in $runtimeConfig.pages) {
+    if ($page.path -notmatch '\?') { $page.path = "$($page.path)?today=asof" }
+  }
+  $configText = $runtimeConfig | ConvertTo-Json -Depth 20
+}
 [System.IO.File]::WriteAllText(
   $RuntimeConfigPath,
   $configText,
@@ -128,6 +143,7 @@ Write-Host "  output : $OutputDir"
 Write-Host "  mode   : $(if ($Live) { 'live (GitHub Pages)' } else { 'local (file://)' })"
 if ($Only)  { Write-Host "  only   : $Only" }
 if ($Pages) { Write-Host "  pages  : $Pages" }
+Write-Host "  today  : $(if ($RealDate) { 'real date' } else { 'each profile''s as-of date (?today=asof)' })"
 Write-Host ""
 
 Push-Location $VidScrollDir
@@ -139,6 +155,18 @@ try {
 } finally {
   Pop-Location
   Remove-Item -LiteralPath $RuntimeConfigPath -ErrorAction SilentlyContinue
+}
+
+# vid-scroll names files <slug>_<width>.png; the README gallery links <slug>-<width>.png.
+$heroDir = Join-Path $RepoRoot "docs\screenshots\hero"
+if ([System.IO.Path]::GetFullPath($OutputDir).TrimEnd('\') -eq [System.IO.Path]::GetFullPath($heroDir).TrimEnd('\')) {
+  Get-ChildItem -LiteralPath $OutputDir -Recurse -File | ForEach-Object {
+    $m = [regex]::Match($_.Name, '^(.+)_(\d+)(\.\w+)$')
+    if (-not $m.Success) { return }
+    $target = Join-Path $_.DirectoryName ("{0}-{1}{2}" -f $m.Groups[1].Value, $m.Groups[2].Value, $m.Groups[3].Value)
+    Move-Item -LiteralPath $_.FullName -Destination $target -Force
+    Write-Host "  hero   : $(Split-Path -Leaf $target)"
+  }
 }
 
 Write-Host ""

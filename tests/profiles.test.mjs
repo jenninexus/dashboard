@@ -96,6 +96,7 @@ function render(id, data = fixtures[id].data, options = {}) {
     getDate() { return options.localDate[2]; }
     toISOString() { throw new Error('Calendar date must not be converted to UTC'); }
   };
+  if (options.search != null) Object.assign(sandbox, { location: { search: options.search }, URLSearchParams });
   sandbox.window = sandbox;
   vm.createContext(sandbox);
   for (const match of fixtures[id].html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)) {
@@ -212,6 +213,20 @@ test('pet offline SVG renders every real weight reading and accessible labels', 
     assert.ok(points[i].attributes['aria-label'].includes(`${reading.date}: ${reading.lbs}`));
   });
   assert.ok(all.some(node => node.tagName === 'POLYLINE' && node.attributes.points.split(' ').length === readings.length));
+});
+
+test('?today=asof pins the clock to each profile\'s own as-of date; other values keep the real clock', () => {
+  const asOf = { finances: fixtures.finances.data.profile.asOf, health: fixtures.health.data.profile.last_updated, pets: fixtures.pets.data.profile.last_updated };
+  for (const id of ['health', 'pets']) {
+    const pinned = render(id, undefined, { today: null, localDate: [2026, 11, 1], search: '?today=asof' });
+    assert.ok(pinned.storageReads.includes(`${id}-checklist-${asOf[id]}`), `${id} should read the ${asOf[id]} checklist`);
+    const ignored = render(id, undefined, { today: null, localDate: [2026, 11, 1], search: '?today=2020-01-01' });
+    assert.ok(ignored.storageReads.includes(`${id}-checklist-2026-11-01`), `${id} should ignore a non-asof value`);
+  }
+  const finance = render('finances', undefined, { today: null, localDate: [2026, 11, 1], search: '?today=asof' });
+  assert.match(finance.nodes.get('.meta').textContent, new RegExp(`due states today: ${asOf.finances}`));
+  const injected = render('finances', undefined, { today: '2026-07-04', search: '?today=asof' });
+  assert.match(injected.nodes.get('.meta').textContent, /due states today: 2026-07-04/, 'an injected dashboardToday still wins');
 });
 
 test('calendar clocks use local components and reject impossible injected dates', () => {

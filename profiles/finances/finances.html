@@ -1386,6 +1386,12 @@ function localToday(){
     if(year < 1 || month < 1 || month > 12 || day < 1 || day > days[month-1]) throw new Error('dashboardToday must be a real calendar date');
     return value;
   }
+  // ?today=asof pins "today" to this dashboard's own as-of date, so captures and shared links
+  // show the example as it was meant to be read instead of months of overdue items.
+  if (typeof location !== 'undefined' && new URLSearchParams(location.search).get('today') === 'asof') {
+    const asOf = D.profile && (D.profile.asOf || D.profile.last_updated);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(asOf || '')) return asOf;
+  }
   const date = new Date();
   return date.getFullYear() + '-' + String(date.getMonth()+1).padStart(2,'0') + '-' + String(date.getDate()).padStart(2,'0');
 }

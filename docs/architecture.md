@@ -56,6 +56,12 @@ The optional `scripts/capture.ps1` wrapper discovers a sibling `vid-scroll` chec
 `VID_SCROLL_DIR`, resolves the current clone path into a temporary ignored config, and writes local
 evidence by default. It is contributor tooling, not a runtime dependency.
 
+Captures open every page with `?today=asof`, which pins the page's clock to that profile's own as-of
+date (`profile.asOf` or `profile.last_updated`), so screenshots of the fictional examples never age into
+months of overdue items. `-RealDate` renders with the machine's date instead. Hero captures written to
+`docs/screenshots/hero/` are renamed to the `<slug>-<width>.png` names the README links. The same query
+works in a browser: open `profiles/finances/finances.html?today=asof`.
+
 ## Verification
 
 `npm test` covers the core, schema contracts, hostile data, finance derivations, offline render
