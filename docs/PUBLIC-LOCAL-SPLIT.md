@@ -14,7 +14,7 @@ sample data only. A user's generated dashboard, real data, secrets, plans, and Q
 | Runtime profile art | `docs/images/` | Assets referenced by profile HTML and copied into generated output |
 | Curated README gallery | `docs/screenshots/hero/` | One public hero image per profile |
 | User and contributor guidance | `README.md`, `AGENTS.md`, `docs/*.md` | Durable behavior, architecture, safety, and extension contracts |
-| Example AI commands | `.claude/commands.example/*.md` | Optional finance commands to copy into your own clone's ignored `.claude/commands/` |
+| Example AI commands | `.claude/commands.example/*.md.example` | Optional finance commands to copy into your own clone's ignored `.claude/commands/` (drop the `.example` suffix) |
 
 The committed repository must be sufficient to scaffold, update, and open every profile. It must not
 require a private theme kit, another local checkout, an AI account, API keys, a backend, or internet

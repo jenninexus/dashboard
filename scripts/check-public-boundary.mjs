@@ -32,7 +32,7 @@ const publicSamples = [
   'profiles/finances/example-data.json',
   'docs/screenshots/hero/1920/seo-1920.png',
   'docs/images/pets/pink-cats-16x9.webp',
-  '.claude/commands.example/dash-fin-start.md',
+  '.claude/commands.example/dash-fin-start.md.example',
 ];
 
 const privateTrackedPath =
@@ -75,8 +75,9 @@ const trackedPaths = execFileSync('git', ['ls-files', '-z'], {
   .filter(Boolean)
   .map((path) => path.replaceAll('\\', '/'));
 
-// Example AI commands are public templates: Markdown only, directly inside .claude/commands.example/.
-const publicCommandExample = /^\.claude\/commands\.example\/[a-z0-9-]+\.md$/;
+// Example AI commands are public templates: `*.md.example` only, directly inside .claude/commands.example/.
+// The .example suffix keeps tools that load or scan `*.md` commands from ever picking them up.
+const publicCommandExample = /^\.claude\/commands\.example\/[a-z0-9-]+\.md\.example$/;
 
 for (const path of trackedPaths) {
   if (privateTrackedPath.test(path) && !publicCommandExample.test(path)) failures.push(`private/generated path is tracked: ${path}`);

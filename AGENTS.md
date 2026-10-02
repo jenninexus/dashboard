@@ -35,8 +35,9 @@ This public repository does **not** use root `dev-chat.md` or `dev-log.yaml` fil
 plans live in ignored `Plans/_active/` and move to ignored `Plans/_complete/` when finished. Promote
 anything users or contributors must know into `AGENTS.md`, `README.md`, or `docs/` before completing
 the plan. `.codex/`, `.claude/`, `_scratch/`, generated dashboards, and QA evidence are local-only.
-The single tracked exception is `.claude/commands.example/` (Markdown command templates users copy
-into their own ignored `.claude/commands/`); never commit a live `.claude/commands/` folder here.
+The single tracked exception is `.claude/commands.example/` (`*.md.example` command templates users copy
+into their own ignored `.claude/commands/`, dropping the suffix — the suffix keeps them out of every
+assistant's live command list); never commit a live `.claude/commands/` folder here.
 
 ## Profiles
 
