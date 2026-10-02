@@ -10,7 +10,7 @@ const ignoredSamples = [
   'dev-log.yaml',
   '.codex/skills/build-dashboard/SKILL.md',
   '.claude/commands/build-dashboard.md',
-  '.claude/commands/fin-start.md',
+  '.claude/commands/dash-fin-start.md',
   '.claude/settings.local.json',
   '_scratch/output/dashboard.html',
   'storage/screenshots/seo.webp',
@@ -32,7 +32,7 @@ const publicSamples = [
   'profiles/finances/example-data.json',
   'docs/screenshots/hero/1920/seo-1920.png',
   'docs/images/pets/pink-cats-16x9.webp',
-  '.claude/commands.example/fin-start.md',
+  '.claude/commands.example/dash-fin-start.md',
 ];
 
 const privateTrackedPath =

@@ -90,7 +90,10 @@ use [jenninexus/senior-pet-care](https://github.com/jenninexus/senior-pet-care).
 ### Optional AI commands (finances)
 
 `.claude/commands.example/` ships three example commands for AI coding assistants that read
-`.claude/commands/` — `/fin-start`, `/bills` and `/ap-done`. They are templates, not live commands.
+`.claude/commands/` — `/dash-fin-start`, `/dash-bills` and `/dash-ap-done`. They are templates, not live commands,
+and they operate only on this template's example finance data (`profiles/finances/example-data.json`, or
+your own copy built into `my-dashboard/`) — they are unrelated to any private finance workspace. The
+`dash-` prefix keeps them from colliding with commands you may already have.
 To use them in your own clone, copy the folder (the destination is gitignored, so your edits stay local):
 
 ```bash

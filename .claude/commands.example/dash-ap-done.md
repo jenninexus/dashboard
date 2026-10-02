@@ -1,14 +1,24 @@
-# /ap-done — Mark an item done and log it
+---
+description: Dashboard template example - mark an item done and append history in the finances profile's example data (my-dashboard/ built from profiles/finances/example-data.json). Not for any private finance workspace.
+---
+
+# /dash-ap-done — Example: mark an item done and log it
 
 Example command for the dashboard **finances** profile. Copy it to `.claude/commands/` in your own
 copy of the repository.
 
+> **Scope:** this is an example command from the public `dashboard` template. It operates ONLY on
+> this template's example finance data — `profiles/finances/example-data.json`, or your own copy of it
+> built into the gitignored `my-dashboard/` folder. It is unrelated to any private or personal finance
+> workspace, and must never be pointed at one. The `dash-` prefix keeps it from colliding with
+> commands of the same purpose elsewhere.
+
 ## Usage
 
 ```
-/ap-done paid rent 1400
-/ap-done renewed vehicle registration
-/ap-done set up autopay for the gym
+/dash-ap-done paid rent 1400
+/dash-ap-done renewed vehicle registration
+/dash-ap-done set up autopay for the gym
 ```
 
 ## Steps
@@ -32,5 +42,6 @@ copy of the repository.
 
 ## Rules
 
+- Only edit files under `my-dashboard/` in this repository; never write to any other finance data.
 - History is append-only. To correct an entry, append a new one explaining the correction.
 - Record a payment only when the user says it happened; autopay being scheduled is not payment.

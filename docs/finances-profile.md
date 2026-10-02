@@ -103,9 +103,10 @@ wizard shows an **Add** button for the empty collections.
 
 ## Optional AI commands
 
-`.claude/commands.example/` holds three example commands for this profile — `/fin-start` (session
-summary), `/bills` (bill status by urgency) and `/ap-done` (mark done + append history). They are
-templates: copy them into `.claude/commands/` in your own clone (that folder is gitignored). See the
+`.claude/commands.example/` holds three example commands for this profile — `/dash-fin-start` (session
+summary), `/dash-bills` (bill status by urgency) and `/dash-ap-done` (mark done + append history). They
+operate only on this profile's example data (`profiles/finances/example-data.json`, or your copy in
+`my-dashboard/`) and are unrelated to any private finance workspace. They are templates: copy them into `.claude/commands/` in your own clone (that folder is gitignored). See the
 README for the copy command.
 
 ## Edit safely

@@ -1,8 +1,18 @@
-# /fin-start — Finance session start
+---
+description: Dashboard template example - session summary for the finances profile's example data (my-dashboard/ built from profiles/finances/example-data.json). Not for any private finance workspace.
+---
+
+# /dash-fin-start — Example finances session start
 
 Example command for the dashboard **finances** profile. Copy it to `.claude/commands/` in your own
 copy of the repository (see README → "Optional AI commands"). It works on your local
 `my-dashboard/` folder, which is gitignored.
+
+> **Scope:** this is an example command from the public `dashboard` template. It operates ONLY on
+> this template's example finance data — `profiles/finances/example-data.json`, or your own copy of it
+> built into the gitignored `my-dashboard/` folder. It is unrelated to any private or personal finance
+> workspace, and must never be pointed at one. The `dash-` prefix keeps it from colliding with
+> commands of the same purpose elsewhere.
 
 ## Steps
 
@@ -22,5 +32,7 @@ copy of the repository (see README → "Optional AI commands"). It works on your
 
 ## Rules
 
+- Only touch `my-dashboard/` in this repository. If it is missing, stop; never look for finance data
+  anywhere else.
 - Read-only except for the refresh command in step 2. Never invent amounts or dates; say "unknown".
 - Never move money, log in to a bank, or contact a creditor.
