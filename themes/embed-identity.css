@@ -1,0 +1,146 @@
+/* Identity embeds — a circular portrait plus a landscape banner for any dashboard or profile.
+ *
+ * Drop this file into any standalone dashboard. It ships NO images: you point it at your own
+ * local art. Tokens fall back to the dashboard's existing palette, so nothing here has to be
+ * recoloured to match a theme.
+ *
+ *   1. copy themes/embed-identity.css next to your dashboard HTML (or inline its <style>)
+ *   2. set --id-accent to the brand colour for that character/agent
+ *   3. <div class="finline fin-card"> … as in docs/EMBEDS.md
+ *
+ * Sizing rule of thumb: portrait 512x512 (rendered 42–56px), banner 1600x600 (renders at any
+ * width, cropped to --embed-banner-h). Keep art out of git unless it is public/licensed.
+ */
+
+:root {
+  --embed-accent: var(--dash-accent, var(--plasma, #a855f7));
+  --embed-surface: var(--dash-surface, rgba(255, 255, 255, .05));
+  --embed-border: var(--border, rgba(255, 255, 255, .10));
+  --embed-text: var(--text, #e6edf3);
+  --embed-text-dim: var(--text-muted, #8b949e);
+  --embed-radius: 12px;
+  --embed-avatar: 54px;
+  --embed-banner-h: 168px;
+}
+
+/* Card shell */
+.embed-card {
+  border: 1px solid var(--embed-border);
+  border-radius: var(--embed-radius);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--embed-surface) 60%, transparent);
+}
+
+/* Landscape banner. Use a real <img> (not background-image) when the dashboard is a single
+ * file or the art comes from a different origin: object-fit keeps the crop predictable. */
+.embed-banner {
+  position: relative;
+  height: var(--embed-banner-h);
+  background: #0a0d16 center 32% / cover no-repeat;
+  overflow: hidden;
+}
+.embed-banner > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.embed-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(4, 6, 12, .10) 0%, rgba(4, 6, 12, .45) 50%, rgba(4, 6, 12, .94) 100%);
+}
+
+/* Portrait + name block, pinned to the bottom of the banner */
+.embed-id {
+  position: absolute;
+  inset: auto 16px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+}
+.embed-avatar {
+  width: var(--embed-avatar);
+  height: var(--embed-avatar);
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
+  border: 2px solid var(--embed-accent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--embed-accent) 50%, transparent);
+  background: #10151d;
+}
+.embed-id-text { min-width: 0; }
+.embed-name {
+  font-weight: 700;
+  font-size: 1.02rem;
+  line-height: 1.15;
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .85);
+}
+.embed-role {
+  font-size: .71rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--embed-accent) 45%, #fff);
+}
+.embed-tag {
+  margin-left: auto;
+  font-family: var(--mono, ui-monospace, monospace);
+  font-size: .70rem;
+  color: var(--embed-text);
+  background: rgba(4, 6, 12, .60);
+  border: 1px solid color-mix(in srgb, var(--embed-accent) 40%, transparent);
+  border-radius: 100px;
+  padding: 2px 9px;
+  white-space: nowrap;
+}
+
+/* Body + message bubble (reads as an incoming message, not a table row) */
+.embed-body { padding: 14px 16px 16px; }
+.embed-message {
+  background: color-mix(in srgb, var(--embed-accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--embed-accent) 32%, transparent);
+  border-radius: var(--embed-radius);
+  border-top-left-radius: 4px;
+  padding: 10px 13px;
+  color: var(--embed-text);
+  font-size: .9rem;
+  line-height: 1.55;
+  max-width: 76ch;
+}
+.embed-message strong { color: color-mix(in srgb, var(--embed-accent) 35%, #fff); }
+.embed-stamp {
+  margin-top: 6px;
+  font-size: .70rem;
+  color: var(--embed-text-dim);
+  font-family: var(--mono, ui-monospace, monospace);
+}
+
+/* Portrait-only variant: same identity, no banner */
+.embed-inline { display: flex; align-items: center; gap: 10px; }
+.embed-inline .embed-avatar { border-color: var(--embed-accent); }
+
+/* Accessibility: honour reduced motion and never rely on colour alone */
+@media (prefers-reduced-motion: no-preference) {
+  .embed-avatar { transition: box-shadow .18s ease, transform .18s ease; }
+  .embed-avatar:hover { transform: translateY(-1px); }
+}
+@media (forced-colors: active) {
+  .embed-card, .embed-avatar, .embed-message { border: 1px solid CanvasText; }
+}
+
+/* Canonical breakpoints (www-theme-kit/scss/_breakpoint-tokens.scss) */
+@media (max-width: 767.98px) {
+  :root { --embed-avatar: 44px; --embed-banner-h: 124px; }
+  .embed-id { inset: auto 12px 8px; }
+  .embed-tag { display: none; }
+  .embed-body { padding: 12px 12px 14px; }
+}
+
+/* Data-URI mode: when the art must travel inside a single HTML file (an embedded widget, a
+ * mail-safe card, a desktop notification), inline it instead of linking a path. Keep those
+ * payloads small — a 128–256px JPEG at q80 is 6–20 KB, a 512px portrait is ~50 KB. */

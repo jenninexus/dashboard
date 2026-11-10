@@ -72,6 +72,11 @@
       "id": "seo-tokens",
       "role": "canonical vendor-color token reference",
       "files": ["seo-tokens.css"]
+    },
+    {
+      "id": "embed-identity",
+      "role": "portrait avatar + landscape banner embeds for a card; ships no images",
+      "files": ["embed-identity.css"]
     }
   ]
 }
